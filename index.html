@@ -73,6 +73,7 @@
     .epg-container { display: flex; flex-direction: column; gap: 12px; }
     .epg-card { background: #14141a; border-radius: 12px; padding: 16px; border: 1px solid rgba(255,255,255,0.05); }
     .epg-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .epg-logo { width: 32px; height: 32px; object-fit: contain; }
     .epg-item { display: flex; gap: 12px; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 13px; }
     .epg-time { color: #ff6600; font-weight: 700; min-width: 50px; }
     .epg-title { color: #ddd; flex: 1; }
@@ -131,7 +132,7 @@
         </div>
       </div>
 
-      <!-- Фильтр категорий из плейлиста -->
+      <!-- Фильтр категорий -->
       <div class="categories" id="categoryContainer">
         <div class="cat-chip active" onclick="filterCategory('all', this)">Все каналы</div>
       </div>
@@ -142,7 +143,7 @@
       </div>
     </div>
 
-    <!-- Вкладка 2: ТВ-Программа из epg.json -->
+    <!-- Вкладка 2: ТВ-Программа только для активных каналов -->
     <div id="tab-epg" class="tab-content">
       <h2 style="margin-bottom: 16px; color: #ff6600;">Телепрограмма</h2>
       <div id="epgList" class="epg-container">
@@ -256,7 +257,7 @@
       }
     }
 
-    // Динамические категории из плейлиста
+    // Динамические категории
     function renderCategories() {
       const container = document.getElementById('categoryContainer');
       container.innerHTML = '<div class="cat-chip active" onclick="filterCategory(\'all\', this)">Все каналы</div>';
@@ -270,7 +271,7 @@
       });
     }
 
-    // Отрисовка карточек каналов
+    // Отрисовка каналов (вместо "Прямой эфир" выводится название передачи)
     function renderChannels(channels) {
       const container = document.getElementById('channelList');
       container.innerHTML = '';
@@ -284,7 +285,9 @@
           playStream(ch.url, ch.name);
         };
 
-        const epgCurrent = epgScheduleMap[ch.name.toLowerCase()] || 'Прямой эфир';
+        // Берем передачу из кэша телепрограммы
+        const cleanName = ch.name.toLowerCase().trim();
+        const epgCurrent = epgScheduleMap[cleanName] || 'Загрузка передачи...';
 
         card.innerHTML = `
           <img class="channel-logo" src="${ch.logo}" onerror="this.src='https://via.placeholder.com/50/181820/ffffff?text=TV'">
@@ -297,10 +300,10 @@
       });
     }
 
-    // Загрузка телепрограммы из сформированного epg.json
+    // Фильтрация телепрограммы: оставляем только те каналы, которые есть в плейлисте
     async function loadEpgJson() {
       const epgContainer = document.getElementById('epgList');
-      epgContainer.innerHTML = '<p style="color: #ff6600;">Загрузка программы передач...</p>';
+      epgContainer.innerHTML = '<p style="color: #ff6600;">Синхронизация телепрограммы...</p>';
 
       try {
         const res = await fetch('./epg.json?v=' + Date.now());
@@ -309,46 +312,75 @@
         const data = await res.json();
         epgContainer.innerHTML = '';
 
+        // Создаем список названий каналов из нашего плейлиста для быстрого поиска
+        const playlistChannelNames = allChannels.map(c => c.name.toLowerCase().trim());
+
+        let matchedCount = 0;
+
         if (data.channels && data.channels.length > 0) {
           data.channels.forEach(ch => {
-            const epgCard = document.createElement('div');
-            epgCard.className = 'epg-card';
+            const epgChannelName = ch.name.toLowerCase().trim();
+            
+            // Проверяем, есть ли этот канал в нашем плейлисте (сопоставление названий)
+            const matchedPlaylistChannel = allChannels.find(p => {
+              const pName = p.name.toLowerCase().trim();
+              return pName === epgChannelName || pName.includes(epgChannelName) || epgChannelName.includes(pName);
+            });
 
-            let programsHtml = '';
-            if (ch.programs && ch.programs.length > 0) {
-              ch.programs.forEach(p => {
-                programsHtml += `
-                  <div class="epg-item">
-                    <span class="epg-time">${p.time}</span>
-                    <span class="epg-title">${p.title}</span>
-                  </div>
-                `;
-              });
+            if (matchedPlaylistChannel) {
+              matchedCount++;
+              const epgCard = document.createElement('div');
+              epgCard.className = 'epg-card';
 
-              // Запоминаем первую передачу для вывода на главной
-              epgScheduleMap[ch.name.toLowerCase()] = ch.programs[0].title;
+              let programsHtml = '';
+              if (ch.programs && ch.programs.length > 0) {
+                ch.programs.forEach(p => {
+                  programsHtml += `
+                    <div class="epg-item">
+                      <span class="epg-time">${p.time}</span>
+                      <span class="epg-title">${p.title}</span>
+                    </div>
+                  `;
+                });
+
+                // Привязываем текущую передачу к имени канала
+                epgScheduleMap[matchedPlaylistChannel.name.toLowerCase().trim()] = `${ch.programs[0].time} — ${ch.programs[0].title}`;
+              }
+
+              epgCard.innerHTML = `
+                <div class="epg-header">
+                  ${matchedPlaylistChannel.logo ? `<img class="epg-logo" src="${matchedPlaylistChannel.logo}">` : ''}
+                  <h3 style="font-size: 16px;">${matchedPlaylistChannel.name}</h3>
+                </div>
+                <div>${programsHtml || '<div style="color:#666;">Нет данных о передачах</div>'}</div>
+              `;
+              epgContainer.appendChild(epgCard);
             }
-
-            epgCard.innerHTML = `
-              <div class="epg-header">
-                <h3 style="font-size: 16px;">${ch.name}</h3>
-              </div>
-              <div>${programsHtml || '<div style="color:#666;">Нет данных о передачах</div>'}</div>
-            `;
-            epgContainer.appendChild(epgCard);
           });
 
-          // Обновляем текущие передачи на карточках каналов
+          // Для каналов, к которым не нашлась телепрограмма в базе, ставим статус
+          allChannels.forEach(ch => {
+            const nameKey = ch.name.toLowerCase().trim();
+            if (!epgScheduleMap[nameKey]) {
+              epgScheduleMap[nameKey] = 'Телепрограмма недоступна';
+            }
+          });
+
+          // Обновляем текст передач на карточках
           renderChannels(allChannels);
+
+          if (matchedCount === 0) {
+            epgContainer.innerHTML = '<div style="color:#888; text-align:center; padding: 20px;">Для каналов из вашего плейлиста телепрограмма пока не найдена.</div>';
+          }
         } else {
-          throw new Error("Пустой список телепрограммы");
+          throw new Error("Пустой список EPG");
         }
       } catch (e) {
-        console.warn("Ошибка подгрузки EPG JSON:", e);
+        console.warn("Ошибка подгрузки EPG:", e);
         epgContainer.innerHTML = `
           <div style="background: #181820; padding: 16px; border-radius: 12px; color: #888; text-align: center;">
-            <p style="margin-bottom: 8px;">⏳ Телепрограмма загружается...</p>
-            <p style="font-size: 12px; color: #aaa;">Если файл epg.json ещё не создался, запустите Workflow на GitHub.</p>
+            <p style="margin-bottom: 8px;">⏳ Обновление телепрограммы...</p>
+            <p style="font-size: 12px; color: #aaa;">Убедитесь, что GitHub Actions завершил сборку epg.json</p>
           </div>
         `;
       }
