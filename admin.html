@@ -3,159 +3,132 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Админ-панель — Телевизор 34</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>Админка — Телевизор 34</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
-    body { background-color: #0b0b0e; color: #fff; padding: 24px; max-width: 1100px; margin: 0 auto; }
-
-    header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; border-bottom: 1px solid #222; padding-bottom: 16px; }
-    h1 { color: #ff6600; font-size: 22px; font-weight: 800; display: flex; align-items: center; gap: 8px; }
+    body { background: #0b0b0e; color: #fff; padding: 20px; max-width: 480px; margin: 0 auto; }
     
-    .card { background: #14141a; border-radius: 14px; padding: 20px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.08); }
-    .card-title { font-size: 15px; font-weight: 700; color: #888; margin-bottom: 14px; text-transform: uppercase; letter-spacing: 0.5px; }
-
-    .grid-2 { display: grid; grid-template-columns: 2fr 1fr; gap: 12px; }
-    @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
-
+    h1 { color: #ff6600; font-size: 20px; font-weight: 800; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+    
+    .card { background: #14141a; padding: 20px; border-radius: 14px; border: 1px solid #222; margin-bottom: 16px; }
+    
     label { display: block; font-size: 12px; color: #aaa; margin-bottom: 6px; font-weight: 600; }
     input, select {
-      width: 100%; padding: 10px 14px; background: #0b0b0e; border: 1px solid #2a2a36;
-      border-radius: 8px; color: #fff; font-size: 14px; outline: none; transition: 0.2s;
+      width: 100%; padding: 12px; background: #0b0b0e; border: 1px solid #333;
+      border-radius: 8px; color: #fff; font-size: 14px; margin-bottom: 14px; outline: none; transition: border-color 0.2s;
     }
     input:focus, select:focus { border-color: #ff6600; }
 
     .btn {
-      background: #ff6600; color: white; border: none; padding: 10px 18px;
-      border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; display: inline-flex; align-items: center; gap: 8px; font-size: 14px;
+      width: 100%; background: #ff6600; color: white; border: none; padding: 14px;
+      border-radius: 8px; font-weight: 700; font-size: 15px; cursor: pointer; transition: 0.2s;
     }
     .btn:hover { background: #e65c00; }
-    .btn-secondary { background: #22222c; color: #ccc; }
-    .btn-secondary:hover { background: #323240; color: #fff; }
-    .btn-danger { background: #d32f2f; padding: 8px 12px; }
-    .btn-danger:hover { background: #b71c1c; }
 
-    /* Controls Bar */
-    .toolbar { display: flex; gap: 12px; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-    .search-box { flex: 1; min-width: 200px; }
-
-    /* Channel List */
-    .channel-item {
-      background: #0f0f14; border: 1px solid #222; border-radius: 10px; padding: 14px;
-      margin-bottom: 12px; display: grid; grid-template-columns: 48px 1.5fr 1fr 2fr 40px; gap: 12px; align-items: center;
-    }
-    @media (max-width: 850px) {
-      .channel-item { grid-template-columns: 1fr; gap: 8px; }
-      .channel-item img { justify-self: center; }
-    }
-
-    .channel-preview { width: 48px; height: 48px; object-fit: contain; background: #000; border-radius: 8px; border: 1px solid #222; padding: 4px; }
-    
-    .status-bar {
-      position: sticky; bottom: 16px; background: rgba(20, 20, 26, 0.95); backdrop-filter: blur(10px);
-      padding: 16px 20px; border-radius: 12px; border: 1px solid #ff6600; display: flex;
-      justify-content: space-between; align-items: center; z-index: 10; margin-top: 20px;
-    }
+    .status { margin-top: 12px; font-size: 13px; text-align: center; color: #888; word-break: break-all; }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>📺 Администрирование TV34</h1>
-    <button class="btn btn-secondary" onclick="loadPlaylist()">🔄 Перезагрузить</button>
-  </header>
+  <h1>📺 Добавить канал на TV34</h1>
 
-  <!-- Конфигурация GitHub -->
+  <!-- Форма добавления -->
   <div class="card">
-    <div class="card-title">Источник и Доступ</div>
-    <div class="grid-2">
-      <div>
-        <label>URL плейлиста или имя репозитория</label>
-        <input type="text" id="playlistUrl" value="https://raw.githubusercontent.com/tv34online/tv34online.github.io/refs/heads/main/playlist.m3u">
-      </div>
-      <div>
-        <label>GitHub Access Token (PAT)</label>
-        <input type="password" id="ghToken" placeholder="ghp_xxxxxxxxxxxxxx">
-      </div>
-    </div>
-  </div>
+    <label>Название канала</label>
+    <input type="text" id="chName" placeholder="Например: Россия 24">
 
-  <!-- Управление и Фильтры -->
-  <div class="toolbar">
-    <div class="search-box">
-      <input type="text" id="searchInput" placeholder="🔍 Поиск по названию..." oninput="filterChannels()">
-    </div>
-    <button class="btn" onclick="addChannel()">+ Добавить канал</button>
-  </div>
+    <label>Категория</label>
+    <select id="chGroup">
+      <option value="Федеральные">Федеральные</option>
+      <option value="Новостные">Новостные</option>
+      <option value="Развлекательные">Развлекательные</option>
+      <option value="Спортивные">Спортивные</option>
+      <option value="Детские">Детские</option>
+      <option value="Познавательные">Познавательные</option>
+    </select>
 
-  <!-- Список каналов -->
-  <div id="channelsContainer">
-    <!-- Элементы генерируются скриптом -->
-  </div>
+    <label>Ссылка на логотип (.png/.svg)</label>
+    <input type="text" id="chLogo" placeholder="https://...">
 
-  <!-- Фиксированная нижняя панель сохранения -->
-  <div class="status-bar">
-    <span id="statusText" style="color: #aaa; font-size: 14px;">Загрузите плейлист для начала работы</span>
-    <button class="btn" onclick="saveToGitHub()">💾 Сохранить изменения на GitHub</button>
+    <label>Ссылка на поток (.m3u8)</label>
+    <input type="text" id="chUrl" placeholder="https://domain.com/stream.m3u8">
+
+    <button class="btn" onclick="addChannelToGitHub()">🚀 Добавить канал в плейлист</button>
+    <div class="status" id="statusText"></div>
   </div>
 
   <script>
-    let channels = [];
-    let fileSha = '';
+    const REPO = 'tv34online/tv34online.github.io';
+    const FILE_PATH = 'playlist.m3u';
+    const TOKEN = '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';
 
-    // Преобразование ссылки raw в путь GitHub API
-    function getApiDetails() {
-      const input = document.getElementById('playlistUrl').value.trim();
-      let repo = 'tv34online/tv34online.github.io';
-      let path = 'playlist.m3u';
-
-      if (input.includes('githubusercontent.com')) {
-        const parts = input.replace('https://raw.githubusercontent.com/', '').split('/');
-        repo = `${parts[0]}/${parts[1]}`;
-        path = parts.slice(4).join('/'); // Пропускаем refs/heads/main
-      }
-
-      return { repo, path };
-    }
-
-    // Загрузка плейлиста
-    async function loadPlaylist() {
-      const { repo, path } = getApiDetails();
-      const token = document.getElementById('ghToken').value.trim();
+    async function addChannelToGitHub() {
+      const name = document.getElementById('chName').value.trim();
+      const group = document.getElementById('chGroup').value;
+      const logo = document.getElementById('chLogo').value.trim();
+      const url = document.getElementById('chUrl').value.trim();
       const status = document.getElementById('statusText');
 
-      status.innerText = 'Загрузка с GitHub...';
+      if (!name || !url) { 
+        alert('Пожалуйста, заполните название канала и ссылку на поток!'); 
+        return; 
+      }
+
+      status.style.color = '#ff6600';
+      status.innerText = 'Загрузка плейлиста с GitHub...';
 
       try {
-        const headers = token ? { 'Authorization': `token ${token}` } : {};
-        const res = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, { headers });
+        // 1. Запрашиваем текущий плейлист с GitHub
+        const getRes = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE_PATH}`, {
+          headers: { 'Authorization': `token ${TOKEN}` }
+        });
+
+        if (!getRes.ok) throw new Error('Не удалось получить доступ к файлу плейлиста.');
+
+        const fileData = await getRes.json();
+        const currentSha = fileData.sha;
         
-        if (!res.ok) throw new Error('Не удалось получить доступ к репозиторию.');
+        // Декодируем M3U из Base64 в текст UTF-8
+        let currentText = decodeURIComponent(escape(atob(fileData.content)));
 
-        const data = await res.json();
-        fileSha = data.sha;
+        // 2. Формируем запись для нового канала
+        const newChannelText = `#EXTINF:-1 tvg-logo="${logo}" group-title="${group}",${name}\n${url}\n`;
+        const updatedPlaylistText = currentText.trim() + '\n\n' + newChannelText;
 
-        // Декодирование UTF-8 Base64
-        const decodedContent = decodeURIComponent(escape(atob(data.content)));
-        parseM3U(decodedContent);
+        status.innerText = 'Сохранение изменений...';
 
-        status.innerText = `Загружено каналов: ${channels.length}`;
-        status.style.color = '#4caf50';
+        // 3. Отправляем обновленный файл обратно в GitHub
+        const base64Content = btoa(unescape(encodeURIComponent(updatedPlaylistText)));
+
+        const putRes = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE_PATH}`, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `token ${TOKEN}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            message: `Добавлен канал: ${name}`,
+            content: base64Content,
+            sha: currentSha
+          })
+        });
+
+        if (!putRes.ok) throw new Error('Ошибка записи в репозиторий.');
+
+        status.style.color = '#00ff88';
+        status.innerText = `✅ Канал "${name}" успешно добавлен! Сайт обновится через 1-2 минуты.`;
+
+        // Очистка полей ввода
+        document.getElementById('chName').value = '';
+        document.getElementById('chLogo').value = '';
+        document.getElementById('chUrl').value = '';
+
       } catch (err) {
-        status.innerText = 'Ошибка: ' + err.message;
-        status.style.color = '#f44336';
+        status.style.color = '#ff4444';
+        status.innerText = '❌ Ошибка: ' + err.message;
       }
     }
-
-    // Парсинг формата M3U
-    function parseM3U(text) {
-      channels = [];
-      const lines = text.split('\n');
-      let current = null;
-
-      lines.forEach(line => {
-        line = line.trim();
-        if (line.startsWith('#EXTINF:')) {
-          const logoMatch = line.match(/tvg-logo="([^"]+)"/);
-          const groupMatch = line.match(/group-title="([^"]+)"/);
-          const idMatch = line.match(/tvg-id="
+  </script>
+</body>
+</html>
