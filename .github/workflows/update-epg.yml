@@ -1,0 +1,69 @@
+name: Update EPG Data
+
+on:
+  schedule:
+    # Запуск каждый день в 04:00 по МСК (01:00 UTC)
+    - cron: '0 1 * * *'
+  workflow_dispatch: # Кнопка для ручного запуска из интерфейса GitHub
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Проверка репозитория
+        uses: actions/checkout@v3
+
+      - name: Скачивание и генерация epg.json
+        run: |
+          echo "Загрузка EPG с iptvx.one..."
+          curl -sL https://iptvx.one/epg/epg.xml.gz -o epg.xml.gz
+          gunzip -f epg.xml.gz
+
+          echo "Формирование epg.json..."
+          python3 -c "
+          import xml.etree.ElementTree as ET
+          import json, datetime
+
+          tree = ET.parse('epg.xml')
+          root = tree.getroot()
+
+          channels = []
+          # Берем первые 80 каналов
+          for channel in root.findall('channel')[:80]:
+              ch_id = channel.get('id')
+              display_name = channel.find('display-name')
+              name = display_name.text if display_name is not None else ch_id
+
+              programs = []
+              for prog in root.findall(f\"./programme[@channel='{ch_id}']\")[:8]:
+                  title_el = prog.find('title')
+                  title = title_el.text if title_el is not None else ''
+                  start_raw = prog.get('start', '')
+                  
+                  time_str = '--:--'
+                  if len(start_raw) >= 12:
+                      time_str = f'{start_raw[8:10]}:{start_raw[10:12]}'
+                  
+                  programs.append({'time': time_str, 'title': title})
+
+              if programs:
+                  channels.append({'id': ch_id, 'name': name, 'programs': programs})
+
+          output = {
+              'updated': datetime.datetime.now().isoformat(),
+              'channels': channels
+          }
+
+          with open('epg.json', 'w', encoding='utf-8') as f:
+              json.dump(output, f, ensure_ascii=False, indent=2)
+          "
+          rm -f epg.xml
+
+      - name: Сохранение epg.json в репозиторий
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add epg.json
+          git commit -m "Автообновление epg.json от iptvx.one [skip ci]" || exit 0
+          git push
