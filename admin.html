@@ -3,116 +3,151 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Панель админа — Телевизор 34</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <title>Админ-панель — Телевизор 34</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
-    body { background-color: #0b0b0e; color: #fff; padding: 20px; max-width: 900px; margin: 0 auto; }
-    
-    h1 { color: #ff6600; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; font-size: 24px; }
-    
-    .card { background: #16161c; border-radius: 12px; padding: 20px; margin-bottom: 20px; border: 1px solid #282832; }
-    .card h2 { font-size: 16px; margin-bottom: 12px; color: #aaa; }
+    body { background-color: #0b0b0e; color: #fff; padding: 24px; max-width: 1100px; margin: 0 auto; }
 
-    label { display: block; font-size: 12px; color: #888; margin-bottom: 4px; }
+    header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; border-bottom: 1px solid #222; padding-bottom: 16px; }
+    h1 { color: #ff6600; font-size: 22px; font-weight: 800; display: flex; align-items: center; gap: 8px; }
+    
+    .card { background: #14141a; border-radius: 14px; padding: 20px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.08); }
+    .card-title { font-size: 15px; font-weight: 700; color: #888; margin-bottom: 14px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+    .grid-2 { display: grid; grid-template-columns: 2fr 1fr; gap: 12px; }
+    @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+
+    label { display: block; font-size: 12px; color: #aaa; margin-bottom: 6px; font-weight: 600; }
     input, select {
-      width: 100%; padding: 10px 12px; background: #0b0b0e; border: 1px solid #333;
-      border-radius: 8px; color: #fff; font-size: 14px; margin-bottom: 12px; outline: none;
+      width: 100%; padding: 10px 14px; background: #0b0b0e; border: 1px solid #2a2a36;
+      border-radius: 8px; color: #fff; font-size: 14px; outline: none; transition: 0.2s;
     }
-    input:focus { border-color: #ff6600; }
+    input:focus, select:focus { border-color: #ff6600; }
 
     .btn {
       background: #ff6600; color: white; border: none; padding: 10px 18px;
-      border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; display: inline-flex; align-items: center; gap: 8px;
+      border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; display: inline-flex; align-items: center; gap: 8px; font-size: 14px;
     }
     .btn:hover { background: #e65c00; }
-    .btn-danger { background: #e53935; }
-    .btn-danger:hover { background: #c62828; }
-    .btn-secondary { background: #282832; color: #ccc; }
-    .btn-secondary:hover { background: #383845; color: #fff; }
+    .btn-secondary { background: #22222c; color: #ccc; }
+    .btn-secondary:hover { background: #323240; color: #fff; }
+    .btn-danger { background: #d32f2f; padding: 8px 12px; }
+    .btn-danger:hover { background: #b71c1c; }
 
+    /* Controls Bar */
+    .toolbar { display: flex; gap: 12px; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+    .search-box { flex: 1; min-width: 200px; }
+
+    /* Channel List */
     .channel-item {
-      display: grid; grid-template-columns: 50px 1fr 1fr 2fr auto; gap: 10px;
-      align-items: center; background: #111116; padding: 12px; border-radius: 8px; margin-bottom: 10px; border: 1px solid #222;
+      background: #0f0f14; border: 1px solid #222; border-radius: 10px; padding: 14px;
+      margin-bottom: 12px; display: grid; grid-template-columns: 48px 1.5fr 1fr 2fr 40px; gap: 12px; align-items: center;
     }
-    .channel-item img { width: 40px; height: 40px; object-fit: contain; background: #000; border-radius: 6px; }
+    @media (max-width: 850px) {
+      .channel-item { grid-template-columns: 1fr; gap: 8px; }
+      .channel-item img { justify-self: center; }
+    }
 
-    .actions { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; }
-    .status { font-size: 14px; color: #888; }
+    .channel-preview { width: 48px; height: 48px; object-fit: contain; background: #000; border-radius: 8px; border: 1px solid #222; padding: 4px; }
+    
+    .status-bar {
+      position: sticky; bottom: 16px; background: rgba(20, 20, 26, 0.95); backdrop-filter: blur(10px);
+      padding: 16px 20px; border-radius: 12px; border: 1px solid #ff6600; display: flex;
+      justify-content: space-between; align-items: center; z-index: 10; margin-top: 20px;
+    }
   </style>
 </head>
 <body>
 
-  <h1>📺 Админ-панель Телевизор 34</h1>
+  <header>
+    <h1>📺 Администрирование TV34</h1>
+    <button class="btn btn-secondary" onclick="loadPlaylist()">🔄 Перезагрузить</button>
+  </header>
 
-  <!-- Настройки подключения GitHub -->
+  <!-- Конфигурация GitHub -->
   <div class="card">
-    <h2>1. Настройки подключения к GitHub</h2>
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+    <div class="card-title">Источник и Доступ</div>
+    <div class="grid-2">
       <div>
-        <label>Владелец и Репозиторий</label>
-        <input type="text" id="repoPath" value="televizor34/televizor34.github.io" placeholder="username/repo">
+        <label>URL плейлиста или имя репозитория</label>
+        <input type="text" id="playlistUrl" value="https://raw.githubusercontent.com/tv34online/tv34online.github.io/refs/heads/main/playlist.m3u">
       </div>
       <div>
-        <label>GitHub Personal Access Token (PAT)</label>
-        <input type="password" id="ghToken" placeholder="ghp_xxxxxxxxxxxxxxxxx">
+        <label>GitHub Access Token (PAT)</label>
+        <input type="password" id="ghToken" placeholder="ghp_xxxxxxxxxxxxxx">
       </div>
     </div>
-    <button class="btn btn-secondary" onclick="loadPlaylistFromGitHub()">📥 Загрузить плейлист из GitHub</button>
+  </div>
+
+  <!-- Управление и Фильтры -->
+  <div class="toolbar">
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="🔍 Поиск по названию..." oninput="filterChannels()">
+    </div>
+    <button class="btn" onclick="addChannel()">+ Добавить канал</button>
   </div>
 
   <!-- Список каналов -->
-  <div class="card">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-      <h2>2. Каналы плейлиста</h2>
-      <button class="btn" onclick="addChannel()">+ Добавить канал</button>
-    </div>
-
-    <div id="channelsContainer">
-      <!-- Динамические каналы -->
-    </div>
+  <div id="channelsContainer">
+    <!-- Элементы генерируются скриптом -->
   </div>
 
-  <!-- Сохранение -->
-  <div class="actions">
-    <span class="status" id="statusText">Готов к работе</span>
-    <button class="btn" onclick="savePlaylistToGitHub()">💾 Сохранить изменения на GitHub</button>
+  <!-- Фиксированная нижняя панель сохранения -->
+  <div class="status-bar">
+    <span id="statusText" style="color: #aaa; font-size: 14px;">Загрузите плейлист для начала работы</span>
+    <button class="btn" onclick="saveToGitHub()">💾 Сохранить изменения на GitHub</button>
   </div>
 
   <script>
     let channels = [];
-    let fileSha = ""; // Нужен для обновления файла через API GitHub
+    let fileSha = '';
 
-    // Загрузка файла из GitHub
-    async function loadPlaylistFromGitHub() {
-      const repo = document.getElementById('repoPath').value.trim();
+    // Преобразование ссылки raw в путь GitHub API
+    function getApiDetails() {
+      const input = document.getElementById('playlistUrl').value.trim();
+      let repo = 'tv34online/tv34online.github.io';
+      let path = 'playlist.m3u';
+
+      if (input.includes('githubusercontent.com')) {
+        const parts = input.replace('https://raw.githubusercontent.com/', '').split('/');
+        repo = `${parts[0]}/${parts[1]}`;
+        path = parts.slice(4).join('/'); // Пропускаем refs/heads/main
+      }
+
+      return { repo, path };
+    }
+
+    // Загрузка плейлиста
+    async function loadPlaylist() {
+      const { repo, path } = getApiDetails();
       const token = document.getElementById('ghToken').value.trim();
       const status = document.getElementById('statusText');
 
-      if (!repo) { alert('Укажите репозиторий'); return; }
+      status.innerText = 'Загрузка с GitHub...';
 
-      status.innerText = "Загрузка плейлиста...";
-      
       try {
         const headers = token ? { 'Authorization': `token ${token}` } : {};
-        const res = await fetch(`https://api.github.com/repos/${repo}/contents/playlist.m3u`, { headers });
+        const res = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, { headers });
         
-        if (!res.ok) throw new Error("Не удалось загрузить файл");
+        if (!res.ok) throw new Error('Не удалось получить доступ к репозиторию.');
 
         const data = await res.json();
         fileSha = data.sha;
 
-        // Декодируем base64 из UTF-8
-        const content = decodeURIComponent(escape(atob(data.content)));
-        parseM3U(content);
+        // Декодирование UTF-8 Base64
+        const decodedContent = decodeURIComponent(escape(atob(data.content)));
+        parseM3U(decodedContent);
 
-        status.innerText = `Плейлист загружен (${channels.length} каналов)`;
+        status.innerText = `Загружено каналов: ${channels.length}`;
+        status.style.color = '#4caf50';
       } catch (err) {
-        status.innerText = "Ошибка загрузки: " + err.message;
+        status.innerText = 'Ошибка: ' + err.message;
+        status.style.color = '#f44336';
       }
     }
 
-    // Парсинг текста M3U
+    // Парсинг формата M3U
     function parseM3U(text) {
       channels = [];
       const lines = text.split('\n');
@@ -123,96 +158,4 @@
         if (line.startsWith('#EXTINF:')) {
           const logoMatch = line.match(/tvg-logo="([^"]+)"/);
           const groupMatch = line.match(/group-title="([^"]+)"/);
-          const nameMatch = line.split(',')[1];
-
-          current = {
-            logo: logoMatch ? logoMatch[1] : '',
-            group: groupMatch ? groupMatch[1] : 'Общие',
-            name: nameMatch ? nameMatch.trim() : 'Без названия',
-            url: ''
-          };
-        } else if (line && !line.startsWith('#') && current) {
-          current.url = line;
-          channels.push(current);
-          current = null;
-        }
-      });
-
-      renderChannels();
-    }
-
-    // Генерация элементов управления
-    function renderChannels() {
-      const container = document.getElementById('channelsContainer');
-      container.innerHTML = '';
-
-      channels.forEach((ch, idx) => {
-        const div = document.createElement('div');
-        div.className = 'channel-item';
-        div.innerHTML = `
-          <img src="${ch.logo || 'https://via.placeholder.com/40'}" onerror="this.src='https://via.placeholder.com/40'">
-          <input type="text" value="${ch.name}" placeholder="Название" onchange="channels[${idx}].name = this.value">
-          <input type="text" value="${ch.group}" placeholder="Категория" onchange="channels[${idx}].group = this.value">
-          <input type="text" value="${ch.url}" placeholder="M3U8 Ссылка" onchange="channels[${idx}].url = this.value">
-          <button class="btn btn-danger" onclick="removeChannel(${idx})">🗑</button>
-        `;
-        container.appendChild(div);
-      });
-    }
-
-    function addChannel() {
-      channels.push({ name: 'Новый канал', group: 'Федеральные', logo: '', url: '' });
-      renderChannels();
-    }
-
-    function removeChannel(idx) {
-      channels.splice(idx, 1);
-      renderChannels();
-    }
-
-    // Сохранение плейлиста в GitHub
-    async function savePlaylistToGitHub() {
-      const repo = document.getElementById('repoPath').value.trim();
-      const token = document.getElementById('ghToken').value.trim();
-      const status = document.getElementById('statusText');
-
-      if (!token) { alert('Введите GitHub Personal Access Token для сохранения!'); return; }
-
-      // Формируем файл M3U
-      let m3uContent = '#EXTM3U\n\n';
-      channels.forEach(ch => {
-        m3uContent += `#EXTINF:-1 tvg-logo="${ch.logo}" group-title="${ch.group}", ${ch.name}\n${ch.url}\n\n`;
-      });
-
-      // Кодируем в UTF-8 Base64
-      const base64Content = btoa(unescape(encodeURIComponent(m3uContent)));
-
-      status.innerText = "Сохранение на GitHub...";
-
-      try {
-        const res = await fetch(`https://api.github.com/repos/${repo}/contents/playlist.m3u`, {
-          method: 'PUT',
-          headers: {
-            'Authorization': `token ${token}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            message: 'Update playlist.m3u via admin panel',
-            content: base64Content,
-            sha: fileSha
-          })
-        });
-
-        if (!res.ok) throw new Error("Ошибка при записи файла");
-
-        const resData = await res.json();
-        fileSha = resData.content.sha; // Обновляем sha
-
-        status.innerText = "Успешно сохранено! GitHub Pages обновится через пару минут.";
-      } catch (err) {
-        status.innerText = "Ошибка сохранения: " + err.message;
-      }
-    }
-  </script>
-</body>
-</html>
+          const idMatch = line.match(/tvg-id="
