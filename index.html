@@ -143,9 +143,9 @@
       </div>
     </div>
 
-    <!-- Вкладка 2: ТВ-Программа -->
+    <!-- Вкладка 2: ТВ-Программа EPGService -->
     <div id="tab-epg" class="tab-content">
-      <h2 style="margin-bottom: 16px; color: #ff6600;">Яндекс Телепрограмма</h2>
+      <h2 style="margin-bottom: 16px; color: #ff6600;">Телепрограмма</h2>
       <div id="epgList" class="epg-container">
         <p style="color: #666;">Загрузка ТВ-программы...</p>
       </div>
@@ -170,17 +170,18 @@
       <span>ТВ-программа</span>
     </div>
     <div class="nav-item" onclick="switchTab('account', this)">
-      <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+      <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
       <span>Аккаунт</span>
     </div>
   </nav>
 
   <script>
     const YANDEX_CLIENT_ID = 'b065196734cb494e8965207de203df4f';
+    const EPG_TOKEN = '987c6312-e354-4abe-b964-6862ab29175';
 
     let allChannels = [];
     let categoriesSet = new Set();
-    let yandexScheduleMap = {};
+    let epgScheduleMap = {};
     let hls = null;
 
     // Включение плеера HLS
@@ -250,14 +251,14 @@
 
       renderCategories();
       renderChannels(allChannels);
-      fetchYandexEpg();
+      fetchEpgServiceData();
 
       if (allChannels.length > 0) {
         playStream(allChannels[0].url, allChannels[0].name);
       }
     }
 
-    // Автоматическая генерация категорий из плейлиста
+    // Динамические категории из плейлиста
     function renderCategories() {
       const container = document.getElementById('categoryContainer');
       container.innerHTML = '<div class="cat-chip active" onclick="filterCategory(\'all\', this)">Все каналы</div>';
@@ -271,7 +272,7 @@
       });
     }
 
-    // Отрисовка каналов
+    // Отрисовка карточек каналов
     function renderChannels(channels) {
       const container = document.getElementById('channelList');
       container.innerHTML = '';
@@ -285,45 +286,44 @@
           playStream(ch.url, ch.name);
         };
 
-        const epgCurrent = yandexScheduleMap[ch.name.toLowerCase()] || 'Прямой эфир';
+        const epgCurrent = epgScheduleMap[ch.name.toLowerCase()] || 'Прямой эфир';
 
         card.innerHTML = `
           <img class="channel-logo" src="${ch.logo}" onerror="this.src='https://via.placeholder.com/50/181820/ffffff?text=TV'">
           <div class="channel-info">
             <div class="channel-title">${ch.name}</div>
-            <div class="channel-epg" id="epg-title-${idx}">${epgCurrent}</div>
+            <div class="channel-epg">${epgCurrent}</div>
           </div>
         `;
         container.appendChild(card);
       });
     }
 
-    // Загрузка ТВ-Программы через прокси
-    async function fetchYandexEpg() {
+    // Загрузка ТВ-Программы через EPGService API
+    async function fetchEpgServiceData() {
       const epgContainer = document.getElementById('epgList');
-      epgContainer.innerHTML = '<p style="color: #ff6600;">Загрузка актуальной телепрограммы...</p>';
+      epgContainer.innerHTML = '<p style="color: #ff6600;">Загрузка программы передач...</p>';
 
       try {
-        const targetUrl = 'https://tv.yandex.ru/api/quick/schedule?channelIds=1,2,3,4,5,6,7,8,9,10';
-        const proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(targetUrl);
+        const res = await fetch(`https://epgservice.ru/api/v1/epg/today?token=${EPG_TOKEN}`);
+        if (!res.ok) throw new Error(`Ошибка API (${res.status})`);
 
-        const res = await fetch(proxyUrl);
-        if (!res.ok) throw new Error("Ошибка сервера");
-        
-        const wrapper = await res.json();
-        const data = JSON.parse(wrapper.contents);
-
+        const data = await res.json();
         epgContainer.innerHTML = '';
 
-        if (data && data.channels && data.channels.length > 0) {
-          data.channels.forEach(ch => {
+        const channelsData = data.channels || (Array.isArray(data) ? data : []);
+
+        if (channelsData.length > 0) {
+          channelsData.forEach(ch => {
             const epgCard = document.createElement('div');
             epgCard.className = 'epg-card';
 
             let programsHtml = '';
-            if (ch.events && ch.events.length > 0) {
-              ch.events.slice(0, 5).forEach(ev => {
-                const time = new Date(ev.startTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            const channelName = (ch.name || ch.title || '').toLowerCase();
+
+            if (ch.program && ch.program.length > 0) {
+              ch.program.slice(0, 5).forEach(ev => {
+                const time = ev.start ? new Date(ev.start * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '--:--';
                 programsHtml += `
                   <div class="epg-item">
                     <span class="epg-time">${time}</span>
@@ -332,29 +332,31 @@
                 `;
               });
 
-              yandexScheduleMap[ch.title.toLowerCase()] = ch.events[0].title;
+              if (channelName) {
+                epgScheduleMap[channelName] = ch.program[0].title;
+              }
             }
 
             epgCard.innerHTML = `
               <div class="epg-header">
                 <img class="epg-logo" src="${ch.logo || ''}" onerror="this.style.display='none'">
-                <h3 style="font-size: 16px;">${ch.title}</h3>
+                <h3 style="font-size: 16px;">${ch.name || ch.title}</h3>
               </div>
-              <div>${programsHtml || '<div style="color:#666;">Нет данных о передачах</div>'}</div>
+              <div>${programsHtml || '<div style="color:#666;">Нет данных о передачах на сегодня</div>'}</div>
             `;
             epgContainer.appendChild(epgCard);
           });
 
           renderChannels(allChannels);
         } else {
-          throw new Error("Пустой ответ");
+          throw new Error("Пустой список передач");
         }
       } catch (e) {
-        console.warn("Ошибка загрузки телепрограммы:", e);
+        console.warn("Ошибка подгрузки EPGService:", e);
         epgContainer.innerHTML = `
           <div style="background: #181820; padding: 16px; border-radius: 12px; color: #888; text-align: center;">
-            <p style="margin-bottom: 8px;">⚠️ Не удалось загрузить Яндекс Телепрограмму.</p>
-            <a href="https://tv.yandex.ru/" target="_blank" style="color: #ff6600; font-weight: bold;">Открыть tv.yandex.ru ↗</a>
+            <p style="margin-bottom: 8px;">⚠️ Не удалось загрузить телепрограмму.</p>
+            <p style="font-size: 12px;">Проверьте активность токена на epgservice.ru</p>
           </div>
         `;
       }
@@ -385,7 +387,7 @@
       if (video.requestFullscreen) video.requestFullscreen();
     }
 
-    // Яндекс ID
+    // Авторизация Яндекс ID
     function loginWithYandex() {
       const redirectUri = window.location.origin + window.location.pathname;
       window.location.href = `https://oauth.yandex.ru/authorize?response_type=token&client_id=${YANDEX_CLIENT_ID}&redirect_uri=${encodeURIComponent(redirectUri)}`;
@@ -441,7 +443,7 @@
       renderAccount();
     }
 
-    // Старт
+    // Инициализация
     loadPlaylist();
     checkYandexAuth();
   </script>
