@@ -33,19 +33,32 @@
       border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
       border: 1px solid rgba(255, 255, 255, 0.1);
     }
-    video { width: 100%; height: 100%; object-fit: contain; }
+    video { width: 100%; height: 100%; object-fit: contain; cursor: pointer; }
     
     /* Controls Overlay */
     .player-controls {
       position: absolute; bottom: 0; left: 0; right: 0;
-      background: linear-gradient(0deg, rgba(0,0,0,0.9) 0%, transparent 100%);
+      background: linear-gradient(0deg, rgba(0,0,0,0.95) 0%, transparent 100%);
       padding: 16px; display: flex; align-items: center; justify-content: space-between;
-      opacity: 0; transition: opacity 0.3s ease;
+      opacity: 0; transition: opacity 0.3s ease; gap: 12px;
     }
     .player-wrapper:hover .player-controls { opacity: 1; }
-    .ctrl-btn { background: none; border: none; color: #fff; cursor: pointer; font-size: 18px; padding: 6px; }
-    .now-playing { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 14px; }
-    .live-tag { background: #ff4500; color: #fff; font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 4px; text-transform: uppercase; }
+    .right-controls { display: flex; align-items: center; gap: 10px; }
+    .ctrl-btn { background: none; border: none; color: #fff; cursor: pointer; font-size: 18px; padding: 6px; display: flex; align-items: center; justify-content: center; }
+    .now-playing { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 14px; overflow: hidden; }
+    .live-tag { background: #ff4500; color: #fff; font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 4px; text-transform: uppercase; flex-shrink: 0; }
+
+    /* Volume Slider Styling */
+    .volume-box { display: flex; align-items: center; gap: 6px; }
+    .volume-slider {
+      -webkit-appearance: none; appearance: none;
+      width: 70px; height: 4px; background: rgba(255,255,255,0.3);
+      border-radius: 2px; outline: none; cursor: pointer; transition: 0.2s;
+    }
+    .volume-slider::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none;
+      width: 12px; height: 12px; border-radius: 50%; background: #ff6600; cursor: pointer;
+    }
 
     /* Category Filter */
     .categories { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 12px; margin-bottom: 16px; scrollbar-width: none; }
@@ -121,13 +134,21 @@
     <div id="tab-home" class="tab-content active">
       <div class="player-section">
         <div class="player-wrapper">
-          <video id="videoPlayer" autoplay playsinline muted></video>
+          <video id="videoPlayer" autoplay playsinline muted onclick="toggleMute()"></video>
           <div class="player-controls">
             <div class="now-playing">
               <span class="live-tag">LIVE</span>
               <span id="playerChannelName">Выберите канал</span>
             </div>
-            <button class="ctrl-btn" onclick="toggleFullscreen()">⛶</button>
+            
+            <div class="right-controls">
+              <!-- Громкость -->
+              <div class="volume-box">
+                <button class="ctrl-btn" id="muteBtn" onclick="toggleMute()">🔇</button>
+                <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.05" value="0.8" oninput="changeVolume(this.value)">
+              </div>
+              <button class="ctrl-btn" onclick="toggleFullscreen()">⛶</button>
+            </div>
           </div>
         </div>
       </div>
@@ -143,7 +164,7 @@
       </div>
     </div>
 
-    <!-- Вкладка 2: ТВ-Программа только для активных каналов -->
+    <!-- Вкладка 2: ТВ-Программа -->
     <div id="tab-epg" class="tab-content">
       <h2 style="margin-bottom: 16px; color: #ff6600;">Телепрограмма</h2>
       <div id="epgList" class="epg-container">
@@ -182,6 +203,40 @@
     let categoriesSet = new Set();
     let epgScheduleMap = {};
     let hls = null;
+    let savedVolume = 0.8;
+
+    // Управление звуком и ползунком
+    function toggleMute() {
+      const video = document.getElementById('videoPlayer');
+      const muteBtn = document.getElementById('muteBtn');
+      const slider = document.getElementById('volumeSlider');
+
+      video.muted = !video.muted;
+
+      if (video.muted) {
+        muteBtn.innerText = '🔇';
+      } else {
+        video.volume = savedVolume > 0 ? savedVolume : 0.8;
+        slider.value = video.volume;
+        muteBtn.innerText = video.volume > 0.5 ? '🔊' : '🔉';
+      }
+    }
+
+    function changeVolume(val) {
+      const video = document.getElementById('videoPlayer');
+      const muteBtn = document.getElementById('muteBtn');
+      
+      savedVolume = parseFloat(val);
+      video.volume = savedVolume;
+
+      if (savedVolume === 0) {
+        video.muted = true;
+        muteBtn.innerText = '🔇';
+      } else {
+        video.muted = false;
+        muteBtn.innerText = savedVolume > 0.5 ? '🔊' : '🔉';
+      }
+    }
 
     // Включение плеера HLS
     function playStream(url, name) {
@@ -193,10 +248,16 @@
         hls = new Hls();
         hls.loadSource(url);
         hls.attachMedia(video);
-        hls.on(Hls.Events.MANIFEST_PARSED, () => video.play());
+        hls.on(Hls.Events.MANIFEST_PARSED, () => {
+          video.play();
+          video.volume = savedVolume;
+        });
       } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
         video.src = url;
-        video.addEventListener('loadedmetadata', () => video.play());
+        video.addEventListener('loadedmetadata', () => {
+          video.play();
+          video.volume = savedVolume;
+        });
       }
     }
 
@@ -271,7 +332,7 @@
       });
     }
 
-    // Отрисовка каналов (вместо "Прямой эфир" выводится название передачи)
+    // Отрисовка каналов
     function renderChannels(channels) {
       const container = document.getElementById('channelList');
       container.innerHTML = '';
@@ -285,7 +346,6 @@
           playStream(ch.url, ch.name);
         };
 
-        // Берем передачу из кэша телепрограммы
         const cleanName = ch.name.toLowerCase().trim();
         const epgCurrent = epgScheduleMap[cleanName] || 'Загрузка передачи...';
 
@@ -300,7 +360,7 @@
       });
     }
 
-    // Фильтрация телепрограммы: оставляем только те каналы, которые есть в плейлисте
+    // Фильтрация телепрограммы из epg.json
     async function loadEpgJson() {
       const epgContainer = document.getElementById('epgList');
       epgContainer.innerHTML = '<p style="color: #ff6600;">Синхронизация телепрограммы...</p>';
@@ -312,16 +372,12 @@
         const data = await res.json();
         epgContainer.innerHTML = '';
 
-        // Создаем список названий каналов из нашего плейлиста для быстрого поиска
-        const playlistChannelNames = allChannels.map(c => c.name.toLowerCase().trim());
-
         let matchedCount = 0;
 
         if (data.channels && data.channels.length > 0) {
           data.channels.forEach(ch => {
             const epgChannelName = ch.name.toLowerCase().trim();
             
-            // Проверяем, есть ли этот канал в нашем плейлисте (сопоставление названий)
             const matchedPlaylistChannel = allChannels.find(p => {
               const pName = p.name.toLowerCase().trim();
               return pName === epgChannelName || pName.includes(epgChannelName) || epgChannelName.includes(pName);
@@ -343,7 +399,6 @@
                   `;
                 });
 
-                // Привязываем текущую передачу к имени канала
                 epgScheduleMap[matchedPlaylistChannel.name.toLowerCase().trim()] = `${ch.programs[0].time} — ${ch.programs[0].title}`;
               }
 
@@ -358,7 +413,6 @@
             }
           });
 
-          // Для каналов, к которым не нашлась телепрограмма в базе, ставим статус
           allChannels.forEach(ch => {
             const nameKey = ch.name.toLowerCase().trim();
             if (!epgScheduleMap[nameKey]) {
@@ -366,7 +420,6 @@
             }
           });
 
-          // Обновляем текст передач на карточках
           renderChannels(allChannels);
 
           if (matchedCount === 0) {
