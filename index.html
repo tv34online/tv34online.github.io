@@ -47,7 +47,7 @@
     .now-playing { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 14px; }
     .live-tag { background: #ff4500; color: #fff; font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 4px; text-transform: uppercase; }
 
-    /* Category Filter (Динамический) */
+    /* Category Filter */
     .categories { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 12px; margin-bottom: 16px; scrollbar-width: none; }
     .categories::-webkit-scrollbar { display: none; }
     .cat-chip {
@@ -69,7 +69,7 @@
     .channel-title { font-weight: 700; font-size: 15px; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .channel-epg { font-size: 12px; color: #ff6600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-    /* EPG / ТВ Программа Яндекс */
+    /* EPG / ТВ Программа */
     .epg-container { display: flex; flex-direction: column; gap: 12px; }
     .epg-card { background: #14141a; border-radius: 12px; padding: 16px; border: 1px solid rgba(255,255,255,0.05); }
     .epg-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
@@ -132,18 +132,18 @@
         </div>
       </div>
 
-      <!-- Фильтр категорий (формируется динамически) -->
+      <!-- Фильтр категорий из плейлиста -->
       <div class="categories" id="categoryContainer">
         <div class="cat-chip active" onclick="filterCategory('all', this)">Все каналы</div>
       </div>
 
       <!-- Список каналов -->
       <div class="channel-grid" id="channelList">
-        <!-- Каналы загружаются динамически -->
+        <!-- Загружается динамически -->
       </div>
     </div>
 
-    <!-- Вкладка 2: Яндекс ТВ-Программа -->
+    <!-- Вкладка 2: ТВ-Программа -->
     <div id="tab-epg" class="tab-content">
       <h2 style="margin-bottom: 16px; color: #ff6600;">Яндекс Телепрограмма</h2>
       <div id="epgList" class="epg-container">
@@ -200,7 +200,7 @@
       }
     }
 
-    // Загрузка плейлиста без кэширования
+    // Загрузка плейлиста M3U
     async function loadPlaylist() {
       try {
         const res = await fetch('./playlist.m3u?v=' + Date.now());
@@ -208,7 +208,7 @@
         const text = await res.text();
         parseM3U(text);
       } catch (e) {
-        console.warn("Локальный плейлист не найден, загружен тестовый.");
+        console.warn("Локальный плейлист не найден, используется тестовый.");
         allChannels = [
           { name: 'Первый канал', group: 'Федеральные', logo: 'https://upload.wikimedia.org/wikipedia/commons/e/e0/Perviy_Kanal_logo.svg', url: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8' },
           { name: 'Россия 1', group: 'Федеральные', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Rossiya-1_logo.svg/300px-Rossiya-1_logo.svg.png', url: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8' }
@@ -257,7 +257,7 @@
       }
     }
 
-    // Отрисовка динамических категорий из плейлиста
+    // Автоматическая генерация категорий из плейлиста
     function renderCategories() {
       const container = document.getElementById('categoryContainer');
       container.innerHTML = '<div class="cat-chip active" onclick="filterCategory(\'all\', this)">Все каналы</div>';
@@ -271,7 +271,7 @@
       });
     }
 
-    // Отрисовка карточек каналов
+    // Отрисовка каналов
     function renderChannels(channels) {
       const container = document.getElementById('channelList');
       container.innerHTML = '';
@@ -298,24 +298,30 @@
       });
     }
 
-    // Загрузка Яндекс Телепрограммы
+    // Загрузка ТВ-Программы через прокси
     async function fetchYandexEpg() {
-      try {
-        // Запрос к публичному API Яндекс Телепрограммы
-        const res = await fetch('https://tv.yandex.ru/api/quick/schedule?channelIds=1,2,3,4,5,6,7,8,9,10');
-        if (!res.ok) return;
-        const data = await res.json();
+      const epgContainer = document.getElementById('epgList');
+      epgContainer.innerHTML = '<p style="color: #ff6600;">Загрузка актуальной телепрограммы...</p>';
 
-        const epgContainer = document.getElementById('epgList');
+      try {
+        const targetUrl = 'https://tv.yandex.ru/api/quick/schedule?channelIds=1,2,3,4,5,6,7,8,9,10';
+        const proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(targetUrl);
+
+        const res = await fetch(proxyUrl);
+        if (!res.ok) throw new Error("Ошибка сервера");
+        
+        const wrapper = await res.json();
+        const data = JSON.parse(wrapper.contents);
+
         epgContainer.innerHTML = '';
 
-        if (data && data.channels) {
+        if (data && data.channels && data.channels.length > 0) {
           data.channels.forEach(ch => {
             const epgCard = document.createElement('div');
             epgCard.className = 'epg-card';
 
             let programsHtml = '';
-            if (ch.events) {
+            if (ch.events && ch.events.length > 0) {
               ch.events.slice(0, 5).forEach(ev => {
                 const time = new Date(ev.startTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
                 programsHtml += `
@@ -326,10 +332,7 @@
                 `;
               });
 
-              // Привязка текущего эфира к списку каналов
-              if (ch.events.length > 0) {
-                yandexScheduleMap[ch.title.toLowerCase()] = ch.events[0].title;
-              }
+              yandexScheduleMap[ch.title.toLowerCase()] = ch.events[0].title;
             }
 
             epgCard.innerHTML = `
@@ -337,16 +340,23 @@
                 <img class="epg-logo" src="${ch.logo || ''}" onerror="this.style.display='none'">
                 <h3 style="font-size: 16px;">${ch.title}</h3>
               </div>
-              <div>${programsHtml || 'Информация о передачах недоступна'}</div>
+              <div>${programsHtml || '<div style="color:#666;">Нет данных о передачах</div>'}</div>
             `;
             epgContainer.appendChild(epgCard);
           });
 
-          // Обновляем карточки каналов с полученными именами передач
           renderChannels(allChannels);
+        } else {
+          throw new Error("Пустой ответ");
         }
       } catch (e) {
-        console.warn("Телепрограмма Яндекс не подгрузилась:", e);
+        console.warn("Ошибка загрузки телепрограммы:", e);
+        epgContainer.innerHTML = `
+          <div style="background: #181820; padding: 16px; border-radius: 12px; color: #888; text-align: center;">
+            <p style="margin-bottom: 8px;">⚠️ Не удалось загрузить Яндекс Телепрограмму.</p>
+            <a href="https://tv.yandex.ru/" target="_blank" style="color: #ff6600; font-weight: bold;">Открыть tv.yandex.ru ↗</a>
+          </div>
+        `;
       }
     }
 
@@ -375,7 +385,7 @@
       if (video.requestFullscreen) video.requestFullscreen();
     }
 
-    // Авторизация Яндекс ID
+    // Яндекс ID
     function loginWithYandex() {
       const redirectUri = window.location.origin + window.location.pathname;
       window.location.href = `https://oauth.yandex.ru/authorize?response_type=token&client_id=${YANDEX_CLIENT_ID}&redirect_uri=${encodeURIComponent(redirectUri)}`;
@@ -431,7 +441,7 @@
       renderAccount();
     }
 
-    // Инициализация
+    // Старт
     loadPlaylist();
     checkYandexAuth();
   </script>
