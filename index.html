@@ -75,34 +75,12 @@
     .channel-info { flex: 1; overflow: hidden; }
     .channel-title { font-weight: 700; font-size: 15px; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-    /* Блок выбранного канала на вкладке ТВ-программы */
-    .epg-channel-header {
-      background: #14141a; border-radius: 16px; padding: 16px; margin-top: 16px; margin-bottom: 16px;
-      border: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: space-between;
+    /* Встроенный сайт телепрограммы */
+    .epg-frame-container {
+      width: 100%; height: 600px; border-radius: 16px; overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1); background: #14141a; margin-top: 12px;
     }
-    .epg-ch-info { display: flex; align-items: center; gap: 12px; }
-    .epg-ch-logo { width: 40px; height: 40px; border-radius: 8px; object-fit: contain; background: #000; padding: 2px; }
-    .btn-pip {
-      background: #ff6600; color: #fff; border: none; padding: 8px 14px;
-      border-radius: 8px; font-weight: 700; font-size: 12px; cursor: pointer;
-      display: flex; align-items: center; gap: 6px; transition: 0.2s;
-    }
-    .btn-pip:hover { background: #ff4500; }
-
-    /* Элементы передач */
-    .epg-list { display: flex; flex-direction: column; gap: 8px; }
-    .epg-item { display: flex; flex-direction: column; padding: 8px 10px; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 13px; }
-    .epg-row { display: flex; gap: 12px; align-items: center; }
-    .epg-time { color: #888; font-weight: 700; min-width: 50px; }
-    .epg-title { color: #ddd; flex: 1; }
-    
-    .epg-item.is-now { background: rgba(255, 102, 0, 0.12); border-radius: 8px; padding: 10px; border-bottom: none; }
-    .epg-item.is-now .epg-time { color: #ff6600; }
-    .epg-item.is-now .epg-title { color: #ffffff; font-weight: 600; }
-    .now-badge { background: #ff6600; color: #fff; font-size: 9px; font-weight: 800; padding: 2px 5px; border-radius: 4px; margin-left: 6px; text-transform: uppercase; }
-
-    .epg-progress-bar { width: 100%; height: 3px; background: rgba(255,255,255,0.1); border-radius: 2px; margin-top: 6px; overflow: hidden; }
-    .epg-progress-fill { height: 100%; background: #ff6600; transition: width 0.3s ease; }
+    .epg-iframe { width: 100%; height: 100%; border: none; }
 
     /* Аккаунт */
     .account-card {
@@ -143,7 +121,7 @@
 
   <div class="container">
     
-    <!-- Общий контейнер плеера (перемещается между вкладками динамически) -->
+    <!-- Общий контейнер плеера (перемещается при смене вкладок) -->
     <div id="playerContainer" class="player-section">
       <div class="player-wrapper">
         <video id="videoPlayer" autoplay playsinline muted onclick="toggleMute()"></video>
@@ -176,29 +154,13 @@
       <div class="channel-grid" id="channelList"></div>
     </div>
 
-    <!-- Вкладка 2: ТВ-Программа (с отдельным плеером выбранного канала) -->
+    <!-- Вкладка 2: ТВ-Программа (Сайт с телепрограммой под плеером) -->
     <div id="tab-epg" class="tab-content">
       <div id="epgPlayerAnchor"></div>
 
-      <div id="epgChannelHeader" class="epg-channel-header" style="display: none;">
-        <div class="epg-ch-info">
-          <img class="epg-ch-logo" id="epgLogo" src="" onerror="this.style.display='none'">
-          <div>
-            <h3 style="font-size: 16px;" id="epgTitle">Название канала</h3>
-            <p style="font-size: 12px; color: #ff6600;" id="epgCategory">Категория</p>
-          </div>
-        </div>
-        <button class="btn-pip" onclick="togglePiP()">
-          <span>Фоновый режим</span>
-          <span style="font-size: 14px;">🗔</span>
-        </button>
-      </div>
-
-      <div class="epg-list" id="epgProgramList">
-        <div style="color: #888; text-align: center; padding: 30px; background: #14141a; border-radius: 16px;">
-          <p style="font-size: 15px; margin-bottom: 6px;">📺 Выберите канал для просмотра ТВ-программы</p>
-          <p style="font-size: 12px; color: #666;">Нажмите на любой канал на Главной вкладке</p>
-        </div>
+      <div class="epg-frame-container">
+        <!-- Встроенный виджет / сайт телепрограммы -->
+        <iframe class="epg-iframe" src="https://tv.mail.ru/" title="Телепрограмма онлайн"></iframe>
       </div>
     </div>
 
@@ -215,7 +177,7 @@
       <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
       <span>Главная</span>
     </div>
-    <div class="nav-item" id="navEpgBtn" onclick="switchTab('epg', this)">
+    <div class="nav-item" onclick="switchTab('epg', this)">
       <svg viewBox="0 0 24 24"><path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H3V5h18v14zM5 15h14v2H5zm0-4h14v2H5zm0-4h14v2H5z"/></svg>
       <span>ТВ-программа</span>
     </div>
@@ -230,11 +192,9 @@
 
     let allChannels = [];
     let categoriesSet = new Set();
-    let epgDataGlobal = [];
     let currentSelectedChannel = null;
     let hls = null;
     let savedVolume = 0.8;
-    let activeTab = 'home';
 
     function toggleMute() {
       const video = document.getElementById('videoPlayer');
@@ -268,7 +228,6 @@
       }
     }
 
-    // Включение режима "Картинка в картинке" (Picture-in-Picture)
     async function togglePiP() {
       const video = document.getElementById('videoPlayer');
       try {
@@ -276,8 +235,6 @@
           await document.exitPictureInPicture();
         } else if (document.pictureInPictureEnabled) {
           await video.requestPictureInPicture();
-        } else {
-          alert('Режим "Картинка в картинке" не поддерживается вашим браузером');
         }
       } catch (err) {
         console.error("Ошибка PiP:", err);
@@ -305,8 +262,6 @@
           video.volume = savedVolume;
         });
       }
-
-      updateEpgTabContent(channel);
     }
 
     async function loadPlaylist() {
@@ -331,7 +286,6 @@
         if (line.startsWith('#EXTINF:')) {
           const logoMatch = line.match(/tvg-logo="([^"]+)"/);
           const groupMatch = line.match(/group-title="([^"]+)"/);
-          const tvgNameMatch = line.match(/tvg-name="([^"]+)"/);
           const nameParts = line.split(',');
           const displayName = nameParts[nameParts.length - 1].trim();
 
@@ -342,7 +296,6 @@
             logo: logoMatch ? logoMatch[1] : '',
             group: group,
             name: displayName,
-            tvgName: tvgNameMatch ? tvgNameMatch[1] : displayName,
             url: ''
           };
         } else if (line && !line.startsWith('#') && current) {
@@ -354,7 +307,6 @@
 
       renderCategories();
       renderChannels(allChannels);
-      fetchEpgData();
 
       if (allChannels.length > 0) {
         playStream(allChannels[0]);
@@ -398,129 +350,7 @@
       });
     }
 
-    function cleanChannelName(name) {
-      if (!name) return '';
-      return name.toLowerCase()
-        .replace(/[\!\?\"\'\«\»\(\)\-]/g, ' ')
-        .replace(/\b(hd|sd|fhd|4k|50fps|720p|1080p|канал|tv|тв)\b/g, '')
-        .replace(/\s+/g, ' ')
-        .trim();
-    }
-
-    function timeToMinutes(timeStr) {
-      if (!timeStr || !timeStr.includes(':')) return -1;
-      const parts = timeStr.split(':');
-      return parseInt(parts[0], 10) * 60 + parseInt(parts[1], 10);
-    }
-
-    async function fetchEpgData() {
-      try {
-        const res = await fetch('./epg.json?v=' + Date.now());
-        if (res.ok) {
-          const data = await res.json();
-          epgDataGlobal = data.channels || [];
-          if (currentSelectedChannel) {
-            updateEpgTabContent(currentSelectedChannel);
-          }
-        }
-      } catch (e) {
-        console.warn("EPG не загрузился:", e);
-      }
-    }
-
-    // Динамическая отрисовка ТВ-программы для выбранного канала
-    function updateEpgTabContent(channel) {
-      const header = document.getElementById('epgChannelHeader');
-      const logo = document.getElementById('epgLogo');
-      const title = document.getElementById('epgTitle');
-      const category = document.getElementById('epgCategory');
-      const listContainer = document.getElementById('epgProgramList');
-
-      header.style.display = 'flex';
-      title.innerText = channel.name;
-      category.innerText = channel.group || 'Канал';
-
-      if (channel.logo) {
-        logo.src = channel.logo;
-        logo.style.display = 'block';
-      } else {
-        logo.style.display = 'none';
-      }
-
-      const plTvgClean = cleanChannelName(channel.tvgName);
-      const plNameClean = cleanChannelName(channel.name);
-
-      const matchedEpg = epgDataGlobal.find(epg => {
-        const epgClean = cleanChannelName(epg.name);
-        return epgClean === plTvgClean || epgClean === plNameClean || 
-               epgClean.includes(plTvgClean) || plTvgClean.includes(epgClean);
-      });
-
-      const now = new Date();
-      const currentMinutes = now.getHours() * 60 + now.getMinutes();
-
-      if (matchedEpg && matchedEpg.programs && matchedEpg.programs.length > 0) {
-        const progs = matchedEpg.programs;
-
-        const processedProgs = progs.map((p, i) => {
-          const startMin = timeToMinutes(p.time);
-          let endMin = 1440;
-
-          if (i < progs.length - 1) {
-            const nextStart = timeToMinutes(progs[i + 1].time);
-            if (nextStart > startMin) endMin = nextStart;
-          }
-          return { ...p, startMin, endMin };
-        });
-
-        let nowProg = processedProgs.find(p => currentMinutes >= p.startMin && currentMinutes < p.endMin);
-        const upcomingProgs = processedProgs.filter(p => p.startMin > currentMinutes);
-
-        if (!nowProg && upcomingProgs.length > 0) {
-          nowProg = upcomingProgs.shift();
-        }
-
-        let html = '';
-
-        if (nowProg) {
-          const duration = Math.max(1, nowProg.endMin - nowProg.startMin);
-          const elapsed = Math.max(0, currentMinutes - nowProg.startMin);
-          const progressPct = Math.min(100, Math.round((elapsed / duration) * 100));
-
-          html += `
-            <div class="epg-item is-now">
-              <div class="epg-row">
-                <span class="epg-time">${nowProg.time}</span>
-                <span class="epg-title">${nowProg.title} <span class="now-badge">В ЭФИРЕ</span></span>
-              </div>
-              <div class="epg-progress-bar">
-                <div class="epg-progress-fill" style="width: ${progressPct}%;"></div>
-              </div>
-            </div>
-          `;
-        }
-
-        upcomingProgs.slice(0, 10).forEach(p => {
-          html += `
-            <div class="epg-item">
-              <div class="epg-row">
-                <span class="epg-time">${p.time}</span>
-                <span class="epg-title">${p.title}</span>
-              </div>
-            </div>
-          `;
-        });
-
-        listContainer.innerHTML = html;
-
-      } else {
-        listContainer.innerHTML = '<div style="color:#666; font-size: 13px; text-align: center; padding: 20px;">Телепрограмма для этого канала временно недоступна</div>';
-      }
-    }
-
-    // Переключение между вкладками и динамическое перемещение плеера
     function switchTab(tabId, el) {
-      activeTab = tabId;
       document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
       document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
 
