@@ -4,16 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Телевизор 34 — Онлайн ТВ</title>
-  <!-- HLS.js для воспроизведения каналов -->
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-  <!-- Яндекс SDK для авторизации -->
   <script src="https://yastatic.net/s3/pasport/auth-sdk/v1/auth-sdk.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
     body { background-color: #0b0b0e; color: #ffffff; padding-bottom: 70px; overflow-x: hidden; }
 
-    /* Header */
     header {
       display: flex; justify-content: space-between; align-items: center;
       padding: 16px 20px; background: rgba(11, 11, 14, 0.95);
@@ -23,10 +20,8 @@
     .logo { display: flex; align-items: center; gap: 8px; font-weight: 900; font-size: 20px; color: #fff; text-decoration: none; }
     .logo-badge { background: linear-gradient(135deg, #ff8800, #ff4500); color: #fff; padding: 2px 8px; border-radius: 6px; font-size: 16px; }
 
-    /* Main Container */
     .container { padding: 16px; max-width: 1000px; margin: 0 auto; }
 
-    /* Player Container */
     .player-section { margin-bottom: 20px; }
     .player-wrapper {
       position: relative; width: 100%; aspect-ratio: 16/9; background: #000;
@@ -35,7 +30,6 @@
     }
     video { width: 100%; height: 100%; object-fit: contain; cursor: pointer; }
     
-    /* Controls Overlay */
     .player-controls {
       position: absolute; bottom: 0; left: 0; right: 0;
       background: linear-gradient(0deg, rgba(0,0,0,0.95) 0%, transparent 100%);
@@ -48,7 +42,6 @@
     .now-playing { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 14px; overflow: hidden; }
     .live-tag { background: #ff4500; color: #fff; font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 4px; text-transform: uppercase; flex-shrink: 0; }
 
-    /* Volume Slider Styling */
     .volume-box { display: flex; align-items: center; gap: 6px; }
     .volume-slider {
       -webkit-appearance: none; appearance: none;
@@ -60,7 +53,6 @@
       width: 12px; height: 12px; border-radius: 50%; background: #ff6600; cursor: pointer;
     }
 
-    /* Category Filter */
     .categories { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 12px; margin-bottom: 16px; scrollbar-width: none; }
     .categories::-webkit-scrollbar { display: none; }
     .cat-chip {
@@ -70,7 +62,6 @@
     }
     .cat-chip.active, .cat-chip:hover { background: #ff6600; color: #fff; border-color: #ff6600; }
 
-    /* Channel Grid */
     .channel-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
     .channel-card {
       background: #14141a; border-radius: 12px; padding: 12px; display: flex; align-items: center; gap: 12px;
@@ -82,7 +73,6 @@
     .channel-title { font-weight: 700; font-size: 15px; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .channel-epg { font-size: 12px; color: #ff6600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-    /* EPG / ТВ Программа */
     .epg-container { display: flex; flex-direction: column; gap: 12px; }
     .epg-card { background: #14141a; border-radius: 12px; padding: 16px; border: 1px solid rgba(255,255,255,0.05); }
     .epg-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
@@ -92,17 +82,14 @@
     .epg-time { color: #888; font-weight: 700; min-width: 50px; }
     .epg-title { color: #ddd; flex: 1; }
     
-    /* Стили для текущей передачи в эфире */
     .epg-item.is-now { background: rgba(255, 102, 0, 0.08); border-radius: 8px; padding: 8px; margin: 4px 0; }
     .epg-item.is-now .epg-time { color: #ff6600; }
     .epg-item.is-now .epg-title { color: #ffffff; font-weight: 600; }
     .now-badge { background: #ff6600; color: #fff; font-size: 9px; font-weight: 800; padding: 2px 5px; border-radius: 4px; margin-left: 6px; text-transform: uppercase; }
 
-    /* Прогресс-бар для передачи в эфире */
     .epg-progress-bar { width: 100%; height: 3px; background: rgba(255,255,255,0.1); border-radius: 2px; margin-top: 6px; overflow: hidden; }
     .epg-progress-fill { height: 100%; background: #ff6600; transition: width 0.3s ease; }
 
-    /* Account Section */
     .account-card {
       background: #14141a; border-radius: 16px; padding: 24px; text-align: center;
       border: 1px solid rgba(255,255,255,0.08); max-width: 400px; margin: 40px auto;
@@ -116,7 +103,6 @@
     .btn-yandex:hover { background: #e03213; }
     .btn-logout { background: #282832; color: #ccc; margin-top: 12px; }
 
-    /* Bottom Navigation */
     .bottom-nav {
       position: fixed; bottom: 0; left: 0; right: 0; height: 60px;
       background: rgba(18, 18, 24, 0.95); border-top: 1px solid rgba(255, 255, 255, 0.08);
@@ -132,7 +118,6 @@
 </head>
 <body>
 
-  <!-- Header -->
   <header>
     <a href="#" class="logo">
       <span>ТЕЛЕВИЗОР</span>
@@ -141,7 +126,6 @@
   </header>
 
   <div class="container">
-    <!-- Вкладка 1: Главная (ТВ и Плеер) -->
     <div id="tab-home" class="tab-content active">
       <div class="player-section">
         <div class="player-wrapper">
@@ -153,7 +137,6 @@
             </div>
             
             <div class="right-controls">
-              <!-- Громкость -->
               <div class="volume-box">
                 <button class="ctrl-btn" id="muteBtn" onclick="toggleMute()">🔇</button>
                 <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.05" value="0.8" oninput="changeVolume(this.value)">
@@ -164,18 +147,13 @@
         </div>
       </div>
 
-      <!-- Фильтр категорий -->
       <div class="categories" id="categoryContainer">
         <div class="cat-chip active" onclick="filterCategory('all', this)">Все каналы</div>
       </div>
 
-      <!-- Список каналов -->
-      <div class="channel-grid" id="channelList">
-        <!-- Загружается динамически -->
-      </div>
+      <div class="channel-grid" id="channelList"></div>
     </div>
 
-    <!-- Вкладка 2: ТВ-Программа -->
     <div id="tab-epg" class="tab-content">
       <h2 style="margin-bottom: 16px; color: #ff6600;">Телепрограмма</h2>
       <div id="epgList" class="epg-container">
@@ -183,15 +161,11 @@
       </div>
     </div>
 
-    <!-- Вкладка 3: Аккаунт -->
     <div id="tab-account" class="tab-content">
-      <div class="account-card" id="accountBox">
-        <!-- Заполняется JS -->
-      </div>
+      <div class="account-card" id="accountBox"></div>
     </div>
   </div>
 
-  <!-- Нижнее меню -->
   <nav class="bottom-nav">
     <div class="nav-item active" onclick="switchTab('home', this)">
       <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
@@ -216,7 +190,6 @@
     let hls = null;
     let savedVolume = 0.8;
 
-    // Управление звуком и ползунком
     function toggleMute() {
       const video = document.getElementById('videoPlayer');
       const muteBtn = document.getElementById('muteBtn');
@@ -233,368 +206,4 @@
       }
     }
 
-    function changeVolume(val) {
-      const video = document.getElementById('videoPlayer');
-      const muteBtn = document.getElementById('muteBtn');
-      
-      savedVolume = parseFloat(val);
-      video.volume = savedVolume;
-
-      if (savedVolume === 0) {
-        video.muted = true;
-        muteBtn.innerText = '🔇';
-      } else {
-        video.muted = false;
-        muteBtn.innerText = savedVolume > 0.5 ? '🔊' : '🔉';
-      }
-    }
-
-    // Включение плеера HLS
-    function playStream(url, name) {
-      const video = document.getElementById('videoPlayer');
-      document.getElementById('playerChannelName').innerText = name;
-
-      if (Hls.isSupported()) {
-        if (hls) hls.destroy();
-        hls = new Hls();
-        hls.loadSource(url);
-        hls.attachMedia(video);
-        hls.on(Hls.Events.MANIFEST_PARSED, () => {
-          video.play();
-          video.volume = savedVolume;
-        });
-      } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-        video.src = url;
-        video.addEventListener('loadedmetadata', () => {
-          video.play();
-          video.volume = savedVolume;
-        });
-      }
-    }
-
-    // Загрузка плейлиста M3U
-    async function loadPlaylist() {
-      try {
-        const res = await fetch('./playlist.m3u?v=' + Date.now());
-        if (!res.ok) throw new Error("Файл не найден");
-        const text = await res.text();
-        parseM3U(text);
-      } catch (e) {
-        console.warn("Локальный плейлист не найден, используется тестовый.");
-        allChannels = [
-          { name: 'Первый канал', group: 'Федеральные', logo: 'https://upload.wikimedia.org/wikipedia/commons/e/e0/Perviy_Kanal_logo.svg', url: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8' },
-          { name: 'Россия 1', group: 'Федеральные', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Rossiya-1_logo.svg/300px-Rossiya-1_logo.svg.png', url: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8' }
-        ];
-        categoriesSet.add('Федеральные');
-        renderCategories();
-        renderChannels(allChannels);
-      }
-    }
-
-    function parseM3U(text) {
-      allChannels = [];
-      categoriesSet.clear();
-      const lines = text.split('\n');
-      let current = null;
-
-      lines.forEach(line => {
-        line = line.trim();
-        if (line.startsWith('#EXTINF:')) {
-          const logoMatch = line.match(/tvg-logo="([^"]+)"/);
-          const groupMatch = line.match(/group-title="([^"]+)"/);
-          const nameMatch = line.split(',')[1];
-
-          const group = groupMatch ? groupMatch[1] : 'Развлекательные';
-          categoriesSet.add(group);
-
-          current = {
-            logo: logoMatch ? logoMatch[1] : '',
-            group: group,
-            name: nameMatch ? nameMatch.trim() : 'Канал',
-            url: ''
-          };
-        } else if (line && !line.startsWith('#') && current) {
-          current.url = line;
-          allChannels.push(current);
-          current = null;
-        }
-      });
-
-      renderCategories();
-      renderChannels(allChannels);
-      loadEpgJson();
-
-      if (allChannels.length > 0) {
-        playStream(allChannels[0].url, allChannels[0].name);
-      }
-    }
-
-    function renderCategories() {
-      const container = document.getElementById('categoryContainer');
-      container.innerHTML = '<div class="cat-chip active" onclick="filterCategory(\'all\', this)">Все каналы</div>';
-
-      categoriesSet.forEach(cat => {
-        const chip = document.createElement('div');
-        chip.className = 'cat-chip';
-        chip.innerText = cat;
-        chip.onclick = () => filterCategory(cat, chip);
-        container.appendChild(chip);
-      });
-    }
-
-    function renderChannels(channels) {
-      const container = document.getElementById('channelList');
-      container.innerHTML = '';
-
-      channels.forEach((ch, idx) => {
-        const card = document.createElement('div');
-        card.className = `channel-card ${idx === 0 ? 'active' : ''}`;
-        card.onclick = () => {
-          document.querySelectorAll('.channel-card').forEach(c => c.classList.remove('active'));
-          card.classList.add('active');
-          playStream(ch.url, ch.name);
-        };
-
-        const cleanName = ch.name.toLowerCase().trim();
-        const epgCurrent = epgScheduleMap[cleanName] || 'Прямой эфир';
-
-        card.innerHTML = `
-          <img class="channel-logo" src="${ch.logo}" onerror="this.src='https://via.placeholder.com/50/181820/ffffff?text=TV'">
-          <div class="channel-info">
-            <div class="channel-title">${ch.name}</div>
-            <div class="channel-epg">${epgCurrent}</div>
-          </div>
-        `;
-        container.appendChild(card);
-      });
-    }
-
-    // Вспомогательная функция для преобразования времени "HH:MM" в минуты дня
-    function timeToMinutes(timeStr) {
-      if (!timeStr || !timeStr.includes(':')) return -1;
-      const parts = timeStr.split(':');
-      return parseInt(parts[0], 10) * 60 + parseInt(parts[1], 10);
-    }
-
-    // Загрузка и фильтрация телепрограммы по ТЕКУЩЕМУ ВРЕМЕНИ
-    async function loadEpgJson() {
-      const epgContainer = document.getElementById('epgList');
-      epgContainer.innerHTML = '<p style="color: #ff6600;">Синхронизация телепрограммы...</p>';
-
-      try {
-        const res = await fetch('./epg.json?v=' + Date.now());
-        if (!res.ok) throw new Error("Файл epg.json не найден");
-
-        const data = await res.json();
-        epgContainer.innerHTML = '';
-
-        const epgChannels = data.channels || [];
-
-        // Вычисляем текущие минуты от начала суток
-        const now = new Date();
-        const currentMinutes = now.getHours() * 60 + now.getMinutes();
-
-        // Проходим по каналам из плейлиста strictly по порядку
-        allChannels.forEach(plChannel => {
-          const plNameClean = plChannel.name.toLowerCase().replace(/hd|50fps|720p|1080p|\(.*\)/g, '').trim();
-
-          const matchedEpg = epgChannels.find(epg => {
-            const epgNameClean = epg.name.toLowerCase().replace(/hd|50fps|720p|1080p|\(.*\)/g, '').trim();
-            return epgNameClean === plNameClean || epgNameClean.includes(plNameClean) || plNameClean.includes(epgNameClean);
-          });
-
-          const epgCard = document.createElement('div');
-          epgCard.className = 'epg-card';
-
-          let programsHtml = '';
-
-          if (matchedEpg && matchedEpg.programs && matchedEpg.programs.length > 0) {
-            const progs = matchedEpg.programs;
-            
-            // Определяем временные интервалы каждой передачи
-            const processedProgs = progs.map((p, i) => {
-              const startMin = timeToMinutes(p.time);
-              let endMin = 1440; // конец суток по умолчанию
-
-              if (i < progs.length - 1) {
-                const nextStart = timeToMinutes(progs[i + 1].time);
-                if (nextStart > startMin) {
-                  endMin = nextStart;
-                }
-              }
-              return { ...p, startMin, endMin };
-            });
-
-            // Находим передачу, которая идет СЕЙЧАС, и фильтруем прошедшие
-            let nowProg = null;
-            const upcomingProgs = [];
-
-            processedProgs.forEach(p => {
-              if (currentMinutes >= p.startMin && currentMinutes < p.endMin) {
-                nowProg = p;
-              } else if (p.startMin > currentMinutes) {
-                upcomingProgs.push(p);
-              }
-            });
-
-            // Если не нашли подходящий интервал (например, первая передача списка чуть позже), берем самую актуальную ближайшую
-            if (!nowProg && upcomingProgs.length > 0) {
-              nowProg = upcomingProgs.shift();
-            }
-
-            // Рендерим передачу, которая идет сейчас
-            if (nowProg) {
-              const duration = Math.max(1, nowProg.endMin - nowProg.startMin);
-              const elapsed = Math.max(0, currentMinutes - nowProg.startMin);
-              const progressPct = Math.min(100, Math.round((elapsed / duration) * 100));
-
-              programsHtml += `
-                <div class="epg-item is-now">
-                  <div class="epg-row">
-                    <span class="epg-time">${nowProg.time}</span>
-                    <span class="epg-title">${nowProg.title} <span class="now-badge">В ЭФИРЕ</span></span>
-                  </div>
-                  <div class="epg-progress-bar">
-                    <div class="epg-progress-fill" style="width: ${progressPct}%;"></div>
-                  </div>
-                </div>
-              `;
-
-              // Запоминаем текущую передачу для вывода на главной под логотипом
-              epgScheduleMap[plChannel.name.toLowerCase().trim()] = `${nowProg.time} — ${nowProg.title}`;
-            }
-
-            // Рендерим следующие передачи до конца дня
-            upcomingProgs.slice(0, 6).forEach(p => {
-              programsHtml += `
-                <div class="epg-item">
-                  <div class="epg-row">
-                    <span class="epg-time">${p.time}</span>
-                    <span class="epg-title">${p.title}</span>
-                  </div>
-                </div>
-              `;
-            });
-
-            if (!nowProg && upcomingProgs.length === 0) {
-              programsHtml = '<div style="color:#666; font-size: 13px;">Передачи на сегодня завершены</div>';
-              epgScheduleMap[plChannel.name.toLowerCase().trim()] = 'Прямой эфир';
-            }
-
-          } else {
-            programsHtml = '<div style="color:#666; font-size: 13px;">Телепрограмма временно недоступна</div>';
-            epgScheduleMap[plChannel.name.toLowerCase().trim()] = 'Прямой эфир';
-          }
-
-          epgCard.innerHTML = `
-            <div class="epg-header">
-              ${plChannel.logo ? `<img class="epg-logo" src="${plChannel.logo}" onerror="this.style.display='none'">` : ''}
-              <h3 style="font-size: 16px;">${plChannel.name}</h3>
-            </div>
-            <div>${programsHtml}</div>
-          `;
-
-          epgContainer.appendChild(epgCard);
-        });
-
-        // Обновляем плашки передач в списке каналов
-        renderChannels(allChannels);
-
-      } catch (e) {
-        console.warn("Ошибка подгрузки EPG:", e);
-        epgContainer.innerHTML = `
-          <div style="background: #181820; padding: 16px; border-radius: 12px; color: #888; text-align: center;">
-            <p style="margin-bottom: 8px;">⏳ Синхронизация телепрограммы...</p>
-            <p style="font-size: 12px; color: #aaa;">Убедитесь, что GitHub Actions сгенерировал файл epg.json</p>
-          </div>
-        `;
-      }
-    }
-
-    function filterCategory(cat, element) {
-      document.querySelectorAll('.cat-chip').forEach(el => el.classList.remove('active'));
-      element.classList.add('active');
-
-      if (cat === 'all') {
-        renderChannels(allChannels);
-      } else {
-        const filtered = allChannels.filter(c => c.group === cat);
-        renderChannels(filtered);
-      }
-    }
-
-    function switchTab(tabId, el) {
-      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-
-      document.getElementById(`tab-${tabId}`).classList.add('active');
-      el.classList.add('active');
-    }
-
-    function toggleFullscreen() {
-      const video = document.getElementById('videoPlayer');
-      if (video.requestFullscreen) video.requestFullscreen();
-    }
-
-    // Авторизация Яндекс ID
-    function loginWithYandex() {
-      const redirectUri = window.location.origin + window.location.pathname;
-      window.location.href = `https://oauth.yandex.ru/authorize?response_type=token&client_id=${YANDEX_CLIENT_ID}&redirect_uri=${encodeURIComponent(redirectUri)}`;
-    }
-
-    function checkYandexAuth() {
-      const hash = window.location.hash;
-      if (hash.includes('access_token')) {
-        const params = new URLSearchParams(hash.replace('#', '?'));
-        const token = params.get('access_token');
-        
-        fetch('https://login.yandex.ru/info?format=json', {
-          headers: { 'Authorization': `OAuth ${token}` }
-        })
-        .then(res => res.json())
-        .then(user => {
-          localStorage.setItem('yandex_user', JSON.stringify(user));
-          window.history.replaceState({}, document.title, window.location.pathname);
-          renderAccount();
-        });
-      } else {
-        renderAccount();
-      }
-    }
-
-    function renderAccount() {
-      const accountBox = document.getElementById('accountBox');
-      const savedUser = localStorage.getItem('yandex_user');
-
-      if (savedUser) {
-        const user = JSON.parse(savedUser);
-        const avatarUrl = user.default_avatar_id ? `https://avatars.yandex.net/get-yapic/${user.default_avatar_id}/islands-200` : 'https://via.placeholder.com/80';
-        
-        accountBox.innerHTML = `
-          <img class="avatar" src="${avatarUrl}">
-          <h2 style="font-size: 20px; margin-bottom: 4px;">${user.real_name || user.login}</h2>
-          <p style="color: #888; font-size: 14px; margin-bottom: 20px;">@${user.login}</p>
-          <button class="btn-yandex btn-logout" onclick="logout()">Выйти из профиля</button>
-        `;
-      } else {
-        accountBox.innerHTML = `
-          <h2 style="font-size: 20px; margin-bottom: 12px;">Вход в Телевизор 34</h2>
-          <p style="color: #888; font-size: 14px; margin-bottom: 24px;">Войдите через Яндекс ID</p>
-          <button class="btn-yandex" onclick="loginWithYandex()">
-            Войти через Яндекс
-          </button>
-        `;
-      }
-    }
-
-    function logout() {
-      localStorage.removeItem('yandex_user');
-      renderAccount();
-    }
-
-    // Старт проекта
-    loadPlaylist();
-    checkYandexAuth();
-  </script>
-</body>
-</html>
+    function changeVolume(val)
