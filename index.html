@@ -54,16 +54,34 @@
       width: 12px; height: 12px; border-radius: 50%; background: #ff6600; cursor: pointer;
     }
 
-    /* Блок выбранного канала и его ТВ-программы */
-    .selected-channel-box {
-      background: #14141a; border-radius: 16px; padding: 16px; margin-bottom: 20px;
-      border: 1px solid rgba(255,255,255,0.08); display: none;
+    /* Категории */
+    .categories { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 12px; margin-bottom: 16px; scrollbar-width: none; }
+    .categories::-webkit-scrollbar { display: none; }
+    .cat-chip {
+      background: #181820; border: 1px solid rgba(255,255,255,0.08); color: #aaa;
+      padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 600;
+      white-space: nowrap; cursor: pointer; transition: 0.2s;
     }
-    .selected-channel-box.active { display: block; }
+    .cat-chip.active, .cat-chip:hover { background: #ff6600; color: #fff; border-color: #ff6600; }
 
-    .ch-header-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-    .ch-header-info { display: flex; align-items: center; gap: 12px; }
-    .ch-header-logo { width: 40px; height: 40px; border-radius: 8px; object-fit: contain; background: #000; padding: 2px; }
+    /* Список каналов */
+    .channel-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+    .channel-card {
+      background: #14141a; border-radius: 12px; padding: 12px; display: flex; align-items: center; gap: 12px;
+      cursor: pointer; border: 1px solid rgba(255,255,255,0.05); transition: 0.2s;
+    }
+    .channel-card:hover, .channel-card.active { background: #1c1c24; border-color: #ff6600; transform: translateY(-2px); }
+    .channel-logo { width: 50px; height: 50px; border-radius: 8px; background: #08080a; object-fit: contain; padding: 4px; }
+    .channel-info { flex: 1; overflow: hidden; }
+    .channel-title { font-weight: 700; font-size: 15px; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    /* Блок выбранного канала на вкладке ТВ-программы */
+    .epg-channel-header {
+      background: #14141a; border-radius: 16px; padding: 16px; margin-top: 16px; margin-bottom: 16px;
+      border: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: space-between;
+    }
+    .epg-ch-info { display: flex; align-items: center; gap: 12px; }
+    .epg-ch-logo { width: 40px; height: 40px; border-radius: 8px; object-fit: contain; background: #000; padding: 2px; }
     .btn-pip {
       background: #ff6600; color: #fff; border: none; padding: 8px 14px;
       border-radius: 8px; font-weight: 700; font-size: 12px; cursor: pointer;
@@ -71,8 +89,8 @@
     }
     .btn-pip:hover { background: #ff4500; }
 
-    /* Список передач */
-    .epg-list { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+    /* Элементы передач */
+    .epg-list { display: flex; flex-direction: column; gap: 8px; }
     .epg-item { display: flex; flex-direction: column; padding: 8px 10px; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 13px; }
     .epg-row { display: flex; gap: 12px; align-items: center; }
     .epg-time { color: #888; font-weight: 700; min-width: 50px; }
@@ -85,28 +103,6 @@
 
     .epg-progress-bar { width: 100%; height: 3px; background: rgba(255,255,255,0.1); border-radius: 2px; margin-top: 6px; overflow: hidden; }
     .epg-progress-fill { height: 100%; background: #ff6600; transition: width 0.3s ease; }
-
-    /* Категории */
-    .categories { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 12px; margin-bottom: 16px; scrollbar-width: none; }
-    .categories::-webkit-scrollbar { display: none; }
-    .cat-chip {
-      background: #181820; border: 1px solid rgba(255,255,255,0.08); color: #aaa;
-      padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 600;
-      white-space: nowrap; cursor: pointer; transition: 0.2s;
-    }
-    .cat-chip.active, .cat-chip:hover { background: #ff6600; color: #fff; border-color: #ff6600; }
-
-    /* Грид каналов */
-    .channel-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
-    .channel-card {
-      background: #14141a; border-radius: 12px; padding: 12px; display: flex; align-items: center; gap: 12px;
-      cursor: pointer; border: 1px solid rgba(255,255,255,0.05); transition: 0.2s;
-    }
-    .channel-card:hover, .channel-card.active { background: #1c1c24; border-color: #ff6600; transform: translateY(-2px); }
-    .channel-logo { width: 50px; height: 50px; border-radius: 8px; background: #08080a; object-fit: contain; padding: 4px; }
-    .channel-info { flex: 1; overflow: hidden; }
-    .channel-title { font-weight: 700; font-size: 15px; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .channel-epg { font-size: 12px; color: #ff6600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
     /* Аккаунт */
     .account-card {
@@ -122,7 +118,7 @@
     .btn-yandex:hover { background: #e03213; }
     .btn-logout { background: #282832; color: #ccc; margin-top: 12px; }
 
-    /* Нижняя навигация */
+    /* Нижнее меню */
     .bottom-nav {
       position: fixed; bottom: 0; left: 0; right: 0; height: 60px;
       background: rgba(18, 18, 24, 0.95); border-top: 1px solid rgba(255, 255, 255, 0.08);
@@ -146,70 +142,82 @@
   </header>
 
   <div class="container">
+    
+    <!-- Общий контейнер плеера (перемещается между вкладками динамически) -->
+    <div id="playerContainer" class="player-section">
+      <div class="player-wrapper">
+        <video id="videoPlayer" autoplay playsinline muted onclick="toggleMute()"></video>
+        <div class="player-controls">
+          <div class="now-playing">
+            <span class="live-tag">LIVE</span>
+            <span id="playerChannelName">Выберите канал</span>
+          </div>
+          
+          <div class="right-controls">
+            <div class="volume-box">
+              <button class="ctrl-btn" id="muteBtn" onclick="toggleMute()">🔇</button>
+              <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.05" value="0.8" oninput="changeVolume(this.value)">
+            </div>
+            <button class="ctrl-btn" title="Картинка в картинке" onclick="togglePiP()">🖼️</button>
+            <button class="ctrl-btn" onclick="toggleFullscreen()">⛶</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Вкладка 1: Главная (Каналы) -->
     <div id="tab-home" class="tab-content active">
-      <!-- Блок плеера -->
-      <div class="player-section">
-        <div class="player-wrapper">
-          <video id="videoPlayer" autoplay playsinline muted onclick="toggleMute()"></video>
-          <div class="player-controls">
-            <div class="now-playing">
-              <span class="live-tag">LIVE</span>
-              <span id="playerChannelName">Выберите канал</span>
-            </div>
-            
-            <div class="right-controls">
-              <div class="volume-box">
-                <button class="ctrl-btn" id="muteBtn" onclick="toggleMute()">🔇</button>
-                <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.05" value="0.8" oninput="changeVolume(this.value)">
-              </div>
-              <button class="ctrl-btn" title="Картинка в картинке" onclick="togglePiP()">🖼️</button>
-              <button class="ctrl-btn" onclick="toggleFullscreen()">⛶</button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div id="homePlayerAnchor"></div>
 
-      <!-- Меню выбранного канала и его ТВ-программа -->
-      <div class="selected-channel-box" id="selectedChannelBox">
-        <div class="ch-header-row">
-          <div class="ch-header-info">
-            <img class="ch-header-logo" id="selectedLogo" src="" onerror="this.style.display='none'">
-            <div>
-              <h3 style="font-size: 16px;" id="selectedTitle">Название канала</h3>
-              <p style="font-size: 12px; color: #ff6600;" id="selectedCategory">Категория</p>
-            </div>
-          </div>
-          <button class="btn-pip" onclick="togglePiP()">
-            <span>Фоновый режим</span>
-            <span style="font-size: 14px;">🗔</span>
-          </button>
-        </div>
-
-        <h4 style="font-size: 14px; color: #888; margin-top: 10px; margin-bottom: 4px;">Телепрограмма канала:</h4>
-        <div class="epg-list" id="channelEpgList">
-          <p style="color: #666; font-size: 13px;">Загрузка программы...</p>
-        </div>
-      </div>
-
-      <!-- Категории каналов -->
       <div class="categories" id="categoryContainer">
         <div class="cat-chip active" onclick="filterCategory('all', this)">Все каналы</div>
       </div>
 
-      <!-- Список всех каналов -->
       <div class="channel-grid" id="channelList"></div>
     </div>
 
-    <!-- Вкладка Профиль/Аккаунт -->
+    <!-- Вкладка 2: ТВ-Программа (с отдельным плеером выбранного канала) -->
+    <div id="tab-epg" class="tab-content">
+      <div id="epgPlayerAnchor"></div>
+
+      <div id="epgChannelHeader" class="epg-channel-header" style="display: none;">
+        <div class="epg-ch-info">
+          <img class="epg-ch-logo" id="epgLogo" src="" onerror="this.style.display='none'">
+          <div>
+            <h3 style="font-size: 16px;" id="epgTitle">Название канала</h3>
+            <p style="font-size: 12px; color: #ff6600;" id="epgCategory">Категория</p>
+          </div>
+        </div>
+        <button class="btn-pip" onclick="togglePiP()">
+          <span>Фоновый режим</span>
+          <span style="font-size: 14px;">🗔</span>
+        </button>
+      </div>
+
+      <div class="epg-list" id="epgProgramList">
+        <div style="color: #888; text-align: center; padding: 30px; background: #14141a; border-radius: 16px;">
+          <p style="font-size: 15px; margin-bottom: 6px;">📺 Выберите канал для просмотра ТВ-программы</p>
+          <p style="font-size: 12px; color: #666;">Нажмите на любой канал на Главной вкладке</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Вкладка 3: Аккаунт -->
     <div id="tab-account" class="tab-content">
       <div class="account-card" id="accountBox"></div>
     </div>
+
   </div>
 
+  <!-- Нижнее меню -->
   <nav class="bottom-nav">
     <div class="nav-item active" onclick="switchTab('home', this)">
       <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
       <span>Главная</span>
+    </div>
+    <div class="nav-item" id="navEpgBtn" onclick="switchTab('epg', this)">
+      <svg viewBox="0 0 24 24"><path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H3V5h18v14zM5 15h14v2H5zm0-4h14v2H5zm0-4h14v2H5z"/></svg>
+      <span>ТВ-программа</span>
     </div>
     <div class="nav-item" onclick="switchTab('account', this)">
       <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
@@ -226,6 +234,7 @@
     let currentSelectedChannel = null;
     let hls = null;
     let savedVolume = 0.8;
+    let activeTab = 'home';
 
     function toggleMute() {
       const video = document.getElementById('videoPlayer');
@@ -259,7 +268,7 @@
       }
     }
 
-    // Режим "Картинка в картинке" (Picture-in-Picture) для фонового просмотра
+    // Включение режима "Картинка в картинке" (Picture-in-Picture)
     async function togglePiP() {
       const video = document.getElementById('videoPlayer');
       try {
@@ -268,10 +277,10 @@
         } else if (document.pictureInPictureEnabled) {
           await video.requestPictureInPicture();
         } else {
-          alert('Ваш браузер не поддерживает режим "Картинка в картинке"');
+          alert('Режим "Картинка в картинке" не поддерживается вашим браузером');
         }
       } catch (err) {
-        console.error("Ошибка Picture-in-Picture:", err);
+        console.error("Ошибка PiP:", err);
       }
     }
 
@@ -297,18 +306,17 @@
         });
       }
 
-      // Обновляем плашку выбранного канала и его ТВ-программу
-      updateSelectedChannelMenu(channel);
+      updateEpgTabContent(channel);
     }
 
     async function loadPlaylist() {
       try {
         const res = await fetch('./playlist.m3u?v=' + Date.now());
-        if (!res.ok) throw new Error("Файл не найден");
+        if (!res.ok) throw new Error("Плейлист не найден");
         const text = await res.text();
         parseM3U(text);
       } catch (e) {
-        console.warn("Локальный плейлист не найден.");
+        console.warn("Ошибка загрузки плейлиста:", e);
       }
     }
 
@@ -347,6 +355,10 @@
       renderCategories();
       renderChannels(allChannels);
       fetchEpgData();
+
+      if (allChannels.length > 0) {
+        playStream(allChannels[0]);
+      }
     }
 
     function renderCategories() {
@@ -379,7 +391,7 @@
           <img class="channel-logo" src="${ch.logo}" onerror="this.src='https://via.placeholder.com/50/181820/ffffff?text=TV'">
           <div class="channel-info">
             <div class="channel-title">${ch.name}</div>
-            <div class="channel-epg" style="color:#777;">Нажмите для просмотра</div>
+            <div style="font-size: 11px; color: #ff6600;">Смотреть эфир</div>
           </div>
         `;
         container.appendChild(card);
@@ -407,32 +419,33 @@
         if (res.ok) {
           const data = await res.json();
           epgDataGlobal = data.channels || [];
+          if (currentSelectedChannel) {
+            updateEpgTabContent(currentSelectedChannel);
+          }
         }
       } catch (e) {
         console.warn("EPG не загрузился:", e);
       }
     }
 
-    // Обновление меню выбранного канала и отрисовка его телепрограммы
-    function updateSelectedChannelMenu(channel) {
-      const box = document.getElementById('selectedChannelBox');
-      const logo = document.getElementById('selectedLogo');
-      const title = document.getElementById('selectedTitle');
-      const category = document.getElementById('selectedCategory');
-      const epgContainer = document.getElementById('channelEpgList');
+    // Динамическая отрисовка ТВ-программы для выбранного канала
+    function updateEpgTabContent(channel) {
+      const header = document.getElementById('epgChannelHeader');
+      const logo = document.getElementById('epgLogo');
+      const title = document.getElementById('epgTitle');
+      const category = document.getElementById('epgCategory');
+      const listContainer = document.getElementById('epgProgramList');
 
-      box.classList.add('active');
+      header.style.display = 'flex';
       title.innerText = channel.name;
-      category.innerText = channel.group || 'ТВ канал';
-      
+      category.innerText = channel.group || 'Канал';
+
       if (channel.logo) {
         logo.src = channel.logo;
         logo.style.display = 'block';
       } else {
         logo.style.display = 'none';
       }
-
-      epgContainer.innerHTML = '';
 
       const plTvgClean = cleanChannelName(channel.tvgName);
       const plNameClean = cleanChannelName(channel.name);
@@ -487,7 +500,7 @@
           `;
         }
 
-        upcomingProgs.slice(0, 8).forEach(p => {
+        upcomingProgs.slice(0, 10).forEach(p => {
           html += `
             <div class="epg-item">
               <div class="epg-row">
@@ -498,10 +511,28 @@
           `;
         });
 
-        epgContainer.innerHTML = html;
+        listContainer.innerHTML = html;
 
       } else {
-        epgContainer.innerHTML = '<div style="color:#666; font-size: 13px; padding: 6px 0;">Телепрограмма для данного канала временно недоступна.</div>';
+        listContainer.innerHTML = '<div style="color:#666; font-size: 13px; text-align: center; padding: 20px;">Телепрограмма для этого канала временно недоступна</div>';
+      }
+    }
+
+    // Переключение между вкладками и динамическое перемещение плеера
+    function switchTab(tabId, el) {
+      activeTab = tabId;
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+
+      document.getElementById(`tab-${tabId}`).classList.add('active');
+      el.classList.add('active');
+
+      const playerBox = document.getElementById('playerContainer');
+      
+      if (tabId === 'epg') {
+        document.getElementById('epgPlayerAnchor').appendChild(playerBox);
+      } else if (tabId === 'home') {
+        document.getElementById('homePlayerAnchor').appendChild(playerBox);
       }
     }
 
@@ -515,14 +546,6 @@
         const filtered = allChannels.filter(c => c.group === cat);
         renderChannels(filtered);
       }
-    }
-
-    function switchTab(tabId, el) {
-      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-
-      document.getElementById(`tab-${tabId}`).classList.add('active');
-      el.classList.add('active');
     }
 
     function toggleFullscreen() {
