@@ -17,7 +17,7 @@ jobs:
       - name: Скачивание и генерация epg.json
         run: |
           echo "Загрузка EPG с iptvx.one..."
-          curl -sL https://iptvx.one/epg/epg.xml.gz -o epg.xml.gz
+          curl -sL http://epg.one/ru2.xml.gz -o epg.xml.gz
           gunzip -f epg.xml.gz
 
           echo "Формирование epg.json..."
