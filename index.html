@@ -87,9 +87,20 @@
     .epg-card { background: #14141a; border-radius: 12px; padding: 16px; border: 1px solid rgba(255,255,255,0.05); }
     .epg-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
     .epg-logo { width: 32px; height: 32px; object-fit: contain; }
-    .epg-item { display: flex; gap: 12px; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 13px; }
-    .epg-time { color: #ff6600; font-weight: 700; min-width: 50px; }
+    .epg-item { display: flex; flex-direction: column; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 13px; }
+    .epg-row { display: flex; gap: 12px; align-items: center; }
+    .epg-time { color: #888; font-weight: 700; min-width: 50px; }
     .epg-title { color: #ddd; flex: 1; }
+    
+    /* Стили для текущей передачи в эфире */
+    .epg-item.is-now { background: rgba(255, 102, 0, 0.08); border-radius: 8px; padding: 8px; margin: 4px 0; }
+    .epg-item.is-now .epg-time { color: #ff6600; }
+    .epg-item.is-now .epg-title { color: #ffffff; font-weight: 600; }
+    .now-badge { background: #ff6600; color: #fff; font-size: 9px; font-weight: 800; padding: 2px 5px; border-radius: 4px; margin-left: 6px; text-transform: uppercase; }
+
+    /* Прогресс-бар для передачи в эфире */
+    .epg-progress-bar { width: 100%; height: 3px; background: rgba(255,255,255,0.1); border-radius: 2px; margin-top: 6px; overflow: hidden; }
+    .epg-progress-fill { height: 100%; background: #ff6600; transition: width 0.3s ease; }
 
     /* Account Section */
     .account-card {
@@ -318,7 +329,6 @@
       }
     }
 
-    // Динамические категории
     function renderCategories() {
       const container = document.getElementById('categoryContainer');
       container.innerHTML = '<div class="cat-chip active" onclick="filterCategory(\'all\', this)">Все каналы</div>';
@@ -332,7 +342,6 @@
       });
     }
 
-    // Отрисовка каналов
     function renderChannels(channels) {
       const container = document.getElementById('channelList');
       container.innerHTML = '';
@@ -347,7 +356,7 @@
         };
 
         const cleanName = ch.name.toLowerCase().trim();
-        const epgCurrent = epgScheduleMap[cleanName] || 'Загрузка передачи...';
+        const epgCurrent = epgScheduleMap[cleanName] || 'Прямой эфир';
 
         card.innerHTML = `
           <img class="channel-logo" src="${ch.logo}" onerror="this.src='https://via.placeholder.com/50/181820/ffffff?text=TV'">
@@ -360,7 +369,14 @@
       });
     }
 
-    // Фильтрация телепрограммы из epg.json
+    // Вспомогательная функция для преобразования времени "HH:MM" в минуты дня
+    function timeToMinutes(timeStr) {
+      if (!timeStr || !timeStr.includes(':')) return -1;
+      const parts = timeStr.split(':');
+      return parseInt(parts[0], 10) * 60 + parseInt(parts[1], 10);
+    }
+
+    // Загрузка и фильтрация телепрограммы по ТЕКУЩЕМУ ВРЕМЕНИ
     async function loadEpgJson() {
       const epgContainer = document.getElementById('epgList');
       epgContainer.innerHTML = '<p style="color: #ff6600;">Синхронизация телепрограммы...</p>';
@@ -372,68 +388,124 @@
         const data = await res.json();
         epgContainer.innerHTML = '';
 
-        let matchedCount = 0;
+        const epgChannels = data.channels || [];
 
-        if (data.channels && data.channels.length > 0) {
-          data.channels.forEach(ch => {
-            const epgChannelName = ch.name.toLowerCase().trim();
+        // Вычисляем текущие минуты от начала суток
+        const now = new Date();
+        const currentMinutes = now.getHours() * 60 + now.getMinutes();
+
+        // Проходим по каналам из плейлиста strictly по порядку
+        allChannels.forEach(plChannel => {
+          const plNameClean = plChannel.name.toLowerCase().replace(/hd|50fps|720p|1080p|\(.*\)/g, '').trim();
+
+          const matchedEpg = epgChannels.find(epg => {
+            const epgNameClean = epg.name.toLowerCase().replace(/hd|50fps|720p|1080p|\(.*\)/g, '').trim();
+            return epgNameClean === plNameClean || epgNameClean.includes(plNameClean) || plNameClean.includes(epgNameClean);
+          });
+
+          const epgCard = document.createElement('div');
+          epgCard.className = 'epg-card';
+
+          let programsHtml = '';
+
+          if (matchedEpg && matchedEpg.programs && matchedEpg.programs.length > 0) {
+            const progs = matchedEpg.programs;
             
-            const matchedPlaylistChannel = allChannels.find(p => {
-              const pName = p.name.toLowerCase().trim();
-              return pName === epgChannelName || pName.includes(epgChannelName) || epgChannelName.includes(pName);
+            // Определяем временные интервалы каждой передачи
+            const processedProgs = progs.map((p, i) => {
+              const startMin = timeToMinutes(p.time);
+              let endMin = 1440; // конец суток по умолчанию
+
+              if (i < progs.length - 1) {
+                const nextStart = timeToMinutes(progs[i + 1].time);
+                if (nextStart > startMin) {
+                  endMin = nextStart;
+                }
+              }
+              return { ...p, startMin, endMin };
             });
 
-            if (matchedPlaylistChannel) {
-              matchedCount++;
-              const epgCard = document.createElement('div');
-              epgCard.className = 'epg-card';
+            // Находим передачу, которая идет СЕЙЧАС, и фильтруем прошедшие
+            let nowProg = null;
+            const upcomingProgs = [];
 
-              let programsHtml = '';
-              if (ch.programs && ch.programs.length > 0) {
-                ch.programs.forEach(p => {
-                  programsHtml += `
-                    <div class="epg-item">
-                      <span class="epg-time">${p.time}</span>
-                      <span class="epg-title">${p.title}</span>
-                    </div>
-                  `;
-                });
-
-                epgScheduleMap[matchedPlaylistChannel.name.toLowerCase().trim()] = `${ch.programs[0].time} — ${ch.programs[0].title}`;
+            processedProgs.forEach(p => {
+              if (currentMinutes >= p.startMin && currentMinutes < p.endMin) {
+                nowProg = p;
+              } else if (p.startMin > currentMinutes) {
+                upcomingProgs.push(p);
               }
+            });
 
-              epgCard.innerHTML = `
-                <div class="epg-header">
-                  ${matchedPlaylistChannel.logo ? `<img class="epg-logo" src="${matchedPlaylistChannel.logo}">` : ''}
-                  <h3 style="font-size: 16px;">${matchedPlaylistChannel.name}</h3>
+            // Если не нашли подходящий интервал (например, первая передача списка чуть позже), берем самую актуальную ближайшую
+            if (!nowProg && upcomingProgs.length > 0) {
+              nowProg = upcomingProgs.shift();
+            }
+
+            // Рендерим передачу, которая идет сейчас
+            if (nowProg) {
+              const duration = Math.max(1, nowProg.endMin - nowProg.startMin);
+              const elapsed = Math.max(0, currentMinutes - nowProg.startMin);
+              const progressPct = Math.min(100, Math.round((elapsed / duration) * 100));
+
+              programsHtml += `
+                <div class="epg-item is-now">
+                  <div class="epg-row">
+                    <span class="epg-time">${nowProg.time}</span>
+                    <span class="epg-title">${nowProg.title} <span class="now-badge">В ЭФИРЕ</span></span>
+                  </div>
+                  <div class="epg-progress-bar">
+                    <div class="epg-progress-fill" style="width: ${progressPct}%;"></div>
+                  </div>
                 </div>
-                <div>${programsHtml || '<div style="color:#666;">Нет данных о передачах</div>'}</div>
               `;
-              epgContainer.appendChild(epgCard);
+
+              // Запоминаем текущую передачу для вывода на главной под логотипом
+              epgScheduleMap[plChannel.name.toLowerCase().trim()] = `${nowProg.time} — ${nowProg.title}`;
             }
-          });
 
-          allChannels.forEach(ch => {
-            const nameKey = ch.name.toLowerCase().trim();
-            if (!epgScheduleMap[nameKey]) {
-              epgScheduleMap[nameKey] = 'Телепрограмма недоступна';
+            // Рендерим следующие передачи до конца дня
+            upcomingProgs.slice(0, 6).forEach(p => {
+              programsHtml += `
+                <div class="epg-item">
+                  <div class="epg-row">
+                    <span class="epg-time">${p.time}</span>
+                    <span class="epg-title">${p.title}</span>
+                  </div>
+                </div>
+              `;
+            });
+
+            if (!nowProg && upcomingProgs.length === 0) {
+              programsHtml = '<div style="color:#666; font-size: 13px;">Передачи на сегодня завершены</div>';
+              epgScheduleMap[plChannel.name.toLowerCase().trim()] = 'Прямой эфир';
             }
-          });
 
-          renderChannels(allChannels);
-
-          if (matchedCount === 0) {
-            epgContainer.innerHTML = '<div style="color:#888; text-align:center; padding: 20px;">Для каналов из вашего плейлиста телепрограмма пока не найдена.</div>';
+          } else {
+            programsHtml = '<div style="color:#666; font-size: 13px;">Телепрограмма временно недоступна</div>';
+            epgScheduleMap[plChannel.name.toLowerCase().trim()] = 'Прямой эфир';
           }
-        } else {
-          throw new Error("Пустой список EPG");
-        }
+
+          epgCard.innerHTML = `
+            <div class="epg-header">
+              ${plChannel.logo ? `<img class="epg-logo" src="${plChannel.logo}" onerror="this.style.display='none'">` : ''}
+              <h3 style="font-size: 16px;">${plChannel.name}</h3>
+            </div>
+            <div>${programsHtml}</div>
+          `;
+
+          epgContainer.appendChild(epgCard);
+        });
+
+        // Обновляем плашки передач в списке каналов
+        renderChannels(allChannels);
+
       } catch (e) {
         console.warn("Ошибка подгрузки EPG:", e);
         epgContainer.innerHTML = `
           <div style="background: #181820; padding: 16px; border-radius: 12px; color: #888; text-align: center;">
-            <p style="margin-bottom: 8px;">⏳ Обновление телепрограммы...</p>
-            <p style="font-size: 12px; color: #aaa;">Убедитесь, что GitHub Actions завершил сборку epg.json</p>
+            <p style="margin-bottom: 8px;">⏳ Синхронизация телепрограммы...</p>
+            <p style="font-size: 12px; color: #aaa;">Убедитесь, что GitHub Actions сгенерировал файл epg.json</p>
           </div>
         `;
       }
@@ -520,7 +592,7 @@
       renderAccount();
     }
 
-    // Инициализация
+    // Старт проекта
     loadPlaylist();
     checkYandexAuth();
   </script>
