@@ -206,4 +206,340 @@
       }
     }
 
-    function changeVolume(val)
+    function changeVolume(val) {
+      const video = document.getElementById('videoPlayer');
+      const muteBtn = document.getElementById('muteBtn');
+      
+      savedVolume = parseFloat(val);
+      video.volume = savedVolume;
+
+      if (savedVolume === 0) {
+        video.muted = true;
+        muteBtn.innerText = '🔇';
+      } else {
+        video.muted = false;
+        muteBtn.innerText = savedVolume > 0.5 ? '🔊' : '🔉';
+      }
+    }
+
+    function playStream(url, name) {
+      const video = document.getElementById('videoPlayer');
+      document.getElementById('playerChannelName').innerText = name;
+
+      if (Hls.isSupported()) {
+        if (hls) hls.destroy();
+        hls = new Hls();
+        hls.loadSource(url);
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MANIFEST_PARSED, () => {
+          video.play();
+          video.volume = savedVolume;
+        });
+      } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = url;
+        video.addEventListener('loadedmetadata', () => {
+          video.play();
+          video.volume = savedVolume;
+        });
+      }
+    }
+
+    async function loadPlaylist() {
+      try {
+        const res = await fetch('./playlist.m3u?v=' + Date.now());
+        if (!res.ok) throw new Error("Файл не найден");
+        const text = await res.text();
+        parseM3U(text);
+      } catch (e) {
+        console.warn("Локальный плейлист не найден.");
+      }
+    }
+
+    function parseM3U(text) {
+      allChannels = [];
+      categoriesSet.clear();
+      const lines = text.split('\n');
+      let current = null;
+
+      lines.forEach(line => {
+        line = line.trim();
+        if (line.startsWith('#EXTINF:')) {
+          const logoMatch = line.match(/tvg-logo="([^"]+)"/);
+          const groupMatch = line.match(/group-title="([^"]+)"/);
+          const tvgNameMatch = line.match(/tvg-name="([^"]+)"/);
+          const nameParts = line.split(',');
+          const displayName = nameParts[nameParts.length - 1].trim();
+
+          const group = groupMatch ? groupMatch[1] : 'Развлекательные';
+          categoriesSet.add(group);
+
+          current = {
+            logo: logoMatch ? logoMatch[1] : '',
+            group: group,
+            name: displayName,
+            tvgName: tvgNameMatch ? tvgNameMatch[1] : displayName,
+            url: ''
+          };
+        } else if (line && !line.startsWith('#') && current) {
+          current.url = line;
+          allChannels.push(current);
+          current = null;
+        }
+      });
+
+      renderCategories();
+      renderChannels(allChannels);
+      loadEpgJson();
+
+      if (allChannels.length > 0) {
+        playStream(allChannels[0].url, allChannels[0].name);
+      }
+    }
+
+    function renderCategories() {
+      const container = document.getElementById('categoryContainer');
+      container.innerHTML = '<div class="cat-chip active" onclick="filterCategory(\'all\', this)">Все каналы</div>';
+
+      categoriesSet.forEach(cat => {
+        const chip = document.createElement('div');
+        chip.className = 'cat-chip';
+        chip.innerText = cat;
+        chip.onclick = () => filterCategory(cat, chip);
+        container.appendChild(chip);
+      });
+    }
+
+    function renderChannels(channels) {
+      const container = document.getElementById('channelList');
+      container.innerHTML = '';
+
+      channels.forEach((ch, idx) => {
+        const card = document.createElement('div');
+        card.className = `channel-card ${idx === 0 ? 'active' : ''}`;
+        card.onclick = () => {
+          document.querySelectorAll('.channel-card').forEach(c => c.classList.remove('active'));
+          card.classList.add('active');
+          playStream(ch.url, ch.name);
+        };
+
+        const cleanKey = cleanChannelName(ch.tvgName || ch.name);
+        const epgCurrent = epgScheduleMap[cleanKey] || 'Прямой эфир';
+
+        card.innerHTML = `
+          <img class="channel-logo" src="${ch.logo}" onerror="this.src='https://via.placeholder.com/50/181820/ffffff?text=TV'">
+          <div class="channel-info">
+            <div class="channel-title">${ch.name}</div>
+            <div class="channel-epg">${epgCurrent}</div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function cleanChannelName(name) {
+      if (!name) return '';
+      return name.toLowerCase()
+        .replace(/[\!\?\"\'\«\»\(\)\-]/g, ' ')
+        .replace(/\b(hd|sd|fhd|4k|50fps|720p|1080p|канал|tv|тв)\b/g, '')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    function timeToMinutes(timeStr) {
+      if (!timeStr || !timeStr.includes(':')) return -1;
+      const parts = timeStr.split(':');
+      return parseInt(parts[0], 10) * 60 + parseInt(parts[1], 10);
+    }
+
+    async function loadEpgJson() {
+      const epgContainer = document.getElementById('epgList');
+      epgContainer.innerHTML = '<p style="color: #ff6600;">Синхронизация телепрограммы...</p>';
+
+      try {
+        const res = await fetch('./epg.json?v=' + Date.now());
+        if (!res.ok) throw new Error("Файл epg.json не найден");
+
+        const data = await res.json();
+        epgContainer.innerHTML = '';
+
+        const epgChannels = data.channels || [];
+        const now = new Date();
+        const currentMinutes = now.getHours() * 60 + now.getMinutes();
+
+        allChannels.forEach(plChannel => {
+          const plTvgClean = cleanChannelName(plChannel.tvgName);
+          const plNameClean = cleanChannelName(plChannel.name);
+
+          const matchedEpg = epgChannels.find(epg => {
+            const epgClean = cleanChannelName(epg.name);
+            return epgClean === plTvgClean || epgClean === plNameClean || 
+                   epgClean.includes(plTvgClean) || plTvgClean.includes(epgClean);
+          });
+
+          const epgCard = document.createElement('div');
+          epgCard.className = 'epg-card';
+
+          let programsHtml = '';
+
+          if (matchedEpg && matchedEpg.programs && matchedEpg.programs.length > 0) {
+            const progs = matchedEpg.programs;
+
+            const processedProgs = progs.map((p, i) => {
+              const startMin = timeToMinutes(p.time);
+              let endMin = 1440;
+
+              if (i < progs.length - 1) {
+                const nextStart = timeToMinutes(progs[i + 1].time);
+                if (nextStart > startMin) endMin = nextStart;
+              }
+              return { ...p, startMin, endMin };
+            });
+
+            let nowProg = processedProgs.find(p => currentMinutes >= p.startMin && currentMinutes < p.endMin);
+            const upcomingProgs = processedProgs.filter(p => p.startMin > currentMinutes);
+
+            if (!nowProg && upcomingProgs.length > 0) {
+              nowProg = upcomingProgs.shift();
+            }
+
+            if (nowProg) {
+              const duration = Math.max(1, nowProg.endMin - nowProg.startMin);
+              const elapsed = Math.max(0, currentMinutes - nowProg.startMin);
+              const progressPct = Math.min(100, Math.round((elapsed / duration) * 100));
+
+              programsHtml += `
+                <div class="epg-item is-now">
+                  <div class="epg-row">
+                    <span class="epg-time">${nowProg.time}</span>
+                    <span class="epg-title">${nowProg.title} <span class="now-badge">В ЭФИРЕ</span></span>
+                  </div>
+                  <div class="epg-progress-bar">
+                    <div class="epg-progress-fill" style="width: ${progressPct}%;"></div>
+                  </div>
+                </div>
+              `;
+
+              epgScheduleMap[plTvgClean] = `${nowProg.time} — ${nowProg.title}`;
+              epgScheduleMap[plNameClean] = `${nowProg.time} — ${nowProg.title}`;
+            }
+
+            upcomingProgs.slice(0, 5).forEach(p => {
+              programsHtml += `
+                <div class="epg-item">
+                  <div class="epg-row">
+                    <span class="epg-time">${p.time}</span>
+                    <span class="epg-title">${p.title}</span>
+                  </div>
+                </div>
+              `;
+            });
+
+          } else {
+            programsHtml = '<div style="color:#666; font-size: 13px;">Телепрограмма временно недоступна</div>';
+            epgScheduleMap[plTvgClean] = 'Прямой эфир';
+            epgScheduleMap[plNameClean] = 'Прямой эфир';
+          }
+
+          epgCard.innerHTML = `
+            <div class="epg-header">
+              ${plChannel.logo ? `<img class="epg-logo" src="${plChannel.logo}" onerror="this.style.display='none'">` : ''}
+              <h3 style="font-size: 16px;">${plChannel.name}</h3>
+            </div>
+            <div>${programsHtml}</div>
+          `;
+
+          epgContainer.appendChild(epgCard);
+        });
+
+        renderChannels(allChannels);
+
+      } catch (e) {
+        console.warn("Ошибка подгрузки EPG:", e);
+      }
+    }
+
+    function filterCategory(cat, element) {
+      document.querySelectorAll('.cat-chip').forEach(el => el.classList.remove('active'));
+      element.classList.add('active');
+
+      if (cat === 'all') {
+        renderChannels(allChannels);
+      } else {
+        const filtered = allChannels.filter(c => c.group === cat);
+        renderChannels(filtered);
+      }
+    }
+
+    function switchTab(tabId, el) {
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+
+      document.getElementById(`tab-${tabId}`).classList.add('active');
+      el.classList.add('active');
+    }
+
+    function toggleFullscreen() {
+      const video = document.getElementById('videoPlayer');
+      if (video.requestFullscreen) video.requestFullscreen();
+    }
+
+    function loginWithYandex() {
+      const redirectUri = window.location.origin + window.location.pathname;
+      window.location.href = `https://oauth.yandex.ru/authorize?response_type=token&client_id=${YANDEX_CLIENT_ID}&redirect_uri=${encodeURIComponent(redirectUri)}`;
+    }
+
+    function checkYandexAuth() {
+      const hash = window.location.hash;
+      if (hash.includes('access_token')) {
+        const params = new URLSearchParams(hash.replace('#', '?'));
+        const token = params.get('access_token');
+        
+        fetch('https://login.yandex.ru/info?format=json', {
+          headers: { 'Authorization': `OAuth ${token}` }
+        })
+        .then(res => res.json())
+        .then(user => {
+          localStorage.setItem('yandex_user', JSON.stringify(user));
+          window.history.replaceState({}, document.title, window.location.pathname);
+          renderAccount();
+        });
+      } else {
+        renderAccount();
+      }
+    }
+
+    function renderAccount() {
+      const accountBox = document.getElementById('accountBox');
+      const savedUser = localStorage.getItem('yandex_user');
+
+      if (savedUser) {
+        const user = JSON.parse(savedUser);
+        const avatarUrl = user.default_avatar_id ? `https://avatars.yandex.net/get-yapic/${user.default_avatar_id}/islands-200` : 'https://via.placeholder.com/80';
+        
+        accountBox.innerHTML = `
+          <img class="avatar" src="${avatarUrl}">
+          <h2 style="font-size: 20px; margin-bottom: 4px;">${user.real_name || user.login}</h2>
+          <p style="color: #888; font-size: 14px; margin-bottom: 20px;">@${user.login}</p>
+          <button class="btn-yandex btn-logout" onclick="logout()">Выйти из профиля</button>
+        `;
+      } else {
+        accountBox.innerHTML = `
+          <h2 style="font-size: 20px; margin-bottom: 12px;">Вход в Телевизор 34</h2>
+          <p style="color: #888; font-size: 14px; margin-bottom: 24px;">Войдите через Яндекс ID</p>
+          <button class="btn-yandex" onclick="loginWithYandex()">
+            Войти через Яндекс
+          </button>
+        `;
+      }
+    }
+
+    function logout() {
+      localStorage.removeItem('yandex_user');
+      renderAccount();
+    }
+
+    loadPlaylist();
+    checkYandexAuth();
+  </script>
+</body>
+</html>
