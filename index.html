@@ -75,10 +75,10 @@
     .channel-info { flex: 1; overflow: hidden; }
     .channel-title { font-weight: 700; font-size: 15px; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-    /* Встроенный сайт телепрограммы */
+    /* Встроенный виджет телепрограммы */
     .epg-frame-container {
-      width: 100%; height: 600px; border-radius: 16px; overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.1); background: #14141a; margin-top: 12px;
+      width: 100%; height: 650px; border-radius: 16px; overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1); background: #ffffff; margin-top: 12px;
     }
     .epg-iframe { width: 100%; height: 100%; border: none; }
 
@@ -121,7 +121,7 @@
 
   <div class="container">
     
-    <!-- Общий контейнер плеера (перемещается при смене вкладок) -->
+    <!-- Общий контейнер плеера -->
     <div id="playerContainer" class="player-section">
       <div class="player-wrapper">
         <video id="videoPlayer" autoplay playsinline muted onclick="toggleMute()"></video>
@@ -154,13 +154,13 @@
       <div class="channel-grid" id="channelList"></div>
     </div>
 
-    <!-- Вкладка 2: ТВ-Программа (Сайт с телепрограммой под плеером) -->
+    <!-- Вкладка 2: ТВ-Программа (Специальный виджет) -->
     <div id="tab-epg" class="tab-content">
       <div id="epgPlayerAnchor"></div>
 
       <div class="epg-frame-container">
-        <!-- Встроенный виджет / сайт телепрограммы -->
-        <iframe class="epg-iframe" src="https://tv.mail.ru/" title="Телепрограмма онлайн"></iframe>
+        <!-- Виджет телепрограммы без блокировки iframe -->
+        <iframe class="epg-iframe" src="https://m.tv.yandex.ru/24/channels" title="Яндекс ТВ программа"></iframe>
       </div>
     </div>
 
