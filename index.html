@@ -169,7 +169,7 @@
       <div id="epgPlayerAnchor"></div>
 
       <div id="epgList" class="epg-container">
-        <p style="color: #888; text-align: center; padding: 20px;">Загрузка программы передач...</p>
+        <p id="epgStatusText" style="color: #888; text-align: center; padding: 20px;">Загрузка программы передач...</p>
       </div>
     </div>
 
@@ -200,6 +200,11 @@
     const YANDEX_CLIENT_ID = '0fc0a6b7929b4efdb1822f75b1c078b8';
     const EPG_URL = 'https://raw.githubusercontent.com/iboxestvoff/televizor34_serverfiles/epg-data/epg.xml';
 
+    const EPG_DB_NAME = 'televizor34-epg';
+    const EPG_STORE = 'cache';
+    const EPG_CACHE_KEY = 'epg-v1';
+    const EPG_MAX_AGE_MS = 12 * 60 * 60 * 1000; // Кеш на 12 часов
+
     let allChannels = [];
     let categoriesSet = new Set();
     let currentSelectedChannel = null;
@@ -218,10 +223,46 @@
     }
 
     function fmtTime(d) {
-      return String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+      const date = new Date(d);
+      return String(date.getHours()).padStart(2, '0') + ':' + String(date.getMinutes()).padStart(2, '0');
     }
 
-    // Воркер из старого проекта для парсинга XMLTV
+    /* --- Работа с IndexedDB (Кеширование) --- */
+    function openEpgDb() {
+      return new Promise((resolve, reject) => {
+        if (typeof indexedDB === 'undefined') return reject(new Error('IndexedDB недоступен'));
+        const req = indexedDB.open(EPG_DB_NAME, 1);
+        req.onupgradeneeded = () => { req.result.createObjectStore(EPG_STORE); };
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => reject(req.error);
+      });
+    }
+
+    async function loadEpgFromCache() {
+      try {
+        const db = await openEpgDb();
+        return await new Promise((resolve) => {
+          const tx = db.transaction(EPG_STORE, 'readonly');
+          const req = tx.objectStore(EPG_STORE).get(EPG_CACHE_KEY);
+          req.onsuccess = () => resolve(req.result || null);
+          req.onerror = () => resolve(null);
+        });
+      } catch (e) { return null; }
+    }
+
+    async function saveEpgToCache(data) {
+      try {
+        const db = await openEpgDb();
+        const tx = db.transaction(EPG_STORE, 'readwrite');
+        tx.objectStore(EPG_STORE).put({
+          savedAt: Date.now(),
+          idByNormalizedName: data.idByNormalizedName,
+          programsByChannelId: data.programsByChannelId
+        }, EPG_CACHE_KEY);
+      } catch (e) {}
+    }
+
+    /* --- Web Worker для парсинга в фоновом потоке --- */
     const EPG_WORKER_SRC = [
       'function decodeXmlEntities(s){',
       '  return s.replace(/&(amp|lt|gt|quot|apos|#x[0-9a-fA-F]+|#\\d+);/g, function(m, g){',
@@ -352,7 +393,7 @@
     function renderEpgTab(){
       const epgContainer = document.getElementById('epgList');
       if(!epgData){
-        epgContainer.innerHTML = '<p style="color: #888; text-align: center; padding: 20px;">Телепрограмма ещё загружается...</p>';
+        epgContainer.innerHTML = '<p style="color: #888; text-align: center; padding: 20px;">Загрузка программы передач...</p>';
         return;
       }
 
@@ -363,7 +404,7 @@
         const chId = epgChannelIdForIndex.get(i);
         const programs = chId ? (epgData.programsByChannelId.get(chId) || []) : [];
         
-        const idx = programs.findIndex(p => p.start <= now && now < p.stop);
+        const idx = programs.findIndex(p => new Date(p.start) <= now && now < new Date(p.stop));
         const current = idx >= 0 ? programs[idx] : null;
         const upcoming = idx >= 0 ? programs.slice(idx + 1, idx + 6) : [];
 
@@ -373,13 +414,15 @@
         let bodyHtml = '';
 
         if (current) {
-          const totalMs = current.stop - current.start;
-          const elapsedMs = now - current.start;
+          const startTime = new Date(current.start);
+          const stopTime = new Date(current.stop);
+          const totalMs = stopTime - startTime;
+          const elapsedMs = now - startTime;
           const pct = totalMs > 0 ? Math.min(100, Math.max(0, Math.round(elapsedMs / totalMs * 100))) : 0;
 
           bodyHtml += `
             <div class="program-row now">
-              <span class="program-time">${fmtTime(current.start)} – ${fmtTime(current.stop)}</span>
+              <span class="program-time">${fmtTime(startTime)} – ${fmtTime(stopTime)}</span>
               <span class="program-title">${escapeHtml(current.title)} <span class="now-tag">СЕЙЧАС</span></span>
             </div>
             <div class="program-progress"><div class="program-progress-bar" style="width:${pct}%"></div></div>
@@ -410,13 +453,33 @@
     }
 
     async function loadEpg() {
+      // 1. Проверяем готовый кеш
+      const cached = await loadEpgFromCache();
+      if (cached && (Date.now() - cached.savedAt) < EPG_MAX_AGE_MS) {
+        epgData = { 
+          idByNormalizedName: cached.idByNormalizedName, 
+          programsByChannelId: cached.programsByChannelId 
+        };
+        buildEpgMatches();
+        renderEpgTab();
+        return;
+      }
+
+      // 2. Если кеша нет или он устарел, качаем заново
       try {
+        const statusEl = document.getElementById('epgStatusText');
+        if (statusEl) statusEl.innerText = 'Первичная загрузка базы ТВ-программы (один раз)...';
+
         const res = await fetch(EPG_URL, { cache: 'no-store' });
         if(!res.ok) throw new Error('HTTP ' + res.status);
         const bytes = new Uint8Array(await res.arrayBuffer());
+        
         epgData = await parseEpgInWorker(bytes);
         buildEpgMatches();
         renderEpgTab();
+        
+        // Сохраняем в кеш IndexedDB
+        saveEpgToCache(epgData);
       } catch(e) {
         console.warn("Ошибка загрузки EPG:", e);
         document.getElementById('epgList').innerHTML = '<p style="color: #ff5d5d; text-align: center; padding: 20px;">Не удалось загрузить телепрограмму</p>';
