@@ -75,12 +75,23 @@
     .channel-info { flex: 1; overflow: hidden; }
     .channel-title { font-weight: 700; font-size: 15px; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-    /* Фрейм с Rambler TV Волгоград */
-    .epg-frame-container {
-      width: 100%; height: 650px; border-radius: 16px; overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.1); background: #ffffff; margin-top: 12px;
-    }
-    .epg-iframe { width: 100%; height: 100%; border: none; }
+    /* EPG Список телепрограммы */
+    .epg-container { display: flex; flex-direction: column; gap: 12px; margin-top: 12px; }
+    .epg-card { background: #14141a; border-radius: 12px; padding: 16px; border: 1px solid rgba(255,255,255,0.05); }
+    .epg-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .epg-logo { width: 32px; height: 32px; object-fit: contain; }
+    .epg-item { display: flex; flex-direction: column; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 13px; }
+    .epg-row { display: flex; gap: 12px; align-items: center; }
+    .epg-time { color: #888; font-weight: 700; min-width: 50px; }
+    .epg-title { color: #ddd; flex: 1; }
+    
+    .epg-item.is-now { background: rgba(255, 102, 0, 0.08); border-radius: 8px; padding: 8px; margin: 4px 0; }
+    .epg-item.is-now .epg-time { color: #ff6600; }
+    .epg-item.is-now .epg-title { color: #ffffff; font-weight: 600; }
+    .now-badge { background: #ff6600; color: #fff; font-size: 9px; font-weight: 800; padding: 2px 5px; border-radius: 4px; margin-left: 6px; text-transform: uppercase; }
+
+    .epg-progress-bar { width: 100%; height: 3px; background: rgba(255,255,255,0.1); border-radius: 2px; margin-top: 6px; overflow: hidden; }
+    .epg-progress-fill { height: 100%; background: #ff6600; transition: width 0.3s ease; }
 
     /* Аккаунт */
     .account-card {
@@ -154,13 +165,12 @@
       <div class="channel-grid" id="channelList"></div>
     </div>
 
-    <!-- Вкладка 2: ТВ-Программа (Rambler TV Волгоград) -->
+    <!-- Вкладка 2: ТВ-Программа (Обычная EPG для каналов из плейлиста) -->
     <div id="tab-epg" class="tab-content">
       <div id="epgPlayerAnchor"></div>
 
-      <div class="epg-frame-container">
-        <!-- Встроенная ТВ-программа Rambler для Волгограда -->
-        <iframe class="epg-iframe" src="https://m.tv.rambler.ru/volgograd/" title="Рамблер ТВ Программа Волгоград"></iframe>
+      <div id="epgList" class="epg-container">
+        <p style="color: #666;">Загрузка программы передач...</p>
       </div>
     </div>
 
@@ -286,6 +296,7 @@
         if (line.startsWith('#EXTINF:')) {
           const logoMatch = line.match(/tvg-logo="([^"]+)"/);
           const groupMatch = line.match(/group-title="([^"]+)"/);
+          const tvgNameMatch = line.match(/tvg-name="([^"]+)"/);
           const nameParts = line.split(',');
           const displayName = nameParts[nameParts.length - 1].trim();
 
@@ -296,6 +307,7 @@
             logo: logoMatch ? logoMatch[1] : '',
             group: group,
             name: displayName,
+            tvgName: tvgNameMatch ? tvgNameMatch[1] : displayName,
             url: ''
           };
         } else if (line && !line.startsWith('#') && current) {
@@ -307,6 +319,7 @@
 
       renderCategories();
       renderChannels(allChannels);
+      loadEpgJson();
 
       if (allChannels.length > 0) {
         playStream(allChannels[0]);
@@ -348,6 +361,129 @@
         `;
         container.appendChild(card);
       });
+    }
+
+    function cleanChannelName(name) {
+      if (!name) return '';
+      return name.toLowerCase()
+        .replace(/[\!\?\"\'\«\»\(\)\-]/g, ' ')
+        .replace(/\b(hd|sd|fhd|4k|50fps|720p|1080p|канал|tv|тв)\b/g, '')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    function timeToMinutes(timeStr) {
+      if (!timeStr || !timeStr.includes(':')) return -1;
+      const parts = timeStr.split(':');
+      return parseInt(parts[0], 10) * 60 + parseInt(parts[1], 10);
+    }
+
+    // Загрузка epg.json и вывод ТОЛЬКО для каналов из плейлиста
+    async function loadEpgJson() {
+      const epgContainer = document.getElementById('epgList');
+      epgContainer.innerHTML = '<p style="color: #ff6600;">Синхронизация телепрограммы...</p>';
+
+      try {
+        const res = await fetch('./epg.json?v=' + Date.now());
+        if (!res.ok) throw new Error("Файл epg.json не найден");
+
+        const data = await res.json();
+        epgContainer.innerHTML = '';
+
+        const epgChannels = data.channels || [];
+        const now = new Date();
+        const currentMinutes = now.getHours() * 60 + now.getMinutes();
+
+        // Проходим СТРОГО по каналам из плейлиста
+        allChannels.forEach(plChannel => {
+          const plTvgClean = cleanChannelName(plChannel.tvgName);
+          const plNameClean = cleanChannelName(plChannel.name);
+
+          const matchedEpg = epgChannels.find(epg => {
+            const epgClean = cleanChannelName(epg.name);
+            return epgClean === plTvgClean || epgClean === plNameClean || 
+                   epgClean.includes(plTvgClean) || plTvgClean.includes(epgClean);
+          });
+
+          const epgCard = document.createElement('div');
+          epgCard.className = 'epg-card';
+
+          let programsHtml = '';
+
+          if (matchedEpg && matchedEpg.programs && matchedEpg.programs.length > 0) {
+            const progs = matchedEpg.programs;
+
+            const processedProgs = progs.map((p, i) => {
+              const startMin = timeToMinutes(p.time);
+              let endMin = 1440;
+
+              if (i < progs.length - 1) {
+                const nextStart = timeToMinutes(progs[i + 1].time);
+                if (nextStart > startMin) endMin = nextStart;
+              }
+              return { ...p, startMin, endMin };
+            });
+
+            let nowProg = processedProgs.find(p => currentMinutes >= p.startMin && currentMinutes < p.endMin);
+            const upcomingProgs = processedProgs.filter(p => p.startMin > currentMinutes);
+
+            if (!nowProg && upcomingProgs.length > 0) {
+              nowProg = upcomingProgs.shift();
+            }
+
+            if (nowProg) {
+              const duration = Math.max(1, nowProg.endMin - nowProg.startMin);
+              const elapsed = Math.max(0, currentMinutes - nowProg.startMin);
+              const progressPct = Math.min(100, Math.round((elapsed / duration) * 100));
+
+              programsHtml += `
+                <div class="epg-item is-now">
+                  <div class="epg-row">
+                    <span class="epg-time">${nowProg.time}</span>
+                    <span class="epg-title">${nowProg.title} <span class="now-badge">В ЭФИРЕ</span></span>
+                  </div>
+                  <div class="epg-progress-bar">
+                    <div class="epg-progress-fill" style="width: ${progressPct}%;"></div>
+                  </div>
+                </div>
+              `;
+            }
+
+            upcomingProgs.slice(0, 5).forEach(p => {
+              programsHtml += `
+                <div class="epg-item">
+                  <div class="epg-row">
+                    <span class="epg-time">${p.time}</span>
+                    <span class="epg-title">${p.title}</span>
+                  </div>
+                </div>
+              `;
+            });
+
+          } else {
+            programsHtml = '<div style="color:#666; font-size: 13px;">Телепрограмма временно недоступна</div>';
+          }
+
+          epgCard.innerHTML = `
+            <div class="epg-header">
+              ${plChannel.logo ? `<img class="epg-logo" src="${plChannel.logo}" onerror="this.style.display='none'">` : ''}
+              <h3 style="font-size: 16px;">${plChannel.name}</h3>
+            </div>
+            <div>${programsHtml}</div>
+          `;
+
+          epgContainer.appendChild(epgCard);
+        });
+
+      } catch (e) {
+        console.warn("Ошибка подгрузки EPG:", e);
+        epgContainer.innerHTML = `
+          <div style="background: #181820; padding: 16px; border-radius: 12px; color: #888; text-align: center;">
+            <p style="margin-bottom: 8px;">⏳ Синхронизация телепрограммы...</p>
+            <p style="font-size: 12px; color: #aaa;">Убедитесь, что GitHub Actions сгенерировал epg.json</p>
+          </div>
+        `;
+      }
     }
 
     function switchTab(tabId, el) {
