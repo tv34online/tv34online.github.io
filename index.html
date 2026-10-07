@@ -75,23 +75,22 @@
     .channel-info { flex: 1; overflow: hidden; }
     .channel-title { font-weight: 700; font-size: 15px; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-    /* EPG Список телепрограммы */
+    /* EPG Карточки */
     .epg-container { display: flex; flex-direction: column; gap: 12px; margin-top: 12px; }
     .epg-card { background: #14141a; border-radius: 12px; padding: 16px; border: 1px solid rgba(255,255,255,0.05); }
     .epg-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
     .epg-logo { width: 32px; height: 32px; object-fit: contain; }
-    .epg-item { display: flex; flex-direction: column; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 13px; }
-    .epg-row { display: flex; gap: 12px; align-items: center; }
-    .epg-time { color: #888; font-weight: 700; min-width: 50px; }
-    .epg-title { color: #ddd; flex: 1; }
     
-    .epg-item.is-now { background: rgba(255, 102, 0, 0.08); border-radius: 8px; padding: 8px; margin: 4px 0; }
-    .epg-item.is-now .epg-time { color: #ff6600; }
-    .epg-item.is-now .epg-title { color: #ffffff; font-weight: 600; }
-    .now-badge { background: #ff6600; color: #fff; font-size: 9px; font-weight: 800; padding: 2px 5px; border-radius: 4px; margin-left: 6px; text-transform: uppercase; }
+    .program-row { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 13px; }
+    .program-time { color: #888; font-weight: 700; min-width: 85px; }
+    .program-title { color: #ddd; flex: 1; }
+    .program-row.now { background: rgba(255, 102, 0, 0.08); border-radius: 8px; padding: 8px; margin: 4px 0; }
+    .program-row.now .program-time { color: #ff6600; }
+    .program-row.now .program-title { color: #ffffff; font-weight: 600; }
+    .now-tag { background: #ff6600; color: #fff; font-size: 9px; font-weight: 800; padding: 2px 5px; border-radius: 4px; margin-left: 6px; text-transform: uppercase; }
 
-    .epg-progress-bar { width: 100%; height: 3px; background: rgba(255,255,255,0.1); border-radius: 2px; margin-top: 6px; overflow: hidden; }
-    .epg-progress-fill { height: 100%; background: #ff6600; transition: width 0.3s ease; }
+    .program-progress { width: 100%; height: 3px; background: rgba(255,255,255,0.1); border-radius: 2px; margin-top: 6px; overflow: hidden; }
+    .program-progress-bar { height: 100%; background: #ff6600; transition: width 0.3s ease; }
 
     /* Аккаунт */
     .account-card {
@@ -170,7 +169,7 @@
       <div id="epgPlayerAnchor"></div>
 
       <div id="epgList" class="epg-container">
-        <p style="color: #666;">Загрузка программы передач...</p>
+        <p style="color: #888; text-align: center; padding: 20px;">Загрузка программы передач...</p>
       </div>
     </div>
 
@@ -198,13 +197,231 @@
   </nav>
 
   <script>
-    const YANDEX_CLIENT_ID = 'b065196734cb494e8965207de203df4f';
+    const YANDEX_CLIENT_ID = '0fc0a6b7929b4efdb1822f75b1c078b8';
+    const EPG_URL = 'https://raw.githubusercontent.com/iboxestvoff/televizor34_serverfiles/epg-data/epg.xml';
 
     let allChannels = [];
     let categoriesSet = new Set();
     let currentSelectedChannel = null;
     let hls = null;
     let savedVolume = 0.8;
+
+    let epgData = null;
+    let epgChannelIdForIndex = new Map();
+
+    function escapeHtml(s) {
+      return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+
+    function normalizeName(s) {
+      return (s || '').toLowerCase().replace(/[^a-zа-яё0-9]/gi, '');
+    }
+
+    function fmtTime(d) {
+      return String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+    }
+
+    // Воркер из старого проекта для парсинга XMLTV
+    const EPG_WORKER_SRC = [
+      'function decodeXmlEntities(s){',
+      '  return s.replace(/&(amp|lt|gt|quot|apos|#x[0-9a-fA-F]+|#\\d+);/g, function(m, g){',
+      '    if(g === "amp") return "&";',
+      '    if(g === "lt") return "<";',
+      '    if(g === "gt") return ">";',
+      '    if(g === "quot") return \'"\';',
+      "    if(g === 'apos') return \"'\";",
+      '    if(g[0] === "#"){',
+      '      var code = g[1] === "x" ? parseInt(g.slice(2), 16) : parseInt(g.slice(1), 10);',
+      '      return isNaN(code) ? m : String.fromCodePoint(code);',
+      '    }',
+      '    return m;',
+      '  });',
+      '}',
+      'function getAttr(str, name){',
+      '  var m = str.match(new RegExp(name + "=\\"([^\\"]*)\\""));',
+      '  return m ? m[1] : null;',
+      '}',
+      'function parseXmltvTime(s){',
+      '  if(!s) return null;',
+      '  var m = s.match(/^(\\d{4})(\\d{2})(\\d{2})(\\d{2})(\\d{2})(\\d{2})\\s*([+-]\\d{2})?(\\d{2})?/);',
+      '  if(!m) return null;',
+      '  var Y=+m[1],Mo=+m[2],D=+m[3],H=+m[4],Mi=+m[5],S=+m[6],offH=m[7],offM=m[8];',
+      '  var ms = Date.UTC(Y, Mo-1, D, H, Mi, S);',
+      '  if(offH){',
+      '    var sign = offH[0] === "-" ? -1 : 1;',
+      '    var offsetMinutes = sign * (parseInt(offH.slice(1),10)*60 + (offM?parseInt(offM,10):0));',
+      '    ms -= offsetMinutes*60000;',
+      '  }',
+      '  return new Date(ms);',
+      '}',
+      'function normalizeName(s){',
+      '  return (s||"").toLowerCase().replace(/[^a-zа-яё0-9]/gi,"");',
+      '}',
+      'async function decompressIfGzip(bytes){',
+      '  var isGzip = bytes.length > 2 && bytes[0] === 0x1f && bytes[1] === 0x8b;',
+      '  if(!isGzip) return new TextDecoder("utf-8").decode(bytes);',
+      '  var stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream("gzip"));',
+      '  var buf = await new Response(stream).arrayBuffer();',
+      '  return new TextDecoder("utf-8").decode(buf);',
+      '}',
+      'self.onmessage = async function(e){',
+      '  try{',
+      '    var bytes = e.data.bytes;',
+      '    var text = await decompressIfGzip(bytes);',
+      '    var idByNormalizedName = new Map();',
+      '    var channelRe = /<channel\\s+id="([^"]*)"[^>]*>([\\s\\S]*?)<\\/channel>/g;',
+      '    var dnRe = /<display-name[^>]*>([\\s\\S]*?)<\\/display-name>/g;',
+      '    var cm;',
+      '    while((cm = channelRe.exec(text))){',
+      '      var id = cm[1];',
+      '      var inner = cm[2];',
+      '      var dm;',
+      '      dnRe.lastIndex = 0;',
+      '      while((dm = dnRe.exec(inner))){',
+      '        var norm = normalizeName(decodeXmlEntities(dm[1]));',
+      '        if(norm && !idByNormalizedName.has(norm)) idByNormalizedName.set(norm, id);',
+      '      }',
+      '    }',
+      '    var programsByChannelId = new Map();',
+      '    var progRe = /<programme\\s+([^>]*)>([\\s\\S]*?)<\\/programme>/g;',
+      '    var titleRe = /<title[^>]*>([\\s\\S]*?)<\\/title>/;',
+      '    var pm;',
+      '    while((pm = progRe.exec(text))){',
+      '      var attrs = pm[1];',
+      '      var inner2 = pm[2];',
+      '      var chId = getAttr(attrs, "channel");',
+      '      var start = parseXmltvTime(getAttr(attrs, "start"));',
+      '      var stop = parseXmltvTime(getAttr(attrs, "stop"));',
+      '      if(!chId || !start || !stop) continue;',
+      '      var tm = titleRe.exec(inner2);',
+      '      var title = tm ? decodeXmlEntities(tm[1]).trim() : "Без названия";',
+      '      if(!programsByChannelId.has(chId)) programsByChannelId.set(chId, []);',
+      '      programsByChannelId.get(chId).push({ start: start, stop: stop, title: title });',
+      '    }',
+      '    programsByChannelId.forEach(function(list){ list.sort(function(a,b){ return a.start - b.start; }); });',
+      '    self.postMessage({ ok: true, idByNormalizedName: idByNormalizedName, programsByChannelId: programsByChannelId });',
+      '  }catch(err){',
+      '    self.postMessage({ ok: false, error: (err && err.message) || String(err) });',
+      '  }',
+      '};'
+    ].join('\n');
+
+    let epgWorker = null;
+    function getEpgWorker(){
+      if(!epgWorker){
+        const blob = new Blob([EPG_WORKER_SRC], { type: 'application/javascript' });
+        epgWorker = new Worker(URL.createObjectURL(blob));
+      }
+      return epgWorker;
+    }
+
+    function parseEpgInWorker(bytes){
+      return new Promise((resolve, reject) => {
+        const worker = getEpgWorker();
+        function onMessage(e){
+          worker.removeEventListener('message', onMessage);
+          worker.removeEventListener('error', onError);
+          if(e.data.ok) resolve({ idByNormalizedName: e.data.idByNormalizedName, programsByChannelId: e.data.programsByChannelId });
+          else reject(new Error(e.data.error));
+        }
+        function onError(err){
+          worker.removeEventListener('message', onMessage);
+          worker.removeEventListener('error', onError);
+          reject(new Error(err.message || 'ошибка воркера'));
+        }
+        worker.addEventListener('message', onMessage);
+        worker.addEventListener('error', onError);
+        worker.postMessage({ bytes }, [bytes.buffer]);
+      });
+    }
+
+    function buildEpgMatches(){
+      epgChannelIdForIndex = new Map();
+      if(!epgData) return;
+      allChannels.forEach((ch, i) => {
+        let id = null;
+        if(ch.tvgId && epgData.programsByChannelId.has(ch.tvgId)) id = ch.tvgId;
+        if(!id){
+          const norm = normalizeName(ch.name);
+          id = epgData.idByNormalizedName.get(norm) || null;
+        }
+        epgChannelIdForIndex.set(i, id);
+      });
+    }
+
+    function renderEpgTab(){
+      const epgContainer = document.getElementById('epgList');
+      if(!epgData){
+        epgContainer.innerHTML = '<p style="color: #888; text-align: center; padding: 20px;">Телепрограмма ещё загружается...</p>';
+        return;
+      }
+
+      epgContainer.innerHTML = '';
+      const now = new Date();
+
+      allChannels.forEach((ch, i) => {
+        const chId = epgChannelIdForIndex.get(i);
+        const programs = chId ? (epgData.programsByChannelId.get(chId) || []) : [];
+        
+        const idx = programs.findIndex(p => p.start <= now && now < p.stop);
+        const current = idx >= 0 ? programs[idx] : null;
+        const upcoming = idx >= 0 ? programs.slice(idx + 1, idx + 6) : [];
+
+        const epgCard = document.createElement('div');
+        epgCard.className = 'epg-card';
+
+        let bodyHtml = '';
+
+        if (current) {
+          const totalMs = current.stop - current.start;
+          const elapsedMs = now - current.start;
+          const pct = totalMs > 0 ? Math.min(100, Math.max(0, Math.round(elapsedMs / totalMs * 100))) : 0;
+
+          bodyHtml += `
+            <div class="program-row now">
+              <span class="program-time">${fmtTime(current.start)} – ${fmtTime(current.stop)}</span>
+              <span class="program-title">${escapeHtml(current.title)} <span class="now-tag">СЕЙЧАС</span></span>
+            </div>
+            <div class="program-progress"><div class="program-progress-bar" style="width:${pct}%"></div></div>
+          `;
+
+          upcoming.forEach(p => {
+            bodyHtml += `
+              <div class="program-row">
+                <span class="program-time">${fmtTime(p.start)}</span>
+                <span class="program-title">${escapeHtml(p.title)}</span>
+              </div>
+            `;
+          });
+        } else {
+          bodyHtml = '<div style="color:#666; font-size: 13px;">Программа передач временно недоступна</div>';
+        }
+
+        epgCard.innerHTML = `
+          <div class="epg-header">
+            ${ch.logo ? `<img class="epg-logo" src="${escapeHtml(ch.logo)}" onerror="this.style.display='none'">` : ''}
+            <h3 style="font-size: 16px;">${escapeHtml(ch.name)}</h3>
+          </div>
+          <div>${bodyHtml}</div>
+        `;
+
+        epgContainer.appendChild(epgCard);
+      });
+    }
+
+    async function loadEpg() {
+      try {
+        const res = await fetch(EPG_URL, { cache: 'no-store' });
+        if(!res.ok) throw new Error('HTTP ' + res.status);
+        const bytes = new Uint8Array(await res.arrayBuffer());
+        epgData = await parseEpgInWorker(bytes);
+        buildEpgMatches();
+        renderEpgTab();
+      } catch(e) {
+        console.warn("Ошибка загрузки EPG:", e);
+        document.getElementById('epgList').innerHTML = '<p style="color: #ff5d5d; text-align: center; padding: 20px;">Не удалось загрузить телепрограмму</p>';
+      }
+    }
 
     function toggleMute() {
       const video = document.getElementById('videoPlayer');
@@ -296,7 +513,7 @@
         if (line.startsWith('#EXTINF:')) {
           const logoMatch = line.match(/tvg-logo="([^"]+)"/);
           const groupMatch = line.match(/group-title="([^"]+)"/);
-          const tvgNameMatch = line.match(/tvg-name="([^"]+)"/);
+          const tvgIdMatch = line.match(/tvg-id="([^"]+)"/);
           const nameParts = line.split(',');
           const displayName = nameParts[nameParts.length - 1].trim();
 
@@ -307,7 +524,7 @@
             logo: logoMatch ? logoMatch[1] : '',
             group: group,
             name: displayName,
-            tvgName: tvgNameMatch ? tvgNameMatch[1] : displayName,
+            tvgId: tvgIdMatch ? tvgIdMatch[1] : null,
             url: ''
           };
         } else if (line && !line.startsWith('#') && current) {
@@ -319,11 +536,12 @@
 
       renderCategories();
       renderChannels(allChannels);
-      loadEpgJson();
 
       if (allChannels.length > 0) {
         playStream(allChannels[0]);
       }
+
+      loadEpg();
     }
 
     function renderCategories() {
@@ -355,147 +573,12 @@
         card.innerHTML = `
           <img class="channel-logo" src="${ch.logo}" onerror="this.src='https://via.placeholder.com/50/181820/ffffff?text=TV'">
           <div class="channel-info">
-            <div class="channel-title">${ch.name}</div>
+            <div class="channel-title">${escapeHtml(ch.name)}</div>
             <div style="font-size: 11px; color: #ff6600;">Смотреть эфир</div>
           </div>
         `;
         container.appendChild(card);
       });
-    }
-
-    // Расширенная нормализация имён для максимального совпадения
-    function cleanChannelName(name) {
-      if (!name) return '';
-      return name.toLowerCase()
-        .replace(/[\!\?\"\'\«\»\(\)\-\_\.\,\/]/g, ' ')
-        .replace(/\b(hd|sd|fhd|4k|50fps|720p|1080p|канал|tv|тв|россия|первый)\b/g, '')
-        .replace(/\s+/g, ' ')
-        .trim();
-    }
-
-    function timeToMinutes(timeStr) {
-      if (!timeStr || !timeStr.includes(':')) return -1;
-      const parts = timeStr.split(':');
-      return parseInt(parts[0], 10) * 60 + parseInt(parts[1], 10);
-    }
-
-    async function loadEpgJson() {
-      const epgContainer = document.getElementById('epgList');
-      epgContainer.innerHTML = '<p style="color: #ff6600;">Синхронизация телепрограммы...</p>';
-
-      try {
-        const res = await fetch('./epg.json?v=' + Date.now());
-        if (!res.ok) throw new Error("Файл epg.json не найден");
-
-        const data = await res.json();
-        epgContainer.innerHTML = '';
-
-        const epgChannels = data.channels || [];
-        const now = new Date();
-        const currentMinutes = now.getHours() * 60 + now.getMinutes();
-
-        allChannels.forEach(plChannel => {
-          const plTvgClean = cleanChannelName(plChannel.tvgName);
-          const plNameClean = cleanChannelName(plChannel.name);
-          const rawTvgLower = (plChannel.tvgName || '').toLowerCase();
-          const rawNameLower = (plChannel.name || '').toLowerCase();
-
-          // Поиск совпадений по нормализованному названию или вхождению слов
-          const matchedEpg = epgChannels.find(epg => {
-            const epgClean = cleanChannelName(epg.name);
-            const epgRawLower = (epg.name || '').toLowerCase();
-
-            return (
-              epgClean === plTvgClean ||
-              epgClean === plNameClean ||
-              (epgClean.length > 2 && plTvgClean.includes(epgClean)) ||
-              (plTvgClean.length > 2 && epgClean.includes(plTvgClean)) ||
-              (epgClean.length > 2 && plNameClean.includes(epgClean)) ||
-              (plNameClean.length > 2 && epgClean.includes(plNameClean)) ||
-              epgRawLower === rawTvgLower ||
-              epgRawLower === rawNameLower
-            );
-          });
-
-          const epgCard = document.createElement('div');
-          epgCard.className = 'epg-card';
-
-          let programsHtml = '';
-
-          if (matchedEpg && matchedEpg.programs && matchedEpg.programs.length > 0) {
-            const progs = matchedEpg.programs;
-
-            const processedProgs = progs.map((p, i) => {
-              const startMin = timeToMinutes(p.time);
-              let endMin = 1440;
-
-              if (i < progs.length - 1) {
-                const nextStart = timeToMinutes(progs[i + 1].time);
-                if (nextStart > startMin) endMin = nextStart;
-              }
-              return { ...p, startMin, endMin };
-            });
-
-            let nowProg = processedProgs.find(p => currentMinutes >= p.startMin && currentMinutes < p.endMin);
-            const upcomingProgs = processedProgs.filter(p => p.startMin > currentMinutes);
-
-            if (!nowProg && upcomingProgs.length > 0) {
-              nowProg = upcomingProgs.shift();
-            }
-
-            if (nowProg) {
-              const duration = Math.max(1, nowProg.endMin - nowProg.startMin);
-              const elapsed = Math.max(0, currentMinutes - nowProg.startMin);
-              const progressPct = Math.min(100, Math.round((elapsed / duration) * 100));
-
-              programsHtml += `
-                <div class="epg-item is-now">
-                  <div class="epg-row">
-                    <span class="epg-time">${nowProg.time}</span>
-                    <span class="epg-title">${nowProg.title} <span class="now-badge">В ЭФИРЕ</span></span>
-                  </div>
-                  <div class="epg-progress-bar">
-                    <div class="epg-progress-fill" style="width: ${progressPct}%;"></div>
-                  </div>
-                </div>
-              `;
-            }
-
-            upcomingProgs.slice(0, 5).forEach(p => {
-              programsHtml += `
-                <div class="epg-item">
-                  <div class="epg-row">
-                    <span class="epg-time">${p.time}</span>
-                    <span class="epg-title">${p.title}</span>
-                  </div>
-                </div>
-              `;
-            });
-
-          } else {
-            programsHtml = '<div style="color:#666; font-size: 13px;">Программа передач на сегодня не найдена</div>';
-          }
-
-          epgCard.innerHTML = `
-            <div class="epg-header">
-              ${plChannel.logo ? `<img class="epg-logo" src="${plChannel.logo}" onerror="this.style.display='none'">` : ''}
-              <h3 style="font-size: 16px;">${plChannel.name}</h3>
-            </div>
-            <div>${programsHtml}</div>
-          `;
-
-          epgContainer.appendChild(epgCard);
-        });
-
-      } catch (e) {
-        console.warn("Ошибка подгрузки EPG:", e);
-        epgContainer.innerHTML = `
-          <div style="background: #181820; padding: 16px; border-radius: 12px; color: #888; text-align: center;">
-            <p style="margin-bottom: 8px;">⏳ Синхронизация телепрограммы...</p>
-            <p style="font-size: 12px; color: #aaa;">Проверьте, сгенерировался ли файл epg.json</p>
-          </div>
-        `;
-      }
     }
 
     function switchTab(tabId, el) {
@@ -566,8 +649,8 @@
         
         accountBox.innerHTML = `
           <img class="avatar" src="${avatarUrl}">
-          <h2 style="font-size: 20px; margin-bottom: 4px;">${user.real_name || user.login}</h2>
-          <p style="color: #888; font-size: 14px; margin-bottom: 20px;">@${user.login}</p>
+          <h2 style="font-size: 20px; margin-bottom: 4px;">${escapeHtml(user.real_name || user.login)}</h2>
+          <p style="color: #888; font-size: 14px; margin-bottom: 20px;">@${escapeHtml(user.login)}</p>
           <button class="btn-yandex btn-logout" onclick="logout()">Выйти из профиля</button>
         `;
       } else {
