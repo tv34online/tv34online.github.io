@@ -165,7 +165,7 @@
       <div class="channel-grid" id="channelList"></div>
     </div>
 
-    <!-- Вкладка 2: ТВ-Программа (Обычная EPG для каналов из плейлиста) -->
+    <!-- Вкладка 2: ТВ-Программа -->
     <div id="tab-epg" class="tab-content">
       <div id="epgPlayerAnchor"></div>
 
@@ -363,11 +363,12 @@
       });
     }
 
+    // Расширенная нормализация имён для максимального совпадения
     function cleanChannelName(name) {
       if (!name) return '';
       return name.toLowerCase()
-        .replace(/[\!\?\"\'\«\»\(\)\-]/g, ' ')
-        .replace(/\b(hd|sd|fhd|4k|50fps|720p|1080p|канал|tv|тв)\b/g, '')
+        .replace(/[\!\?\"\'\«\»\(\)\-\_\.\,\/]/g, ' ')
+        .replace(/\b(hd|sd|fhd|4k|50fps|720p|1080p|канал|tv|тв|россия|первый)\b/g, '')
         .replace(/\s+/g, ' ')
         .trim();
     }
@@ -378,7 +379,6 @@
       return parseInt(parts[0], 10) * 60 + parseInt(parts[1], 10);
     }
 
-    // Загрузка epg.json и вывод ТОЛЬКО для каналов из плейлиста
     async function loadEpgJson() {
       const epgContainer = document.getElementById('epgList');
       epgContainer.innerHTML = '<p style="color: #ff6600;">Синхронизация телепрограммы...</p>';
@@ -394,15 +394,27 @@
         const now = new Date();
         const currentMinutes = now.getHours() * 60 + now.getMinutes();
 
-        // Проходим СТРОГО по каналам из плейлиста
         allChannels.forEach(plChannel => {
           const plTvgClean = cleanChannelName(plChannel.tvgName);
           const plNameClean = cleanChannelName(plChannel.name);
+          const rawTvgLower = (plChannel.tvgName || '').toLowerCase();
+          const rawNameLower = (plChannel.name || '').toLowerCase();
 
+          // Поиск совпадений по нормализованному названию или вхождению слов
           const matchedEpg = epgChannels.find(epg => {
             const epgClean = cleanChannelName(epg.name);
-            return epgClean === plTvgClean || epgClean === plNameClean || 
-                   epgClean.includes(plTvgClean) || plTvgClean.includes(epgClean);
+            const epgRawLower = (epg.name || '').toLowerCase();
+
+            return (
+              epgClean === plTvgClean ||
+              epgClean === plNameClean ||
+              (epgClean.length > 2 && plTvgClean.includes(epgClean)) ||
+              (plTvgClean.length > 2 && epgClean.includes(plTvgClean)) ||
+              (epgClean.length > 2 && plNameClean.includes(epgClean)) ||
+              (plNameClean.length > 2 && epgClean.includes(plNameClean)) ||
+              epgRawLower === rawTvgLower ||
+              epgRawLower === rawNameLower
+            );
           });
 
           const epgCard = document.createElement('div');
@@ -461,7 +473,7 @@
             });
 
           } else {
-            programsHtml = '<div style="color:#666; font-size: 13px;">Телепрограмма временно недоступна</div>';
+            programsHtml = '<div style="color:#666; font-size: 13px;">Программа передач на сегодня не найдена</div>';
           }
 
           epgCard.innerHTML = `
@@ -480,7 +492,7 @@
         epgContainer.innerHTML = `
           <div style="background: #181820; padding: 16px; border-radius: 12px; color: #888; text-align: center;">
             <p style="margin-bottom: 8px;">⏳ Синхронизация телепрограммы...</p>
-            <p style="font-size: 12px; color: #aaa;">Убедитесь, что GitHub Actions сгенерировал epg.json</p>
+            <p style="font-size: 12px; color: #aaa;">Проверьте, сгенерировался ли файл epg.json</p>
           </div>
         `;
       }
