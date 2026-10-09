@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Любимой мамочке! ❤️</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 40px 30px;
+            max-width: 550px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            position: relative;
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .heart-icon {
+            font-size: 50px;
+            color: #ff4b5c;
+            animation: pulse 1.5s infinite;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+
+        h1 {
+            color: #d63384;
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            color: #6c757d;
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        .message {
+            color: #495057;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            text-align: left;
+            background: #fff0f5;
+            padding: 20px;
+            border-radius: 16px;
+            border-left: 5px solid #ff6b81;
+        }
+
+        .secret-box {
+            background: #fff;
+            border: 2px dashed #ff9a9e;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .secret-box:hover {
+            background: #ffe6ea;
+            transform: scale(1.02);
+        }
+
+        .secret-title {
+            color: #d63384;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .secret-content {
+            display: none;
+            margin-top: 10px;
+            color: #333;
+            font-size: 1.05rem;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #ff4b5c, #ff6b81);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 15px rgba(255, 75, 92, 0.3);
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px rgba(255, 75, 92, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        .floating-heart {
+            position: fixed;
+            pointer-events: none;
+            animation: floatUp 4s linear forwards;
+            font-size: 24px;
+            z-index: 999;
+        }
+
+        @keyframes floatUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="heart-icon">❤️</div>
+        <h1>Любимой маме</h1>
+        <p class="subtitle">С праздником тебя!</p>
+
+        <div class="message">
+            <p>Люблю тебя! Спасибо за о что ты есть!</p>
+            <br>
+            <p>Желаю тебе крепкого здоровья, море улыбок, душевного спокойствия и пусть каждый твой день наполняется радостью и счастьем!</p>
+        </div>
+
+        <div class="secret-box" onclick="toggleSecret()">
+            <div class="secret-title">✨ Нажми сюда, чтобы прочитать секретный записку</div>
+            <div class="secret-content" id="secretText">
+                Люблю тебя ❣️
+            </div>
+        </div>
+
+        <button class="btn" onclick="createHearts()">Отправить обнимашки 💖</button>
+    </div>
+
+    <script>
+        function toggleSecret() {
+            const secretText = document.getElementById('secretText');
+            if (secretText.style.display === 'block') {
+                secretText.style.display = 'none';
+            } else {
+                secretText.style.display = 'block';
+            }
+        }
+
+        function createHearts() {
+            const hearts = ['❤️', '💖', '🌸', '✨', '💕', '🌷'];
+            for (let i = 0; i < 25; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.classList.add('floating-heart');
+                    heart.innerText = hearts[Math.floor(Math.random() * hearts.length)];
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.bottom = '-20px';
+                    heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+                    document.body.appendChild(heart);
+
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 4000);
+                }, i * 100);
+            }
+        }
+    </script>
+</body>
+</html>
