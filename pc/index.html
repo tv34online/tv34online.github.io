@@ -1,1 +1,770 @@
-g
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Телевизор 34 — Онлайн ТВ</title>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <script src="https://yastatic.net/s3/pasport/auth-sdk/v1/auth-sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
+    body { background-color: #0b0b0e; color: #ffffff; padding-bottom: 70px; overflow-x: hidden; }
+
+    header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 16px 24px; background: rgba(11, 11, 14, 0.95);
+      position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .logo { display: flex; align-items: center; gap: 8px; font-weight: 900; font-size: 20px; color: #fff; text-decoration: none; }
+    .logo-badge { background: linear-gradient(135deg, #ff8800, #ff4500); color: #fff; padding: 2px 8px; border-radius: 6px; font-size: 16px; }
+
+    .container { padding: 20px; max-width: 1400px; margin: 0 auto; }
+
+    /* ПК Сетка Layout */
+    .pc-layout {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    /* Плеер */
+    .player-section { margin-bottom: 16px; }
+    .player-wrapper {
+      position: relative; width: 100%; aspect-ratio: 16/9; background: #000;
+      border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    video { width: 100%; height: 100%; object-fit: contain; cursor: pointer; }
+    
+    .player-controls {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(0deg, rgba(0,0,0,0.95) 0%, transparent 100%);
+      padding: 16px; display: flex; align-items: center; justify-content: space-between;
+      opacity: 0; transition: opacity 0.3s ease; gap: 12px;
+    }
+    .player-wrapper:hover .player-controls { opacity: 1; }
+    .right-controls { display: flex; align-items: center; gap: 10px; }
+    .ctrl-btn { background: none; border: none; color: #fff; cursor: pointer; font-size: 18px; padding: 6px; display: flex; align-items: center; justify-content: center; }
+    .now-playing { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 14px; overflow: hidden; }
+    .live-tag { background: #ff4500; color: #fff; font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 4px; text-transform: uppercase; flex-shrink: 0; }
+
+    .volume-box { display: flex; align-items: center; gap: 6px; }
+    .volume-slider {
+      -webkit-appearance: none; appearance: none;
+      width: 70px; height: 4px; background: rgba(255,255,255,0.3);
+      border-radius: 2px; outline: none; cursor: pointer; transition: 0.2s;
+    }
+    .volume-slider::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none;
+      width: 12px; height: 12px; border-radius: 50%; background: #ff6600; cursor: pointer;
+    }
+
+    /* Категории */
+    .categories { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 12px; margin-bottom: 16px; scrollbar-width: none; }
+    .categories::-webkit-scrollbar { display: none; }
+    .cat-chip {
+      background: #181820; border: 1px solid rgba(255,255,255,0.08); color: #aaa;
+      padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 600;
+      white-space: nowrap; cursor: pointer; transition: 0.2s;
+    }
+    .cat-chip.active, .cat-chip:hover { background: #ff6600; color: #fff; border-color: #ff6600; }
+
+    /* Список каналов */
+    .channel-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+    .channel-card {
+      background: #14141a; border-radius: 12px; padding: 12px; display: flex; align-items: center; gap: 12px;
+      cursor: pointer; border: 1px solid rgba(255,255,255,0.05); transition: 0.2s;
+    }
+    .channel-card:hover, .channel-card.active { background: #1c1c24; border-color: #ff6600; transform: translateY(-2px); }
+    .channel-logo { width: 44px; height: 44px; border-radius: 8px; background: #08080a; object-fit: contain; padding: 4px; }
+    .channel-info { flex: 1; overflow: hidden; }
+    .channel-title { font-weight: 700; font-size: 14px; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    /* EPG Боковая панель для ПК */
+    .sidebar-epg {
+      background: #14141a; border-radius: 16px; padding: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      max-height: calc(100vh - 120px); overflow-y: auto;
+    }
+    .sidebar-title { font-size: 18px; font-weight: 800; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+
+    .epg-container { display: flex; flex-direction: column; gap: 12px; }
+    .epg-card { background: #181820; border-radius: 12px; padding: 14px; border: 1px solid rgba(255,255,255,0.03); }
+    .epg-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .epg-logo { width: 28px; height: 28px; object-fit: contain; }
+    
+    .program-row { display: flex; gap: 8px; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 12px; }
+    .program-time { color: #888; font-weight: 700; min-width: 75px; }
+    .program-title { color: #ddd; flex: 1; }
+    .program-row.now { background: rgba(255, 102, 0, 0.12); border-radius: 6px; padding: 6px 8px; margin: 4px 0; }
+    .program-row.now .program-time { color: #ff6600; }
+    .program-row.now .program-title { color: #ffffff; font-weight: 600; }
+    .now-tag { background: #ff6600; color: #fff; font-size: 8px; font-weight: 800; padding: 1px 4px; border-radius: 3px; margin-left: 4px; text-transform: uppercase; }
+
+    .program-progress { width: 100%; height: 3px; background: rgba(255,255,255,0.1); border-radius: 2px; margin-top: 4px; overflow: hidden; }
+    .program-progress-bar { height: 100%; background: #ff6600; transition: width 0.3s ease; }
+
+    /* Аккаунт */
+    .account-card {
+      background: #14141a; border-radius: 16px; padding: 24px; text-align: center;
+      border: 1px solid rgba(255,255,255,0.08); max-width: 400px; margin: 40px auto;
+    }
+    .avatar { width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 16px; border: 3px solid #ff6600; object-fit: cover; }
+    .btn-yandex {
+      background: #fc3f1d; color: white; border: none; padding: 12px 24px;
+      border-radius: 10px; font-weight: 700; font-size: 15px; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 10px; transition: 0.2s; width: 100%; justify-content: center;
+    }
+    .btn-yandex:hover { background: #e03213; }
+    .btn-logout { background: #282832; color: #ccc; margin-top: 12px; }
+
+    /* Нижняя навигация (только для мобилок) */
+    .bottom-nav { display: none; }
+
+    /* Стили для адаптива под мобильные устройства */
+    @media (max-width: 1024px) {
+      body { padding-bottom: 70px; }
+      .pc-layout { grid-template-columns: 1fr; }
+      .sidebar-epg { display: none; }
+      .bottom-nav {
+        position: fixed; bottom: 0; left: 0; right: 0; height: 60px;
+        background: rgba(18, 18, 24, 0.95); border-top: 1px solid rgba(255, 255, 255, 0.08);
+        display: flex; justify-content: space-around; align-items: center; backdrop-filter: blur(10px); z-index: 1000;
+      }
+      .nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; color: #777; text-decoration: none; font-size: 11px; font-weight: 600; cursor: pointer; }
+      .nav-item.active { color: #ff6600; }
+      .nav-item svg { width: 22px; height: 22px; fill: currentColor; }
+      .tab-content { display: none; }
+      .tab-content.active { display: block; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="#" class="logo">
+      <span>ТЕЛЕВИЗОР</span>
+      <span class="logo-badge">34</span>
+    </a>
+    <div id="pcAuthBox"></div>
+  </header>
+
+  <div class="container">
+    
+    <div class="pc-layout">
+      
+      <!-- Левая/Главная колонка -->
+      <div>
+        <!-- Контейнер плеера -->
+        <div id="playerContainer" class="player-section">
+          <div class="player-wrapper">
+            <video id="videoPlayer" autoplay playsinline muted onclick="toggleMute()"></video>
+            <div class="player-controls">
+              <div class="now-playing">
+                <span class="live-tag">LIVE</span>
+                <span id="playerChannelName">Выберите канал</span>
+              </div>
+              
+              <div class="right-controls">
+                <div class="volume-box">
+                  <button class="ctrl-btn" id="muteBtn" onclick="toggleMute()">🔇</button>
+                  <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.05" value="0.8" oninput="changeVolume(this.value)">
+                </div>
+                <button class="ctrl-btn" title="Картинка в картинке" onclick="togglePiP()">🖼️</button>
+                <button class="ctrl-btn" onclick="toggleFullscreen()">⛶</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Вкладка 1: Главная (Каналы) -->
+        <div id="tab-home" class="tab-content active">
+          <div id="homePlayerAnchor"></div>
+
+          <div class="categories" id="categoryContainer">
+            <div class="cat-chip active" onclick="filterCategory('all', this)">Все каналы</div>
+          </div>
+
+          <div class="channel-grid" id="channelList"></div>
+        </div>
+
+        <!-- Вкладка 2: ТВ-Программа (Мобильная версия) -->
+        <div id="tab-epg" class="tab-content">
+          <div id="epgPlayerAnchor"></div>
+          <div id="epgListMobile" class="epg-container"></div>
+        </div>
+
+        <!-- Вкладка 3: Аккаунт -->
+        <div id="tab-account" class="tab-content">
+          <div class="account-card" id="accountBox"></div>
+        </div>
+      </div>
+
+      <!-- Правая колонка: ТВ-программа на ПК -->
+      <div class="sidebar-epg">
+        <div class="sidebar-title">
+          <span>📅</span>
+          <span>ТВ-Программа</span>
+        </div>
+        <div id="epgListPC" class="epg-container">
+          <p style="color: #888; text-align: center; padding: 20px;">Загрузка программы...</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Нижнее меню (для экранов смартфонов) -->
+  <nav class="bottom-nav">
+    <div class="nav-item active" onclick="switchTab('home', this)">
+      <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+      <span>Главная</span>
+    </div>
+    <div class="nav-item" onclick="switchTab('epg', this)">
+      <svg viewBox="0 0 24 24"><path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H3V5h18v14zM5 15h14v2H5zm0-4h14v2H5zm0-4h14v2H5z"/></svg>
+      <span>ТВ-программа</span>
+    </div>
+    <div class="nav-item" onclick="switchTab('account', this)">
+      <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+      <span>Аккаунт</span>
+    </div>
+  </nav>
+
+  <script>
+    const YANDEX_CLIENT_ID = '0fc0a6b7929b4efdb1822f75b1c078b8';
+    const EPG_URL = 'https://raw.githubusercontent.com/iboxestvoff/televizor34_serverfiles/epg-data/epg.xml';
+
+    const EPG_DB_NAME = 'televizor34-epg';
+    const EPG_STORE = 'cache';
+    const EPG_CACHE_KEY = 'epg-v1';
+    const EPG_MAX_AGE_MS = 12 * 60 * 60 * 1000;
+
+    let allChannels = [];
+    let categoriesSet = new Set();
+    let currentSelectedChannel = null;
+    let hls = null;
+    let savedVolume = 0.8;
+
+    let epgData = null;
+    let epgChannelIdForIndex = new Map();
+
+    function escapeHtml(s) {
+      return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+
+    function normalizeName(s) {
+      return (s || '').toLowerCase().replace(/[^a-zа-яё0-9]/gi, '');
+    }
+
+    function fmtTime(d) {
+      const date = new Date(d);
+      return String(date.getHours()).padStart(2, '0') + ':' + String(date.getMinutes()).padStart(2, '0');
+    }
+
+    function openEpgDb() {
+      return new Promise((resolve, reject) => {
+        if (typeof indexedDB === 'undefined') return reject(new Error('IndexedDB недоступен'));
+        const req = indexedDB.open(EPG_DB_NAME, 1);
+        req.onupgradeneeded = () => { req.result.createObjectStore(EPG_STORE); };
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => reject(req.error);
+      });
+    }
+
+    async function loadEpgFromCache() {
+      try {
+        const db = await openEpgDb();
+        return await new Promise((resolve) => {
+          const tx = db.transaction(EPG_STORE, 'readonly');
+          const req = tx.objectStore(EPG_STORE).get(EPG_CACHE_KEY);
+          req.onsuccess = () => resolve(req.result || null);
+          req.onerror = () => resolve(null);
+        });
+      } catch (e) { return null; }
+    }
+
+    async function saveEpgToCache(data) {
+      try {
+        const db = await openEpgDb();
+        const tx = db.transaction(EPG_STORE, 'readwrite');
+        tx.objectStore(EPG_STORE).put({
+          savedAt: Date.now(),
+          idByNormalizedName: data.idByNormalizedName,
+          programsByChannelId: data.programsByChannelId
+        }, EPG_CACHE_KEY);
+      } catch (e) {}
+    }
+
+    const EPG_WORKER_SRC = [
+      'function decodeXmlEntities(s){',
+      '  return s.replace(/&(amp|lt|gt|quot|apos|#x[0-9a-fA-F]+|#\\d+);/g, function(m, g){',
+      '    if(g === "amp") return "&";',
+      '    if(g === "lt") return "<";',
+      '    if(g === "gt") return ">";',
+      '    if(g === "quot") return \'"\';',
+      "    if(g === 'apos') return \"'\";",
+      '    if(g[0] === "#"){',
+      '      var code = g[1] === "x" ? parseInt(g.slice(2), 16) : parseInt(g.slice(1), 10);',
+      '      return isNaN(code) ? m : String.fromCodePoint(code);',
+      '    }',
+      '    return m;',
+      '  });',
+      '}',
+      'function getAttr(str, name){',
+      '  var m = str.match(new RegExp(name + "=\\"([^\\"]*)\\""));',
+      '  return m ? m[1] : null;',
+      '}',
+      'function parseXmltvTime(s){',
+      '  if(!s) return null;',
+      '  var m = s.match(/^(\\d{4})(\\d{2})(\\d{2})(\\d{2})(\\d{2})(\\d{2})\\s*([+-]\\d{2})?(\\d{2})?/);',
+      '  if(!m) return null;',
+      '  var Y=+m[1],Mo=+m[2],D=+m[3],H=+m[4],Mi=+m[5],S=+m[6],offH=m[7],offM=m[8];',
+      '  var ms = Date.UTC(Y, Mo-1, D, H, Mi, S);',
+      '  if(offH){',
+      '    var sign = offH[0] === "-" ? -1 : 1;',
+      '    var offsetMinutes = sign * (parseInt(offH.slice(1),10)*60 + (offM?parseInt(offM,10):0));',
+      '    ms -= offsetMinutes*60000;',
+      '  }',
+      '  return new Date(ms);',
+      '}',
+      'function normalizeName(s){',
+      '  return (s||"").toLowerCase().replace(/[^a-zа-яё0-9]/gi,"");',
+      '}',
+      'async function decompressIfGzip(bytes){',
+      '  var isGzip = bytes.length > 2 && bytes[0] === 0x1f && bytes[1] === 0x8b;',
+      '  if(!isGzip) return new TextDecoder("utf-8").decode(bytes);',
+      '  var stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream("gzip"));',
+      '  var buf = await new Response(stream).arrayBuffer();',
+      '  return new TextDecoder("utf-8").decode(buf);',
+      '}',
+      'self.onmessage = async function(e){',
+      '  try{',
+      '    var bytes = e.data.bytes;',
+      '    var text = await decompressIfGzip(bytes);',
+      '    var idByNormalizedName = new Map();',
+      '    var channelRe = /<channel\\s+id="([^"]*)"[^>]*>([\\s\\S]*?)<\\/channel>/g;',
+      '    var dnRe = /<display-name[^>]*>([\\s\\S]*?)<\\/display-name>/g;',
+      '    var cm;',
+      '    while((cm = channelRe.exec(text))){',
+      '      var id = cm[1];',
+      '      var inner = cm[2];',
+      '      var dm;',
+      '      dnRe.lastIndex = 0;',
+      '      while((dm = dnRe.exec(inner))){',
+      '        var norm = normalizeName(decodeXmlEntities(dm[1]));',
+      '        if(norm && !idByNormalizedName.has(norm)) idByNormalizedName.set(norm, id);',
+      '      }',
+      '    }',
+      '    var programsByChannelId = new Map();',
+      '    var progRe = /<programme\\s+([^>]*)>([\\s\\S]*?)<\\/programme>/g;',
+      '    var titleRe = /<title[^>]*>([\\s\\S]*?)<\\/title>/;',
+      '    var pm;',
+      '    while((pm = progRe.exec(text))){',
+      '      var attrs = pm[1];',
+      '      var inner2 = pm[2];',
+      '      var chId = getAttr(attrs, "channel");',
+      '      var start = parseXmltvTime(getAttr(attrs, "start"));',
+      '      var stop = parseXmltvTime(getAttr(attrs, "stop"));',
+      '      if(!chId || !start || !stop) continue;',
+      '      var tm = titleRe.exec(inner2);',
+      '      var title = tm ? decodeXmlEntities(tm[1]).trim() : "Без названия";',
+      '      if(!programsByChannelId.has(chId)) programsByChannelId.set(chId, []);',
+      '      programsByChannelId.get(chId).push({ start: start, stop: stop, title: title });',
+      '    }',
+      '    programsByChannelId.forEach(function(list){ list.sort(function(a,b){ return a.start - b.start; }); });',
+      '    self.postMessage({ ok: true, idByNormalizedName: idByNormalizedName, programsByChannelId: programsByChannelId });',
+      '  }catch(err){',
+      '    self.postMessage({ ok: false, error: (err && err.message) || String(err) });',
+      '  }',
+      '};'
+    ].join('\n');
+
+    let epgWorker = null;
+    function getEpgWorker(){
+      if(!epgWorker){
+        const blob = new Blob([EPG_WORKER_SRC], { type: 'application/javascript' });
+        epgWorker = new Worker(URL.createObjectURL(blob));
+      }
+      return epgWorker;
+    }
+
+    function parseEpgInWorker(bytes){
+      return new Promise((resolve, reject) => {
+        const worker = getEpgWorker();
+        function onMessage(e){
+          worker.removeEventListener('message', onMessage);
+          worker.removeEventListener('error', onError);
+          if(e.data.ok) resolve({ idByNormalizedName: e.data.idByNormalizedName, programsByChannelId: e.data.programsByChannelId });
+          else reject(new Error(e.data.error));
+        }
+        function onError(err){
+          worker.removeEventListener('message', onMessage);
+          worker.removeEventListener('error', onError);
+          reject(new Error(err.message || 'ошибка воркера'));
+        }
+        worker.addEventListener('message', onMessage);
+        worker.addEventListener('error', onError);
+        worker.postMessage({ bytes }, [bytes.buffer]);
+      });
+    }
+
+    function buildEpgMatches(){
+      epgChannelIdForIndex = new Map();
+      if(!epgData) return;
+      allChannels.forEach((ch, i) => {
+        let id = null;
+        if(ch.tvgId && epgData.programsByChannelId.has(ch.tvgId)) id = ch.tvgId;
+        if(!id){
+          const norm = normalizeName(ch.name);
+          id = epgData.idByNormalizedName.get(norm) || null;
+        }
+        epgChannelIdForIndex.set(i, id);
+      });
+    }
+
+    function renderEpgTab(){
+      const containers = [
+        document.getElementById('epgListPC'),
+        document.getElementById('epgListMobile')
+      ];
+
+      if(!epgData){
+        containers.forEach(c => { if(c) c.innerHTML = '<p style="color: #888; text-align: center; padding: 20px;">Загрузка программы...</p>'; });
+        return;
+      }
+
+      const now = new Date();
+      let html = '';
+
+      allChannels.forEach((ch, i) => {
+        const chId = epgChannelIdForIndex.get(i);
+        const programs = chId ? (epgData.programsByChannelId.get(chId) || []) : [];
+        
+        const idx = programs.findIndex(p => new Date(p.start) <= now && now < new Date(p.stop));
+        const current = idx >= 0 ? programs[idx] : null;
+        const upcoming = idx >= 0 ? programs.slice(idx + 1, idx + 4) : [];
+
+        let bodyHtml = '';
+
+        if (current) {
+          const startTime = new Date(current.start);
+          const stopTime = new Date(current.stop);
+          const totalMs = stopTime - startTime;
+          const elapsedMs = now - startTime;
+          const pct = totalMs > 0 ? Math.min(100, Math.max(0, Math.round(elapsedMs / totalMs * 100))) : 0;
+
+          bodyHtml += `
+            <div class="program-row now">
+              <span class="program-time">${fmtTime(startTime)} – ${fmtTime(stopTime)}</span>
+              <span class="program-title">${escapeHtml(current.title)} <span class="now-tag">СЕЙЧАС</span></span>
+            </div>
+            <div class="program-progress"><div class="program-progress-bar" style="width:${pct}%"></div></div>
+          `;
+
+          upcoming.forEach(p => {
+            bodyHtml += `
+              <div class="program-row">
+                <span class="program-time">${fmtTime(p.start)}</span>
+                <span class="program-title">${escapeHtml(p.title)}</span>
+              </div>
+            `;
+          });
+        } else {
+          bodyHtml = '<div style="color:#666; font-size: 12px;">Программа недоступна</div>';
+        }
+
+        html += `
+          <div class="epg-card">
+            <div class="epg-header">
+              ${ch.logo ? `<img class="epg-logo" src="${escapeHtml(ch.logo)}" onerror="this.style.display='none'">` : ''}
+              <h3 style="font-size: 14px;">${escapeHtml(ch.name)}</h3>
+            </div>
+            <div>${bodyHtml}</div>
+          </div>
+        `;
+      });
+
+      containers.forEach(c => { if(c) c.innerHTML = html; });
+    }
+
+    async function loadEpg() {
+      const cached = await loadEpgFromCache();
+      if (cached && (Date.now() - cached.savedAt) < EPG_MAX_AGE_MS) {
+        epgData = { 
+          idByNormalizedName: cached.idByNormalizedName, 
+          programsByChannelId: cached.programsByChannelId 
+        };
+        buildEpgMatches();
+        renderEpgTab();
+        return;
+      }
+
+      try {
+        const res = await fetch(EPG_URL, { cache: 'no-store' });
+        if(!res.ok) throw new Error('HTTP ' + res.status);
+        const bytes = new Uint8Array(await res.arrayBuffer());
+        
+        epgData = await parseEpgInWorker(bytes);
+        buildEpgMatches();
+        renderEpgTab();
+        saveEpgToCache(epgData);
+      } catch(e) {
+        console.warn("Ошибка загрузки EPG:", e);
+      }
+    }
+
+    function toggleMute() {
+      const video = document.getElementById('videoPlayer');
+      const muteBtn = document.getElementById('muteBtn');
+      const slider = document.getElementById('volumeSlider');
+
+      video.muted = !video.muted;
+
+      if (video.muted) {
+        muteBtn.innerText = '🔇';
+      } else {
+        video.volume = savedVolume > 0 ? savedVolume : 0.8;
+        slider.value = video.volume;
+        muteBtn.innerText = video.volume > 0.5 ? '🔊' : '🔉';
+      }
+    }
+
+    function changeVolume(val) {
+      const video = document.getElementById('videoPlayer');
+      const muteBtn = document.getElementById('muteBtn');
+      
+      savedVolume = parseFloat(val);
+      video.volume = savedVolume;
+
+      if (savedVolume === 0) {
+        video.muted = true;
+        muteBtn.innerText = '🔇';
+      } else {
+        video.muted = false;
+        muteBtn.innerText = savedVolume > 0.5 ? '🔊' : '🔉';
+      }
+    }
+
+    async function togglePiP() {
+      const video = document.getElementById('videoPlayer');
+      try {
+        if (document.pictureInPictureElement) {
+          await document.exitPictureInPicture();
+        } else if (document.pictureInPictureEnabled) {
+          await video.requestPictureInPicture();
+        }
+      } catch (err) {
+        console.error("Ошибка PiP:", err);
+      }
+    }
+
+    function playStream(channel) {
+      currentSelectedChannel = channel;
+      const video = document.getElementById('videoPlayer');
+      document.getElementById('playerChannelName').innerText = channel.name;
+
+      if (Hls.isSupported()) {
+        if (hls) hls.destroy();
+        hls = new Hls();
+        hls.loadSource(channel.url);
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MANIFEST_PARSED, () => {
+          video.play();
+          video.volume = savedVolume;
+        });
+      } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = channel.url;
+        video.addEventListener('loadedmetadata', () => {
+          video.play();
+          video.volume = savedVolume;
+        });
+      }
+    }
+
+    async function loadPlaylist() {
+      try {
+        const res = await fetch('./playlist.m3u?v=' + Date.now());
+        if (!res.ok) throw new Error("Плейлист не найден");
+        const text = await res.text();
+        parseM3U(text);
+      } catch (e) {
+        console.warn("Ошибка загрузки плейлиста:", e);
+      }
+    }
+
+    function parseM3U(text) {
+      allChannels = [];
+      categoriesSet.clear();
+      const lines = text.split('\n');
+      let current = null;
+
+      lines.forEach(line => {
+        line = line.trim();
+        if (line.startsWith('#EXTINF:')) {
+          const logoMatch = line.match(/tvg-logo="([^"]+)"/);
+          const groupMatch = line.match(/group-title="([^"]+)"/);
+          const tvgIdMatch = line.match(/tvg-id="([^"]+)"/);
+          const nameParts = line.split(',');
+          const displayName = nameParts[nameParts.length - 1].trim();
+
+          const group = groupMatch ? groupMatch[1] : 'Развлекательные';
+          categoriesSet.add(group);
+
+          current = {
+            logo: logoMatch ? logoMatch[1] : '',
+            group: group,
+            name: displayName,
+            tvgId: tvgIdMatch ? tvgIdMatch[1] : null,
+            url: ''
+          };
+        } else if (line && !line.startsWith('#') && current) {
+          current.url = line;
+          allChannels.push(current);
+          current = null;
+        }
+      });
+
+      renderCategories();
+      renderChannels(allChannels);
+
+      if (allChannels.length > 0) {
+        playStream(allChannels[0]);
+      }
+
+      loadEpg();
+    }
+
+    function renderCategories() {
+      const container = document.getElementById('categoryContainer');
+      container.innerHTML = '<div class="cat-chip active" onclick="filterCategory(\'all\', this)">Все каналы</div>';
+
+      categoriesSet.forEach(cat => {
+        const chip = document.createElement('div');
+        chip.className = 'cat-chip';
+        chip.innerText = cat;
+        chip.onclick = () => filterCategory(cat, chip);
+        container.appendChild(chip);
+      });
+    }
+
+    function renderChannels(channels) {
+      const container = document.getElementById('channelList');
+      container.innerHTML = '';
+
+      channels.forEach((ch) => {
+        const card = document.createElement('div');
+        card.className = `channel-card ${currentSelectedChannel && currentSelectedChannel.name === ch.name ? 'active' : ''}`;
+        card.onclick = () => {
+          document.querySelectorAll('.channel-card').forEach(c => c.classList.remove('active'));
+          card.classList.add('active');
+          playStream(ch);
+        };
+
+        card.innerHTML = `
+          <img class="channel-logo" src="${ch.logo}" onerror="this.src='https://via.placeholder.com/50/181820/ffffff?text=TV'">
+          <div class="channel-info">
+            <div class="channel-title">${escapeHtml(ch.name)}</div>
+            <div style="font-size: 11px; color: #ff6600;">Смотреть эфир</div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function switchTab(tabId, el) {
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+
+      document.getElementById(`tab-${tabId}`).classList.add('active');
+      el.classList.add('active');
+
+      const playerBox = document.getElementById('playerContainer');
+      
+      if (tabId === 'epg') {
+        document.getElementById('epgPlayerAnchor').appendChild(playerBox);
+      } else if (tabId === 'home') {
+        document.getElementById('homePlayerAnchor').appendChild(playerBox);
+      }
+    }
+
+    function filterCategory(cat, element) {
+      document.querySelectorAll('.cat-chip').forEach(el => el.classList.remove('active'));
+      element.classList.add('active');
+
+      if (cat === 'all') {
+        renderChannels(allChannels);
+      } else {
+        const filtered = allChannels.filter(c => c.group === cat);
+        renderChannels(filtered);
+      }
+    }
+
+    function toggleFullscreen() {
+      const video = document.getElementById('videoPlayer');
+      if (video.requestFullscreen) video.requestFullscreen();
+    }
+
+    function loginWithYandex() {
+      const redirectUri = window.location.origin + window.location.pathname;
+      window.location.href = `https://oauth.yandex.ru/authorize?response_type=token&client_id=${YANDEX_CLIENT_ID}&redirect_uri=${encodeURIComponent(redirectUri)}`;
+    }
+
+    function checkYandexAuth() {
+      const hash = window.location.hash;
+      if (hash.includes('access_token')) {
+        const params = new URLSearchParams(hash.replace('#', '?'));
+        const token = params.get('access_token');
+        
+        fetch('https://login.yandex.ru/info?format=json', {
+          headers: { 'Authorization': `OAuth ${token}` }
+        })
+        .then(res => res.json())
+        .then(user => {
+          localStorage.setItem('yandex_user', JSON.stringify(user));
+          window.history.replaceState({}, document.title, window.location.pathname);
+          renderAccount();
+        });
+      } else {
+        renderAccount();
+      }
+    }
+
+    function renderAccount() {
+      const accountBox = document.getElementById('accountBox');
+      const savedUser = localStorage.getItem('yandex_user');
+
+      if (savedUser) {
+        const user = JSON.parse(savedUser);
+        const avatarUrl = user.default_avatar_id ? `https://avatars.yandex.net/get-yapic/${user.default_avatar_id}/islands-200` : 'https://via.placeholder.com/80';
+        
+        accountBox.innerHTML = `
+          <img class="avatar" src="${avatarUrl}">
+          <h2 style="font-size: 20px; margin-bottom: 4px;">${escapeHtml(user.real_name || user.login)}</h2>
+          <p style="color: #888; font-size: 14px; margin-bottom: 20px;">@${escapeHtml(user.login)}</p>
+          <button class="btn-yandex btn-logout" onclick="logout()">Выйти из профиля</button>
+        `;
+      } else {
+        accountBox.innerHTML = `
+          <h2 style="font-size: 20px; margin-bottom: 12px;">Вход в Телевизор 34</h2>
+          <p style="color: #888; font-size: 14px; margin-bottom: 24px;">Войдите через Яндекс ID</p>
+          <button class="btn-yandex" onclick="loginWithYandex()">
+            Войти через Яндекс
+          </button>
+        `;
+      }
+    }
+
+    function logout() {
+      localStorage.removeItem('yandex_user');
+      renderAccount();
+    }
+
+    loadPlaylist();
+    checkYandexAuth();
+  </script>
+</body>
+</html>
