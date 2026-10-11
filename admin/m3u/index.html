@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TV34Online Playlist Manager</title>
+    <title>Телевизор 34 Админ Плейлиста</title>
     <style>
         :root {
             --bg: #0f172a;
@@ -15,56 +15,62 @@
             --success: #4ade80;
             --danger: #f87171;
         }
-        body { font-family: sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; }
-        .container { max-width: 1000px; margin: 0 auto; background: var(--panel); padding: 20px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.4); }
-        h2 { margin-top: 0; border-bottom: 1px solid var(--border); padding-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
-        .settings-bar, .toolbar { display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap; align-items: center; }
-        input, select, button { background: var(--bg); color: var(--text); border: 1px solid var(--border); padding: 10px; border-radius: 6px; font-size: 14px; outline: none; }
-        input[type="text"], input[type="password"] { flex: 1; min-width: 250px; }
+        body { font-family: sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 10px; box-sizing: border-box; }
+        .container { max-width: 1000px; margin: 0 auto; background: var(--panel); padding: 12px; border-radius: 10px; box-shadow: 0 10px 25px rgba(0,0,0,0.4); }
+        h2 { margin: 0 0 10px 0; font-size: 16px; border-bottom: 1px solid var(--border); padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+        .settings-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 10px; background: rgba(15, 23, 42, 0.4); padding: 8px; border-radius: 6px; border: 1px solid var(--border); }
+        input, select, button { background: var(--bg); color: var(--text); border: 1px solid var(--border); padding: 8px; border-radius: 6px; font-size: 13px; outline: none; width: 100%; box-sizing: border-box; }
         button { background: var(--accent); border: none; font-weight: bold; cursor: pointer; }
         button:hover { background: var(--accent-hover); }
         button.danger { background: var(--danger); }
-        .channel-card { background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border); padding: 12px; border-radius: 8px; margin-bottom: 10px; display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; align-items: center; }
-        .channel-card input { width: 100%; box-sizing: border-box; }
-        .status { margin-top: 15px; font-weight: bold; min-height: 20px; }
-        .tabs { display: flex; gap: 10px; margin-bottom: 20px; }
-        .tab { padding: 8px 16px; border-radius: 6px; cursor: pointer; background: var(--bg); border: 1px solid var(--border); }
+        .toolbar { display: flex; gap: 6px; margin-bottom: 10px; }
+        .channel-card { background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border); padding: 8px; border-radius: 6px; margin-bottom: 6px; display: flex; flex-direction: column; gap: 6px; }
+        .status { margin-top: 8px; font-weight: bold; font-size: 12px; word-break: break-all; }
+        .tabs { display: flex; gap: 4px; margin-bottom: 10px; }
+        .tab { flex: 1; text-align: center; padding: 6px; border-radius: 6px; cursor: pointer; background: var(--bg); border: 1px solid var(--border); font-size: 13px; }
         .tab.active { background: var(--accent); border-color: var(--accent); }
-        #channelsList { max-height: 500px; overflow-y: auto; padding-right: 5px; }
+        #channelsList { max-height: 400px; overflow-y: auto; }
+        label { font-size: 11px; color: #94a3b8; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <h2>
-        <span>Управление плейлистами GitHub</span>
-        <button onclick="toggleView()" style="font-size: 12px; padding: 6px 10px;">Режим кода (Raw)</button>
+        <span>TV34Manager</span>
+        <button onclick="toggleView()" style="width: auto; font-size: 11px; padding: 4px 8px;">Код / Карточки</button>
     </h2>
 
-    <!-- Настройки токена и репозитория -->
-    <div class="settings-bar">
-        <input type="password" id="ghToken" placeholder="Введите GitHub Token (Ghp_...)" oninput="saveSettings()">
-        <input type="text" id="repoName" placeholder="Репозиторий (например: user/repo)" value="tv34online/tv34online" oninput="saveSettings()">
-        <button onclick="loadPlaylist()">Загрузить с GitHub</button>
+    <!-- Настройки -->
+    <div class="settings-group">
+        <div>
+            <label>GitHub Токен (ghp_...):</label>
+            <input type="password" id="ghToken" placeholder="Вставьте токен" oninput="saveSettings()">
+        </div>
+        <div>
+            <label>Репозиторий (владелец/проект):</label>
+            <input type="text" id="repoName" placeholder="tv34online/tv34online" value="tv34online/tv34online" oninput="saveSettings()">
+        </div>
+        <button onclick="loadPlaylist()" style="margin-top: 4px;">Загрузить плейлист</button>
     </div>
 
     <!-- Выбор плейлиста -->
     <div class="tabs">
-        <div class="tab active" onclick="switchPlaylist('tv/playlist.m3u')">TV</div>
-        <div class="tab" onclick="switchPlaylist('ios/playlist.m3u')">iOS</div>
-        <div class="tab" onclick="switchPlaylist('pc/playlist.m3u')">PC</div>
+        <div class="tab active" onclick="switchPlaylist('tv/playlist.m3u', this)">TV</div>
+        <div class="tab" onclick="switchPlaylist('ios/playlist.m3u', this)">iOS</div>
+        <div class="tab" onclick="switchPlaylist('pc/playlist.m3u', this)">PC</div>
     </div>
 
     <div class="toolbar">
-        <button onclick="addChannel()">➕ Добавить канал</button>
-        <button onclick="saveToGitHub()" style="background: var(--success); color: #0f172a;">💾 Сохранить на GitHub</button>
+        <button onclick="addChannel()">➕ Добавить</button>
+        <button onclick="saveToGitHub()" style="background: var(--success); color: #0f172a;">💾 Сохранить</button>
     </div>
 
-    <!-- Список каналов (визуальный режим) -->
+    <!-- Список каналов -->
     <div id="channelsList"></div>
 
-    <!-- Режим сырого текста (скрыт по умолчанию) -->
-    <textarea id="rawContent" style="width:100%; height:450px; display:none; font-family:monospace; box-sizing:border-box; background:var(--bg); color:#38bdf8; padding:10px; border-radius:6px; border:1px solid var(--border);" oninput="syncFromRaw()"></textarea>
+    <!-- Режим кода -->
+    <textarea id="rawContent" style="width:100%; height:350px; display:none; font-family:monospace; font-size:12px; background:var(--bg); color:#38bdf8; padding:8px; border-radius:6px; border:1px solid var(--border); box-sizing:border-box;" oninput="syncFromRaw()"></textarea>
 
     <div class="status" id="statusMsg"></div>
 </div>
@@ -74,7 +80,6 @@
     let channels = [];
     let fileSha = '';
 
-    // Автозагрузка сохраненных данных при старте
     window.onload = function() {
         if (localStorage.getItem('gh_token')) document.getElementById('ghToken').value = localStorage.getItem('gh_token');
         if (localStorage.getItem('gh_repo')) document.getElementById('repoName').value = localStorage.getItem('gh_repo');
@@ -82,48 +87,59 @@
     };
 
     function saveSettings() {
-        localStorage.setItem('gh_token', document.getElementById('ghToken').value);
-        localStorage.setItem('gh_repo', document.getElementById('repoName').value);
+        localStorage.setItem('gh_token', document.getElementById('ghToken').value.trim());
+        localStorage.setItem('gh_repo', document.getElementById('repoName').value.trim());
     }
 
-    function switchPlaylist(path) {
+    function switchPlaylist(path, element) {
         currentPath = path;
         document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-        event.target.classList.add('active');
+        element.classList.add('active');
         loadPlaylist();
     }
 
-    // Загрузка файла с GitHub API
+    function getCleanToken() {
+        return document.getElementById('ghToken').value.trim().replace(/[\r\n\t]/g, '');
+    }
+
     async function loadPlaylist() {
-        const token = document.getElementById('ghToken').value;
-        const repo = document.getElementById('repoName').value;
+        const token = getCleanToken();
+        const repo = document.getElementById('repoName').value.trim();
         if (!token || !repo) {
-            showStatus('Укажите токен и репозиторий!', 'red');
+            showStatus('Заполните токен и репозиторий!', 'orange');
             return;
         }
 
-        showStatus('Загрузка файла с GitHub...', '#38bdf8');
+        showStatus('Загрузка с GitHub...', '#38bdf8');
         try {
             const url = `https://api.github.com/repos/${repo}/contents/${currentPath}`;
             const res = await fetch(url, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
-            if (!res.ok) throw new Error('Ошибка загрузки. Проверьте токен и путь.');
-            const data = await res.json();
+
+            if (res.status === 404) {
+                // Если файла еще нет, создаем пустой шаблон
+                channels = [{ title: 'Канал 1', url: 'http://', logo: '' }];
+                fileSha = '';
+                renderChannels();
+                showStatus('Файл не найден на GitHub. Будет создан новый при сохранении.', 'orange');
+                return;
+            }
+
+            if (!res.ok) throw new Error('Ошибка сети или неверный токен (Код: ' + res.status + ')');
             
+            const data = await res.json();
             fileSha = data.sha;
-            // Декодируем Base64 из GitHub API с поддержкой UTF-8
             const content = decodeURIComponent(escape(atob(data.content)));
             parseM3U(content);
             renderChannels();
             document.getElementById('rawContent').value = content;
-            showStatus('Плейлист успешно загружен!', 'var(--success)');
+            showStatus('Успешно загружено!', 'var(--success)');
         } catch (err) {
-            showStatus(err.message, 'var(--danger)');
+            showStatus('Ошибка: ' + err.message, 'var(--danger)');
         }
     }
 
-    // Парсинг M3U файла в массив объектов
     function parseM3U(text) {
         channels = [];
         const lines = text.split('\n');
@@ -133,11 +149,9 @@
             let line = lines[i].trim();
             if (line.startsWith('#EXTINF:')) {
                 currentChannel = {};
-                // Извлекаем иконку (tvg-logo="...")
                 const logoMatch = line.match(/tvg-logo="([^"]*)"/);
                 currentChannel.logo = logoMatch ? logoMatch[1] : '';
 
-                // Извлекаем название канала (после запятой)
                 const commaIdx = line.lastIndexOf(',');
                 currentChannel.title = commaIdx !== -1 ? line.substring(commaIdx + 1) : '';
             } else if (line && !line.startsWith('#')) {
@@ -146,9 +160,11 @@
                 currentChannel = {};
             }
         }
+        if (channels.length === 0 && text.trim() !== '') {
+            channels.push({ title: 'Канал', url: text, logo: '' });
+        }
     }
 
-    // Генерация текста M3U из массива каналов
     function generateM3U() {
         let text = '#EXTM3U\n';
         channels.forEach(ch => {
@@ -158,7 +174,6 @@
         return text;
     }
 
-    // Отрисовка карточек каналов
     function renderChannels() {
         const list = document.getElementById('channelsList');
         list.innerHTML = '';
@@ -166,20 +181,18 @@
             list.innerHTML += `
                 <div class="channel-card">
                     <div>
-                        <label style="font-size:11px; color:#94a3b8;">Название канала:</label>
+                        <label>Название:</label>
                         <input type="text" value="${escapeHtml(ch.title)}" oninput="channels[${index}].title = this.value; updateRaw()">
                     </div>
                     <div>
-                        <label style="font-size:11px; color:#94a3b8;">Ссылка на поток:</label>
+                        <label>Ссылка:</label>
                         <input type="text" value="${escapeHtml(ch.url)}" oninput="channels[${index}].url = this.value; updateRaw()">
                     </div>
                     <div>
-                        <label style="font-size:11px; color:#94a3b8;">Иконка (лого):</label>
-                        <div style="display:flex; gap:5px;">
-                            <input type="text" value="${escapeHtml(ch.logo)}" oninput="channels[${index}].logo = this.value; updateRaw()">
-                            <button class="danger" onclick="removeChannel(${index})">❌</button>
-                        </div>
+                        <label>Иконка (лого):</label>
+                        <input type="text" value="${escapeHtml(ch.logo)}" oninput="channels[${index}].logo = this.value; updateRaw()">
                     </div>
+                    <button class="danger" style="padding: 4px; font-size: 11px; width: auto;" onclick="removeChannel(${index})">Удалить канал</button>
                 </div>
             `;
         });
@@ -219,27 +232,25 @@
         }
     }
 
-    // Сохранение файла обратно в GitHub через API
     async function saveToGitHub() {
-        const token = document.getElementById('ghToken').value;
-        const repo = document.getElementById('repoName').value;
+        const token = getCleanToken();
+        const repo = document.getElementById('repoName').value.trim();
         if (!token || !repo) {
             showStatus('Заполните токен и репозиторий!', 'var(--danger)');
             return;
         }
 
-        showStatus('Сохранение изменений на GitHub...', '#38bdf8');
+        showStatus('Сохранение на GitHub...', '#38bdf8');
         try {
             const contentToSave = document.getElementById('rawContent').value;
-            // Кодируем в Base64 с поддержкой UTF-8
             const base64Content = btoa(unescape(encodeURIComponent(contentToSave)));
 
             const url = `https://api.github.com/repos/${repo}/contents/${currentPath}`;
             const body = {
                 message: `Update ${currentPath} via Web Editor`,
-                content: base64Content,
-                sha: fileSha
+                content: base64Content
             };
+            if (fileSha) body.sha = fileSha;
 
             const res = await fetch(url, {
                 method: 'PUT',
@@ -256,8 +267,8 @@
             }
 
             const data = await res.json();
-            fileSha = data.content.sha; // Обновляем SHA для последующих коммитов
-            showStatus('Файл успешно сохранен на GitHub!', 'var(--success)');
+            fileSha = data.content.sha;
+            showStatus('Успешно сохранено на GitHub!', 'var(--success)');
         } catch (err) {
             showStatus('Ошибка: ' + err.message, 'var(--danger)');
         }
