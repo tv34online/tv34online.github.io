@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Телевизор 34 — Android TV</title>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; outline: none; }
+    
+    body {
+      background-color: #08090c;
+      color: #ffffff;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Фокус пульта для всех интерактивных элементов */
+    button:focus, .channel-card:focus {
+      border-color: #ff6600 !important;
+      transform: scale(1.03);
+      box-shadow: 0 0 25px rgba(255, 102, 0, 0.6) !important;
+      background-color: rgba(255, 102, 0, 0.15) !important;
+      z-index: 10;
+    }
+
+    /* Шапка */
+    header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 24px 40px; background: rgba(12, 14, 18, 0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      flex-shrink: 0;
+    }
+    .logo { display: flex; align-items: center; gap: 12px; font-weight: 900; font-size: 26px; color: #fff; text-decoration: none; }
+    .logo-badge { background: linear-gradient(135deg, #ff8800, #ff4500); color: #fff; padding: 4px 12px; border-radius: 10px; font-size: 20px; box-shadow: 0 4px 15px rgba(255, 69, 0, 0.4); }
+    .clock { font-size: 24px; font-weight: 700; color: #ffb13d; font-family: monospace; }
+
+    /* Основная сетка для ТВ (Слева каналы, Справа плеер) */
+    .tv-container {
+      display: grid;
+      grid-template-columns: 450px 1fr;
+      gap: 30px;
+      padding: 30px 40px;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    /* Список каналов с телепрограммой */
+    .channel-list-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      overflow-y: auto;
+      padding-right: 10px;
+      scrollbar-width: none;
+    }
+    .channel-list-container::-webkit-scrollbar { display: none; }
+
+    .channel-card {
+      background: rgba(20, 22, 30, 0.7);
+      backdrop-filter: blur(15px);
+      border-radius: 16px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      cursor: pointer;
+      border: 2px solid rgba(255, 255, 255, 0.06);
+      transition: all 0.2s ease;
+    }
+    .channel-logo { width: 54px; height: 54px; border-radius: 12px; background: #08080a; object-fit: contain; padding: 4px; flex-shrink: 0; }
+    .channel-info { flex: 1; overflow: hidden; }
+    .channel-title { font-weight: 800; font-size: 17px; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    
+    .current-show {
+      font-size: 13px;
+      color: #aaa;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .current-show span { color: #ff6600; font-weight: 600; }
+
+    /* Плеер справа */
+    .player-column {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      height: 100%;
+    }
+    .player-wrapper {
+      position: relative;
+      width: 100%;
+      flex: 1;
+      background: #000;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.7);
+    }
+    video { width: 100%; height: 100%; object-fit: contain; }
+
+    /* OSD плашка поверх плеера */
+    .osd-panel {
+      position: absolute;
+      top: 24px;
+      left: 24px;
+      background: rgba(10, 12, 16, 0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 14px 22px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      transition: opacity 0.5s ease;
+    }
+    .osd-num { font-size: 22px; font-weight: 900; color: #ff6600; font-family: monospace; }
+    .osd-text h4 { font-size: 18px; font-weight: 800; }
+    .osd-text p { font-size: 13px; color: #aaa; margin-top: 2px; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="#" class="logo">
+      <span>ТЕЛЕВИЗОР</span>
+      <span class="logo-badge">34 TV</span>
+    </a>
+    <div class="clock" id="clock">00:00</div>
+  </header>
+
+  <div class="tv-container">
+    <!-- Слева: Список каналов с телепрограммой -->
+    <div class="channel-list-container" id="channelList">
+      <p style="color: #888; padding: 20px;">Загрузка плейлиста...</p>
+    </div>
+
+    <!-- Справа: Плеер -->
+    <div class="player-column">
+      <div class="player-wrapper">
+        <video id="videoPlayer" autoplay playsinline></video>
+        
+        <!-- OSD плашка канала -->
+        <div id="osdPanel" class="osd-panel" style="opacity: 0;">
+          <div class="osd-num" id="osdNum">01</div>
+          <div class="osd-text">
+            <h4 id="osdName">Выберите канал</h4>
+            <p id="osdShow">Загрузка программы...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const EPG_URL = 'https://raw.githubusercontent.com/iboxestvoff/televizor34_serverfiles/epg-data/epg.xml';
+    const EPG_DB_NAME = 'televizor34-epg';
+    const EPG_STORE = 'cache';
+    const EPG_CACHE_KEY = 'epg-v1';
+    const EPG_MAX_AGE_MS = 12 * 60 * 60 * 1000;
+
+    let allChannels = [];
+    let currentSelectedChannelIndex = 0;
+    let hls = null;
+    let epgData = null;
+    let epgChannelIdForIndex = new Map();
+    let osdTimer = null;
+
+    // Часы в реальном времени
+    function updateClock() {
+      const now = new Date();
+      document.getElementById('clock').innerText = 
+        String(now.getHours()).padStart(2, '0') + ':' + 
+        String(now.getMinutes()).padStart(2, '0');
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    function escapeHtml(s) {
+      return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+
+    function normalizeName(s) {
+      return (s || '').toLowerCase().replace(/[^a-zа-яё0-9]/gi, '');
+    }
+
+    function fmtTime(d) {
+      const date = new Date(d);
+      return String(date.getHours()).padStart(2, '0') + ':' + String(date.getMinutes()).padStart(2, '0');
+    }
+
+    // Кеширование EPG через IndexedDB
+    function openEpgDb() {
+      return new Promise((resolve, reject) => {
+        if (typeof indexedDB === 'undefined') return reject(new Error('IndexedDB недоступен'));
+        const req = indexedDB.open(EPG_DB_NAME, 1);
+        req.onupgradeneeded = () => { req.result.createObjectStore(EPG_STORE); };
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => reject(req.error);
+      });
+    }
+
+    async function loadEpgFromCache() {
+      try {
+        const db = await openEpgDb();
+        return await new Promise((resolve) => {
+          const tx = db.transaction(EPG_STORE, 'readonly');
+          const req = tx.objectStore(EPG_STORE).get(EPG_CACHE_KEY);
+          req.onsuccess = () => resolve(req.result || null);
+          req.onerror = () => resolve(null);
+        });
+      } catch (e) { return null; }
+    }
+
+    async function saveEpgToCache(data) {
+      try {
+        const db = await openEpgDb();
+        const tx = db.transaction(EPG_STORE, 'readwrite');
+        tx.objectStore(EPG_STORE).put({
+          savedAt: Date.now(),
+          idByNormalizedName: data.idByNormalizedName,
+          programsByChannelId: data.programsByChannelId
+        }, EPG_CACHE_KEY);
+      } catch (e) {}
+    }
+
+    // Web Worker для быстрого парсинга XMLTV
+    const EPG_WORKER_SRC = [
+      'function decodeXmlEntities(s){',
+      '  return s.replace(/&(amp|lt|gt|quot|apos|#x[0-9a-fA-F]+|#\\d+);/g, function(m, g){',
+      '    if(g === "amp") return "&";',
+      '    if(g === "lt") return "<";',
+      '    if(g === "gt") return ">";',
+      '    if(g === "quot") return \'"\';',
+      "    if(g === 'apos') return \"'\";",
+      '    if(g[0] === "#"){',
+      '      var code = g[1] === "x" ? parseInt(g.slice(2), 16) : parseInt(g.slice(1), 10);',
+      '      return isNaN(code) ? m : String.fromCodePoint(code);',
+      '    }',
+      '    return m;',
+      '  });',
+      '}',
+      'function getAttr(str, name){',
+      '  var m = str.match(new RegExp(name + "=\\"([^\\"]*)\\""));',
+      '  return m ? m[1] : null;',
+      '}',
+      'function parseXmltvTime(s){',
+      '  if(!s) return null;',
+      '  var m = s.match(/^(\\d{4})(\\d{2})(\\d{2})(\\d{2})(\\d{2})(\\d{2})\\s*([+-]\\d{2})?(\\d{2})?/);',
+      '  if(!m) return null;',
+      '  var Y=+m[1],Mo=+m[2],D=+m[3],H=+m[4],Mi=+m[5],S=+m[6],offH=m[7],offM=m[8];',
+      '  var ms = Date.UTC(Y, Mo-1, D, H, Mi, S);',
+      '  if(offH){',
+      '    var sign = offH[0] === "-" ? -1 : 1;',
+      '    var offsetMinutes = sign * (parseInt(offH.slice(1),10)*60 + (offM?parseInt(offM,10):0));',
+      '    ms -= offsetMinutes*60000;',
+      '  }',
+      '  return new Date(ms);',
+      '}',
+      'function normalizeName(s){',
+      '  return (s||"").toLowerCase().replace(/[^a-zа-яё0-9]/gi,"");',
+      '}',
+      'async function decompressIfGzip(bytes){',
+      '  var isGzip = bytes.length > 2 && bytes[0] === 0x1f && bytes[1] === 0x8b;',
+      '  if(!isGzip) return new TextDecoder("utf-8").decode(bytes);',
+      '  var stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream("gzip"));',
+      '  var buf = await new Response(stream).arrayBuffer();',
+      '  return new TextDecoder("utf-8").decode(buf);',
+      '}',
+      'self.onmessage = async function(e){',
+      '  try{',
+      '    var bytes = e.data.bytes;',
+      '    var text = await decompressIfGzip(bytes);',
+      '    var idByNormalizedName = new Map();',
+      '    var channelRe = /<channel\\s+id="([^"]*)"[^>]*>([\\s\\S]*?)<\\/channel>/g;',
+      '    var dnRe = /<display-name[^>]*>([\\s\\S]*?)<\\/display-name>/g;',
+      '    var cm;',
+      '    while((cm = channelRe.exec(text))){',
+      '      var id = cm[1];',
+      '      var inner = cm[2];',
+      '      var dm;',
+      '      dnRe.lastIndex = 0;',
+      '      while((dm = dnRe.exec(inner))){',
+      '        var norm = normalizeName(decodeXmlEntities(dm[1]));',
+      '        if(norm && !idByNormalizedName.has(norm)) idByNormalizedName.set(norm, id);',
+      '      }',
+      '    }',
+      '    var programsByChannelId = new Map();',
+      '    var progRe = /<programme\\s+([^>]*)>([\\s\\S]*?)<\\/programme>/g;',
+      '    var titleRe = /<title[^>]*>([\\s\\S]*?)<\\/title>/;',
+      '    var pm;',
+      '    while((pm = progRe.exec(text))){',
+      '      var attrs = pm[1];',
+      '      var inner2 = pm[2];',
+      '      var chId = getAttr(attrs, "channel");',
+      '      var start = parseXmltvTime(getAttr(attrs, "start"));',
+      '      var stop = parseXmltvTime(getAttr(attrs, "stop"));',
+      '      if(!chId || !start || !stop) continue;',
+      '      var tm = titleRe.exec(inner2);',
+      '      var title = tm ? decodeXmlEntities(tm[1]).trim() : "Без названия";',
+      '      if(!programsByChannelId.has(chId)) programsByChannelId.set(chId, []);',
+      '      programsByChannelId.get(chId).push({ start: start, stop: stop, title: title });',
+      '    }',
+      '    programsByChannelId.forEach(function(list){ list.sort(function(a,b){ return a.start - b.start; }); });',
+      '    self.postMessage({ ok: true, idByNormalizedName: idByNormalizedName, programsByChannelId: programsByChannelId });',
+      '  }catch(err){',
+      '    self.postMessage({ ok: false, error: (err && err.message) || String(err) });',
+      '  }',
+      '};'
+    ].join('\n');
+
+    let epgWorker = null;
+    function getEpgWorker(){
+      if(!epgWorker){
+        const blob = new Blob([EPG_WORKER_SRC], { type: 'application/javascript' });
+        epgWorker = new Worker(URL.createObjectURL(blob));
+      }
+      return epgWorker;
+    }
+
+    function parseEpgInWorker(bytes){
+      return new Promise((resolve, reject) => {
+        const worker = getEpgWorker();
+        function onMessage(e){
+          worker.removeEventListener('message', onMessage);
+          worker.removeEventListener('error', onError);
+          if(e.data.ok) resolve({ idByNormalizedName: e.data.idByNormalizedName, programsByChannelId: e.data.programsByChannelId });
+          else reject(new Error(e.data.error));
+        }
+        function onError(err){
+          worker.removeEventListener('message', onMessage);
+          worker.removeEventListener('error', onError);
+          reject(new Error(err.message || 'ошибка воркера'));
+        }
+        worker.addEventListener('message', onMessage);
+        worker.addEventListener('error', onError);
+        worker.postMessage({ bytes }, [bytes.buffer]);
+      });
+    }
+
+    function buildEpgMatches(){
+      epgChannelIdForIndex = new Map();
+      if(!epgData) return;
+      allChannels.forEach((ch, i) => {
+        let id = null;
+        if(ch.tvgId && epgData.programsByChannelId.has(ch.tvgId)) id = ch.tvgId;
+        if(!id){
+          const norm = normalizeName(ch.name);
+          id = epgData.idByNormalizedName.get(norm) || null;
+        }
+        epgChannelIdForIndex.set(i, id);
+      });
+    }
+
+    function showOSD(num, name, showTitle) {
+      const panel = document.getElementById('osdPanel');
+      document.getElementById('osdNum').innerText = String(num).padStart(2, '0');
+      document.getElementById('osdName').innerText = name;
+      document.getElementById('osdShow').innerText = showTitle || 'Нет данных о передаче';
+      
+      panel.style.opacity = '1';
+      clearTimeout(osdTimer);
+      osdTimer = setTimeout(() => {
+        panel.style.opacity = '0';
+      }, 4000);
+    }
+
+    function playStream(channel, index) {
+      currentSelectedChannelIndex = index;
+      const video = document.getElementById('videoPlayer');
+      
+      // Определяем текущую передачу для OSD
+      const chId = epgChannelIdForIndex.get(index);
+      const programs = chId && epgData ? (epgData.programsByChannelId.get(chId) || []) : [];
+      const now = new Date();
+      const currentProg = programs.find(p => new Date(p.start) <= now && now < new Date(p.stop));
+      const showTitle = currentProg ? `${fmtTime(currentProg.start)} — ${currentProg.title}` : 'Прямой эфир';
+
+      showOSD(index + 1, channel.name, showTitle);
+
+      if (Hls.isSupported()) {
+        if (hls) hls.destroy();
+        hls = new Hls();
+        hls.loadSource(channel.url);
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MANIFEST_PARSED, () => { video.play(); });
+      } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = channel.url;
+        video.addEventListener('loadedmetadata', () => { video.play(); });
+      }
+    }
+
+    function renderChannels() {
+      const container = document.getElementById('channelList');
+      container.innerHTML = '';
+      const now = new Date();
+
+      allChannels.forEach((ch, i) => {
+        const chId = epgChannelIdForIndex.get(i);
+        const programs = chId && epgData ? (epgData.programsByChannelId.get(chId) || []) : [];
+        const currentProg = programs.find(p => new Date(p.start) <= now && now < new Date(p.stop));
+        
+        const showText = currentProg ? `<span>${fmtTime(currentProg.start)}</span> ${escapeHtml(currentProg.title)}` : 'Прямой эфир';
+
+        const card = document.createElement('div');
+        card.className = 'channel-card';
+        card.tabIndex = 0; // Делаем элемент доступным для фокуса пульта
+        card.onclick = () => playStream(ch, i);
+
+        // Управление с пульта (кнопка OK / Enter)
+        card.onkeydown = (e) => {
+          if (e.key === 'Enter') playStream(ch, i);
+        };
+
+        card.innerHTML = `
+          <img class="channel-logo" src="${ch.logo || ''}" onerror="this.src='https://via.placeholder.com/50/181820/ffffff?text=TV'">
+          <div class="channel-info">
+            <div class="channel-title">${i + 1}. ${escapeHtml(ch.name)}</div>
+            <div class="current-show">${showText}</div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+
+      // Фокусируем первый канал при загрузке
+      if(container.firstChild) container.firstChild.focus();
+    }
+
+    async function loadEpgAndPlaylist() {
+      try {
+        // Загрузка плейлиста
+        const res = await fetch('./playlist.m3u?v=' + Date.now());
+        if (!res.ok) throw new Error("Плейлист не найден");
+        const text = await res.text();
+        
+        const lines = text.split('\n');
+        let current = null;
+        lines.forEach(line => {
+          line = line.trim();
+          if (line.startsWith('#EXTINF:')) {
+            const logoMatch = line.match(/tvg-logo="([^"]+)"/);
+            const tvgIdMatch = line.match(/tvg-id="([^"]+)"/);
+            const nameParts = line.split(',');
+            current = {
+              logo: logoMatch ? logoMatch[1] : '',
+              name: nameParts[nameParts.length - 1].trim(),
+              tvgId: tvgIdMatch ? tvgIdMatch[1] : null,
+              url: ''
+            };
+          } else if (line && !line.startsWith('#') && current) {
+            current.url = line;
+            allChannels.push(current);
+            current = null;
+          }
+        });
+
+        // Загрузка EPG (с кешем)
+        const cached = await loadEpgFromCache();
+        if (cached && (Date.now() - cached.savedAt) < EPG_MAX_AGE_MS) {
+          epgData = { idByNormalizedName: cached.idByNormalizedName, programsByChannelId: cached.programsByChannelId };
+        } else {
+          const epgRes = await fetch(EPG_URL, { cache: 'no-store' });
+          if(epgRes.ok) {
+            const bytes = new Uint8Array(await epgRes.arrayBuffer());
+            epgData = await parseEpgInWorker(bytes);
+            saveEpgToCache(epgData);
+          }
+        }
+
+        buildEpgMatches();
+        renderChannels();
+
+        if (allChannels.length > 0) {
+          playStream(allChannels[0], 0);
+        }
+      } catch (e) {
+        console.warn("Ошибка загрузки данных:", e);
+        document.getElementById('channelList').innerHTML = '<p style="color: #ff5d5d; padding: 20px;">Ошибка загрузки плейлиста</p>';
+      }
+    }
+
+    loadEpgAndPlaylist();
+  </script>
+</body>
+</html>
