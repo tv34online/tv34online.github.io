@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактор плейлистов TV34Online</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --panel-bg: #1e293b;
+            --border-color: #334155;
+            --text-color: #f8fafc;
+            --accent-color: #3b82f6;
+            --accent-hover: #2563eb;
+            --success-color: #4ade80;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+            background: var(--panel-bg);
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: 20px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        select, button, label.file-btn {
+            background: var(--bg-color);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        select:focus, button:focus {
+            border-color: var(--accent-color);
+        }
+
+        button.primary {
+            background: var(--accent-color);
+            border: none;
+            font-weight: bold;
+        }
+
+        button.primary:hover {
+            background: var(--accent-hover);
+        }
+
+        label.file-btn {
+            display: inline-block;
+            background: #334155;
+        }
+
+        label.file-btn:hover {
+            background: #475569;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        textarea {
+            width: 100%;
+            height: 420px;
+            font-family: "Courier New", Courier, monospace;
+            font-size: 13px;
+            background: var(--bg-color);
+            color: #38bdf8;
+            padding: 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-sizing: border-box;
+            resize: vertical;
+            line-height: 1.5;
+        }
+
+        .status {
+            margin-top: 10px;
+            font-size: 14px;
+            color: var(--success-color);
+            min-height: 20px;
+            font-weight: 500;
+        }
+
+        .path-info {
+            font-size: 13px;
+            color: #94a3b8;
+            background: rgba(15, 23, 42, 0.6);
+            padding: 6px 12px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>
+        <span>TV34Online Playlist Editor</span>
+        <span style="font-size: 12px; color: #94a3b8;">HTML Client Version</span>
+    </h2>
+
+    <div class="toolbar">
+        <select id="playlistSelect" onchange="changePlaylist()">
+            <option value="tv">TV: tv34online/tv/playlist.m3u</option>
+            <option value="ios">iOS: tv34online/ios/playlist.m3u</option>
+            <option value="pc">PC: tv34online/pc/playlist.m3u</option>
+        </select>
+
+        <label class="file-btn">
+            📂 Загрузить файл с ПК
+            <input type="file" id="importFile" accept=".m3u,.m3u8,.txt" onchange="importFromFile(event)">
+        </label>
+
+        <button class="primary" onclick="downloadPlaylist()">💾 Сохранить / Скачать</button>
+        <button onclick="clearEditor()">🗑 Очистить</button>
+    </div>
+
+    <div class="path-info" id="currentPathDisplay">Целевой путь: tv34online/tv34online/tv/playlist.m3u</div>
+
+    <textarea id="playlistContent" placeholder="#EXTM3U&#10;#EXTINF:-1,Канал 1&#10;http://example.com/stream.m3u8"></textarea>
+    
+    <div class="status" id="statusMessage"></div>
+</div>
+
+<script>
+    // Хранилище данных для трех плейлистов прямо в памяти браузера
+    const playlists = {
+        tv: `#EXTM3U\n#EXTINF:-1,Канал TV\nhttp://Volgograd-stream-tv.ru/playlist.m3u8`,
+        ios: `#EXTM3U\n#EXTINF:-1,Канал iOS\nhttp://Volgograd-stream-ios.ru/playlist.m3u8`,
+        pc: `#EXTM3U\n#EXTINF:-1,Канал PC\nhttp://Volgograd-stream-pc.ru/playlist.m3u8`
+    };
+
+    const filePaths = {
+        tv: 'tv34online/tv34online/tv/playlist.m3u',
+        ios: 'tv34online/tv34online/ios/playlist.m3u',
+        pc: 'tv34online/tv34online/pc/playlist.m3u'
+    };
+
+    function changePlaylist() {
+        const select = document.getElementById('playlistSelect');
+        const key = select.value;
+        
+        // Загружаем текущий текст в текстовое поле
+        document.getElementById('playlistContent').value = playlists[key];
+        document.getElementById('currentPathDisplay').innerText = 'Целевой путь: ' + filePaths[key];
+        showStatus('Переключено на ' + filePaths[key]);
+    }
+
+    // Сохранение изменений в памяти при наборе текста
+    document.getElementById('playlistContent').addEventListener('input', function() {
+        const key = document.getElementById('playlistSelect').value;
+        playlists[key] = this.value;
+    });
+
+    // Скачивание файла с правильным именем структуры папок
+    function downloadPlaylist() {
+        const key = document.getElementById('playlistSelect').value;
+        const content = document.getElementById('playlistContent').value;
+        const fullPath = filePaths[key];
+        const fileName = fullPath.split('/').pop(); // получаем имя файла (playlist.m3u)
+
+        const blob = new Blob([content], { type: 'audio/x-mpegurl;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = fileName;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+        showStatus('Файл "' + fileName + '" успешно скачан! Сохраните его в папку: ' + fullPath);
+    }
+
+    // Импорт готового файла с компьютера
+    function importFromFile(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const content = e.target.result;
+            document.getElementById('playlistContent').value = content;
+            
+            const key = document.getElementById('playlistSelect').value;
+            playlists[key] = content;
+            
+            showStatus('Файл "' + file.name + '" успешно загружен в редактор!');
+        };
+        reader.readAsText(file);
+    }
+
+    function clearEditor() {
+        if (confirm('Очистить поле ввода?')) {
+            document.getElementById('playlistContent').value = '';
+            const key = document.getElementById('playlistSelect').value;
+            playlists[key] = '';
+            showStatus('Поле очищено.');
+        }
+    }
+
+    function showStatus(text) {
+        const status = document.getElementById('statusMessage');
+        status.innerText = text;
+        setTimeout(() => {
+            if (status.innerText === text) {
+                status.innerText = '';
+            }
+        }, 4000);
+    }
+
+    // Инициализация при загрузке
+    changePlaylist();
+</script>
+
+</body>
+</html>
