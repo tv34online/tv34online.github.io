@@ -19,7 +19,6 @@
       flex-direction: column;
     }
 
-    /* Фокус пульта */
     button:focus, .channel-card:focus, .top-btn:focus, .fav-btn:focus {
       border-color: #ff6600 !important;
       transform: scale(1.03);
@@ -28,7 +27,6 @@
       z-index: 10;
     }
 
-    /* Шапка */
     header {
       display: flex; justify-content: space-between; align-items: center;
       padding: 20px 40px; background: rgba(12, 14, 18, 0.85);
@@ -56,7 +54,6 @@
       gap: 8px;
     }
 
-    /* Основная сетка ТВ */
     .tv-container {
       display: grid;
       grid-template-columns: 450px 1fr;
@@ -66,7 +63,6 @@
       overflow: hidden;
     }
 
-    /* Вкладки/Категории каналов (Все / Избранное) */
     .filter-bar {
       display: flex;
       gap: 10px;
@@ -84,7 +80,6 @@
     }
     .filter-tab.active { background: #ff6600; color: #fff; border-color: #ff6600; }
 
-    /* Список каналов */
     .channel-list-container {
       display: flex;
       flex-direction: column;
@@ -134,7 +129,7 @@
     }
     .fav-btn.active { color: #ffbb00; }
 
-    /* Плеер справа */
+    /* Плеер */
     .player-column {
       display: flex;
       flex-direction: column;
@@ -153,28 +148,82 @@
     }
     video { width: 100%; height: 100%; object-fit: contain; cursor: pointer; }
 
-    /* OSD плашка */
-    .osd-panel {
+    /* Интерфейс плеера (OSD в стиле Кинопоиска/Онлайн-ТВ) */
+    .osd-overlay {
       position: absolute;
-      top: 24px;
-      left: 24px;
-      background: rgba(10, 12, 16, 0.85);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      padding: 14px 22px;
-      border-radius: 14px;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, transparent 30%, transparent 60%, rgba(0,0,0,0.85) 100%);
       display: flex;
-      align-items: center;
-      gap: 14px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-      transition: opacity 0.5s ease;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 30px;
+      opacity: 0;
+      transition: opacity 0.4s ease;
       pointer-events: none;
     }
-    .osd-num { font-size: 22px; font-weight: 900; color: #ff6600; font-family: monospace; }
-    .osd-text h4 { font-size: 18px; font-weight: 800; }
-    .osd-text p { font-size: 13px; color: #aaa; margin-top: 2px; }
+    .osd-overlay.visible { opacity: 1; }
 
-    /* Модальное окно профиля Яндекс */
+    /* Верхняя часть OSD */
+    .osd-top {
+      text-align: center;
+    }
+    .osd-show-title { font-size: 24px; font-weight: 800; color: #fff; margin-bottom: 4px; }
+    .osd-channel-name { font-size: 15px; font-weight: 600; color: #aaa; margin-bottom: 4px; }
+    .osd-time-range { font-size: 14px; color: #ffb13d; font-weight: 600; }
+
+    /* Нижняя часть OSD */
+    .osd-bottom {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .osd-controls-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .live-badge-box {
+      background: linear-gradient(135deg, #ff6600, #ff3300);
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 15px rgba(255,102,0,0.4);
+    }
+    .live-dot { width: 8px; height: 8px; background: #fff; border-radius: 50%; animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+
+    .programs-btn-label {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .progress-bar-container {
+      width: 100%;
+      height: 6px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: #ff6600;
+      width: 0%;
+      transition: width 0.5s linear;
+    }
+
+    /* Модальное окно */
     .modal {
       position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
       display: flex; align-items: center; justify-content: center; z-index: 1000; display: none;
@@ -204,8 +253,7 @@
   </header>
 
   <div class="tv-container">
-    <!-- Слева: Каналы и Избранное -->
-    <div style="display: flex; flexDirection: column; height: 100%; overflow: hidden;">
+    <div style="display: flex; flex-direction: column; height: 100%; overflow: hidden;">
       <div class="filter-bar">
         <button class="filter-tab active" id="tabAll" tabIndex="0" onclick="switchFilter('all')">Все каналы</button>
         <button class="filter-tab" id="tabFav" tabIndex="0" onclick="switchFilter('fav')">⭐ Избранное</button>
@@ -216,23 +264,36 @@
       </div>
     </div>
 
-    <!-- Справа: Плеер -->
     <div class="player-column">
       <div class="player-wrapper">
         <video id="videoPlayer" autoplay playsinline onclick="toggleFullscreen()"></video>
         
-        <div id="osdPanel" class="osd-panel" style="opacity: 0;">
-          <div class="osd-num" id="osdNum">01</div>
-          <div class="osd-text">
-            <h4 id="osdName">Выберите канал</h4>
-            <p id="osdShow">Загрузка...</p>
+        <!-- OSD интерфейс плеера (в стиле скриншота) -->
+        <div id="osdOverlay" class="osd-overlay">
+          <div class="osd-top">
+            <h2 class="osd-show-title" id="osdShowTitle">Название передачи</h2>
+            <div class="osd-channel-name" id="osdChannelName">Канал</div>
+            <div class="osd-time-range" id="osdTimeRange">00:00 - 00:00</div>
+          </div>
+          
+          <div class="osd-bottom">
+            <div class="osd-controls-row">
+              <div class="programs-btn-label">📺 ТВ-передачи</div>
+              <div class="live-badge-box">
+                <div class="live-dot"></div>
+                Сейчас в эфире
+              </div>
+            </div>
+            <div class="progress-bar-container">
+              <div class="progress-bar-fill" id="progressBarFill"></div>
+            </div>
           </div>
         </div>
+
       </div>
     </div>
   </div>
 
-  <!-- Модальное окно Яндекс -->
   <div class="modal" id="authModal" onclick="if(event.target === this) closeAuthModal()">
     <div class="modal-card" id="modalCard">
       <div id="modalBody"></div>
@@ -252,7 +313,7 @@
     let allChannels = [];
     let currentFilteredChannels = [];
     let currentSelectedChannelIndex = 0;
-    let currentFilterMode = 'all'; // 'all' или 'fav'
+    let currentFilterMode = 'all';
     let favorites = JSON.parse(localStorage.getItem('tv34_favorites') || '[]');
 
     let hls = null;
@@ -260,7 +321,6 @@
     let epgChannelIdForIndex = new Map();
     let osdTimer = null;
 
-    // Часы
     function updateClock() {
       const now = new Date();
       document.getElementById('clock').innerText = 
@@ -283,7 +343,6 @@
       return String(date.getHours()).padStart(2, '0') + ':' + String(date.getMinutes()).padStart(2, '0');
     }
 
-    // Полноэкранный режим при клике/нажатии
     function toggleFullscreen() {
       const video = document.getElementById('videoPlayer');
       if (document.fullscreenElement) {
@@ -293,18 +352,15 @@
       }
     }
 
-    // Навигация пульта: Стрелка Влево / Вправо для переключения каналов
     window.addEventListener('keydown', (e) => {
       if (currentFilteredChannels.length === 0) return;
 
       if (e.key === 'ArrowLeft') {
-        // К каналу назад
         currentSelectedChannelIndex = (currentSelectedChannelIndex - 1 + currentFilteredChannels.length) % currentFilteredChannels.length;
         playCurrentFilteredChannel();
         focusCard(currentSelectedChannelIndex);
         e.preventDefault();
       } else if (e.key === 'ArrowRight') {
-        // К каналу вперед
         currentSelectedChannelIndex = (currentSelectedChannelIndex + 1) % currentFilteredChannels.length;
         playCurrentFilteredChannel();
         focusCard(currentSelectedChannelIndex);
@@ -319,12 +375,10 @@
 
     function playCurrentFilteredChannel() {
       const ch = currentFilteredChannels[currentSelectedChannelIndex];
-      // Находим глобальный индекс канала
       const globalIndex = allChannels.findIndex(c => c.url === ch.url);
       playStream(ch, globalIndex);
     }
 
-    // Избранное
     function toggleFavorite(chName, event) {
       if (event) event.stopPropagation();
       const idx = favorites.indexOf(chName);
@@ -345,7 +399,6 @@
       renderChannels();
     }
 
-    // IndexedDB & EPG Worker
     function openEpgDb() {
       return new Promise((resolve, reject) => {
         if (typeof indexedDB === 'undefined') return reject(new Error('IndexedDB недоступен'));
@@ -507,15 +560,37 @@
       });
     }
 
-    function showOSD(num, name, showTitle) {
-      const panel = document.getElementById('osdPanel');
-      document.getElementById('osdNum').innerText = String(num).padStart(2, '0');
-      document.getElementById('osdName').innerText = name;
-      document.getElementById('osdShow').innerText = showTitle || 'Прямой эфир';
+    function showOSD(channelName, currentProg) {
+      const overlay = document.getElementById('osdOverlay');
+      const titleEl = document.getElementById('osdShowTitle');
+      const channelEl = document.getElementById('osdChannelName');
+      const timeRangeEl = document.getElementById('osdTimeRange');
+      const fillEl = document.getElementById('progressBarFill');
+
+      channelEl.innerText = channelName;
+
+      if (currentProg) {
+        titleEl.innerText = currentProg.title;
+        const startStr = fmtTime(currentProg.start);
+        const stopStr = fmtTime(currentProg.stop);
+        timeRangeEl.innerText = `${startStr} - ${stopStr}`;
+
+        const now = new Date();
+        const total = currentProg.stop - currentProg.start;
+        const elapsed = now - currentProg.start;
+        const pct = total > 0 ? Math.min(100, Math.max(0, (elapsed / total) * 100)) : 0;
+        fillEl.style.width = pct + '%';
+      } else {
+        titleEl.innerText = "Прямой эфир";
+        timeRangeEl.innerText = "";
+        fillEl.style.width = "100%";
+      }
       
-      panel.style.opacity = '1';
+      overlay.classList.add('visible');
       clearTimeout(osdTimer);
-      osdTimer = setTimeout(() => { panel.style.opacity = '0'; }, 4000);
+      osdTimer = setTimeout(() => {
+        overlay.classList.remove('visible');
+      }, 4500);
     }
 
     function playStream(channel, index) {
@@ -525,9 +600,8 @@
       const programs = chId && epgData ? (epgData.programsByChannelId.get(chId) || []) : [];
       const now = new Date();
       const currentProg = programs.find(p => new Date(p.start) <= now && now < new Date(p.stop));
-      const showTitle = currentProg ? `${fmtTime(currentProg.start)} — ${currentProg.title}` : 'Прямой эфир';
 
-      showOSD(index + 1, channel.name, showTitle);
+      showOSD(channel.name, currentProg);
 
       if (Hls.isSupported()) {
         if (hls) hls.destroy();
@@ -570,7 +644,7 @@
         card.onclick = () => {
           currentSelectedChannelIndex = filteredIdx;
           playStream(ch, globalIndex);
-          toggleFullscreen(); // Открывает полноэкранный режим при клике/нажатии на канал
+          toggleFullscreen();
         };
 
         card.onkeydown = (e) => {
@@ -593,7 +667,6 @@
       });
     }
 
-    // Авторизация Яндекс ID
     function openAuthModal() {
       document.getElementById('authModal').style.display = 'flex';
       renderAuthModalContent();
@@ -665,7 +738,6 @@
       renderAuthModalContent();
     }
 
-    // Загрузка
     async function init() {
       checkYandexAuth();
       try {
