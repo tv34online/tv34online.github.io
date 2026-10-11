@@ -129,7 +129,7 @@
     }
     .fav-btn.active { color: #ffbb00; }
 
-    /* Плеер */
+    /* Кастомный полноэкранный плеер */
     .player-column {
       display: flex;
       flex-direction: column;
@@ -148,34 +148,30 @@
     }
     video { width: 100%; height: 100%; object-fit: contain; cursor: pointer; }
 
-    /* Интерфейс плеера (OSD в стиле Кинопоиска/Онлайн-ТВ) */
+    /* Свой OSD интерфейс плеера (в стиле Кинопоиска/Онлайн-ТВ со скриншота) */
     .osd-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, transparent 30%, transparent 60%, rgba(0,0,0,0.85) 100%);
+      background: linear-gradient(180deg, rgba(0,0,0,0.85) 0%, transparent 25%, transparent 65%, rgba(0,0,0,0.9) 100%);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 30px;
+      padding: 35px;
       opacity: 0;
       transition: opacity 0.4s ease;
       pointer-events: none;
     }
     .osd-overlay.visible { opacity: 1; }
 
-    /* Верхняя часть OSD */
-    .osd-top {
-      text-align: center;
-    }
-    .osd-show-title { font-size: 24px; font-weight: 800; color: #fff; margin-bottom: 4px; }
-    .osd-channel-name { font-size: 15px; font-weight: 600; color: #aaa; margin-bottom: 4px; }
+    .osd-top { text-align: center; }
+    .osd-show-title { font-size: 26px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+    .osd-channel-name { font-size: 16px; font-weight: 600; color: #aaa; margin-bottom: 4px; }
     .osd-time-range { font-size: 14px; color: #ffb13d; font-weight: 600; }
 
-    /* Нижняя часть OSD */
     .osd-bottom {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 14px;
     }
     .osd-controls-row {
       display: flex;
@@ -268,8 +264,8 @@
       <div class="player-wrapper">
         <video id="videoPlayer" autoplay playsinline onclick="toggleFullscreen()"></video>
         
-        <!-- OSD интерфейс плеера (в стиле скриншота) -->
-        <div id="osdOverlay" class="osd-overlay">
+        <!-- Кастомный OSD интерфейс плеера -->
+        <div id="osdOverlay" class="osd-overlay" onclick="showPlayerUI()">
           <div class="osd-top">
             <h2 class="osd-show-title" id="osdShowTitle">Название передачи</h2>
             <div class="osd-channel-name" id="osdChannelName">Канал</div>
@@ -560,8 +556,16 @@
       });
     }
 
-    function showOSD(channelName, currentProg) {
+    function showPlayerUI() {
       const overlay = document.getElementById('osdOverlay');
+      overlay.classList.add('visible');
+      clearTimeout(osdTimer);
+      osdTimer = setTimeout(() => {
+        overlay.classList.remove('visible');
+      }, 5000);
+    }
+
+    function showOSD(channelName, currentProg) {
       const titleEl = document.getElementById('osdShowTitle');
       const channelEl = document.getElementById('osdChannelName');
       const timeRangeEl = document.getElementById('osdTimeRange');
@@ -586,11 +590,7 @@
         fillEl.style.width = "100%";
       }
       
-      overlay.classList.add('visible');
-      clearTimeout(osdTimer);
-      osdTimer = setTimeout(() => {
-        overlay.classList.remove('visible');
-      }, 4500);
+      showPlayerUI();
     }
 
     function playStream(channel, index) {
