@@ -197,65 +197,6 @@ http://5.188.159.128:8070/DiscoveryChannel/index.m3u8
 #EXTINF:-1 tvg-name="National Geographic" group-title="Познавательные", National Geographic
 http://50.7.28.226/8176/index.m3u8
 
-#EXTINF:-1 tvg-name="Соловьев LIVE" group-title="Новостные", Соловьёв.Live
-https://river-1.rutube.ru/stream/genetta-512.ost.rutube.ru/-sNOfMChfIRfTqZ3biZfDw/1765815477/3fa2aa4856bd59821ce68aa3d20a595d/1080p_stream.m3u8
-
-#EXTINF:-1 tvg-name="МИР 24" group-title="Новостные", Мир 24
-https://river-1.rutube.ru/stream/genetta-325.m9.rutube.ru/IoptnoaXAfZ7x4PJjKteQg/1765815184/43269ba8fb179e298b1e497f557e8d2d/1080p_stream.m3u8
-
-#EXTINF:-1 tvg-name="360" group-title="Новостные", 360° Новости
-https://river-1.rutube.ru/stream/genetta-315.m9.rutube.ru/jTY1Y7aBhcKnJOwnlOdctA/1765815193/d14fcf59cb7d07a26c48ebc8c6565f44/1080p_stream.m3u8
-
-#EXTINF:-1 tvg-name="RTVI" group-title="Новостные", RTVI
-http://50.7.28.226/8118/index.m3u8
-
-#EXTINF:-1 tvg-name="Известия" group-title="Новостные", Известия
-https://igi-hls.cdnvideo.ru/igi/igi_tcode/tracks-v2a1/mono.ts.m3u8
-
-#EXTINF:-1 tvg-name="РБК" group-title="Новостные", РБК ТВ
-https://river-1.rutube.ru/stream/genetta-514.ost.rutube.ru/2sY0Q4FN26pKZu7CkIjrFA/1765815279/88f6485ee28d56daf13302ac6fe3d931/1080p_stream.m3u8
-
-#EXTINF:-1 tvg-name="РТР-Планета" group-title="Новостные", Россия РТР
-https://streaming.televizor-24-tochka.ru/live/211.m3u8
-
-#EXTINF:-1 tvg-name="Россия 24" group-title="Новостные", •Россия 24
-http://95.66.188.74/Rossia24/mono.m3u8
-
-#EXTINF:-1 tvg-name="BBC News" group-title="Новостные", BBC News
-https://d1kvlt93j1bc49.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-6vpx7bvwjm7ao/v1/amcnetworks_bbcnews_1/samsungheadend_us/latest/main/hls/playlist.m3u8
-
-#EXTINF:-1 tvg-name="ТСВ" group-title="Новостные", ТСВ
-https://tsv.md/stream/hls/tsv-online/index.m3u8
-
-#EXTINF:-1 tvg-name="RT" group-title="Новостные", RT на английском
-https://river-1.rutube.ru/stream/genetta-303.m9.rutube.ru/BH3Uebf33oU-QZcopZKMhw/1765815317/e553770139adc990ee5f54972ff4121b/1080p_stream.m3u8
-
-#EXTINF:-1 tvg-name="БСТ" group-title="Новостные", БСТ
-https://river-1.rutube.ru/stream/genetta-516.ost.rutube.ru/1LAGsfhuSOy5v2B2kzDIdw/1765815201/92aa15b4975d9f63c4e0b82e3b7af463/1080p_stream.m3u8
-
-#EXTINF:-1 tvg-name="Россия 1" group-title="Новостные", Россия
-http://85.192.10.131/hls/RossijaM9/playlist.m3u8
-
-#EXTINF:-1 tvg-name="RT ДК" group-title="Новостные", RT на русском
-http://rt-doc.rttv.com/dvr/rtdru/rtdru1080.m3u8
-
-#EXTINF:-1 tvg-name="Крик ТВ" group-title="Новостные", Крик ТВ
-https://hls-rictv.cdnvideo.ru/rictv/rictv-srt-stream/playlist.m3u8
-
-#EXTINF:-1 tvg-name="Вместе-РФ" group-title="Новостные", ВМЕСТЕ РФ
-https://qcpdqumitwf.a.trbcdn.net/livemastersrt/pr4mw_lvie-vmesterf-srt.smil/playlist.m3u8
-
-#EXTINF:-1 tvg-name="Первый Информационный" group-title="Новостные", Первый информационный
-https://edge50.dc.beltelecom.by/ngtrk/_definst_/smil:informacionnyy.smil/chunklist_w868240704_b5160000_sleng.m3u8
-
-#EXTINF:-1 tvg-name="Красная линия" group-title="Новостные", Красная линия
-https://s55766.cdn.ngenix.net/s55766-media-origin/rline_high/tracks-v1a1/mono.m3u8
-
-#EXTINF:-1 tvg-name="Ратник" group-title="Новостные", Ратник
-https://river-1.rutube.ru/stream/genetta-512.ost.rutube.ru/K9-coPYUdxrEurMv6nsP4Q/1765815269/13b0320238d7938a2deffb4065068986/1080p_stream.m3u8
-
-#EXTINF:-1 tvg-name="Euronews" group-title="Новостные", EuroNews
-https://flussonic.salomtv.uz/EURONEWS/video.m3u8
 
 #EXTINF:-1 tvg-name="2x2" group-title="Развлекательные", 2х2 
 https://zabava-htlive.cdn.ngenix.net/hls/CH_2X2/variant.m3u8
