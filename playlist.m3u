@@ -1,12 +1,13 @@
-#EXTM3U url-tvg="https://iptvx.one/epg/epg.xml.gz"
+#EXTM3U 
+#PROVIDER:TELEVIZOR34_VOLGOGRAD
 
-#EXTINF:-1 tvg-name="Первый канал" tvg-logo="https://static.okko.tv/images/v4/b221e268-f5e5-459f-9b10-81abb7b1afd1?presetId=1152&width=80&scale=2&quality=80&mediaType=webp" group-title="Общественные", Первый канал
+#EXTINF:-1 group-title="Общественные", Первый канал
 https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R03_1TV_VLGOB/variant.m3u8
 
-#EXTINF:-1 tvg-name="Россия 1" tvg-logo="https://static.okko.tv/images/v4/9389a63e-fab3-454f-ab36-fb32d938b254?presetId=1152&width=80&scale=2&quality=80&mediaType=webp" group-title="Общественные", Россия 1
+#EXTINF:-1 group-title="Общественные", Россия 1
 https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R04_ROSSIA1_VLGOB/variant.m3u8
 
-#EXTINF:-1 tvg-name="Матч ТВ" tvg-logo="https://static.okko.tv/images/v4/14ffbddc-7be5-4598-8489-c352b7393a15?presetId=1152&width=80&scale=2&quality=80&mediaType=webp" group-title="Общественные", Матч!
+#EXTINF:-1 group-title="Общественные", Матч!
 https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R04_ROSSIA2_VLGOB/variant.m3u8
 
 #EXTINF:-1 tvg-name="НТВ" tvg-logo="https://static.okko.tv/images/v4/0fa86f71-4781-4b8d-b46e-5a8c894bc8fa?presetId=1152&width=80&scale=2&quality=80&mediaType=webp" group-title="Общественные", НТВ
@@ -75,65 +76,6 @@ https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R01_MTV/variant.m3u8
 #EXTINF:-1 tvg-name="Волгоград 24" group-title="Общественные", Волгоград 24
 https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R01_VOLGOGRAD24/variant.m3u8
 
-#EXTINF:-1 tvg-name="Бокс ТВ" group-title="Спортивные", БОКС ТВ
-https://a3285272783-s80718.cdn.ngenix.net/hls/CH_BOKS_TVHD/video_1920x1080_avc1/playlist.m3u8?useseq=t
-
-#EXTINF:-1 tvg-name="Спортивный" group-title="Спортивные", Спортивный
-https://live-3.otcnet.ru/sportivny/index.m3u8
-
-#EXTINF:-1 tvg-name="Футбол" group-title="Спортивные", Футбол
-http://31.148.48.15/Futbol_HD/index.m3u8
-
-#EXTINF:-1 tvg-name="Extreme Sports" group-title="Спортивные", Extreme Sports
-https://vod.stb.tvime.ru/Extreme_Sports/video.m3u8
-
-#EXTINF:-1 tvg-name="Eurosport 1" group-title="Спортивные", Eurosport 1
-https://stream11.itv.uz/1439/index.m3u8
-
-#EXTINF:-1 tvg-name="Eurosport 2" group-title="Спортивные", Eurosport 2
-http://5.188.159.128:8070/eurosport2/index.m3u8
-
-#EXTINF:-1 tvg-name="КХЛ ТВ" group-title="Спортивные", KHL
-https://a3285272783-s80718.cdn.ngenix.net//hls//CH_KHL//video_800x450_avc1/playlist.m3u8
-
-#EXTINF:-1 tvg-name="КХЛ Prime" group-title="Спортивные", KHL Prime
-http://tv.streams.baikal-telecom.net:8080/KHL_HD/mpegts
-
-#EXTINF:-1 tvg-name="Setanta Sports 1" group-title="Спортивные", Setanta Sports 1
-https://vod.splay.uz/live_splay/original/Setanta1HD/tracks-v1a1/mono.m3u8
-
-#EXTINF:-1 tvg-name="Setanta Sports 2" group-title="Спортивные", Setanta Sports 2
-https://vod.splay.uz/live_splay/original/Setanta2HD/tracks-v1a1/mono.m3u8
-
-#EXTINF:-1 tvg-name="Матч! Премьер" group-title="Спортивные", Матч! Премьер
-http://89.232.68.194:8080/matchpremier/tracks-v3a1/index.m3u8
-
-#EXTINF:-1 tvg-name="Матч! Планета" group-title="Спортивные", Матч! Планета
-https://tbs01-edge11.itdc.ge/matchplaneta/index.m3u8
-
-#EXTINF:-1 tvg-name="Матч! Футбол 1" group-title="Спортивные", Матч! Футбол 1
-http://193.25.8.59:8000/fut
-
-#EXTINF:-1 tvg-name="Матч! Футбол 2" group-title="Спортивные", Матч! Футбол 2
-http://31.148.48.15/Match_Futbol_2_HD/mono.m3u8
-
-#EXTINF:-1 tvg-name="Матч! Футбол 3" group-title="Спортивные", Матч! Футбол 3
-http://193.25.8.59:8000/fut3
-
-#EXTINF:-1 tvg-name="Матч! Страна" group-title="Спортивные", Матч! Страна
-http://95.163.85.128/streams/media/match-strana_720x576/index.m3u8
-
-#EXTINF:-1 tvg-name="Матч! Игра" group-title="Спортивные", Матч! Игра
-http://185.46.16.239:8000/Match_Igra
-
-#EXTINF:-1 tvg-name="Матч! Боец" group-title="Спортивные", Матч! Боец
-http://95.66.188.74/MatchBoec/mono.m3u8
-
-#EXTINF:-1 tvg-name="Матч! Арена" group-title="Спортивные", Матч! Арена
-http://tv.streams.baikal-telecom.net:8080/MatchArena/mpegts
-
-#EXTINF:-1 tvg-name="Okko Спорт" tvg-logo="https://www.dl.dropboxusercontent.com/scl/fi/esomge9vktd1a2bms4t25/Okko.png?rlkey=ciyj3qhx6x104pv9gr69la966&st=1jtzq9co&dl=0" group-title="Спортивные", Okko Прайм Спорт
-http://185.221.213.254:8080/Okko/tracks-v1a1/index.m3u8
 
 #EXTINF:-1 tvg-name="Bridge TV" group-title="Музыкальные", BRIDGE TV
 http://31.148.48.15/Bridge_TV/index.m3u8
