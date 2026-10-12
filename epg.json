@@ -1,41 +1,41 @@
 {
-  "updated": "2026-10-11T01:07:43.708892",
+  "updated": "2026-10-12T01:11:43.769393",
   "channels": [
     {
       "id": "8900",
       "name": "4Ever Cinema HD",
       "programs": [
         {
-          "time": "06:28",
-          "title": "Ніжний пройдисвіт"
+          "time": "21:48",
+          "title": "007: Помри, але не зараз"
         },
         {
-          "time": "08:00",
-          "title": "Чужий квиток"
+          "time": "00:00",
+          "title": "Дружина священника"
         },
         {
-          "time": "09:44",
-          "title": "Лісоруби"
+          "time": "01:46",
+          "title": "Великий переляк"
         },
         {
-          "time": "11:49",
-          "title": "Обладунки бога"
+          "time": "03:14",
+          "title": "Не називай мене маленькою"
         },
         {
-          "time": "13:29",
-          "title": "Захват потягу Пелем 1-2-3"
+          "time": "04:49",
+          "title": "Темна зірка"
         },
         {
-          "time": "15:12",
-          "title": "Відчиніть, поліція!"
+          "time": "06:14",
+          "title": "Весільний переполох"
         },
         {
-          "time": "16:58",
-          "title": "Відчиніть, поліція! 2"
+          "time": "07:56",
+          "title": "Подвійний удар"
         },
         {
-          "time": "18:44",
-          "title": "Влада місяця"
+          "time": "09:42",
+          "title": "Рік Дракона"
         }
       ]
     },
@@ -95,23 +95,23 @@
         },
         {
           "time": "06:00",
-          "title": "Джи-Джи Бонд: Супергонщик"
+          "title": "Время малышей"
         },
         {
-          "time": "18:00",
-          "title": "Буба"
+          "time": "07:00",
+          "title": "Просто о важном. Про Миру и Гошу"
         },
         {
-          "time": "20:00",
-          "title": "Приключения Котигорошка и его друзей"
+          "time": "08:00",
+          "title": "Смешарики 2д"
         },
         {
-          "time": "21:00",
-          "title": "Тюленьки"
+          "time": "10:00",
+          "title": "Туган Батыр"
         },
         {
-          "time": "21:15",
-          "title": "10 лет приключений. Лео и Тиг"
+          "time": "11:00",
+          "title": "Простоквашино"
         }
       ]
     },
@@ -120,36 +120,36 @@
       "name": "Arena Sport 1 FHD RS",
       "programs": [
         {
-          "time": "22:00",
-          "title": "Bolton – West Ham. Fudbal. Championship"
+          "time": "21:45",
+          "title": "Irska – Izrael. Fudbal. UEFA LIGA NACIJA"
         },
         {
           "time": "00:00",
-          "title": "Emisija: Direkt"
+          "title": "Pregled 4. kola. Fudbal. Championship"
         },
         {
           "time": "00:30",
-          "title": "PL Stories – Diogo Jota. Fudbal. Engleska Liga"
+          "title": "Klasici Premijer Lige: Tottenham – Newcastle 1994/95. Fudbal. Engleska Liga"
         },
         {
           "time": "01:00",
-          "title": "Bournemouth – Liverpool. Fudbal. Engleska Liga"
+          "title": "Tottenham – Newcastle. Fudbal. Engleska Liga"
         },
         {
           "time": "03:00",
-          "title": "West Ham – Wrexham. Fudbal. Championship"
+          "title": "Millwall – West Ham. Fudbal. Championship"
         },
         {
           "time": "05:00",
-          "title": "Chesterfield – Tranmere Rovers. Fudbal. League Two"
+          "title": "Sheffield United – Wolverhampton. Fudbal. Championship"
         },
         {
           "time": "07:00",
-          "title": "Leeds – Crystal Palace. Fudbal. Engleska Liga"
+          "title": "Chesterfield – Tranmere Rovers. Fudbal. League Two"
         },
         {
           "time": "09:00",
-          "title": "Liverpool – Nottingham Forestt. Fudbal. Engleska Liga"
+          "title": "West Ham – Wrexham. Fudbal. Championship"
         }
       ]
     },
@@ -158,36 +158,36 @@
       "name": "Arena Sport 3 HD RS",
       "programs": [
         {
+          "time": "23:00",
+          "title": "Nice – Lille. Fudbal. Francuska Liga"
+        },
+        {
+          "time": "01:00",
+          "title": "Marseille – PSG. Fudbal. Francuska Liga"
+        },
+        {
+          "time": "03:00",
+          "title": "Schalke – Elversberg. Fudbal. Nemačka Liga"
+        },
+        {
           "time": "05:00",
-          "title": "Greuter Furth – Magdeburg. Fudbal. Nemačka 2. Liga"
+          "title": "Arminia Bielefeld – Heidenheim. Fudbal. Nemačka 2. Liga"
         },
         {
           "time": "07:00",
-          "title": "Metz – Saint-Etienne. Fudbal. Francuska 2. Liga"
+          "title": "Greuter Furth – Magdeburg. Fudbal. Nemačka 2. Liga"
         },
         {
           "time": "09:00",
-          "title": "Hannover – Bochum. Fudbal. Nemačka 2. Liga"
+          "title": "Rapid – Tirol. Fudbal. Austrijska Liga"
         },
         {
           "time": "11:00",
-          "title": "Ajax – Excelsior. Fudbal. Holandska Liga"
+          "title": "Reims – Montpellier. Fudbal. Francuska 2. Liga"
         },
         {
           "time": "13:00",
-          "title": "Pregled 7. kola. Fudbal. Holandska Liga"
-        },
-        {
-          "time": "14:00",
           "title": "Twente – PSV. Fudbal. Holandska Liga"
-        },
-        {
-          "time": "16:00",
-          "title": "Stuttgart – Borussia Dormund. Fudbal. Nemačka Liga"
-        },
-        {
-          "time": "18:00",
-          "title": "Pregled 4. kola. Fudbal. Nemačka Liga"
         }
       ]
     },
@@ -196,36 +196,36 @@
       "name": "Arena Sport 4 HD RS",
       "programs": [
         {
-          "time": "23:00",
-          "title": "Bayern – Bodo/Glimt. Fudbal. UEFA Liga Šampiona"
+          "time": "22:00",
+          "title": "Juventus – NEC. Fudbal. UEFA Liga Evrope"
+        },
+        {
+          "time": "00:00",
+          "title": "Pregled 1. kola. Fudbal. UEFA Liga Evrope"
         },
         {
           "time": "01:00",
-          "title": "Omonia – Celta. Fudbal. UEFA Liga Evrope"
+          "title": "Real Madrid – Inter. Fudbal. UEFA Liga Šampiona"
         },
         {
           "time": "03:00",
-          "title": "Rapid – Hearts. Fudbal. UEFA Liga Konferencija – Kvalifikacije"
+          "title": "Panathinaikos – CSKA 1948. Fudbal. UEFA Liga Konferencija – Kvalifikacije"
+        },
+        {
+          "time": "05:00",
+          "title": "Celtic – LASK. Fudbal. UEFA Liga Šampiona – Kvalifikacije"
         },
         {
           "time": "07:00",
-          "title": "Jablonec – Rangers. Fudbal. UEFA Liga Konferencija – Kvalifikacije"
+          "title": "Viktoria Plzen – Crvena zvezda. Fudbal. UEFA Liga Evrope – Kvalifikacije"
         },
         {
           "time": "09:30",
-          "title": "Celje – Slovan. Fudbal. UEFA Liga Šampiona – Kvalifikacije"
+          "title": "Liga Šampiona: Magazin ep. 5. Fudbal. UEFA Liga Šampiona"
         },
         {
-          "time": "12:00",
-          "title": "Stuttgart – Viking. Fudbal. UEFA Liga Šampiona"
-        },
-        {
-          "time": "14:00",
-          "title": "Fenerbahce – Roma. Fudbal. UEFA Liga Šampiona"
-        },
-        {
-          "time": "16:00",
-          "title": "Levski – Salzburg. Fudbal. UEFA Liga Evrope"
+          "time": "10:00",
+          "title": "Getafe – Partizan. Fudbal. UEFA Liga Konferencija – Kvalifikacije"
         }
       ]
     },
@@ -235,35 +235,35 @@
       "programs": [
         {
           "time": "22:00",
-          "title": "Polufinala. Pikado. World Grand Prix"
+          "title": "Finale. Pikado. World Grand Prix"
+        },
+        {
+          "time": "01:00",
+          "title": "Pregled 2. kola. Košarka. Evroliga"
         },
         {
           "time": "02:00",
-          "title": "Debrecen, polufinala i finale. Basket 3x3. FIBA 3x3 World Tour"
-        },
-        {
-          "time": "03:30",
-          "title": "Deqing, polufinala i finale. Basket 3x3. FIBA 3x3 World Tour"
+          "title": "Deqing, grupna faza. Basket 3x3. FIBA 3x3 World Tour"
         },
         {
           "time": "05:00",
-          "title": "Unicaja – AEK, PF2. Košarka. FIBA Liga Šampiona"
+          "title": "Unicaja – Tenerife, meč za treće mesto. Košarka. FIBA Liga Šampiona"
         },
         {
           "time": "07:00",
-          "title": "Fenerbahce – Dubai. Košarka. Evroliga"
-        },
-        {
-          "time": "09:00",
           "title": "ASVEL – Valencia. Košarka. Evroliga"
         },
         {
+          "time": "09:00",
+          "title": "Bayern – Partizan. Košarka. Evroliga"
+        },
+        {
           "time": "11:00",
-          "title": "Pregled 3. kola. Košarka. Evroliga"
+          "title": "Pregled 1. kola. Košarka. Evroliga"
         },
         {
           "time": "12:00",
-          "title": "Slask – Budućnost. Košarka. EVROKUP"
+          "title": "Napoli – Bourg. Košarka. EVROKUP"
         }
       ]
     },
@@ -273,35 +273,35 @@
       "programs": [
         {
           "time": "23:30",
-          "title": "FTC – CSM Bucuresti. Rukomet. EHF Liga Šampiona (Ž)"
+          "title": "Pelister – La Rioja. Rukomet. EHF Liga Evrope"
         },
         {
           "time": "01:00",
-          "title": "Crvena zvezda – Radnički. Rukomet. Superliga Srbije"
+          "title": "Brest – Krim. Rukomet. EHF Liga Šampiona (Ž)"
         },
         {
           "time": "02:30",
-          "title": "Neobične igre S01E04: Jeleni, banane i boks"
+          "title": "Neobične igre S01E05: Lokalni ukusi"
         },
         {
           "time": "03:00",
-          "title": "Alfred Dunhill Links Championship, dan 3. Golf. DP WORLD TOUR"
+          "title": "Alfred Dunhill Links Championship, finalni dan. Golf. DP WORLD TOUR"
         },
         {
           "time": "07:00",
-          "title": "Great Sporting Moments ep. 9"
+          "title": "Great Sporting Moments ep. 10"
         },
         {
           "time": "07:30",
-          "title": "Crvena zvezda – Radnički. Rukomet. Superliga Srbije"
+          "title": "Lippe – Podravka. Rukomet. EHF Liga Šampiona (Ž)"
         },
         {
           "time": "09:00",
-          "title": "Magdeburg – Kiel. Rukomet. Bundesliga"
+          "title": "Esbjerg – Budućnost. Rukomet. EHF Liga Šampiona (Ž)"
         },
         {
-          "time": "11:00",
-          "title": "Četvrtfinala. Pikado. World Grand Prix"
+          "time": "10:30",
+          "title": "Emisija: Zona zdravog sporta ep. 119"
         }
       ]
     },
@@ -311,35 +311,35 @@
       "programs": [
         {
           "time": "22:00",
-          "title": "Finale. Košarka. VTB SUPERCUP"
+          "title": "UNICS – Dynamo. Košarka. VTB LIGA"
         },
         {
           "time": "00:00",
-          "title": "Zenit – Lokomotiv. Fudbal. Ruska Liga"
+          "title": "Rostov – Dinamo. Fudbal. Ruska Liga"
         },
         {
           "time": "02:00",
-          "title": "Spartak – Rostov. Fudbal. Ruska Liga"
+          "title": "Zenit – Lokomotiv. Fudbal. Ruska Liga"
         },
         {
           "time": "04:00",
-          "title": "Oni žive za fudbal ep. 241 – FK Crvena zvezda Novi Sad, prvi deo. Fudbal"
+          "title": "Oni žive za fudbal ep. 242 – FK Crvena zvezda Novi Sad, drugi deo. Fudbal"
         },
         {
           "time": "04:30",
-          "title": "Emisija: Kraljevska igra ep. 6 – Nije sve tako crno i belo"
+          "title": "Emisija: 1 na 1"
         },
         {
           "time": "05:00",
-          "title": "Krasnodar – Fakel. Fudbal. Ruska Liga"
+          "title": "Akhmat – Spartak. Fudbal. Ruska Liga"
         },
         {
           "time": "07:00",
-          "title": "Odintsovo – Dinamo Kazan, finale G3. Odbojka. Ruska Liga (Ž)"
+          "title": "Zenit – Dinamo, polufinale G1. Odbojka. Ruska Liga"
         },
         {
-          "time": "08:45",
-          "title": "Sport bez granica S01E09: Wife Carrying"
+          "time": "09:45",
+          "title": "Sport bez granica S01E14: Chinlone"
         }
       ]
     },
@@ -348,36 +348,36 @@
       "name": "Arena Sport 8 HD RS",
       "programs": [
         {
-          "time": "22:00",
-          "title": "Chicago Bears – Philadelphia Eagles. Američki fudbal. NFL"
+          "time": "23:30",
+          "title": "Carolina Hurricanes – Florida Panthers. Hokej. NHL"
         },
         {
-          "time": "00:30",
-          "title": "Denver Broncos – Los Angeles Rams. Američki fudbal. NFL"
+          "time": "01:30",
+          "title": "MLB Plays of the Week. Bejzbol. Major League Baseball"
         },
         {
-          "time": "03:00",
-          "title": "Carolina Hurricanes – Las Vegas Golden Knights, Finale G5. Hokej. NHL"
+          "time": "02:00",
+          "title": "Las Vegas Golden Knights – Carolina Hurricanes, Finale G6. Hokej. NHL"
+        },
+        {
+          "time": "04:30",
+          "title": "Put Šampiona: Carolina Hurricanes. Hokej. NHL"
         },
         {
           "time": "05:00",
-          "title": "Cleveland – Detroit, G3. Košarka. NBA"
+          "title": "Cleveland – Detroit, G4. Košarka. NBA"
         },
         {
           "time": "07:00",
-          "title": "Miami – Boston. Košarka. NBA"
+          "title": "Phoenix – Denver. Košarka. NBA"
         },
         {
           "time": "09:00",
-          "title": "Philadelphia – Detroit. Košarka. NBA"
+          "title": "Boston – Oklahoma. Košarka. NBA"
         },
         {
           "time": "11:00",
-          "title": "Italija – Live Stage 4. Moto Sport. WRC"
-        },
-        {
-          "time": "12:00",
-          "title": "Pregled nedelje: Week 1. Američki fudbal. NFL"
+          "title": "Detroit Red Wings – Winnipeg Jets. Hokej. NHL"
         }
       ]
     },
@@ -386,36 +386,36 @@
       "name": "Arena Sport 9 HD RS",
       "programs": [
         {
-          "time": "22:45",
-          "title": "Igokea – Bosna. Košarka. ABA LIGA"
+          "time": "23:00",
+          "title": "Dinamo – Lokomotiva. Fudbal. HRVATSKA LIGA"
         },
         {
-          "time": "00:45",
-          "title": "Vienna – Cluj. Košarka. ABA LIGA"
-        },
-        {
-          "time": "02:45",
-          "title": "Sport bez granica S01E05: Bossaball"
+          "time": "01:00",
+          "title": "Ilirija – Dubai. Košarka. ABA LIGA"
         },
         {
           "time": "03:00",
-          "title": "Crvena zvezda – Partizan. Fudbal. MOZZARTBET SUPERLIGA"
+          "title": "FMP – Crvena zvezda. Košarka. ABA LIGA"
         },
         {
           "time": "05:00",
-          "title": "Radnički – Budućnost. Vaterpolo. Regionalna vaterpolo liga"
+          "title": "Radnički – Šabac. Vaterpolo. Regionalna vaterpolo liga"
         },
         {
           "time": "06:15",
-          "title": "Emisija: Sportske Igre Mladih E05"
+          "title": "Emisija: Sportske Igre Mladih E06"
         },
         {
           "time": "06:30",
-          "title": "Priča o svemu (pa i o sportu) ep. 36"
+          "title": "Priča o svemu (pa i o sportu) ep. 37"
         },
         {
           "time": "07:00",
-          "title": "Podgorica – Radnički. Košarka. ABA2 LIGA"
+          "title": "Sutjeska – Sloboda. Košarka. ABA2 LIGA"
+        },
+        {
+          "time": "08:45",
+          "title": "Mi živimo za košarku ep. 93 -KK Kris Kros, prvi deo"
         }
       ]
     },
@@ -424,36 +424,36 @@
       "name": "BCU Biography HDR",
       "programs": [
         {
-          "time": "19:51",
-          "title": "Комбинация (2024)."
+          "time": "23:31",
+          "title": "Калашников (2020)."
         },
         {
-          "time": "02:20",
-          "title": "Дом Gucci (2021)."
+          "time": "02:56",
+          "title": "Оппенгеймер (2023)."
         },
         {
-          "time": "04:57",
-          "title": "Король Англии (2019)."
+          "time": "05:56",
+          "title": "Красивый, плохой, злой (2018)."
         },
         {
-          "time": "07:17",
-          "title": "Человек на Луне (2018)."
+          "time": "07:46",
+          "title": "Похороны (2023)."
         },
         {
-          "time": "09:37",
-          "title": "Дело храбрых (2017)."
+          "time": "09:53",
+          "title": "Жанна Дюбарри (2023)."
         },
         {
-          "time": "11:50",
-          "title": "Компромат (2019)."
+          "time": "11:49",
+          "title": "Первый на Олимпе (2025)."
         },
         {
-          "time": "13:37",
-          "title": "Дурные деньги (2023)."
+          "time": "13:35",
+          "title": "Борьба со льдом (2022)."
         },
         {
-          "time": "15:21",
-          "title": "Ламборгини - Человек-легенда (2022)."
+          "time": "15:18",
+          "title": "Девятаев (2021)."
         }
       ]
     },
@@ -462,36 +462,36 @@
       "name": "BCU Comedy HDR",
       "programs": [
         {
-          "time": "23:44",
+          "time": "23:02",
+          "title": "Конек-Горбунок (2021)."
+        },
+        {
+          "time": "02:26",
+          "title": "Дедушка нелегкого поведения (2020)."
+        },
+        {
+          "time": "04:04",
+          "title": "Искусство по понятиям (2023)."
+        },
+        {
+          "time": "05:40",
           "title": "Очень страшное кино (2026)."
         },
         {
-          "time": "01:19",
-          "title": "Пара на праздники (2020)."
+          "time": "07:15",
+          "title": "Своя в доску (2026)."
         },
         {
-          "time": "03:03",
-          "title": "Лулу и Бриггс (2021)."
+          "time": "08:46",
+          "title": "Следствие ведут овечки (2026)."
         },
         {
-          "time": "04:44",
-          "title": "Рождественские хроники 2 (2020)."
+          "time": "10:34",
+          "title": "Постучись в мою Тверь (2024)."
         },
         {
-          "time": "06:39",
-          "title": "Телохранитель жены киллера (2020)."
-        },
-        {
-          "time": "08:35",
-          "title": "Плагиатор (2025)."
-        },
-        {
-          "time": "10:36",
-          "title": "Небриллиантовая рука (2024)."
-        },
-        {
-          "time": "13:00",
-          "title": "Семьянин (2025)."
+          "time": "12:04",
+          "title": "Конек-Горбунок (2021)."
         }
       ]
     },
@@ -500,36 +500,36 @@
       "name": "BCU Kinozakaz Premiere 4K",
       "programs": [
         {
-          "time": "23:07",
-          "title": "Призрак дома на холме (1999)"
-        },
-        {
-          "time": "00:59",
-          "title": "Доберман (1997)"
-        },
-        {
-          "time": "02:41",
+          "time": "23:57",
           "title": "Радиус (2017)"
         },
         {
-          "time": "04:13",
-          "title": "Рейд (2011)"
+          "time": "05:39",
+          "title": "Экзорцист Ватикана (2023)"
         },
         {
-          "time": "05:53",
-          "title": "Последний рубеж (2013)"
+          "time": "07:22",
+          "title": "Мэйдэй (2026)"
         },
         {
-          "time": "07:33",
-          "title": "Хроники Риддика (2004)"
+          "time": "09:12",
+          "title": "Рыцарь дня (2010)"
         },
         {
-          "time": "09:46",
-          "title": "Воры в законе (1988)"
+          "time": "11:08",
+          "title": "Майкл (2026)"
         },
         {
-          "time": "11:15",
-          "title": "Пришельцы в Америке (2001)"
+          "time": "13:15",
+          "title": "Супергёрл (2026)"
+        },
+        {
+          "time": "15:02",
+          "title": "Очень страшное кино (2026)"
+        },
+        {
+          "time": "16:37",
+          "title": "Рэкетир (2007)"
         }
       ]
     },
@@ -538,36 +538,36 @@
       "name": "BCU Marvel HDR",
       "programs": [
         {
-          "time": "22:52",
-          "title": "Тор 2 - Царство тьмы (2013)."
+          "time": "22:41",
+          "title": "Новые мутанты (2020)."
         },
         {
-          "time": "00:43",
-          "title": "Новый Человек-паук. Высокое напряжение (2014)."
+          "time": "00:14",
+          "title": "Человек-паук (2002)."
         },
         {
-          "time": "03:04",
-          "title": "Человек-паук - Возвращение домой (2017)."
+          "time": "02:15",
+          "title": "Доктор Стрэндж - В мультивселенной безумия (2022)."
         },
         {
-          "time": "05:17",
-          "title": "Защитники (2017)."
+          "time": "04:21",
+          "title": "Крэйвен-охотник (2024)."
         },
         {
-          "time": "06:45",
-          "title": "Первый мститель - Другая война (2014)."
+          "time": "06:27",
+          "title": "Дэдпул 2 (2018)."
         },
         {
-          "time": "09:00",
-          "title": "Веном 2 (2021)."
+          "time": "08:40",
+          "title": "Электра (2005)."
         },
         {
-          "time": "10:37",
-          "title": "Аквамен (2018)."
+          "time": "10:19",
+          "title": "Громовержцы (2025)."
         },
         {
-          "time": "13:00",
-          "title": "Человек-паук - Нет пути домой (2021)."
+          "time": "12:25",
+          "title": "Логан (2017)."
         }
       ]
     },
@@ -576,36 +576,36 @@
       "name": "BCU Media 2 HD",
       "programs": [
         {
-          "time": "23:29",
-          "title": "Тихое место 2 (2020)."
+          "time": "23:37",
+          "title": "Стальная хватка (2023)."
         },
         {
-          "time": "01:05",
-          "title": "Веном (2018)."
+          "time": "03:22",
+          "title": "Похороны (2023)."
         },
         {
-          "time": "02:57",
-          "title": "Судная ночь в Аркадии (2024)."
+          "time": "05:29",
+          "title": "Возвращение титанов (2011)."
         },
         {
-          "time": "04:28",
-          "title": "Расплата 2 (2025)."
+          "time": "06:59",
+          "title": "Окулус (2013)."
         },
         {
-          "time": "06:40",
-          "title": "Хищник - Планета смерти (2025)."
+          "time": "08:42",
+          "title": "Эпидемия (1995)."
         },
         {
-          "time": "08:27",
-          "title": "Зараза (2025)."
+          "time": "10:50",
+          "title": "Астрал - Глава 2 (2013)."
         },
         {
-          "time": "10:05",
-          "title": "Кто угодно, кроме тебя (2023)."
+          "time": "12:35",
+          "title": "Капкан (2019)."
         },
         {
-          "time": "11:48",
-          "title": "Полтергейст - Другое измерение (2023)."
+          "time": "14:02",
+          "title": "Посейдон (2006)."
         }
       ]
     },
@@ -614,36 +614,36 @@
       "name": "BCU Media 3 HD",
       "programs": [
         {
-          "time": "22:10",
-          "title": "Властелины вселенной (2026)."
+          "time": "23:35",
+          "title": "Молчание (2019)."
         },
         {
-          "time": "00:33",
-          "title": "Черный Адам (2022)."
+          "time": "02:43",
+          "title": "Дорогая, я уменьшаюсь (2025)."
         },
         {
-          "time": "02:37",
-          "title": "Прочь (2017)."
+          "time": "04:17",
+          "title": "Королек моей любви (2026)."
         },
         {
-          "time": "04:20",
-          "title": "Бугимен (2023)."
+          "time": "06:03",
+          "title": "На глубине 6 футов (2017)."
         },
         {
-          "time": "05:58",
-          "title": "Синистер 2 (2015)."
+          "time": "07:40",
+          "title": "Очень страшное кино (2026)."
         },
         {
-          "time": "07:34",
-          "title": "Легион (2010)."
+          "time": "09:15",
+          "title": "Мотылек (2017)."
         },
         {
-          "time": "09:14",
-          "title": "Возвращение титанов (2011)."
+          "time": "11:28",
+          "title": "Вертикальный предел (2000)."
         },
         {
-          "time": "10:44",
-          "title": "Дитя тьмы (2009)."
+          "time": "13:32",
+          "title": "Телохранитель на фрилансе (2023)."
         }
       ]
     },
@@ -652,36 +652,36 @@
       "name": "BCU Russia 90s HD",
       "programs": [
         {
-          "time": "23:50",
-          "title": "Компромат в 90-х. Темные связи Кобзона, скандальные видео с чиновниками, коробка из-под ксерокса"
+          "time": "23:47",
+          "title": "Водочные короли. Кто зарабатывал миллиарды на алкоголе, войны за рынок, бесконечные жертвы суррогата"
         },
         {
-          "time": "00:28",
-          "title": "Самый ЖЕСТКИЙ грабитель СССР. Как жил ОСНОВАТЕЛЬ советского рэкета."
+          "time": "00:26",
+          "title": "Как сложилась судьба самых ПОПУЛЯРНЫХ женских групп России 90-х."
         },
         {
-          "time": "00:28",
-          "title": "Самый ЖЁСТКИЙ грабитель СССР. Как жил ОСНОВАТЕЛЬ советского рэкета"
+          "time": "00:26",
+          "title": "Как сложилась судьба самых ПОПУЛЯРНЫХ женских групп России 90-х"
         },
         {
-          "time": "00:49",
-          "title": "Кровавые скачки в СССР. Тотализатор, черные букмекеры и зарядчики."
+          "time": "01:03",
+          "title": "Бунт ПРОТИВ Хрущева. Как и почему СВЕРГЛИ первого секретаря ЦК КПСС."
         },
         {
-          "time": "00:49",
-          "title": "Кровавые скачки в СССР. Тотализатор, черные букмекеры и «зарядчики»"
+          "time": "01:03",
+          "title": "Бунт ПРОТИВ Хрущёва. Как и почему СВЕРГЛИ первого секретаря ЦК КПСС"
         },
         {
-          "time": "01:25",
-          "title": "Свадьбы в 90-х. Кареты, лимузины и девятки, китайские платья, польские ликеры."
+          "time": "01:20",
+          "title": "Первый капитал олигархов. Как разбогатели Березовский, Ходорковский и другие герои Семибанкирщины."
         },
         {
-          "time": "01:25",
-          "title": "Свадьбы в 90-х. Кареты, лимузины и девятки, китайские платья, польские ликеры"
+          "time": "01:20",
+          "title": "Первый капитал олигархов. Как разбогатели Березовский, Ходорковский и другие герои Семибанкирщины"
         },
         {
-          "time": "02:04",
-          "title": "Как КРИМИНАЛЬНЫЕ авторитеты 90-х становились мэрами и депутатами."
+          "time": "02:01",
+          "title": "Генерал Лебедь. От Афганистана до Чечни, путь легендарного десантника."
         }
       ]
     },
@@ -690,36 +690,36 @@
       "name": "BOX Docu HD",
       "programs": [
         {
-          "time": "23:51",
-          "title": "14 вершин"
+          "time": "15:10",
+          "title": "Игры Богов"
         },
         {
-          "time": "01:31",
-          "title": "Динозавры Доисторические Монстры"
+          "time": "03:30",
+          "title": "Мегаустановка. Синхротрон   Меганаука"
         },
         {
-          "time": "02:45",
-          "title": "Путешествие по планетам Уран и Нептун"
+          "time": "03:56",
+          "title": "Документальный фильм про Касаток - Чудеса Природы"
         },
         {
-          "time": "03:26",
-          "title": "Самолёт Пролетел Сквозь Ядерный Гриб    Самые Необычные Эксперименты"
+          "time": "04:41",
+          "title": "Тайны Пустынь"
         },
         {
-          "time": "03:35",
-          "title": "Альфа.Победить.и.вернуться"
+          "time": "05:31",
+          "title": "Электрическое тело и выращенная кожа. Киберлюди"
         },
         {
-          "time": "04:13",
-          "title": "Тайны Каспийского моря"
+          "time": "05:56",
+          "title": "Поиски второй Земли"
         },
         {
-          "time": "04:57",
-          "title": "Юпитер"
+          "time": "06:39",
+          "title": "Земляне"
         },
         {
-          "time": "05:36",
-          "title": "Самые Провальные Танки За Всю Историю!"
+          "time": "08:50",
+          "title": "Конец вселенной"
         }
       ]
     },
@@ -728,36 +728,36 @@
       "name": "BOX Fantasy HD",
       "programs": [
         {
-          "time": "22:29",
-          "title": "Пэн - Путешествие в Нетландию (2015)."
+          "time": "23:06",
+          "title": "Повелитель Дракона (2022)."
         },
         {
-          "time": "00:19",
-          "title": "Воображариум (2012)."
+          "time": "02:14",
+          "title": "Меч короля Артура (2017)."
         },
         {
-          "time": "01:44",
-          "title": "Любовь сквозь время (2014)."
+          "time": "04:19",
+          "title": "Малефисента - Владычица тьмы (2019)."
         },
         {
-          "time": "03:41",
-          "title": "Гарри Поттер и философский камень (2001)."
+          "time": "06:16",
+          "title": "Гарри Поттер и орден Феникса (2007)."
         },
         {
-          "time": "06:13",
-          "title": "Красавица и чудовище (2017)."
-        },
-        {
-          "time": "08:21",
-          "title": "Гнев титанов (2012)."
-        },
-        {
-          "time": "09:59",
-          "title": "Властелин колец - Две крепости (2002)."
-        },
-        {
-          "time": "13:54",
+          "time": "08:34",
           "title": "Боги Египта (2016)."
+        },
+        {
+          "time": "10:40",
+          "title": "Собачья жизнь (2017)."
+        },
+        {
+          "time": "12:19",
+          "title": "Призрачный гонщик (2007)."
+        },
+        {
+          "time": "14:21",
+          "title": "Маленькая мисс Дулиттл (2018)."
         }
       ]
     },
@@ -766,36 +766,36 @@
       "name": "BOX Ghost HD",
       "programs": [
         {
-          "time": "23:32",
-          "title": "Черные кошки в бамбуковых зарослях."
+          "time": "00:17",
+          "title": "Седьмая луна"
         },
         {
-          "time": "01:11",
-          "title": "Дом призраков New."
+          "time": "01:43",
+          "title": "Дорогуша."
         },
         {
-          "time": "03:32",
-          "title": "Странный Томас."
+          "time": "02:59",
+          "title": "Привязанные к дому."
         },
         {
-          "time": "05:08",
-          "title": "Две луны три Солнца."
+          "time": "04:45",
+          "title": "Владение 18."
         },
         {
-          "time": "06:34",
-          "title": "Полуночная игра."
+          "time": "06:17",
+          "title": "История призрака."
         },
         {
           "time": "07:48",
-          "title": "Дом с кошкой-призраком."
+          "title": "Хранитель Тьмы."
         },
         {
-          "time": "08:55",
-          "title": "Обитатели."
+          "time": "09:30",
+          "title": "Пульс 3."
         },
         {
-          "time": "10:28",
-          "title": "Голос из камня."
+          "time": "11:00",
+          "title": "Канал."
         }
       ]
     },
@@ -804,36 +804,36 @@
       "name": "BOX History 4K",
       "programs": [
         {
-          "time": "23:54",
-          "title": "Хватай не глядя - 1 сезон, 10 серия"
+          "time": "23:42",
+          "title": "Между молотом и наковальней - 7 сезон, 28 серия"
         },
         {
-          "time": "00:15",
-          "title": "Мужчины в горах - 5 сезон, 3 серия."
+          "time": "00:22",
+          "title": "Звезды ломбарда - 16 сезон, 7 серия."
         },
         {
-          "time": "00:15",
-          "title": "Мужчины в горах - 5 сезон, 3 серия"
+          "time": "00:22",
+          "title": "Звёзды ломбарда - 16 сезон, 7 серия"
         },
         {
-          "time": "00:57",
-          "title": "Древние пришельцы - 6 сезон, 5 серия."
+          "time": "01:04",
+          "title": "Между молотом и наковальней - 2 сезон, 4 серия."
         },
         {
-          "time": "00:57",
-          "title": "Древние пришельцы - 6 сезон, 5 серия"
+          "time": "01:04",
+          "title": "Между молотом и наковальней - 2 сезон, 4 серия"
         },
         {
-          "time": "01:39",
-          "title": "Необъяснимое - 5 сезон, 1 серия."
+          "time": "01:44",
+          "title": "Между молотом и наковальней - 5 сезон, 26 серия."
         },
         {
-          "time": "01:39",
-          "title": "Необъяснимое - 5 сезон, 1 серия"
+          "time": "01:44",
+          "title": "Между молотом и наковальней - 5 сезон, 26 серия"
         },
         {
-          "time": "02:21",
-          "title": "Между молотом и наковальней - 5 сезон, 5 серия."
+          "time": "02:23",
+          "title": "Хватай не глядя - 2 сезон, 26 серия."
         }
       ]
     },
@@ -842,36 +842,36 @@
       "name": "BOX Kosmo 4K",
       "programs": [
         {
-          "time": "23:52",
-          "title": "Ученые смогли выяснить какой была наша планета 4  000 000 000  лет назад"
+          "time": "22:51",
+          "title": "Большое путешествие по планетам солнечной системы."
         },
         {
-          "time": "00:02",
-          "title": "Где на самом деле инопланетяне просто посмотри."
+          "time": "01:37",
+          "title": "Самые загадочные места на земле обнаруженные со спутника."
         },
         {
-          "time": "00:02",
-          "title": "Где на самом деле инопланетяне просто посмотри..."
+          "time": "01:37",
+          "title": "Самые загадочные места на земле обнаруженные со спутника"
         },
         {
-          "time": "00:10",
-          "title": "Илон маск создает бесплатный интернет для всей планеты."
+          "time": "01:42",
+          "title": "Что делают космонавты в космосе."
         },
         {
-          "time": "00:10",
-          "title": "Илон маск создает бесплатный интернет для всей планеты"
+          "time": "01:42",
+          "title": "Что делают космонавты в космосе"
         },
         {
-          "time": "00:15",
-          "title": "Леонис. Красный гигант бьется в предсмертной агонии."
+          "time": "01:47",
+          "title": "Звезда тигардена, ближайший красный карлик с двумя экзопланетами."
         },
         {
-          "time": "00:15",
-          "title": "Леонис. Красный гигант бьется в предсмертной агонии"
+          "time": "01:47",
+          "title": "Звезда тигардена, ближайший красный карлик с двумя экзопланетами"
         },
         {
-          "time": "00:28",
-          "title": "Как далеко улетели космические зонды."
+          "time": "01:57",
+          "title": "Что было обнаружено за пределами Плутона Оркуса или АнтиПлутона."
         }
       ]
     },
@@ -880,35 +880,35 @@
       "name": "BOX Lo-Fi HD",
       "programs": [
         {
-          "time": "22:08",
+          "time": "22:24",
           "title": "LoFi Relaxing Music."
         },
         {
-          "time": "01:10",
+          "time": "01:26",
           "title": "LoFi Relaxing Music."
         },
         {
-          "time": "04:12",
+          "time": "04:28",
           "title": "LoFi Relaxing Music."
         },
         {
-          "time": "07:14",
+          "time": "07:30",
           "title": "LoFi Relaxing Music."
         },
         {
-          "time": "10:16",
+          "time": "10:32",
           "title": "LoFi Relaxing Music."
         },
         {
-          "time": "13:18",
+          "time": "13:34",
           "title": "LoFi Relaxing Music."
         },
         {
-          "time": "16:20",
+          "time": "16:36",
           "title": "LoFi Relaxing Music."
         },
         {
-          "time": "19:22",
+          "time": "19:38",
           "title": "LoFi Relaxing Music."
         }
       ]
@@ -918,36 +918,36 @@
       "name": "BOX Mayday HD",
       "programs": [
         {
-          "time": "23:33",
-          "title": "Бойня над Средиземным морем (Massacre Over The Mediterranean)"
+          "time": "23:59",
+          "title": "Без управления (Fatal Distraction)."
         },
         {
-          "time": "00:17",
-          "title": "Доведенный до предела (Pushed to the Limit)."
+          "time": "00:42",
+          "title": "Крушение под кронами (Tree Strike Terror)"
         },
         {
-          "time": "00:17",
-          "title": "Доведенный до предела (Pushed to the Limit)"
+          "time": "01:23",
+          "title": "На грани катастрофы (Edge Of Disaster)."
         },
         {
-          "time": "01:01",
-          "title": "В поисках виновных (I'm The Problem)."
+          "time": "01:23",
+          "title": "На грани катастрофы (Edge Of Disaster)"
         },
         {
-          "time": "01:01",
-          "title": "В поисках виновных (I'm The Problem)"
+          "time": "02:07",
+          "title": "Пилоты-герои (Hero pilots)."
         },
         {
-          "time": "01:46",
-          "title": "Вижу полосу (Runway in sight)."
+          "time": "02:07",
+          "title": "Пилоты-герои (Hero pilots)"
         },
         {
-          "time": "01:46",
-          "title": "Вижу полосу (Runway in sight)"
+          "time": "02:51",
+          "title": "Мюнхенская трагедия (Munich Air Disaster)."
         },
         {
-          "time": "02:30",
-          "title": "Полный отказ двигателей (M1 Plane Crash)."
+          "time": "02:51",
+          "title": "Мюнхенская трагедия (Munich Air Disaster)"
         }
       ]
     },
@@ -956,36 +956,36 @@
       "name": "BOX Premiere 4K",
       "programs": [
         {
-          "time": "22:21",
-          "title": "Невеста (2026)."
-        },
-        {
-          "time": "00:27",
-          "title": "Аватар - Пламя и пепел (2025)."
-        },
-        {
-          "time": "03:44",
-          "title": "На вершине (2026)."
-        },
-        {
-          "time": "05:19",
-          "title": "Кит-убийца (2026)."
-        },
-        {
-          "time": "06:48",
-          "title": "Аватар - Пламя и пепел (2025)."
-        },
-        {
-          "time": "10:05",
+          "time": "23:51",
           "title": "Анаконда (2025)."
         },
         {
-          "time": "11:43",
+          "time": "01:29",
           "title": "Невеста (2026)."
         },
         {
-          "time": "13:49",
+          "time": "03:35",
           "title": "На вершине (2026)."
+        },
+        {
+          "time": "05:10",
+          "title": "Кит-убийца (2026)."
+        },
+        {
+          "time": "06:39",
+          "title": "Аватар - Пламя и пепел (2025)."
+        },
+        {
+          "time": "09:56",
+          "title": "Анаконда (2025)."
+        },
+        {
+          "time": "11:34",
+          "title": "Аватар - Пламя и пепел (2025)."
+        },
+        {
+          "time": "14:51",
+          "title": "Невеста (2026)."
         }
       ]
     },
@@ -994,36 +994,36 @@
       "name": "BCU Premium Premiere+ 4K HDR",
       "programs": [
         {
-          "time": "23:19",
-          "title": "Одно на двоих."
+          "time": "23:53",
+          "title": "Гандикап."
         },
         {
-          "time": "00:49",
-          "title": "Приглашение."
-        },
-        {
-          "time": "02:35",
+          "time": "02:51",
           "title": "Летом всякое бывает. Побег из Сколбора."
         },
         {
-          "time": "04:23",
+          "time": "04:39",
+          "title": "Одно на двоих."
+        },
+        {
+          "time": "06:09",
+          "title": "Неожиданные связи 2."
+        },
+        {
+          "time": "07:39",
+          "title": "Сладкая сказка."
+        },
+        {
+          "time": "09:32",
           "title": "Левит."
         },
         {
-          "time": "05:51",
-          "title": "Кормилец."
-        },
-        {
-          "time": "07:30",
-          "title": "Орудия. Новая глава."
-        },
-        {
-          "time": "09:17",
-          "title": "Робоняня."
-        },
-        {
-          "time": "10:45",
+          "time": "11:00",
           "title": "Распаковка."
+        },
+        {
+          "time": "12:21",
+          "title": "Последние дни."
         }
       ]
     },
@@ -1032,36 +1032,36 @@
       "name": "BOX Remast 4K",
       "programs": [
         {
-          "time": "22:50",
-          "title": "Самый лучший день."
+          "time": "23:48",
+          "title": "Бриллиантовая рука."
         },
         {
-          "time": "00:36",
-          "title": "Верные друзья."
+          "time": "02:44",
+          "title": "Вокзал для двоих."
         },
         {
-          "time": "02:16",
-          "title": "Майор Гром - Чумной Доктор."
-        },
-        {
-          "time": "04:48",
-          "title": "Праведник."
-        },
-        {
-          "time": "07:30",
-          "title": "Не может быть!"
-        },
-        {
-          "time": "09:01",
+          "time": "04:56",
           "title": "Морфий."
         },
         {
-          "time": "10:48",
-          "title": "12 стульев."
+          "time": "06:43",
+          "title": "Конец славы."
         },
         {
-          "time": "13:20",
-          "title": "Метро."
+          "time": "08:18",
+          "title": "72 Метра."
+        },
+        {
+          "time": "10:14",
+          "title": "Гагарин. Первый в космосе."
+        },
+        {
+          "time": "12:02",
+          "title": "Легенда №17."
+        },
+        {
+          "time": "14:15",
+          "title": "О чем говорят мужчины."
         }
       ]
     },
@@ -1070,36 +1070,36 @@
       "name": "BOX Stories HD",
       "programs": [
         {
-          "time": "23:55",
-          "title": "Адольф Гитлер 10 Интересных Фактов."
+          "time": "23:20",
+          "title": "САМЫЙ ЗАГАДОЧНЫЙ МИЛЛИАРДЕР."
         },
         {
-          "time": "00:31",
-          "title": "ГЕНИЙ, ХУДОЖНИК и ЛЕНТЯЙ."
+          "time": "00:05",
+          "title": "УЖАСЫ ПАНДЕМИИ."
         },
         {
-          "time": "01:01",
-          "title": "ПСИХОПАТЫ внутри нас."
+          "time": "00:36",
+          "title": "ШОКИРУЮЩИЕ ФАКТЫ О ДОНАЛЬДЕ ТРАМПЕ."
         },
         {
-          "time": "01:18",
-          "title": "Cтрашные научные эксперименты. 10 Интересных фактов."
+          "time": "00:45",
+          "title": "10 ИНТЕРЕСНЫХ ФАКТОВ ПРО ЯЗЫКИ."
         },
         {
-          "time": "01:45",
-          "title": "САМЫЙ СТРАШНЫЙ МАГ XX ВЕКА."
+          "time": "00:58",
+          "title": "ДЕПРЕССИЯ."
         },
         {
-          "time": "02:18",
-          "title": "РОТШИЛЬДЫ - НАСТОЯЩИЕ ХОЗЯЕВА МИРА."
+          "time": "01:13",
+          "title": "ВОРОВСТВО НА ЮТУБЕ - ИСТОРИЯ ПЛАГИАТА."
         },
         {
-          "time": "02:50",
-          "title": "Деньги. 10 Интересных Фактов."
+          "time": "01:34",
+          "title": "Радиация. 10 Интересных Фактов."
         },
         {
-          "time": "03:12",
-          "title": "Хакеры и Киберпреступления. 10 Интересных Фактов."
+          "time": "02:01",
+          "title": "10 ИНТЕРЕСНЫХ ФАКТОВ О SPACEX."
         }
       ]
     },
@@ -1108,36 +1108,36 @@
       "name": "BOX СССР 4K",
       "programs": [
         {
-          "time": "23:12",
-          "title": "Добро пожаловать, или Посторонним вход воспрещен."
+          "time": "21:54",
+          "title": "Трое в лодке, не считая собаки."
         },
         {
-          "time": "00:25",
-          "title": "Калина красная."
+          "time": "00:07",
+          "title": "Восхождение."
         },
         {
-          "time": "02:07",
-          "title": "Потому что люблю."
+          "time": "01:56",
+          "title": "Не могу сказать прощай."
         },
         {
-          "time": "03:30",
-          "title": "Инспектор ГАИ."
+          "time": "03:21",
+          "title": "Москва слезам не верит."
         },
         {
-          "time": "04:45",
-          "title": "Сказка о потерянном времени."
+          "time": "05:49",
+          "title": "Мусоргский."
         },
         {
-          "time": "06:01",
-          "title": "Кин-дза-дза."
+          "time": "07:43",
+          "title": "Укротительница тигров."
         },
         {
-          "time": "08:13",
-          "title": "Осенний марафон."
+          "time": "09:18",
+          "title": "31 июня."
         },
         {
-          "time": "09:42",
-          "title": "Вокзал для двоих."
+          "time": "11:28",
+          "title": "12 стульев."
         }
       ]
     },
@@ -1146,36 +1146,36 @@
       "name": "BOX Serial 4K",
       "programs": [
         {
-          "time": "23:42",
-          "title": "Оперативная память - 1 сезон, 5 серия."
+          "time": "23:22",
+          "title": "Библиотекари - Следующая глава - 1 сезон, 9 серия"
         },
         {
-          "time": "00:32",
-          "title": "Оперативная память - 1 сезон, 6 серия."
+          "time": "00:04",
+          "title": "Библиотекари - Следующая глава - 1 сезон, 10 серия."
         },
         {
-          "time": "01:21",
-          "title": "Оперативная память - 1 сезон, 7 серия."
+          "time": "00:04",
+          "title": "Библиотекари - Следующая глава - 1 сезон, 10 серия"
         },
         {
-          "time": "02:12",
-          "title": "Оперативная память - 1 сезон, 8 серия."
+          "time": "00:46",
+          "title": "Библиотекари - Следующая глава - 1 сезон, 11 серия."
         },
         {
-          "time": "03:02",
-          "title": "Оперативная память - 1 сезон, 9 серия."
+          "time": "00:46",
+          "title": "Библиотекари - Следующая глава - 1 сезон, 11 серия"
         },
         {
-          "time": "03:50",
-          "title": "Оперативная память - 1 сезон, 10 серия."
+          "time": "01:28",
+          "title": "Библиотекари - Следующая глава - 1 сезон, 12 серия."
         },
         {
-          "time": "04:42",
-          "title": "Оперативная память - 1 сезон, 11 серия."
+          "time": "01:28",
+          "title": "Библиотекари - Следующая глава - 1 сезон, 12 серия"
         },
         {
-          "time": "05:30",
-          "title": "Оперативная память - 1 сезон, 12 серия."
+          "time": "02:10",
+          "title": "Охотник за головами - 1 сезон, 1 серия."
         }
       ]
     },
@@ -1184,35 +1184,35 @@
       "name": "BOX RU.RAP HD",
       "programs": [
         {
-          "time": "22:08",
+          "time": "22:24",
           "title": "Клипы нон-стоп"
         },
         {
-          "time": "01:10",
+          "time": "01:26",
           "title": "Клипы нон-стоп"
         },
         {
-          "time": "04:12",
+          "time": "04:28",
           "title": "Клипы нон-стоп"
         },
         {
-          "time": "07:14",
+          "time": "07:30",
           "title": "Клипы нон-стоп"
         },
         {
-          "time": "10:16",
+          "time": "09:00",
+          "title": "Русский Рэп на канале"
+        },
+        {
+          "time": "10:32",
           "title": "Клипы нон-стоп"
         },
         {
-          "time": "13:18",
-          "title": "Клипы нон-стоп"
+          "time": "12:00",
+          "title": "Русский Рэп на канале"
         },
         {
-          "time": "16:20",
-          "title": "Клипы нон-стоп"
-        },
-        {
-          "time": "19:22",
+          "time": "13:34",
           "title": "Клипы нон-стоп"
         }
       ]
@@ -1221,26 +1221,6 @@
       "id": "7890",
       "name": "BOX SportCast Live 1 HD",
       "programs": [
-        {
-          "time": "13:00",
-          "title": "Перерыв"
-        },
-        {
-          "time": "02:00",
-          "title": "🏒 NHL. Баффало – Чикаго"
-        },
-        {
-          "time": "10:00",
-          "title": "Автоспорт. Гран-при"
-        },
-        {
-          "time": "12:00",
-          "title": "Перерыв"
-        },
-        {
-          "time": "20:00",
-          "title": "🏒 NHL. Детройт – Виннипег"
-        },
         {
           "time": "23:15",
           "title": "Перерыв"
@@ -1252,6 +1232,26 @@
         {
           "time": "04:15",
           "title": "Перерыв"
+        },
+        {
+          "time": "02:00",
+          "title": "🏀 NBA. Нью-Йорк Никс – Филадельфия Сиксерс"
+        },
+        {
+          "time": "04:30",
+          "title": "Перерыв"
+        },
+        {
+          "time": "05:00",
+          "title": "🏀 NBA. ЛА Лейкерс – Сакраменто Кингз"
+        },
+        {
+          "time": "07:30",
+          "title": "Перерыв"
+        },
+        {
+          "time": "02:00",
+          "title": "🏀 NBA. Бруклин Нетс – Шарлотт Хорнетс"
         }
       ]
     },
@@ -1259,22 +1259,6 @@
       "id": "7891",
       "name": "BOX SportCast Live 2 HD",
       "programs": [
-        {
-          "time": "09:30",
-          "title": "Перерыв"
-        },
-        {
-          "time": "02:00",
-          "title": "🏀 NBA. Торонто Рэпторс – Майами Хит"
-        },
-        {
-          "time": "04:55",
-          "title": "Перерыв"
-        },
-        {
-          "time": "05:00",
-          "title": "🏒 NHL. Ванкувер – Калгари"
-        },
         {
           "time": "08:15",
           "title": "Перерыв"
@@ -1290,6 +1274,22 @@
         {
           "time": "02:00",
           "title": "🏀 NBA. Финикс Санз – Детройт Пистонс"
+        },
+        {
+          "time": "04:30",
+          "title": "Перерыв"
+        },
+        {
+          "time": "03:00",
+          "title": "🏀 NBA. Нью-Орлеан Пеликанс – Оклахома-Сити Тандер"
+        },
+        {
+          "time": "05:00",
+          "title": "NBA. ЛА Лейкерс – Голден Стэйт"
+        },
+        {
+          "time": "07:30",
+          "title": "Перерыв"
         }
       ]
     },
@@ -1297,14 +1297,6 @@
       "id": "7892",
       "name": "BOX SportCast Live 3 HD",
       "programs": [
-        {
-          "time": "06:15",
-          "title": "Перерыв"
-        },
-        {
-          "time": "02:00",
-          "title": "🏒 NHL. Коламбус – Юта"
-        },
         {
           "time": "05:15",
           "title": "Перерыв"
@@ -1328,6 +1320,14 @@
         {
           "time": "04:00",
           "title": "🏀 NBA. Денвер Наггетс – Юта Джаз"
+        },
+        {
+          "time": "02:30",
+          "title": "NHL. Виннипег – Колорадо"
+        },
+        {
+          "time": "05:45",
+          "title": "Перерыв"
         }
       ]
     },
@@ -1335,14 +1335,6 @@
       "id": "7893",
       "name": "BOX SportCast Live 4 HD",
       "programs": [
-        {
-          "time": "07:15",
-          "title": "Перерыв"
-        },
-        {
-          "time": "02:00",
-          "title": "🏒 NHL. Питтсбург – Монреаль"
-        },
         {
           "time": "05:15",
           "title": "Перерыв"
@@ -1366,6 +1358,14 @@
         {
           "time": "02:00",
           "title": "🏒 NHL. Нью-Джерси – Юта"
+        },
+        {
+          "time": "05:15",
+          "title": "Перерыв"
+        },
+        {
+          "time": "03:00",
+          "title": "NBA. Финикс Санз – Чикаго Буллз"
         }
       ]
     },
@@ -1373,10 +1373,6 @@
       "id": "7894",
       "name": "BOX SportCast Live 5 HD",
       "programs": [
-        {
-          "time": "02:00",
-          "title": "🏒 NHL. Тампа – Вашингтон"
-        },
         {
           "time": "05:15",
           "title": "Перерыв"
@@ -1404,6 +1400,10 @@
         {
           "time": "05:15",
           "title": "Перерыв"
+        },
+        {
+          "time": "03:00",
+          "title": "NBA. Орландо Мэджик – Мемфис Гриззлис"
         }
       ]
     },
@@ -1411,18 +1411,6 @@
       "id": "8829",
       "name": "BOX SportCast Live 6 HD",
       "programs": [
-        {
-          "time": "00:00",
-          "title": "Программа не найдена"
-        },
-        {
-          "time": "02:00",
-          "title": "🏒 NHL. Торонто – Оттава"
-        },
-        {
-          "time": "05:15",
-          "title": "Перерыв в вещании"
-        },
         {
           "time": "04:00",
           "title": "🏒 NHL. Ванкувер – Вегас (Очаповский) 🎤"
@@ -1442,6 +1430,18 @@
         {
           "time": "02:30",
           "title": "🏒 NHL. Рейнджерс – Айлендерс"
+        },
+        {
+          "time": "05:45",
+          "title": "Перерыв в вещании."
+        },
+        {
+          "time": "03:00",
+          "title": "🏀 NBA. Милоуки Бакс – Оклахома-Сити Тандер."
+        },
+        {
+          "time": "02:30",
+          "title": "🏀 NBA. Филадельфия Сиксерс – Бруклин Нетс"
         }
       ]
     },
@@ -1449,18 +1449,6 @@
       "id": "8830",
       "name": "BOX SportCast Live 7 HD",
       "programs": [
-        {
-          "time": "00:00",
-          "title": "Программа не найдена"
-        },
-        {
-          "time": "02:00",
-          "title": "🏒 NHL. Филадельфия – Каролина"
-        },
-        {
-          "time": "05:15",
-          "title": "Перерыв в вещании"
-        },
         {
           "time": "00:00",
           "title": "Программа не найдена"
@@ -1479,6 +1467,18 @@
         },
         {
           "time": "05:30",
+          "title": "Перерыв в вещании."
+        },
+        {
+          "time": "05:00",
+          "title": "🏒 NHL. Анахайм – Эдмонтон."
+        },
+        {
+          "time": "08:15",
+          "title": "Перерыв в вещании."
+        },
+        {
+          "time": "05:45",
           "title": "Перерыв в вещании."
         }
       ]
@@ -1505,18 +1505,18 @@
         },
         {
           "time": "09:10",
-          "title": "ГОРЯЧАЯ ДЕСЯТКА"
+          "title": "BRIDGE ЧАРТ"
         },
         {
           "time": "09:40",
           "title": "BRIDGE"
         },
         {
-          "time": "13:10",
-          "title": "BRIDGE ЧАРТ"
+          "time": "17:10",
+          "title": "ГОРЯЧАЯ ДЕСЯТКА"
         },
         {
-          "time": "13:40",
+          "time": "17:40",
           "title": "BRIDGE"
         }
       ]
@@ -1603,35 +1603,35 @@
       "programs": [
         {
           "time": "22:00",
-          "title": "Футбол: Манчестер Юнайтед – Сабах"
+          "title": "Футбол: ПСЖ – Слован Братислава"
         },
         {
           "time": "00:00",
-          "title": "Футбол: Бавария Мюнхен – Бодо Глимт"
+          "title": "Футбол: Порту – Манчестер Сити"
         },
         {
           "time": "02:00",
-          "title": "Футбол: ПСВ Эйндховен – Шахтёр Донецк"
+          "title": "Футбол: Штутгарт – Викинг"
         },
         {
           "time": "04:00",
-          "title": "Футбол: Арарат – Спарта Прага"
+          "title": "Футбол: Андерлехт – Лион"
         },
         {
           "time": "06:00",
-          "title": "Футбол: Реал Сосьедад – Борнмут"
+          "title": "Футбол: Славия Прага – Ланс"
         },
         {
           "time": "08:00",
-          "title": "Футбол: Бешикташ – Марсель"
+          "title": "Футбол: Омония – Сельта"
         },
         {
           "time": "10:00",
-          "title": "Футбол: Комо – Лейпциг"
+          "title": "Футбол: Штурм Грац – Ренн"
         },
         {
           "time": "12:00",
-          "title": "Главные моменты: UEL  UECL 2026-27"
+          "title": "Футбол: ПСВ Эйндховен – Шахтёр Донецк"
         }
       ]
     },
@@ -1641,35 +1641,35 @@
       "programs": [
         {
           "time": "23:00",
-          "title": "Футбол: Рома – Интер"
+          "title": "Футбол: Фиорентина – Наполи"
         },
         {
           "time": "01:00",
-          "title": "Футбол: Спортинг Лиссабон – Аруака"
+          "title": "Футбол: Витория Гимарайнш – Морейренсе"
         },
         {
           "time": "03:00",
-          "title": "Футбол: Болонья – Торино"
+          "title": "Футбол: Фрозиноне – Комо"
         },
         {
           "time": "05:00",
-          "title": "Футбол: Удинезе – Кальяри"
+          "title": "Футбол: Парма – Дженоа"
         },
         {
           "time": "07:00",
-          "title": "Футбол: Спортинг Лиссабон – Аруака"
+          "title": "Футбол: Витория Гимараеш – Мореиренсе"
         },
         {
           "time": "09:00",
-          "title": "Футбол: Болонья – Торино"
+          "title": "Футбол: Фрозиноне – Комо"
         },
         {
           "time": "11:00",
-          "title": "Футбол: Удинезе – Кальяри"
+          "title": "Футбол: Парма – Дженоа"
         },
         {
           "time": "13:00",
-          "title": "Футбол: Альверка – Рио Аве"
+          "title": "Футбол: Санта-Клара – Брага"
         }
       ]
     },
@@ -1678,36 +1678,36 @@
       "name": "Cosmote Sport 3 GR",
       "programs": [
         {
-          "time": "22:00",
-          "title": "Футбол: Реал Мадрид – Сантьяго Вондерерс"
+          "time": "23:00",
+          "title": "Футбол: АЛС Омония – АЕК Ларнаки"
         },
         {
-          "time": "00:30",
-          "title": "Футбол: Селтик – Рейнджерс"
-        },
-        {
-          "time": "02:30",
-          "title": "William Hill Шотландская Премьер-лига – Основные моменты"
+          "time": "01:00",
+          "title": "Футбол: Олдэм – Салфорд"
         },
         {
           "time": "03:00",
-          "title": "Sports Classics: Ultimate Rush 3 с-н 11 с."
-        },
-        {
-          "time": "03:30",
-          "title": "Sports Classics: Ultimate Rush 3 с-н 12 с."
-        },
-        {
-          "time": "04:00",
-          "title": "Футбол: Стенхаусмир – Хартс"
+          "title": "Футбол: Килмарнок – Абердин"
         },
         {
           "time": "06:00",
-          "title": "Спортивная классика: Ultimate Rush С1 В13"
+          "title": "Спортивная классика: Ultimate Rush К1 Е1"
         },
         {
           "time": "06:30",
-          "title": "Спортивная классика: Ultimate Rush С1 В14"
+          "title": "Американский футбол: Вашингтон Коммандерс – Индианаполис Колтс"
+        },
+        {
+          "time": "10:00",
+          "title": "William Hill Scottish Premiership – Основные моменты"
+        },
+        {
+          "time": "10:30",
+          "title": "Футбол: Вулверхэмптон – Вест Бром"
+        },
+        {
+          "time": "12:30",
+          "title": "Футбол: АЛС Омония – АЕК Ларнака"
         }
       ]
     },
@@ -1716,11 +1716,11 @@
       "name": "DocuBox HD",
       "programs": [
         {
-          "time": "23:45",
+          "time": "23:35",
           "title": "Чудо"
         },
         {
-          "time": "00:15",
+          "time": "00:10",
           "title": "Чудо"
         },
         {
@@ -1755,35 +1755,35 @@
       "programs": [
         {
           "time": "23:30",
-          "title": "ESPN Vandaag."
+          "title": "▶️ Eurojackpot Vrouwen Eredivisie Highlights."
         },
         {
-          "time": "00:30",
-          "title": "ESPN Vandaag."
+          "time": "00:00",
+          "title": "▶️ ESPN Vandaag (Nabeschouwing Oranje)."
+        },
+        {
+          "time": "00:45",
+          "title": "ESPN Vandaag (Nabeschouwing Oranje)."
         },
         {
           "time": "01:30",
-          "title": "▶️ Almere City - FC Volendam (Samenvatting) (Almere City - FC Volendam)."
+          "title": "ESPN Vandaag (Nabeschouwing Oranje)."
         },
         {
-          "time": "01:40",
-          "title": "▶️ RKC Waalwijk - FC Emmen (Samenvatting) (RKC Waalwijk - FC Emmen)."
+          "time": "02:15",
+          "title": "ESPN Vandaag (Nabeschouwing Oranje)."
         },
         {
-          "time": "01:50",
-          "title": "▶️ TOP Oss - MVV (Samenvatting) (TOP Oss - MVV)."
+          "time": "03:00",
+          "title": "ESPN Vandaag (Nabeschouwing Oranje)."
         },
         {
-          "time": "02:00",
-          "title": "▶️ Toronto Raptors - Miami Heat."
+          "time": "03:38",
+          "title": "ESPN Vandaag (Nabeschouwing Oranje)."
         },
         {
-          "time": "04:35",
-          "title": "ESPN Vandaag."
-        },
-        {
-          "time": "05:25",
-          "title": "ESPN Vandaag."
+          "time": "04:22",
+          "title": "ESPN Vandaag (Nabeschouwing Oranje)."
         }
       ]
     },
@@ -1792,36 +1792,36 @@
       "name": "ESPN 2 HD NL",
       "programs": [
         {
-          "time": "23:30",
-          "title": "Vitesse - NAC Breda."
+          "time": "23:00",
+          "title": "▶️ NL Division Series, Game 2: Milwaukee Brewers - San Diego Padres."
         },
         {
-          "time": "01:15",
-          "title": "▶️ Almere City - FC Volendam (Samenvatting) (Almere City - FC Volendam)."
+          "time": "02:00",
+          "title": "MLB Plays of the Week."
         },
         {
-          "time": "01:20",
-          "title": "▶️ RKC Waalwijk - FC Emmen (Samenvatting) (RKC Waalwijk - FC Emmen)."
+          "time": "02:23",
+          "title": "Feyenoord - Ajax (Samenvatting) (Feyenoord - Ajax)."
         },
         {
-          "time": "01:30",
-          "title": "▶️ AL Division Series, Game 1: Tampa Bay Rays - New York Yankees."
-        },
-        {
-          "time": "04:30",
-          "title": "▶️ Keuken Kampioen Divisie Highlights."
-        },
-        {
-          "time": "05:25",
-          "title": "TOP Oss - MVV (Samenvatting) (TOP Oss - MVV)."
-        },
-        {
-          "time": "05:35",
-          "title": "Almere City - FC Volendam (Samenvatting) (Almere City - FC Volendam)."
-        },
-        {
-          "time": "05:45",
+          "time": "02:35",
           "title": "RKC Waalwijk - FC Emmen (Samenvatting) (RKC Waalwijk - FC Emmen)."
+        },
+        {
+          "time": "02:45",
+          "title": "▶️ VVV-Venlo - Roda JC (Samenvatting) (VVV-Venlo - Roda JC)."
+        },
+        {
+          "time": "03:00",
+          "title": "▶️ NL Division Series, Game 2: Los Angeles Dodgers - Atlanta Braves."
+        },
+        {
+          "time": "06:00",
+          "title": "MLB Plays of the Week."
+        },
+        {
+          "time": "06:23",
+          "title": "TOP Oss - MVV (Samenvatting) (TOP Oss - MVV)."
         }
       ]
     },
@@ -1830,36 +1830,36 @@
       "name": "ESPN 2 HD US",
       "programs": [
         {
-          "time": "22:30",
-          "title": "▶️ College Football \"Teams TBA\"."
+          "time": "22:00",
+          "title": "▶️ USL Cup Soccer \"Final: Louisville City FC at Hartford Athletic\" (Trinity Health Stadium, Hartford, Connecticut, USA)."
+        },
+        {
+          "time": "00:00",
+          "title": "▶️ Boys High School Basketball \"The Border League: Prolific Prep (Fla.) vs. Golden Knights (Calif.)\"."
         },
         {
           "time": "01:30",
-          "title": "▶️ College Football Scoreboard."
+          "title": "The Difference: LSU Football."
         },
         {
           "time": "02:00",
-          "title": "▶️ College Football \"Teams TBA\"."
+          "title": "▶️ Boys High School Basketball \"The Border League: Fear of God (Fla.) vs. Spire Academy (Ohio)\"."
         },
         {
-          "time": "05:00",
-          "title": "▶️ College Football Scoreboard."
+          "time": "03:30",
+          "title": "TrueSouth \"The Shoals, Ala.\"."
+        },
+        {
+          "time": "04:00",
+          "title": "▶️ Boys High School Basketball \"The Border League: Southeastern Prep (Fla.) vs. AZ Compass (Ariz.)\"."
         },
         {
           "time": "05:30",
-          "title": "▶️ College Football \"Eastern Washington at UC Davis\" (UC Davis Health Stadium, Davis, CA, USA)."
+          "title": "Darts \"2026 World Grand Prix, Final\" (Mattioli Arena, Leicester, LEC, GBR)."
         },
         {
-          "time": "08:30",
-          "title": "College Football Final."
-        },
-        {
-          "time": "09:30",
-          "title": "NFL Matchup \"Week 4\"."
-        },
-        {
-          "time": "10:00",
-          "title": "SportsCenter."
+          "time": "07:30",
+          "title": "▶️ Baseball Tonight."
         }
       ]
     },
@@ -1868,36 +1868,36 @@
       "name": "ESPN 3 HD NL",
       "programs": [
         {
-          "time": "23:00",
-          "title": "▶️ MLB."
+          "time": "23:25",
+          "title": "▶️ Las Vegas Raiders - Kansas City Chiefs."
         },
         {
-          "time": "02:00",
-          "title": "▶️ ESPN DOC (Het Nederlandse honkbalwonder)."
-        },
-        {
-          "time": "02:45",
-          "title": "NFL Blitz."
-        },
-        {
-          "time": "03:10",
-          "title": "▶️ Almere City - FC Volendam (Samenvatting) (Almere City - FC Volendam)."
+          "time": "02:30",
+          "title": "▶️ NFL Blitz."
         },
         {
           "time": "03:20",
-          "title": "▶️ RKC Waalwijk - FC Emmen (Samenvatting) (RKC Waalwijk - FC Emmen)."
+          "title": "▶️ Carolina Panthers - Detroit Lions."
         },
         {
-          "time": "03:30",
-          "title": "▶️ NL Division Series, Game 1: Milwaukee Brewers - San Diego Padres."
+          "time": "06:20",
+          "title": "▶️ Eurojackpot Vrouwen Eredivisie Highlights."
         },
         {
-          "time": "06:30",
-          "title": "MLB Plays of the Week."
+          "time": "06:50",
+          "title": "▶️ Feyenoord - Ajax (Samenvatting) (Feyenoord - Ajax)."
         },
         {
-          "time": "06:52",
-          "title": "Almere City - FC Volendam (Samenvatting) (Almere City - FC Volendam)."
+          "time": "07:00",
+          "title": "▶️ Gotham FC - Angel City FC."
+        },
+        {
+          "time": "08:45",
+          "title": "VVV-Venlo - Roda JC (Samenvatting) (VVV-Venlo - Roda JC)."
+        },
+        {
+          "time": "09:00",
+          "title": "Eurojackpot Vrouwen Eredivisie Highlights."
         }
       ]
     },
@@ -1906,36 +1906,36 @@
       "name": "ESPN 4 HD NL",
       "programs": [
         {
-          "time": "23:00",
-          "title": "▶️ Missouri - Florida."
+          "time": "20:00",
+          "title": "▶️ NFL RedZone."
         },
         {
-          "time": "01:30",
-          "title": "▶️ College Football Scoreboard."
+          "time": "03:00",
+          "title": "▶️ Eurojackpot Vrouwen Eredivisie Highlights."
         },
         {
-          "time": "02:30",
-          "title": "▶️ Clemson - Miami."
+          "time": "03:25",
+          "title": "▶️ Halve Finale, Game 1: Atlanta Dream - New York Liberty."
         },
         {
-          "time": "05:30",
-          "title": "▶️ Keuken Kampioen Divisie Highlights."
+          "time": "04:56",
+          "title": "UEFA Women's Champions League Highlights."
         },
         {
-          "time": "06:25",
-          "title": "NFL Blitz."
+          "time": "05:23",
+          "title": "Keuken Kampioen Divisie Highlights."
         },
         {
-          "time": "06:50",
-          "title": "▶️ RKC Waalwijk - FC Emmen (Samenvatting) (RKC Waalwijk - FC Emmen)."
+          "time": "06:15",
+          "title": "Eurojackpot Vrouwen Eredivisie Highlights."
         },
         {
-          "time": "07:00",
-          "title": "TOP Oss - MVV."
+          "time": "06:41",
+          "title": "▶️ VVV-Venlo - Roda JC (Samenvatting) (VVV-Venlo - Roda JC)."
         },
         {
-          "time": "08:45",
-          "title": "Helmond Sport - Heracles Almelo (Samenvatting) (Helmond Sport - Heracles Almelo)."
+          "time": "06:51",
+          "title": "TOP Oss - MVV (Samenvatting) (TOP Oss - MVV)."
         }
       ]
     },
@@ -1944,36 +1944,36 @@
       "name": "ESPN HD US",
       "programs": [
         {
-          "time": "22:30",
-          "title": "▶️ College Football \"Auburn at Tennessee\" (Neyland Stadium, Knoxville, TN, USA)."
+          "time": "22:00",
+          "title": "▶️ Women's College Volleyball. Colorado at Baylor."
         },
         {
-          "time": "01:30",
-          "title": "▶️ College Football Scoreboard."
+          "time": "00:00",
+          "title": "▶️ Women's College Volleyball. Iowa State at Arizona State."
         },
         {
           "time": "02:00",
-          "title": "▶️ College Football \"BYU at TCU\" (Amon G. Carter Stadium, Fort Worth, TX, USA)."
+          "title": "SportsCenter."
         },
         {
-          "time": "05:00",
-          "title": "▶️ College Football Scoreboard."
-        },
-        {
-          "time": "05:30",
-          "title": "▶️ College Football \"Baylor at Arizona State\" (Mountain America Stadium, Tempe, AZ, USA)."
-        },
-        {
-          "time": "08:30",
+          "time": "03:00",
           "title": "▶️ SportsCenter."
         },
         {
-          "time": "10:00",
-          "title": "College Football Final."
+          "time": "03:30",
+          "title": "▶️ Women's College Volleyball. Kentucky at Florida."
         },
         {
-          "time": "11:00",
-          "title": "College Football Final."
+          "time": "05:30",
+          "title": "▶️ SportsCenter."
+        },
+        {
+          "time": "06:30",
+          "title": "▶️ SportsCenter With Scott Van Pelt."
+        },
+        {
+          "time": "08:00",
+          "title": "▶️ SportsCenter."
         }
       ]
     },
@@ -1983,35 +1983,35 @@
       "programs": [
         {
           "time": "23:40",
-          "title": "Bundesliga Clubs: SV Werder Brema"
-        },
-        {
-          "time": "00:00",
-          "title": "Bundesliga Clubs: 1. FC Köln"
+          "title": "Bundesliga Special Show"
         },
         {
           "time": "00:20",
-          "title": "Bundesliga Clubs: Hamburger SV"
-        },
-        {
-          "time": "00:40",
-          "title": "Bundesliga Clubs: Borussia Mönchengladbach"
+          "title": "Serie A: International Break Special"
         },
         {
           "time": "01:00",
-          "title": "Ligue 1 Show"
+          "title": "Eleven Top Goals"
         },
         {
-          "time": "01:40",
-          "title": "AJ Auxerre – Małe miasto, wielki klub"
+          "time": "02:00",
+          "title": "Moi bohaterowie: Joshua Kimmich"
         },
         {
-          "time": "02:15",
-          "title": "Birds of paradise"
+          "time": "02:40",
+          "title": "Najlepsze gole Schalke 04"
         },
         {
           "time": "03:00",
           "title": "Piłka nożna: Serie A. AC Monza – US Sassuolo Calcio"
+        },
+        {
+          "time": "05:00",
+          "title": "Werder Double"
+        },
+        {
+          "time": "06:05",
+          "title": "Legendy Bundesligi: Karl-Heinz Rummenigge"
         }
       ]
     },
@@ -2020,36 +2020,36 @@
       "name": "Hollywood",
       "programs": [
         {
-          "time": "22:00",
-          "title": "Доспехи Бога: Миссия Зодиак"
+          "time": "23:20",
+          "title": "Отчаянный ход"
         },
         {
           "time": "00:00",
-          "title": "Билл и Тед снова в деле"
+          "title": "Новости Голливуда. 739 с."
         },
         {
-          "time": "01:25",
-          "title": "Спрячь бабушку в холодильнике"
+          "time": "00:15",
+          "title": "А вот и она"
+        },
+        {
+          "time": "01:45",
+          "title": "Джулс"
         },
         {
           "time": "03:05",
-          "title": "Я не киллер"
+          "title": "Игра с огнем"
         },
         {
-          "time": "04:55",
-          "title": "Лагерь Лоссель"
+          "time": "04:25",
+          "title": "Тихая гавань"
         },
         {
           "time": "06:20",
-          "title": "Миддлтон"
+          "title": "13 минут"
         },
         {
-          "time": "07:55",
-          "title": "Планета Ка-Пэкс"
-        },
-        {
-          "time": "09:50",
-          "title": "Великая Лилиан Холл"
+          "time": "08:00",
+          "title": "Вышка"
         }
       ]
     },
@@ -2058,36 +2058,36 @@
       "name": "Hollywood HD",
       "programs": [
         {
-          "time": "22:25",
-          "title": "Вторжение в эфир"
+          "time": "22:10",
+          "title": "Маргарита – королева Севера"
         },
         {
           "time": "00:00",
-          "title": "Опасные игры"
+          "title": "Побег из Претории"
         },
         {
-          "time": "01:30",
-          "title": "Час тишины"
+          "time": "01:40",
+          "title": "Невидимый гость"
         },
         {
-          "time": "03:05",
-          "title": "Ограбление в ураган"
+          "time": "03:20",
+          "title": "Офицер и шпион"
         },
         {
-          "time": "04:40",
-          "title": "Шпион по соседству"
+          "time": "05:15",
+          "title": "Банк Дэйва"
         },
         {
-          "time": "06:10",
-          "title": "Бюро магических услуг"
+          "time": "06:55",
+          "title": "Мармелад"
         },
         {
-          "time": "08:00",
-          "title": "Простушка"
+          "time": "08:30",
+          "title": "Дикая жизнь"
         },
         {
-          "time": "09:35",
-          "title": "Детки в порядке"
+          "time": "10:10",
+          "title": "Ангел мой"
         }
       ]
     },
@@ -2096,36 +2096,36 @@
       "name": "Krone hit HD",
       "programs": [
         {
-          "time": "22:20",
-          "title": "Олень."
+          "time": "23:15",
+          "title": "Кукольник."
         },
         {
-          "time": "00:05",
-          "title": "По-братски."
+          "time": "00:50",
+          "title": "Кто там?"
         },
         {
-          "time": "01:45",
-          "title": "Поехавшая."
+          "time": "02:05",
+          "title": "Император."
         },
         {
-          "time": "03:30",
-          "title": "Герда."
-        },
-        {
-          "time": "05:25",
+          "time": "03:35",
           "title": "Петрополис."
         },
         {
-          "time": "07:15",
-          "title": "Переговорщик: 1 серия."
+          "time": "05:25",
+          "title": "По-братски."
         },
         {
-          "time": "08:05",
-          "title": "Переговорщик: 2 серия."
+          "time": "07:00",
+          "title": "За первого встречного: 1 серия."
         },
         {
-          "time": "09:05",
-          "title": "Переговорщик: 3 серия."
+          "time": "08:00",
+          "title": "За первого встречного: 2 серия."
+        },
+        {
+          "time": "08:55",
+          "title": "За первого встречного: 3 серия."
         }
       ]
     },
@@ -2135,31 +2135,31 @@
       "programs": [
         {
           "time": "23:45",
-          "title": "Расшифрованые Животные (Invisible Signals). S1,Ep3"
+          "title": "Выдры (Queen of the Bay). S1,Ep6"
         },
         {
           "time": "00:00",
-          "title": "Destinasi Nasyid Anda"
-        },
-        {
-          "time": "00:40",
-          "title": "Wild Science (Bull Shark). S1,Ep2"
-        },
-        {
-          "time": "01:00",
           "title": "Carta Nasyid ZAYAN"
         },
         {
-          "time": "01:35",
-          "title": "Wild Science (Brown Bear). S1,Ep3"
+          "time": "00:40",
+          "title": "Скопа: морской хищник"
         },
         {
-          "time": "02:00",
+          "time": "01:00",
           "title": "Destinasi Nasyid Anda"
         },
         {
+          "time": "01:35",
+          "title": "Выдры (City of Riches). S1,Ep1"
+        },
+        {
+          "time": "02:00",
+          "title": "ZAYAN Salam Biz"
+        },
+        {
           "time": "02:25",
-          "title": "Wild Science (Black Rhino). S1,Ep4"
+          "title": "Выдры (Home Away from Home). S1,Ep2"
         },
         {
           "time": "03:00",
@@ -2172,36 +2172,36 @@
       "name": "LUXURY WORLD HD orig",
       "programs": [
         {
-          "time": "14:00",
-          "title": "Війна. Марафон на Першому. Повтор за тиждень"
-        },
-        {
-          "time": "02:00",
-          "title": "Війна. Марафон на Першому. Повтор за тиждень"
-        },
-        {
-          "time": "10:25",
-          "title": "Нічний ефір"
-        },
-        {
-          "time": "15:00",
-          "title": "Мода в России."
-        },
-        {
-          "time": "15:30",
+          "time": "23:30",
           "title": "Код женщины (Современность)."
         },
         {
-          "time": "16:00",
-          "title": "Искусство макияжа."
+          "time": "02:30",
+          "title": "Легенды русского балета."
         },
         {
-          "time": "16:30",
-          "title": "Готовим по итальянски. Сезон 1, Серия 6."
-        },
-        {
-          "time": "17:00",
+          "time": "03:00",
           "title": "Планета шефов (Джованни Пассерини, Италия). Сезон 1, Серия 4."
+        },
+        {
+          "time": "04:00",
+          "title": "Я - model."
+        },
+        {
+          "time": "04:30",
+          "title": "Супер-яхты. Сезон 1, Серия 1."
+        },
+        {
+          "time": "05:00",
+          "title": "Мода в России."
+        },
+        {
+          "time": "05:30",
+          "title": "В отрыв. Серия 17."
+        },
+        {
+          "time": "06:00",
+          "title": "Искусство макияжа."
         }
       ]
     },
@@ -2210,36 +2210,36 @@
       "name": "Mezzo HD orig",
       "programs": [
         {
-          "time": "23:30",
-          "title": "Classical. The Cleveland Orchestra, Esa-Pekka Salonen – Ravel, Salonen, Sibelius"
+          "time": "22:00",
+          "title": "Opera. Wagner: Tristan und Isolde – Staatsoper Dresden"
         },
         {
-          "time": "01:10",
-          "title": "Classical. Lucerne Festival Orchestra, Riccardo Chailly, Mao Fujita – Rachmaninov"
+          "time": "01:50",
+          "title": "Classical. Czech Philharmonic, Alain Altinoglu, Beatrice Rana: Berlioz, Mendelssohn, Ravel"
         },
         {
-          "time": "03:00",
-          "title": "Opera. Respighi: La fiamma – Deutsche Oper Berlin"
-        },
-        {
-          "time": "05:15",
-          "title": "Classical. Mahler: Symphony No. 5 – Orchestre Suisse Romande, Jonathan Nott"
-        },
-        {
-          "time": "05:25",
-          "title": "Classical. Mahler: Symphony No. 5 – Orchestre Suisse Romande, Jonathan Nott"
-        },
-        {
-          "time": "06:40",
+          "time": "03:05",
           "title": "Intermezzo"
         },
         {
-          "time": "07:00",
-          "title": "Jazz. Joey Alexander Trio – Fondation Louis Vuitton"
+          "time": "03:15",
+          "title": "Classical. Jakub Hrusa, Augustin Hadelich, Czech Philharmonic – Suk, Sibelius"
         },
         {
-          "time": "08:45",
-          "title": "Jazz. Shahin Novrasli – Fondation Louis Vuitton"
+          "time": "05:05",
+          "title": "Classical. Czech Philharmonic, Semyon Bychkov, Lisa Batiashvili: Beethoven, Strauss"
+        },
+        {
+          "time": "07:00",
+          "title": "Opera. Respighi: La fiamma – Deutsche Oper Berlin"
+        },
+        {
+          "time": "09:10",
+          "title": "Classical. Mahler: Symphony No. 5 – Orchestre Suisse Romande, Jonathan Nott"
+        },
+        {
+          "time": "10:45",
+          "title": "Classical. Beatrice Rana, Chamber Orchestra of Europe and Yannick Nezet-Seguin: Clara Schumann, Brahms"
         }
       ]
     },
@@ -2249,7 +2249,7 @@
       "programs": [
         {
           "time": "23:30",
-          "title": "Романтика."
+          "title": "Юность."
         },
         {
           "time": "00:00",
@@ -2257,7 +2257,7 @@
         },
         {
           "time": "00:30",
-          "title": "Юность."
+          "title": "Эстрада."
         },
         {
           "time": "01:00",
@@ -2265,7 +2265,7 @@
         },
         {
           "time": "01:30",
-          "title": "Эстрада."
+          "title": "Золотой резерв."
         },
         {
           "time": "02:00",
@@ -2273,7 +2273,7 @@
         },
         {
           "time": "02:30",
-          "title": "Playlist."
+          "title": "Золотой резерв."
         },
         {
           "time": "03:00",
@@ -2286,12 +2286,8 @@
       "name": "NRJ HITS HD",
       "programs": [
         {
-          "time": "23:00",
-          "title": "Spéciale Martin Garrix (Clips)."
-        },
-        {
-          "time": "00:00",
-          "title": "Soirée années 2000 (Clips)."
+          "time": "21:00",
+          "title": "NRJ Hit Music Only (Clips)."
         },
         {
           "time": "01:00",
@@ -2307,7 +2303,11 @@
         },
         {
           "time": "13:00",
-          "title": "NRJ Week End (Clips)."
+          "title": "Hit Music Only (Clips)."
+        },
+        {
+          "time": "18:00",
+          "title": "NRJ After School (Clips)."
         },
         {
           "time": "21:00",
@@ -2325,35 +2325,35 @@
       "programs": [
         {
           "time": "23:35",
-          "title": "Истории Черепашек-ниндзя 2. 7 с. Восход Ночного ниндзя"
+          "title": "Истории Черепашек-ниндзя 2. 9 с. История Скрэча"
         },
         {
           "time": "00:00",
-          "title": "Истории Черепашек-ниндзя 2. 8 с. Возвращение Ночного ниндзя"
+          "title": "Истории Черепашек-ниндзя 2. 10 с. Спасти Рода"
         },
         {
           "time": "00:20",
-          "title": "Губка Боб Квадратные Штаны, 216 с. Пещерная губка / Заклинатель устриц"
+          "title": "Губка Боб Квадратные Штаны, 218 с. Бутылкокрут / В моём супе – губка!"
+        },
+        {
+          "time": "00:25",
+          "title": "Губка Боб Квадратные Штаны, 218 с. Бутылкокрут / В моём супе – губка!"
         },
         {
           "time": "00:45",
-          "title": "Губка Боб Квадратные Штаны, 217 с. Цап возвращается / Медосмотр"
+          "title": "Губка Боб Квадратные Штаны, 219 с. Морской Злодей возвращается / Ларри-администратор"
         },
         {
           "time": "01:10",
-          "title": "Марсупилами. 11 с. Музыкальный переполох / Кошка по имени Панч"
+          "title": "Марсупилами. 12 с. Парк с препятствиями / Страшно, очень страшно!"
         },
         {
           "time": "01:35",
-          "title": "Лучш и Лучшик. 4 с. Примодниться / Так ничего не разгадать"
+          "title": "Лучш и Лучшик. 6 с. Тэнта-хлопья / Босс уровня"
         },
         {
           "time": "01:55",
-          "title": "Лучш и Лучшик. 5 с. Баюшки-баю / Взболтай и успевай"
-        },
-        {
-          "time": "02:20",
-          "title": "Шоу Патрика Стара 2. 3 с. Десять и один туалетик / Семейный обед"
+          "title": "Лучш и Лучшик. 7 с. Страх сцены / Счет мячам"
         }
       ]
     },
@@ -2362,36 +2362,36 @@
       "name": "Q Arena HD KZ",
       "programs": [
         {
-          "time": "23:00",
-          "title": "Регби. Кубок вызова, 1/2 финала, Ольстер - Эксетер Чифс."
+          "time": "23:45",
+          "title": "Boxing. IBA World Championships, Men."
         },
         {
-          "time": "00:45",
-          "title": "Волейбол. Ұлттар лигасы, 9 тур, Қытай - Бразилия, ерлер."
+          "time": "00:00",
+          "title": "Регби. Кубок чемпионов, 1/2 финала, Бордо-Бегль - Бат."
         },
         {
-          "time": "02:05",
-          "title": "Basketball. FIBA EuroBasket 2025, Portugal - Latvia, men."
+          "time": "01:40",
+          "title": "Волейбол. Ұлттар лигасы. 1/4 финал, Жапония - Қытай, ерлер."
         },
         {
-          "time": "04:00",
-          "title": "Жағажай волейбол. Pro Tour. Elite 16 Hamburg, 1/2 финал, Германия - Латвия, ерлер."
-        },
-        {
-          "time": "05:00",
-          "title": "LIVE.Мотоспорт. Гран-при Японии. Гонки Мото 3, Мото 2 Мотo GP."
-        },
-        {
-          "time": "09:15",
+          "time": "03:50",
           "title": "Теннис. Дэвис кубогы. Қазақстан - Тайланд, Скатов Т. - Джонс М."
         },
         {
-          "time": "11:35",
-          "title": "Великие команды Лиги чемпионов. Милан."
+          "time": "04:00",
+          "title": "Пляжный волейбол. Pro Tour. Elite16 Montreal, США - США, женщины."
         },
         {
-          "time": "12:00",
-          "title": "LIVE.Киберспорт. ESL Pro League Season 24 CS 2."
+          "time": "04:40",
+          "title": "Пляжный волейбол. Pro Tour. Elite16 Montreal, Швеция - Канада, мужчины."
+        },
+        {
+          "time": "05:20",
+          "title": "Регби. Кубок вызова, финал, Монпелье - Ольстер."
+        },
+        {
+          "time": "07:00",
+          "title": "Волейбол. Ұлттар лигасы. 1/4 финал, Польша - Украина, ерлер."
         }
       ]
     },
@@ -2400,36 +2400,36 @@
       "name": "Romance HD",
       "programs": [
         {
-          "time": "23:15",
-          "title": "Любовь и музыка"
-        },
-        {
-          "time": "00:45",
-          "title": "Секреты моей падчерицы"
-        },
-        {
-          "time": "02:10",
-          "title": "Фурия"
-        },
-        {
-          "time": "03:50",
+          "time": "23:20",
           "title": "Кротоа"
         },
         {
-          "time": "05:45",
-          "title": "Дорога вперёд"
+          "time": "01:15",
+          "title": "Смертельная колыбельная"
+        },
+        {
+          "time": "02:35",
+          "title": "Семейные игры"
+        },
+        {
+          "time": "05:10",
+          "title": "Двойное бельгийское"
         },
         {
           "time": "07:25",
-          "title": "Любить каждую минуту"
+          "title": "VESNA"
         },
         {
-          "time": "08:50",
-          "title": "Плюс один вслепую"
+          "time": "08:00",
+          "title": "VESNA"
         },
         {
-          "time": "10:10",
-          "title": "Пенелопа. 1 с."
+          "time": "09:00",
+          "title": "VESNA"
+        },
+        {
+          "time": "10:00",
+          "title": "VESNA"
         }
       ]
     },
@@ -2438,36 +2438,36 @@
       "name": "SPORT TV + PT",
       "programs": [
         {
-          "time": "23:00",
-          "title": "UEFA Nations League: Resumo do Dia."
+          "time": "23:42",
+          "title": "▶️ Rescaldo Portugal x Noruega (Uefa Nations League - Informação - Informação)."
         },
         {
-          "time": "00:00",
-          "title": "Espanha x Chéquia – UEFA Nations League."
+          "time": "00:56",
+          "title": "Portugal x Noruega (Uefa Nations League - Futebol)."
         },
         {
-          "time": "00:30",
-          "title": "Últimas Notícias."
-        },
-        {
-          "time": "01:30",
+          "time": "01:27",
           "title": "▶️ Últimas Notícias (Últimas Notícias - Informação)."
         },
         {
           "time": "02:00",
-          "title": "Croácia x Inglaterra (Uefa Nations League - Futebol)."
+          "title": "Grécia x Alemanha (Uefa Nations League - Futebol)."
         },
         {
-          "time": "02:30",
-          "title": "One Fight Night (One Fighting Championship - Desportos Combate)."
+          "time": "04:05",
+          "title": "País De Gales x Dinamarca (Uefa Nations League - Futebol)."
         },
         {
-          "time": "03:30",
-          "title": "Sem Transmissão (Sem Transmissão)."
+          "time": "04:35",
+          "title": "Portugal x Noruega (Uefa Nations League - Futebol)."
         },
         {
-          "time": "03:40",
-          "title": "▶️ Motul Grand Prix Of Japan - Moto Gp - Warm Up (Moto Gp - Motociclismo)."
+          "time": "05:06",
+          "title": "Últimas Notícias (Últimas Notícias - Informação)."
+        },
+        {
+          "time": "05:37",
+          "title": "Rali Da Sardenha - Resumo Dia 3 (Wrc 2026 - Resumo Do Dia - Automobilismo)."
         }
       ]
     },
@@ -2475,10 +2475,6 @@
       "id": "7244",
       "name": "Setanta Moldova FHD",
       "programs": [
-        {
-          "time": "00:00",
-          "title": "Программа не найдена"
-        },
         {
           "time": "00:00",
           "title": "Программа не найдена"
@@ -2506,6 +2502,10 @@
         {
           "time": "15:00",
           "title": "Серия A: Фиорентина — Наполи."
+        },
+        {
+          "time": "17:00",
+          "title": "Уточняется!"
         }
       ]
     },
@@ -2515,35 +2515,35 @@
       "programs": [
         {
           "time": "23:00",
-          "title": "GTWC: Barcelona (Sprint Cup) - 1. Rennen."
+          "title": "WRC: Rally Italia Sardegna - SS17 Sassari - Argentiera 2 (Wolf Power Stage)."
         },
         {
-          "time": "00:00",
-          "title": "F1: Qualifying - GP Bahrain. \"GP Bahrain: Qualifying\"."
+          "time": "00:30",
+          "title": "F1: Rennen - GP Bahrain. \"GP Bahrain: Rennen\"."
         },
         {
-          "time": "01:30",
-          "title": "F1: GP Confidential."
+          "time": "02:30",
+          "title": "WRC: Rally Italia Sardegna - SS17 Sassari - Argentiera 2 (Wolf Power Stage)."
         },
         {
-          "time": "02:00",
-          "title": "F1: Rennen - GP Aserbaidschan. \"GP Aserbaidschan: Rennen\"."
+          "time": "03:00",
+          "title": "WRC: Rally Italia Sardegna - SS17 Sassari - Argentiera 2 (Wolf Power Stage)."
         },
         {
-          "time": "04:00",
-          "title": "F1: Qualifying - GP Bahrain. \"GP Bahrain: Qualifying\"."
+          "time": "04:30",
+          "title": "F1: Rennen - GP Bahrain. \"GP Bahrain: Rennen\"."
         },
         {
-          "time": "05:30",
-          "title": "F1: Top 10: Moments of Brilliance - Kimi Raikkonen."
+          "time": "06:30",
+          "title": "GTWC: Barcelona (Sprint Cup) - 2. Rennen."
         },
         {
-          "time": "05:45",
-          "title": "F1: Top 10: Moments of Brilliance - Fernando Alonso."
+          "time": "07:30",
+          "title": "F1: 1. Freies Training - GP Bahrain. \"GP Bahrain: 1. Freies Training\"."
         },
         {
-          "time": "06:00",
-          "title": "GTWC: Barcelona (Sprint Cup) - 1. Rennen."
+          "time": "09:00",
+          "title": "F1: 2. Freies Training - GP Bahrain. \"GP Bahrain: 2. Freies Training\"."
         }
       ]
     },
@@ -2553,35 +2553,35 @@
       "programs": [
         {
           "time": "22:30",
-          "title": "ATP 250: H. Hurkacz (POL) - A. Davidovich Fokina (ESP), Chengdu Open in Chengdu (CHN), Finale."
-        },
-        {
-          "time": "01:00",
-          "title": "WTA 1000: Topspiel, China Open in Peking (China), 4. Tag."
-        },
-        {
-          "time": "03:00",
-          "title": "ATP 500: Topspiel, China Open in Peking (China), 4. Tag."
-        },
-        {
-          "time": "05:00",
-          "title": "▶️ ATP & WTA: Die Topspiele des Tages."
-        },
-        {
-          "time": "18:00",
-          "title": "ATP 250: H. Hurkacz (POL) - A. Davidovich Fokina (ESP), Chengdu Open in Chengdu (CHN), Finale."
-        },
-        {
-          "time": "20:30",
-          "title": "WTA 1000: Topspiel, China Open in Peking (China), 5. Tag."
-        },
-        {
-          "time": "22:30",
           "title": "ATP 500: Topspiel, China Open in Peking (China), 5. Tag."
         },
         {
           "time": "00:30",
           "title": "ATP: This Week. Ep.99 \"Tennis: ATP This Week\"."
+        },
+        {
+          "time": "01:00",
+          "title": "Laver Cup: Review 2026. Ep.401 \"Laver Cup - Review 2026\"."
+        },
+        {
+          "time": "02:00",
+          "title": "WTA 1000: Topspiel, China Open in Peking (China), 5. Tag."
+        },
+        {
+          "time": "03:00",
+          "title": "ATP 500: A. Zverev (GER) - N. Djokovic (SRB), China Open in Peking (China), 5. Tag."
+        },
+        {
+          "time": "05:00",
+          "title": "US Open: Highlights XXL: A. Zverev (GER) - B. Shelton (USA), Finale Herren."
+        },
+        {
+          "time": "05:30",
+          "title": "US Open: Highlights XXL: A. Sabalenka - E. Rybakina (KAZ), Finale Damen."
+        },
+        {
+          "time": "06:00",
+          "title": "▶️ ATP & WTA: Die Topspiele des Tages."
         }
       ]
     },
@@ -2591,35 +2591,35 @@
       "programs": [
         {
           "time": "23:45",
-          "title": "Colpo da campione. Il servizio di Bellucci"
+          "title": "Circolando. TC Napoli 1905"
         },
         {
           "time": "00:00",
-          "title": "Us Open"
+          "title": "WTA Pechino"
         },
         {
           "time": "02:00",
-          "title": "WTA Pechino"
+          "title": "WTA 1000 Pechino"
         },
         {
           "time": "04:00",
-          "title": "WTA Pechino"
+          "title": "WTA 1000 Pechino"
+        },
+        {
+          "time": "05:45",
+          "title": "Race to Foro"
         },
         {
           "time": "06:00",
-          "title": "⋗ WTA 1000 Pechino. Nikola BARTUNKOVA (CZE) vs Aryna SABALENKA"
+          "title": "⋗ WTA 1000. Donna VEKIC (CRO) vs Iga SWIATEK (POL)"
         },
         {
-          "time": "07:45",
-          "title": "Ti. reak Time"
-        },
-        {
-          "time": "08:00",
-          "title": "⋗ WTA 1000 Pechino. Polina KUDERMETOVA (UZB) vs Mirra ANDREEVA"
-        },
-        {
-          "time": "09:20",
+          "time": "08:55",
           "title": "Colpo da campione By Head. Il servizio di Bellucci"
+        },
+        {
+          "time": "09:05",
+          "title": "⋗ WTA 1000 Pechino. Marie BOUZKOVA (CZE) vs Qinwen ZHENG (CHN)"
         }
       ]
     },
@@ -2670,32 +2670,32 @@
           "title": "Бинг. 29 с."
         },
         {
-          "time": "00:00",
-          "title": "Супер Крылья: Джетт и его друзья"
+          "time": "05:01",
+          "title": "Моланг (Автомобиль)"
         },
         {
-          "time": "01:00",
-          "title": "Лесные истории"
+          "time": "05:05",
+          "title": "Пингвиненок Пороро (Рюкзак Эдди на все случаи жизни)"
         },
         {
-          "time": "02:00",
-          "title": "Ранчо динозавров"
+          "time": "05:19",
+          "title": "Пингвиненок Пороро (Быть медленным неплохо)"
         },
         {
-          "time": "03:00",
-          "title": "Робокар Поли и его друзья"
+          "time": "05:33",
+          "title": "Пингвиненок Пороро (Кронг заскучал)"
         },
         {
-          "time": "04:00",
-          "title": "Энчантималс: Волшебные сказки"
+          "time": "05:47",
+          "title": "Пингвиненок Пороро (Поправляйся скорее, Лупи)"
         },
         {
-          "time": "05:00",
-          "title": "Моланг"
+          "time": "06:02",
+          "title": "Цветняшки (Хочу быть как папа)"
         },
         {
-          "time": "06:00",
-          "title": "Пингвиненок Пороро"
+          "time": "06:07",
+          "title": "Цветняшки (Птичка)"
         }
       ]
     },
@@ -2704,36 +2704,36 @@
       "name": "BOX Apocalypse HD",
       "programs": [
         {
-          "time": "23:39",
-          "title": "Батарейка."
+          "time": "22:41",
+          "title": "После нашей эры."
         },
         {
-          "time": "01:18",
-          "title": "Молчаливый бег."
+          "time": "00:20",
+          "title": "Обитель зла. Возмездие."
         },
         {
-          "time": "02:47",
-          "title": "Обитель зла- Последняя глава."
+          "time": "01:55",
+          "title": "Америка-3000."
         },
         {
-          "time": "04:33",
-          "title": "48 недель спустя."
+          "time": "03:27",
+          "title": "Танцы насмерть."
         },
         {
-          "time": "05:55",
-          "title": "Носители."
+          "time": "05:09",
+          "title": "Солдат апокалипсиса."
         },
         {
-          "time": "07:19",
-          "title": "Город Эмбер - Побег."
+          "time": "06:32",
+          "title": "Человек Омега."
         },
         {
-          "time": "08:53",
-          "title": "Принцесса мечей."
+          "time": "08:09",
+          "title": "Сталкер."
         },
         {
-          "time": "10:25",
-          "title": "Голодные игры - И вспыхнет пламя."
+          "time": "10:50",
+          "title": "Местные."
         }
       ]
     },
@@ -2742,36 +2742,36 @@
       "name": "BOX AutoTrend HD",
       "programs": [
         {
-          "time": "23:56",
-          "title": "ПРИВОЗ АВТО ИЗ ГЕРМАНИИ И КОРЕИ! VW CADDY, BMW X6, VW ARTEON! АВТОПОДБОР AUTOFACT"
+          "time": "23:51",
+          "title": "СДЕЛАНО В РОССИИ! ПОЛНЫЙ ПРИВОД И КРОВАТЬ ВНУТРИ. КАТЕГОРИЯ В! Новая Газель"
         },
         {
-          "time": "01:13",
-          "title": "Обзор Toyota Land  Cruiser Prado 250   Продолжение легенды или пластмассовая игрушка"
+          "time": "00:28",
+          "title": "Кроссоверы Tenet появятся в июле   Производство Тенет на заводе АГР в Калуге"
         },
         {
-          "time": "01:46",
-          "title": "Mercedes GLK – ресурс и надежность   Все проблемы подержанных кроссоверов Мерседес ГЛК"
+          "time": "00:37",
+          "title": "Найти идеальную Toyota Camry за день. Шансов нет"
         },
         {
-          "time": "01:59",
-          "title": "Замена масла в коробке передач просто и правильно масло"
+          "time": "01:11",
+          "title": "Курсы упали  Что выбирают в марте 2025 Авто в любой бюджет     Sferacar стоянка"
+        },
+        {
+          "time": "01:38",
+          "title": "Как выбрать не убитый Citroen C4 с пробегом   Ситроен С4 мотор и коробка"
+        },
+        {
+          "time": "01:51",
+          "title": "Повышение утильсбора 2025 Как изменятся цены на авто"
+        },
+        {
+          "time": "01:55",
+          "title": "Каким должен быть современный антикор автомобиля"
         },
         {
           "time": "02:05",
-          "title": "Топ 9 среднеразмерных кроссоверов 2025. Супертест Авто.ру!"
-        },
-        {
-          "time": "02:36",
-          "title": "НИВА с новым мотором! Ну что, поехала   Lada Niva Travel лада нива"
-        },
-        {
-          "time": "02:52",
-          "title": "Подробный обзор Hongqi H5 — статус, управляемость, ресурс, расход"
-        },
-        {
-          "time": "03:11",
-          "title": "Цены на китайские авто! Ищем самый дешевый! Автоподбор Autofact"
+          "title": "КУПИЛИ Xiaomi YU7! Сколько ПЕРЕПЛАТИЛ Первые эмоции и впечатления ПОСЛЕ Zeekr 001"
         }
       ]
     },
@@ -2780,36 +2780,36 @@
       "name": "BOX Gurman HD",
       "programs": [
         {
-          "time": "23:39",
-          "title": "Теперь вы полюбите тыкву. Я проверил этот рецепт на тысяче человек. Толченка из тыквы"
+          "time": "23:46",
+          "title": "Хашлама настоящая идеальный рецепт"
         },
         {
-          "time": "00:06",
-          "title": "ОГРОМНЫЕ РЕБРА В ТАНДЫРЕ."
+          "time": "00:02",
+          "title": "ПЛОВ с перепелиными яйцами."
         },
         {
-          "time": "00:06",
-          "title": "ОГРОМНЫЕ РЕБРА В ТАНДЫРЕ"
+          "time": "00:02",
+          "title": "ПЛОВ с перепелиными яйцами"
         },
         {
-          "time": "00:17",
-          "title": "ШОКОЛАДНЫЕ ПОПРЫГУНЧИКИ ИЗ МАРШМЕЛЛОУ - ну, оОчень вкусные!"
+          "time": "00:12",
+          "title": "Тот самый Дамский салат Для нее - Берите рецепт на заметку."
         },
         {
-          "time": "00:17",
-          "title": "ШОКОЛАДНЫЕ ПОПРЫГУНЧИКИ ИЗ МАРШМЕЛЛОУ - ну, оОчень вкусные!"
+          "time": "00:12",
+          "title": "Тот самый Дамский салат  Для неё  - Берите рецепт на заметку."
         },
         {
-          "time": "00:27",
-          "title": "Сливочный суп из рыбы лучше, чем финская уха и готовится за 20 минут."
+          "time": "00:18",
+          "title": "Мясо по-свански. Простое в приготовлении, но очень вкусное блюдо!"
         },
         {
-          "time": "00:27",
-          "title": "Сливочный суп из рыбы лучше, чем финская уха и готовится за 20 минут."
+          "time": "00:18",
+          "title": "Мясо по-свански. Простое в приготовлении, но очень вкусное блюдо!"
         },
         {
-          "time": "00:45",
-          "title": "Хачапури по-аджарски."
+          "time": "00:26",
+          "title": "Что есть в Жару Гаспачо. Летний суп. Мой вариант."
         }
       ]
     },
@@ -2817,18 +2817,6 @@
       "id": "8809",
       "name": "BOX Metall HD",
       "programs": [
-        {
-          "time": "00:00",
-          "title": "Metal Music Non-Stop."
-        },
-        {
-          "time": "09:00",
-          "title": "Metal Music Non-Stop."
-        },
-        {
-          "time": "15:00",
-          "title": "Metal Music Non-Stop."
-        },
         {
           "time": "00:00",
           "title": "Metal Music Non-Stop."
@@ -2848,6 +2836,18 @@
         {
           "time": "07:46",
           "title": "Music Non-Stop - melodic death metal, power metal, folk metal, speed metal, viking metal..."
+        },
+        {
+          "time": "15:00",
+          "title": "Metal Music Non-Stop."
+        },
+        {
+          "time": "00:00",
+          "title": "Metal Music Non-Stop."
+        },
+        {
+          "time": "08:02",
+          "title": "Music Non-Stop - melodic death metal, power metal, folk metal, speed metal, viking metal..."
         }
       ]
     },
@@ -2856,36 +2856,36 @@
       "name": "BOX Remast+ 4K",
       "programs": [
         {
-          "time": "23:52",
-          "title": "В синем море, в белой пене"
+          "time": "23:50",
+          "title": "Лиса и Волк"
         },
         {
           "time": "00:00",
-          "title": "Фильм, фильм, фильм"
+          "title": "Кубик-рубик"
         },
         {
-          "time": "00:18",
-          "title": "Золушка"
+          "time": "00:09",
+          "title": "Пони бегает по кругу"
+        },
+        {
+          "time": "00:19",
+          "title": "Добро пожаловать"
+        },
+        {
+          "time": "00:28",
+          "title": "Ишь ты, Масленица!"
         },
         {
           "time": "00:36",
-          "title": "История одного преступления"
+          "title": "Полигон"
+        },
+        {
+          "time": "00:45",
+          "title": "Медвежуть"
         },
         {
           "time": "00:55",
-          "title": "Халиф-аист"
-        },
-        {
-          "time": "01:15",
-          "title": "Кораблик"
-        },
-        {
-          "time": "01:25",
-          "title": "Фока – на все руки дока"
-        },
-        {
-          "time": "01:44",
-          "title": "Бременские музыканты"
+          "title": "Двенадцать месяцев"
         }
       ]
     },
@@ -2894,36 +2894,36 @@
       "name": "BOX SportCast HD",
       "programs": [
         {
-          "time": "22:16",
-          "title": "НХЛ 25.04 плей-офф. Анахайм Дакс – Эдмонтон Ойлерз."
+          "time": "23:48",
+          "title": "НХЛ 09.05 плей-офф. Анахайм Дакс – Вегас Голден Найтс."
         },
         {
-          "time": "01:15",
-          "title": "НХЛ 21.05 плей-офф. Колорадо Эвеланш – Вегас Голден Найтс."
+          "time": "04:42",
+          "title": "Летняя лига 11.07 ЛА Лейкерс - Оклахома-Сити Тандер."
         },
         {
-          "time": "04:27",
-          "title": "Футбол Англия - Премьер-лига. 29.08 Кристал Пэлас – Манчестер Сити."
+          "time": "06:55",
+          "title": "Летняя лига 2026 НБА ЛА Клипперс - Вашингтон Уизардс 16.07.26."
         },
         {
-          "time": "06:28",
-          "title": "Футбол Англия - Премьер-лига. 30.08 Сандерленд – Фулхэм."
+          "time": "08:40",
+          "title": "Летняя лига 2026 НБА Даллас Маверикс - ЛА Лейкерс 12.07.26."
         },
         {
-          "time": "08:29",
-          "title": "НБА 23.05 плей-офф. Сан-Антонио - Оклахома."
+          "time": "10:51",
+          "title": "Летняя лига 11.07 Финикс Санз - Портленд Трэйл Блейзерс."
         },
         {
-          "time": "11:31",
-          "title": "Футбол Англия 22.04 Премьер-лига. Бернли – Манчестер Сити."
+          "time": "12:56",
+          "title": "НБА 26.05 плей-офф. Кливленд - Нью-Йорк."
         },
         {
-          "time": "13:43",
-          "title": "Футбол Англия 03.05 Премьер-лига. Астон Вилла – Тоттенхэм."
+          "time": "15:46",
+          "title": "НХЛ 30.05 плей-офф. Каролина Харрикейнз – Монреаль Канадиенс."
         },
         {
-          "time": "15:48",
-          "title": "НБА 21.05 плей-офф. Оклахома - Сан-Антонио."
+          "time": "19:04",
+          "title": "Летняя лига 2026 НБА Хьюстон Рокетс - Филадельфия Сиксерс 14.07.26."
         }
       ]
     },
@@ -2932,36 +2932,36 @@
       "name": "BOX Travel Premiere HD",
       "programs": [
         {
-          "time": "23:31",
-          "title": "Турция 2026. ВЫГОДНО НАТУРАЛЬНЫЕ КАМНИ, СУЛТАНИТ, что привезти Кемер."
+          "time": "23:24",
+          "title": "Бельгия превзошла наши ожидания. Залегли на дно в Брюгге. Открыли для себя Гент."
         },
         {
-          "time": "00:30",
-          "title": "Вардане. Вы просили Мы сняли для ВАС ролик Достоинства и недостатки этого курорта."
+          "time": "00:19",
+          "title": "Лондонский Тауэр мрачная история главной тюрьмы Англии."
         },
         {
-          "time": "00:58",
-          "title": "Небуг. Божественное море Фантастический отдых Это мы запомним на всю жизнь."
+          "time": "00:53",
+          "title": "КАБАРДИНКА МЕСТ БОЛЬШЕ НЕТ БЕНЗИН по QR КОДАМ ПЛЯЖИ ЛОПНУЛИ от НАПЛЫВА ТУРИСТОВ ЧТО ПРОИСХОДИТ."
         },
         {
-          "time": "01:58",
-          "title": "Апшеронск дешевые дома у гор, но почему молодежь уезжает."
+          "time": "01:27",
+          "title": "Психологи и философы, маяки туризма, спортсмены и романтики или КОТоБУДНИ второй половины июля 2026."
         },
         {
-          "time": "02:59",
-          "title": "Турция 2026. УЛЕТНЫЙ ОТЕЛЬ Fun Sun Akman Beach 4 . Первая линия. Кемер."
+          "time": "02:19",
+          "title": "ТУАПСЕ - ЕСТЬ ЛИ СЕЗОН ШОК ОТ ПЛЯЖА В ДЖУБГЕ ОЛЬГИНКА, ЛЕРМОНТОВО И НОВОМИХАЙЛОВСКИЙ. ВСЕ ЦЕНЫ."
         },
         {
-          "time": "03:44",
-          "title": "Египет - Отель премиум-класса Meraki Resort 5 На первой береговой . Шарм Эль Шейх."
+          "time": "03:23",
+          "title": "Анапа Сегодня Погода Июля  Сезон 2026."
         },
         {
-          "time": "04:45",
-          "title": "Дагомыс. Хорошее место для хорошего отдыха Сколько стоит здесь отдохнуть."
+          "time": "03:27",
+          "title": "Турция 2026. УЛЕТАЮ и РЫДАЮ Kemer Dream Hotel 4 . Что ПРИВЕЗТИ из ТУРЦИИ Кемер."
         },
         {
-          "time": "05:07",
-          "title": "Нет мест100 Заполняемость Pickalbatros Royal Grand Resort 5 Шарм Эль Шейх.Какой номер.Пляж и обед."
+          "time": "04:23",
+          "title": "Анапа Сегодня Погода в Конце Июля  Витязево 2026."
         }
       ]
     },
@@ -2970,36 +2970,36 @@
       "name": "Блокбастер HD",
       "programs": [
         {
-          "time": "23:00",
-          "title": "97 Минут"
+          "time": "23:20",
+          "title": "Сорвать банк"
         },
         {
-          "time": "00:40",
-          "title": "Легионер"
+          "time": "00:00",
+          "title": "Золото Умальты"
         },
         {
-          "time": "02:15",
-          "title": "Тепловой удар"
+          "time": "01:20",
+          "title": "Хранители душ"
         },
         {
-          "time": "03:40",
-          "title": "Открытое море: Игра на выживание"
+          "time": "02:30",
+          "title": "В ожидании варваров"
         },
         {
-          "time": "05:00",
-          "title": "Антебеллум"
+          "time": "04:20",
+          "title": "Умереть за доллар"
         },
         {
-          "time": "06:40",
-          "title": "97 Минут"
+          "time": "05:55",
+          "title": "Золото Умальты"
         },
         {
-          "time": "08:15",
-          "title": "Тепловой удар"
+          "time": "07:50",
+          "title": "Поезд на Юму"
         },
         {
-          "time": "10:00",
-          "title": "Открытое море: Игра на выживание"
+          "time": "10:05",
+          "title": "В ожидании варваров"
         }
       ]
     },
@@ -3008,36 +3008,36 @@
       "name": "В мире животных HD",
       "programs": [
         {
-          "time": "23:15",
-          "title": "Синие просторы (с.4)"
+          "time": "23:10",
+          "title": "Синие просторы (с.6)"
         },
         {
-          "time": "00:05",
-          "title": "Разговоры с животными (История ежа)"
+          "time": "05:10",
+          "title": "Аквариум: Водная жизнь (с.1)"
         },
         {
-          "time": "00:55",
-          "title": "Разговоры с животными (Разговор с лесным слоном)"
+          "time": "06:05",
+          "title": "Аквариум: Водная жизнь (с.2)"
         },
         {
-          "time": "01:50",
-          "title": "Разговоры с животными (История льва)"
+          "time": "06:55",
+          "title": "Тайны Красного моря"
         },
         {
-          "time": "02:40",
-          "title": "Пруды Бренна"
+          "time": "07:40",
+          "title": "Сокровища Южной Кореи (Горы)"
         },
         {
-          "time": "03:35",
-          "title": "Спецназ животного мира (Специалисты)"
+          "time": "08:45",
+          "title": "Сокровища Южной Кореи (Море)"
         },
         {
-          "time": "04:20",
-          "title": "Спецназ животного мира (Военно-воздушные войска)"
+          "time": "09:45",
+          "title": "Сокровища Южной Кореи (Люди)"
         },
         {
-          "time": "05:15",
-          "title": "Герои американских прерий"
+          "time": "10:50",
+          "title": "Дико умные (Строители)"
         }
       ]
     }
