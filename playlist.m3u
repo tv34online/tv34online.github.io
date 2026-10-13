@@ -309,35 +309,35 @@ http://195.64.140.147:10124/124
 http://195.64.140.147:10122/122
 
 #EXTINF:-1 tvg-name="Nickelodeon" group-title="Детские", Nickelodeon
-http://tv.woobl.ru:9090/channel/n47dbeb87/index.m3u8?q=6b9b9686f4e5713d39b5472416bf1854
+http://stream.mcquack.net/443/tracks-v1a1/mono.ts.m3u8
 
 #EXTINF:-1 tvg-name="Cartoon Network" group-title="Детские", Cartoon Network
-http://tv.woobl.ru:9090/channel/2ab703d0/index.m3u8?q=6b9b9686f4e5713d39b5472416bf1854
+https://bl.rutube.ru/livestream/d2119cfb95146b3983cf05c1fe35e66f/index.m3u8?s=BHK7OEOTbxOq-0BnENcIlQ&e=2091787924&scheme=https
 
-#EXTINF:-1 tvg-name="Nick Jr." group-title="Детские", Nickelodeon Junior
-http://smotrim.org/000000449.m3u8
+#EXTINF:-1 tvg-name="Nick Jr." group-title="Детские", Nick Jr
+http://stream.mcquack.net/220/tracks-v1a1/mono.ts.m3u8
 
 #EXTINF:-1 tvg-name="Мультиландия" group-title="Детские", Мультиландия
-https://mhd128.iptv2022.com/p/HN7Y_Edir7xQej1p1Rj8oQ,1765227608/streaming/multimania/324/1/tracks-v5a1/mono.m3u8
+https://flussonic.mkpnet.ru/tv-89530153f25733fe/video.m3u8
 
 #EXTINF:-1 group-title="Детские", Disney XD
 https://kinowalk.hopto.org/kanaldisneyonline_live
 
-#EXTINF:-1 tvg-name="Cartoon Network" group-title="Детские", Cartoon Classics
+#EXTINF:-1 tvg-name="Cartoon Classics" group-title="Детские", Cartoon Classics
 http://5.188.159.128:8070/Cartoon_Network/index.m3u8
 
 #EXTINF:-1 tvg-name="Капитан Фантастика" group-title="Детские", Капитан Фантастика 
-https://mhd128.iptv2022.com/p/XMKtWyuH-xoE15VANZfkNg,1765227608/streaming/gingerhd/324/1/tracks-v5a1/mono.m3u8
+http://stream.mcquack.net/144/tracks-v1a1/mono.ts.m3u8
 
 
 #EXTINF:-1 tvg-name="Мультимузыка" group-title="Детские", Мультимузыка
-http://stv.mediacdn.ru/live/cdn/multimuzika/tracks-v1a1/mono.ts.m3u8
+http://31.210.208.171:8080/mult_i_muzika/index.m3u8?token=+W2MSER
 
 #EXTINF:-1 tvg-name="JimJam" group-title="Детские", JimJam
 http://158.160.149.81:8080/269/index.m3u8
 
 #EXTINF:-1 tvg-name="Ani" group-title="Детские", Ani
-https://stv.mediacdn.ru/live/cdn/ani/playlist.m3u8
+http://194.152.35.17/ani/index.m3u8
 
 
 #EXTINF:-1 tvg-name="A1" group-title="Кино", Amedia 1
