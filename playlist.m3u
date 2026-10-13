@@ -302,13 +302,11 @@ http://stream.mcquack.net/111/tracks-v1a1/mono.ts.m3u8
 https://stream8.cinerama.uz/1407/tracks-v1a1/mono.m3u8
 
 #EXTINF:-1 tvg-name="О!" group-title="Детские", О!
-http://tv.woobl.ru:9090/channel/n18f08d51/index.m3u8?q=6b9b9686f4e5713d39b5472416bf1854
+http://195.64.140.147:10124/124
 
-#EXTINF:-1 tvg-name="Лёва" group-title="Детские", Лёва
-https://minsk-cache03t.voka.tv/live/2424-req_5k_v5.m3u8
 
 #EXTINF:-1 tvg-name="Gulli Girl" group-title="Детские", Gulli Girl
-http://178.163.2.144:4022/udp/234.0.0.153:2000
+http://195.64.140.147:10122/122
 
 #EXTINF:-1 tvg-name="Nickelodeon" group-title="Детские", Nickelodeon
 http://tv.woobl.ru:9090/channel/n47dbeb87/index.m3u8?q=6b9b9686f4e5713d39b5472416bf1854
@@ -322,7 +320,7 @@ http://smotrim.org/000000449.m3u8
 #EXTINF:-1 tvg-name="Мультиландия" group-title="Детские", Мультиландия
 https://mhd128.iptv2022.com/p/HN7Y_Edir7xQej1p1Rj8oQ,1765227608/streaming/multimania/324/1/tracks-v5a1/mono.m3u8
 
-#EXTINF:-1 tvg-name="Disney Channel" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/d/d4/Disney_Channel_Russia.png" group-title="Детские", Канал Disney
+#EXTINF:-1 group-title="Детские", Disney XD
 https://kinowalk.hopto.org/kanaldisneyonline_live
 
 #EXTINF:-1 tvg-name="Cartoon Network" group-title="Детские", Cartoon Classics
@@ -332,20 +330,15 @@ http://5.188.159.128:8070/Cartoon_Network/index.m3u8
 https://mhd128.iptv2022.com/p/XMKtWyuH-xoE15VANZfkNg,1765227608/streaming/gingerhd/324/1/tracks-v5a1/mono.m3u8
 
 
-#EXTINF:-1 tvg-name="Мультимузыка" group-title="Детские", МУЛЬТИМУЗЫКА
+#EXTINF:-1 tvg-name="Мультимузыка" group-title="Детские", Мультимузыка
 http://stv.mediacdn.ru/live/cdn/multimuzika/tracks-v1a1/mono.ts.m3u8
 
 #EXTINF:-1 tvg-name="JimJam" group-title="Детские", JimJam
 http://158.160.149.81:8080/269/index.m3u8
 
-#EXTINF:-1 tvg-name="СуперГерои" group-title="Детские", СуперГерои
-http://109.94.1.3:8080/132/index.m3u8
-
 #EXTINF:-1 tvg-name="Ani" group-title="Детские", Ani
 https://stv.mediacdn.ru/live/cdn/ani/playlist.m3u8
 
-#EXTINF:-1 tvg-name="Jetix" tvg-logo="https://upload.wikimedia.org/wikipedia/ru/2/24/Jetix.png?_=20170207225409" group-title="Детские", Jetix
-http://foxkids-online.ru/hls/test_240p264kbs/index.m3u8
 
 #EXTINF:-1 tvg-name="A1" group-title="Кино", Amedia 1
 http://50.7.28.226/8035/index.m3u8
