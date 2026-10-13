@@ -280,8 +280,6 @@ http://chanson.hostingradio.ru:8041/chanson128.mp3
 http://icecast.vgtrk.cdnvideo.ru/kulturafm_mp3_64kbps
 #EXTINF:-1 group-title="Радио",Радио Страна 
 http://icecast.stranafm.cdnvideo.ru/stranafm
-#EXTINF:-1 group-title="Радио", Gazan FM
-https://iboxestv-playlist-tv.onrender.com/gazan_fm.mp3
 #EXTINF:-1 group-title="Радио",Спутник FM 
 http://radio.mediacdn.ru/sputnik_fm.mp3
 #EXTINF:-1 group-title="Радио", Ретро FM
@@ -293,13 +291,14 @@ http://maximum.hostingradio.ru/maximum128.mp3
 #EXTINF:-1 group-title="Радио", Europa Plus
 https://hls-02-europaplus.emgsound.ru/11/playlist.m3u8
 
+#EXTINF:-1 group-title="Детские", Карусель
+https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R01_KARUSEL_VLGOB/variant.m3u8
+
 #EXTINF:-1 tvg-name="Мульт" group-title="Детские", Мульт
 https://flussonic.mkpnet.ru/tv-c8b065a591077c26/video.m3u8
 
 #EXTINF:-1 tvg-name="TiJi" group-title="Детские", TiJi
 http://stream.mcquack.net/111/tracks-v1a1/mono.ts.m3u8
-#EXTINF:-1 tvg-name="Рыжий" group-title="Детские", Рыжий
-https://stream8.cinerama.uz/1407/tracks-v1a1/mono.m3u8
 
 #EXTINF:-1 tvg-name="О!" group-title="Детские", О!
 http://195.64.140.147:10124/124
@@ -333,8 +332,6 @@ http://stream.mcquack.net/144/tracks-v1a1/mono.ts.m3u8
 #EXTINF:-1 tvg-name="Мультимузыка" group-title="Детские", Мультимузыка
 http://31.210.208.171:8080/mult_i_muzika/index.m3u8?token=+W2MSER
 
-#EXTINF:-1 tvg-name="JimJam" group-title="Детские", JimJam
-http://158.160.149.81:8080/269/index.m3u8
 
 #EXTINF:-1 tvg-name="Ani" group-title="Детские", Ani
 http://194.152.35.17/ani/index.m3u8
