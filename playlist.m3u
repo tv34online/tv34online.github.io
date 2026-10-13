@@ -22,7 +22,7 @@ https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R02_ROSSIAK_VLGOB/variant.m3u8
 #EXTINF:-1 tvg-name="Россия 24" tvg-logo="https://static.okko.tv/images/v4/335e7fa5-70ad-47a2-8f92-9d045f0b9d93?presetId=1152&width=80&scale=2&quality=80&mediaType=webp" group-title="Общественные", Россия 24
 https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R01_ROSSIA24_VLGOB/variant.m3u8
 
-#EXTINF:-1 tvg-name="Карусель" tvg-logo="https://static.okko.tv/images/v4/dc414994-c75b-48f9-b267-ea7acac7214a?presetId=1152&width=80&scale=2&quality=80&mediaType=webp" group-title="Общественные", Карусель
+#EXTINF:-1 tvg-name="Карусель" tvg-logo="https://static.okko.tv/images/v4/dc414994-c75b-48f9-b267-ea7acac7214a?presetId=1152&width=80&scale=2&quality=80&mediaType=webp" group-title="Общественные", Детский канал Карусель
 https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R01_KARUSEL_VLGOB/variant.m3u8
 
 #EXTINF:-1 tvg-name="ОТР" tvg-logo="https://static.okko.tv/images/v4/a9bc5e0f-2eff-4825-a139-798ee75cdbe6?presetId=1152&width=80&scale=2&quality=80&mediaType=webp" group-title="Общественные", ОТР
