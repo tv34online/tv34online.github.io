@@ -354,3 +354,18 @@ https://fs.uplink.kz/pobeda/mono.m3u8?token=onlinetv
 
 #EXTINF:-1 group-title="Кино", Кинокомедия
 http://31.210.208.171:8080/kinokomedia/index.m3u8?token=+W2MSER
+
+#EXTINF:-1 group-title="Кино", Русский Детектив
+https://flussonic.mkpnet.ru/tv-2997fed720614567/video.m3u8
+
+#EXTINF:-1 group-title="Кино", Мир Сериала
+http://176.118.197.101/MirSeriala/index.m3u8
+
+#EXTINF:-1 group-title="Кино", Смотрим 100% Мужское
+https://stream.smotrim.ru/hls3/fasttv02/playlist_3.m3u8
+
+#ECYINF:-1 group-title="Кино", Смотрим 100% Классика
+https://stream.smotrim.ru/hls3/fasttv03/playlist_3.m3u8
+
+#EXTINF:-1 group-title="Кино", Смотрим 100% Любовь
+https://stream.smotrim.ru/hls3/fasttv01/playlist_3.m3u8
