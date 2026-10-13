@@ -337,77 +337,11 @@ http://31.210.208.171:8080/mult_i_muzika/index.m3u8?token=+W2MSER
 http://194.152.35.17/ani/index.m3u8
 
 
-#EXTINF:-1 tvg-name="A1" group-title="Кино", Amedia 1
-http://50.7.28.226/8035/index.m3u8
-
-#EXTINF:-1 tvg-name="A2" group-title="Кино", Amedia 2
-http://158.160.149.81:8080/462/index.m3u8
-
-#EXTINF:-1 tvg-name="Amedia Premium" group-title="Кино", Amedia Premium
-http://45.145.32.13:20440/amedia_premium_hd/index.m3u8?token=test
-
-#EXTINF:-1 tvg-name="Amedia Hit" group-title="Кино", Amedia Hit
-https://a3569457567-s70378.cdn.ngenix.net/amedia_hit/2/index.m3u8
-
-#EXTINF:-1 tvg-name="viju TV1000" group-title="Кино", .black
-http://95.66.188.74/.black/index.m3u8
-
-#EXTINF:-1 tvg-name="Red" group-title="Кино", .red
-https://mhd128.iptv2022.com/p/v90kpsxWiKqWA8p0fVrSDQ,1765227607/streaming/red/324/1/tracks-v5a1/mono.m3u8
-
-#EXTINF:-1 tvg-name="Sci-Fi" group-title="Кино", .sci-fi
-https://mhd128.iptv2022.com/p/RPHKJ0jAyle8cVJsFpJCUA,1765227607/streaming/sci-fi/324/1/tracks-v5a1/mono.m3u8
-
 #EXTINF:-1 tvg-name="Дом кино" group-title="Кино", Дом кино
 https://stream8.cinerama.uz/1054/tracks-v1a1/mono.m3u8
 
-#EXTINF:-1 tvg-name="Дом кино Премиум" group-title="Кино", Дом кино Премиум
-http://85.11.144.6:6060/play/a07v/index.m3u8
+#EXTINF:-1 group-title="Кино", Мосфильм. Золотая Коллекция
+https://fs.uplink.kz/mosfilm/mono.m3u8?token=onlinetv
 
-#EXTINF:-1 tvg-name="START Air" group-title="Кино", START Air
-https://minsk-cache06i.voka.tv/live/1804-req_5k_v5.m3u8
-
-#EXTINF:-1 tvg-name="START World" group-title="Кино", START World
-http://109.248.236.51/start_world_hd/tracks-v1a1/mono.m3u8
-
-#EXTINF:-1 tvg-name="viju TV1000" group-title="Кино", Viju TV1000
-http://50.7.28.226/8048/index.m3u8
-
-#EXTINF:-1 tvg-name="viju TV1000 Action" group-title="Кино", Viju TV1000 Action
-http://50.7.28.226/8049/index.m3u8
-
-#EXTINF:-1 tvg-name="viju TV1000 русское" group-title="Кино", Viju TV1000 Русское
-https://tbs01-edge11.itdc.ge/tv1000rukino/index.m3u8
-
-#EXTINF:-1 tvg-name="viju+ Comedy" group-title="Кино", Viju+ Comedy
-http://89.232.68.194:8080/ComedyHD/tracks-v1a1/index.m3u8
-
-#EXTINF:-1 tvg-name="viju+ Megahit" group-title="Кино", Viju+ Megahit
-http://2.57.217.85:8000/play/a03e/index.m3u8
-
-#EXTINF:-1 tvg-name="viju+ Premiere" group-title="Кино", Viju+ Premiere
-http://50.7.28.226/8119/index.m3u8
-
-#EXTINF:-1 tvg-name="viju+ Serial" group-title="Кино", Viju+ Serial
-http://50.7.28.226/9222/index.m3u8
-
-#EXTINF:-1 tvg-name="Кинеко" group-title="Кино", Кинеко
-https://mhd128.iptv2022.com/p/MbPdUXX5paDdCA-pujlKzg,1765227608/streaming/kineko/324/1/tracks-v5a1/mono.m3u8
-
-#EXTINF:-1 tvg-name="Кино ТВ" group-title="Кино", Кино ТВ
-http://50.7.28.226/8207/index.m3u8
-
-#EXTINF:-1 tvg-name="НТВ Право" group-title="Кино", НТВ Право
-https://cdn.ntv.ru/th_pravo/playlist.m3u8
-
-#EXTINF:-1 tvg-name="НТВ Мир" group-title="Кино", НТВ Мир
-http://tv.woobl.ru:9091/channel/9cbd3c0/index.m3u8?q=6b9b9686f4e5713d39b5472416bf1854
-
-#EXTINF:-1 tvg-name="НТВ Хит" group-title="Кино", НТВ Хит
-https://cdn2.ntv.ru/th_hit/playlist.m3u8
-
-#EXTINF:-1 tvg-name="НТВ Сериал" group-title="Кино", НТВ Сериал
-https://cdn.ntv.ru/th_serial/playlist.m3u8
-
-#EXTINF:-1 tvg-name="НТВ Стиль" group-title="Кино", НТВ Стиль
-https://cdn2.ntv.ru/th_style/tracks-v1a1/mono.m3u8
+#EXTINF:-1 group-title="Кино", Красная Линия
+https://s55766.cdn.ngenix.net/s55766-media-origin/rline_high/tracks-v1a1/mono.m3u8
