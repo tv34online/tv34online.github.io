@@ -122,14 +122,9 @@ https://mhd128.iptv2022.com/p/sg65S8XfqmzfDgNuvp0zEw,1765227625/streaming/aiva_t
 #EXTINF:-1 tvg-name="Музыка Первого" group-title="Музыкальные", Музыка первого
 http://176.96.241.40/MuzikaPervogo/index.m3u8
 
-#EXTINF:-1 tvg-name="БелМуз ТВ" group-title="Музыкальные", БелМуз
-https://minsk-cache07t.voka.tv/live/966-req_5k_v5.m3u8
 
 #EXTINF:-1 tvg-name="Music Box Russia" group-title="Музыкальные", Music Box
 http://50.7.28.226/8189/index.m3u8
-
-#EXTINF:-1 tvg-name="MTV 80s" group-title="Музыкальные", MTV 80s 
-http://213.169.39.30:5137/
 
 #EXTINF:-1 tvg-name="Europa Plus TV" group-title="Музыкальные", Europa Plus TV
 https://minsk-cache04i.voka.tv/live/963-req_5k_v5.m3u8
