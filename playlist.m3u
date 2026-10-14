@@ -197,28 +197,28 @@ http://50.7.28.226/8176/index.m3u8
 https://zabava-htlive.cdn.ngenix.net/hls/CH_2X2/variant.m3u8
 
 #EXTINF:-1 tvg-name="СТС Love" group-title="Развлекательные", СТС Love
-http://tv.streams.baikal-telecom.net:8080/CTC_LOVE/index.m3u8
+https://fs.uplink.kz/sts_love/mono.m3u8?token=onlinetv
 
 #EXTINF:-1 tvg-name="Ю" group-title="Развлекательные", Ю
-http://95.66.188.74/U/mono.m3u8
+https://bl.rutube.ru/livestream/5c9327074e25ca86f3111d4085cbbb65/index.m3u8?s=VLfn5xIbPS5HN1HdfMxFWA&e=2091960701&scheme=https
 
 #EXTINF:-1 tvg-name="ТНТ4" group-title="Развлекательные", ТНТ 4
-https://river-1.rutube.ru/stream/genetta-318.m9.rutube.ru/i9Iv7kxvD5hMaeRbI4ceFg/1765737932/c801a7087e29a097192d74c270fbc6c1/1080p_stream.m3u8
+https://fs.uplink.kz/tnt4/mono.m3u8?token=onlinetv
 
 #EXTINF:-1 tvg-name="Перец" group-title="Развлекательные", Перец
-http://158.101.222.193:88/georgia_play.php?id=perec
+https://fs.uplink.kz/perec/mono.m3u8?token=onlinetv
 
 #EXTINF:-1 tvg-name="Твоё ТВ" group-title="Развлекательные", Твоё ТВ
-http://tvoetv.space:8080/tvoetv_humor/index.m3u8
+http://tvoetv.space:8080/tvoetv/index.m3u8
 
 #EXTINF:-1 tvg-name="РЖД ТВ" group-title="Развлекательные", РЖД ТВ
-http://hls.tva.cdnvideo.ru/tva/tvahd.sdp/playlist.m3u8
+https://hls-tva.cdnvideo.ru/tva/tvahd.sdp/tracks-v1a1/mono.m3u8
 
 #EXTINF:-1 tvg-name="Лапки Live" group-title="Развлекательные", Лапки Live
-http://50.7.28.226/8551/index.m3u8
+https://fs.uplink.kz/lapki_live/mono.m3u8?token=onlinetv
 
 #EXTINF:-1 tvg-name="Драйв" group-title="Развлекательные", Драйв
-https://mhd128.iptv2022.com/p/gzAxGkVeSahGP6VoZWnjeA,1765227609/streaming/drive/324/1/tracks-v5a1/mono.m3u8
+http://185.46.16.239:8000/Drayv
 
 #EXTINF:-1 tvg-name="Авто Плюс" group-title="Развлекательные", Авто плюс
 https://mhd128.iptv2022.com/p/NYQCU6FB-HcMxYiMjQRSWA,1765227609/streaming/avtoplus/324/1/tracks-v5a1/mono.m3u8
@@ -227,7 +227,7 @@ https://mhd128.iptv2022.com/p/NYQCU6FB-HcMxYiMjQRSWA,1765227609/streaming/avtopl
 https://mhd128.iptv2022.com/p/sJLRoEkaE-csau_hEoW7gw,1765227609/streaming/avto24/324/1/tracks-v5a1/mono.m3u8
 
 #EXTINF:-1 tvg-name="КВН ТВ" group-title="Развлекательные", КВН ТВ
-http://158.101.222.193:88/georgia_play.php?id=kvntv
+https://fs.uplink.kz/kvn_tv/mono.m3u8?token=onlinetv
 
 #EXTINF:-1 tvg-name="Ключ" group-title="Развлекательные", КЛЮЧ
 https://mhd128.iptv2022.com/p/p4XXoEv-zIwO5xYgDDJ0SQ,1765227607/streaming/kluchhd/324/1/index.m3u8
