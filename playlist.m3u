@@ -78,16 +78,16 @@ https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R01_VOLGOGRAD24/variant.m3u8
 
 
 #EXTINF:-1 tvg-name="Bridge TV" group-title="Музыкальные", BRIDGE TV
-http://31.148.48.15/Bridge_TV/index.m3u8
+https://flussonic.mkpnet.ru/tv-ceaa6aa3cc1ea359/video.m3u8
 
 #EXTINF:-1 tvg-name="Bridge TV Classic" group-title="Музыкальные", BRIDGE TV Classic
-http://31.148.48.15/Bridge_TV_Classic/index.m3u8
+http://stream.mcquack.net/272/tracks-v1a1/mono.ts.m3u8
 
 #EXTINF:-1 tvg-name="Bridge TV Deluxe" group-title="Музыкальные", BRIDGE TV Deluxe
-https://minsk-cache07t.voka.tv/live/110-req_5k_v5.m3u8
+https://limehd.cdnvideo.ru/streaming/lock/banner_400/index.m3u8?e=1791953652&md5=Ozkmi-ANEt3BIQ9_7hnfwA
 
 #EXTINF:-1 tvg-name="Bridge TV Hits" group-title="Музыкальные", BRIDGE TV Hits
-http://50.7.28.226/9202/index.m3u8
+http://5.188.159.128:8070/Bridge_TV_Hits/index.m3u8
 
 #EXTINF:-1 tvg-name="Bridge TV Русский Хит" group-title="Музыкальные", BRIDGE TV Русский хит
 https://mhd128.iptv2022.com/p/TYtEsJA0siUTb16jp9O1cA,1765227614/streaming/br_rushit/324/1/index.m3u8
