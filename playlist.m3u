@@ -10,55 +10,55 @@ https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R04_ROSSIA1_VLGOB/variant.m3u8
 #EXTINF:-1 group-title="Общественные", Матч!
 https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R04_ROSSIA2_VLGOB/variant.m3u8
 
-#EXTINF:-1 tvg-name="НТВ" tvg-logo="https://static.okko.tv/images/v4/0fa86f71-4781-4b8d-b46e-5a8c894bc8fa?presetId=1152&width=80&scale=2&quality=80&mediaType=webp" group-title="Общественные", НТВ
+#EXTINF:-1 tvg-name="НТВ" group-title="Общественные", НТВ
 https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R03_NTV_VLGOB/variant.m3u8
 
-#EXTINF:-1 tvg-name="5 канал" tvg-logo="https://static.okko.tv/images/v4/acdc50c1-0b43-4307-8c34-b0fe35b67996?presetId=1152&width=80&scale=2&quality=80&mediaType=webp" group-title="Общественные", Пятый канал
+#EXTINF:-1 group-title="Общественные", Пятый канал
 https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R02_5TV_VLGOB/variant.m3u8
 
-#EXTINF:-1 tvg-name="Россия К" tvg-logo="https://static.okko.tv/images/v4/335e7fa5-70ad-47a2-8f92-9d045f0b9d93?presetId=1152&width=80&scale=2&quality=80&mediaType=webp" group-title="Общественные", Россия К
+#EXTINF:-1 tvg-name="Россия К" group-title="Общественные", Россия К
 https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R02_ROSSIAK_VLGOB/variant.m3u8
 
-#EXTINF:-1 tvg-name="Россия 24" tvg-logo="https://static.okko.tv/images/v4/335e7fa5-70ad-47a2-8f92-9d045f0b9d93?presetId=1152&width=80&scale=2&quality=80&mediaType=webp" group-title="Общественные", Россия 24
+#EXTINF:-1 tvg-name="Россия 24" group-title="Общественные", Россия 24
 https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R01_ROSSIA24_VLGOB/variant.m3u8
 
-#EXTINF:-1 tvg-name="Карусель" tvg-logo="https://static.okko.tv/images/v4/dc414994-c75b-48f9-b267-ea7acac7214a?presetId=1152&width=80&scale=2&quality=80&mediaType=webp" group-title="Общественные", Детский канал Карусель
+#EXTINF:-1 tvg-name="Карусель" group-title="Общественные", Детский канал Карусель
 https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R01_KARUSEL_VLGOB/variant.m3u8
 
-#EXTINF:-1 tvg-name="ОТР" tvg-logo="https://static.okko.tv/images/v4/a9bc5e0f-2eff-4825-a139-798ee75cdbe6?presetId=1152&width=80&scale=2&quality=80&mediaType=webp" group-title="Общественные", ОТР
+#EXTINF:-1 tvg-name="ОТР" group-title="Общественные", ОТР
 https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R01_OTR_VLGOB/variant.m3u8
 
-#EXTINF:-1 tvg-name="ТВ Центр" tvg-logo="https://static.okko.tv/images/v4/d5e8be22-1bac-4cb8-9d7e-f18a77edeb30?presetId=1152&width=80&scale=2&quality=80&mediaType=webp" group-title="Общественные", ТВЦ
+#EXTINF:-1 tvg-name="ТВ Центр" group-title="Общественные", ТВЦ
 https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R04_TVC_VLGOB/variant.m3u8
 
-#EXTINF:-1 tvg-name="РЕН ТВ" tvg-logo="https://static.okko.tv/images/v4/8501d67b-346a-4bb0-9283-1512e909bda5?presetId=1152&width=80&scale=2&quality=80&mediaType=webp" group-title="Общественные", РЕН ТВ
+#EXTINF:-1 tvg-name="РЕН ТВ" group-title="Общественные", РЕН ТВ
 https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R02_RENTV_VLGOB/variant.m3u8
 
-#EXTINF:-1 tvg-name="Спас" tvg-logo="https://static.okko.tv/images/v4/8b27a151-9a1f-47fa-911f-197dd04b44f6?presetId=1152&width=80&scale=2&quality=80&mediaType=webp" group-title="Общественные", СПАС
+#EXTINF:-1 tvg-name="Спас" group-title="Общественные", СПАС
 https://tvspas.mediacdn.ru/cdn/spas/tracks-v1a1/mono.ts.m3u8
 
-#EXTINF:-1 tvg-name="СТС" tvg-logo="https://static.okko.tv/images/v4/f0406604-ffbe-4c8d-ae3b-1e25c8dac3d6?presetId=1152&width=80&scale=2&quality=80&mediaType=webp" group-title="Общественные", СТС
+#EXTINF:-1 tvg-name="СТС" group-title="Общественные", СТС
 https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R02_STS_VLGOB/variant.m3u8
 
-#EXTINF:-1 tvg-name="Домашний" tvg-logo="https://static.okko.tv/images/v4/89968d64-8a3d-4ca7-8371-dd0e537f333a?presetId=1152&width=80&scale=2&quality=80&mediaType=webp" group-title="Общественные", Домашний
+#EXTINF:-1 tvg-name="Домашний" group-title="Общественные", Домашний
 https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R04_DOMASHNY_VLGOB/variant.m3u8
 
-#EXTINF:-1 tvg-name="ТВ-3" tvg-logo="https://static.okko.tv/images/v4/2f0b38b6-daba-4c45-ba19-eb8519e2be3c?presetId=1152&width=80&scale=2&quality=80&mediaType=webp" group-title="Общественные", ТВ3
+#EXTINF:-1 tvg-name="ТВ-3" group-title="Общественные", ТВ3
 https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R01_TV3_VLGOB/variant.m3u8
 
-#EXTINF:-1 tvg-name="Пятница!" tvg-logo="https://static.okko.tv/images/v4/380ff414-7f87-4361-8124-dd0c73589693?presetId=1152&width=80&scale=2&quality=80&mediaType=webp" group-title="Общественные", Пятница!
+#EXTINF:-1 tvg-name="Пятница!" group-title="Общественные", Пятница!
 https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R01_FRIDAY_VLGOB/variant.m3u8
 
-#EXTINF:-1 tvg-name="Звезда" tvg-logo="https://static.okko.tv/images/v4/8465d096-2175-4a4e-8b04-b28533d62052?presetId=1152&width=80&scale=2&quality=80&mediaType=webp" group-title="Общественные", Звезда
+#EXTINF:-1 tvg-name="Звезда" group-title="Общественные", Звезда
 https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R03_ZVEZDA_VLGOB/variant.m3u8
 
-#EXTINF:-1 tvg-name="Мир" tvg-logo="https://static.okko.tv/images/v4/9c302d81-e657-4b7a-b33e-a8ee279e5756?presetId=1152&width=80&scale=2&quality=80&mediaType=webp" group-title="Общественные", МИР
+#EXTINF:-1 tvg-name="Мир" group-title="Общественные", МИР
 https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R02_MIR_VLGOB/variant.m3u8
 
-#EXTINF:-1 tvg-name="ТНТ" tvg-logo="https://static.okko.tv/images/v4/317419f2-07b1-4c6b-99fb-eaab0c513b47?presetId=1152&width=80&scale=2&quality=80&mediaType=webp" group-title="Общественные", ТНТ
+#EXTINF:-1 tvg-name="ТНТ" group-title="Общественные", ТНТ
 https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R01_TNT_VLGOB/variant.m3u8
 
-#EXTINF:-1 tvg-name="Муз ТВ" tvg-logo="https://static.okko.tv/images/v4/2f253e62-7cb0-4c03-87e5-3b0e536d80a8?presetId=1152&width=80&scale=2&quality=80&mediaType=webp" group-title="Общественные", МУЗ ТВ
+#EXTINF:-1 tvg-name="Муз ТВ" group-title="Общественные", МУЗ ТВ
 https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R06_MUZTV_VLGOB/variant.m3u8
 
 #EXTINF:-1 tvg-name="Суббота!" group-title="Общественные", Суббота!
@@ -70,7 +70,7 @@ https://zabava-htlive.cdn.ngenix.net/hls/CH_DISNEY/variant.m3u8
 #EXTINF:-1 tvg-name="Волгоград 1" group-title="Общественные", Волгоград 1
 http://dmi3y-tv.online/hls/zabava/region/VGRAD/CH_VOLGOGRAD1HD.m3u8
 
-#EXTINF:-1 tvg-name="МТВ Волгоград" tvg-logo="https://sun9-38.userapi.com/s/v1/ig2/QzILXWdv-_F2pAWO3VAnq-iSe7W871hiQcP19gVswAwaxKYZnXAj5iz2zvlLXCRk8VGx0jqkmDbwr1YhP0yVDU0h.jpg?quality=95&crop=375,207,376,376&as=32x32,48x48,72x72,108x108,160x160,240x240,360x360&ava=1&cs=240x240" group-title="Общественные", МТВ Волгоград
+#EXTINF:-1 tvg-name="МТВ Волгоград" group-title="Общественные", МТВ Волгоград
 https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R01_MTV/variant.m3u8
 
 #EXTINF:-1 tvg-name="Волгоград 24" group-title="Общественные", Волгоград 24
