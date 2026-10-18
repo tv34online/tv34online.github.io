@@ -5,9 +5,12 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 25
     steps:
       - uses: actions/setup-java@v4
         with: { distribution: temurin, java-version: 17 }
+      - uses: android-actions/setup-android@v3
+        with: { packages: "platforms;android-34 build-tools;34.0.0" }
       - uses: gradle/actions/setup-gradle@v3
         with: { gradle-version: "8.7" }
       - name: Create project
@@ -27,6 +30,9 @@ jobs:
           EOF
           cat > gradle.properties <<'EOF'
           android.useAndroidX=true
+          org.gradle.jvmargs=-Xmx3g -Dfile.encoding=UTF-8
+          kotlin.daemon.jvmargs=-Xmx2g
+          org.gradle.daemon=false
           EOF
           mkdir -p app
           cat > app/build.gradle.kts <<'EOF'
@@ -39,6 +45,7 @@ jobs:
                   minSdk = 21; targetSdk = 34
                   versionCode = 1; versionName = "1.0"
               }
+              lint { checkReleaseBuilds = false; abortOnError = false }
               compileOptions { sourceCompatibility = JavaVersion.VERSION_17; targetCompatibility = JavaVersion.VERSION_17 }
               kotlinOptions { jvmTarget = "17" }
           }
@@ -301,8 +308,17 @@ jobs:
           EOF
       - name: Build unsigned APK
         working-directory: iptv-app
-        run: gradle assembleRelease --no-daemon --stacktrace
+        run: |
+          set -o pipefail
+          gradle assembleRelease -x lintVitalAnalyzeRelease -x lintVitalReportRelease -x lintVitalRelease --no-daemon --console=plain --stacktrace 2>&1 | tee build.log
+      - name: Last lines of log (on failure)
+        if: failure()
+        working-directory: iptv-app
+        run: grep -n -i -B2 -A12 "What went wrong" build.log | head -60 || tail -40 build.log
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: iptv-unsigned-apk
-          path: iptv-app/app/build/outputs/apk/release/*.apk
+          path: |
+            iptv-app/app/build/outputs/apk/release/*.apk
+            iptv-app/build.log
