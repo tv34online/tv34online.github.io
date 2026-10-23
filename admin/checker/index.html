@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="ru" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ТВ 34 Аналитика — Мониторинг IPTV плейлиста</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="https://tv34online.github.io/favicon.ico" type="image/x-icon">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f6ff',
+                            100: '#e0edff',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- HLS.js for video stream playback -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <!-- Chart.js for analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1f2937;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #374151;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4b5563;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #60a5fa 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans antialiased">
+
+    <!-- Header / Navbar -->
+    <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-slate-950 border border-slate-800 p-1.5 flex items-center justify-center shadow-lg shadow-blue-500/10 shrink-0">
+                    <img src="https://tv34online.github.io/favicon.ico" 
+                         alt="ТВ 34 Аналитика" 
+                         class="w-full h-full object-contain"
+                         onerror="this.onerror=null; this.parentElement.innerHTML='<i class=\"fa-solid fa-tv text-blue-500\"></i>';">
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg leading-tight tracking-wide gradient-text">ТВ 34 Аналитика</h1>
+                    <p class="text-xs text-slate-400">Мониторинг и аналитика IPTV плейлистов</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-3">
+                <button onclick="openCorsModal()" class="px-3 py-1.5 text-xs font-medium rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 flex items-center gap-2 transition">
+                    <i class="fa-solid fa-shield-halved text-amber-400"></i>
+                    <span>О CORS / Ограничениях</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-1 w-full flex flex-col gap-6">
+
+        <!-- Input Section Card -->
+        <section class="bg-slate-900 rounded-2xl border border-slate-800 p-5 shadow-xl">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-end">
+                <!-- URL Input -->
+                <div class="lg:col-span-7 flex flex-col gap-2">
+                    <label for="playlistUrl" class="text-xs font-semibold text-slate-300 uppercase tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-link text-blue-400"></i> Ссылка на M3U плейлист
+                    </label>
+                    <div class="relative">
+                        <input type="url" id="playlistUrl" 
+                               value="https://tv34online.github.io/playlist.m3u" 
+                               placeholder="https://example.com/playlist.m3u"
+                               class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition text-sm">
+                        <button onclick="clearInput()" title="Очистить" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300 transition">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- File Upload Option -->
+                <div class="lg:col-span-3 flex flex-col gap-2">
+                    <label class="text-xs font-semibold text-slate-300 uppercase tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-file-arrow-up text-violet-400"></i> Или загрузите файл
+                    </label>
+                    <label class="cursor-pointer bg-slate-950 border border-slate-700 hover:border-slate-600 rounded-xl px-4 py-2.5 text-sm text-slate-300 flex items-center justify-center gap-2 transition truncate">
+                        <i class="fa-solid fa-folder-open text-slate-400"></i>
+                        <span id="fileNameLabel" class="truncate">Выберите .m3u / .m3u8</span>
+                        <input type="file" id="fileInput" accept=".m3u,.m3u8,.txt" class="hidden" onchange="handleFileUpload(event)">
+                    </label>
+                </div>
+
+                <!-- Action Button -->
+                <div class="lg:col-span-2">
+                    <button id="startBtn" onclick="loadAndCheckPlaylist()" class="w-full bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-medium px-4 py-2.5 rounded-xl transition shadow-lg shadow-blue-600/30 flex items-center justify-center gap-2 text-sm">
+                        <i class="fa-solid fa-play"></i>
+                        <span>Проверить</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Advanced Settings Toggle / Settings Row -->
+            <div class="mt-4 pt-4 border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-4 text-xs text-slate-400">
+                <div class="flex items-center gap-6 flex-wrap">
+                    <div class="flex items-center gap-2">
+                        <label for="concurrencySelect" class="text-slate-400">Параллельные запросы:</label>
+                        <select id="concurrencySelect" class="bg-slate-950 border border-slate-700 rounded-md px-2 py-1 text-slate-200 focus:outline-none">
+                            <option value="3">3</option>
+                            <option value="5" selected>5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                        </select>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <label for="timeoutSelect" class="text-slate-400">Таймаут (сек):</label>
+                        <select id="timeoutSelect" class="bg-slate-950 border border-slate-700 rounded-md px-2 py-1 text-slate-200 focus:outline-none">
+                            <option value="3000">3 сек</option>
+                            <option value="5000" selected>5 сек</option>
+                            <option value="8000">8 сек</option>
+                            <option value="12000">12 сек</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-2 text-slate-500">
+                    <i class="fa-solid fa-chart-line text-blue-400"></i>
+                    <span>ТВ 34 Аналитика • Автоматический HEAD/GET сканер</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats & Visual Analytics Row -->
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <!-- Metrics Cards -->
+            <div class="lg:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+                <!-- Total -->
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-col justify-between">
+                    <div class="flex items-center justify-between text-slate-400 mb-2">
+                        <span class="text-xs font-semibold uppercase tracking-wider">Всего каналов</span>
+                        <i class="fa-solid fa-list text-slate-500"></i>
+                    </div>
+                    <div class="text-2xl sm:text-3xl font-bold text-slate-100" id="statTotal">0</div>
+                    <div class="text-xs text-slate-500 mt-1">Загружено из списка</div>
+                </div>
+
+                <!-- Working -->
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-col justify-between">
+                    <div class="flex items-center justify-between text-emerald-400 mb-2">
+                        <span class="text-xs font-semibold uppercase tracking-wider">Работают</span>
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+                    <div class="text-2xl sm:text-3xl font-bold text-emerald-400" id="statWorking">0</div>
+                    <div class="text-xs text-emerald-500/70 mt-1" id="statWorkingPct">0% от проверенных</div>
+                </div>
+
+                <!-- Broken -->
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-col justify-between">
+                    <div class="flex items-center justify-between text-rose-400 mb-2">
+                        <span class="text-xs font-semibold uppercase tracking-wider">Не работают</span>
+                        <i class="fa-solid fa-circle-xmark"></i>
+                    </div>
+                    <div class="text-2xl sm:text-3xl font-bold text-rose-400" id="statBroken">0</div>
+                    <div class="text-xs text-rose-500/70 mt-1" id="statBrokenPct">0% от проверенных</div>
+                </div>
+
+                <!-- Pending / Checking -->
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-col justify-between">
+                    <div class="flex items-center justify-between text-amber-400 mb-2">
+                        <span class="text-xs font-semibold uppercase tracking-wider">В очереди</span>
+                        <i class="fa-solid fa-spinner animate-spin"></i>
+                    </div>
+                    <div class="text-2xl sm:text-3xl font-bold text-amber-400" id="statPending">0</div>
+                    <div class="text-xs text-amber-500/70 mt-1" id="statProgressText">Ожидание...</div>
+                </div>
+            </div>
+
+            <!-- Mini Analytics Chart -->
+            <div class="lg:col-span-4 bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-col items-center justify-center relative min-h-[160px]">
+                <div class="w-full h-32 relative">
+                    <canvas id="statusChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Progress Bar -->
+        <section id="progressSection" class="bg-slate-900 border border-slate-800 rounded-xl p-4 hidden">
+            <div class="flex justify-between items-center text-xs text-slate-300 mb-2">
+                <span class="font-medium flex items-center gap-2">
+                    <i class="fa-solid fa-rotate text-blue-400 animate-spin"></i>
+                    <span>Идет проверка каналов...</span>
+                </span>
+                <span id="progressPercent" class="font-bold text-blue-400">0%</span>
+            </div>
+            <div class="w-full bg-slate-950 rounded-full h-2.5 overflow-hidden border border-slate-800">
+                <div id="progressBar" class="bg-gradient-to-r from-blue-500 to-violet-500 h-2.5 rounded-full transition-all duration-300 w-0"></div>
+            </div>
+        </section>
+
+        <!-- Main Channels Control & Filter Bar -->
+        <section class="flex flex-col gap-4">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-slate-900 p-4 rounded-xl border border-slate-800">
+                
+                <!-- Status Filter Tabs -->
+                <div class="flex items-center bg-slate-950 p-1 rounded-lg border border-slate-800 self-start md:self-auto overflow-x-auto max-w-full">
+                    <button onclick="setFilter('all')" id="tabAll" class="filter-tab px-3 py-1.5 rounded-md text-xs font-medium transition bg-slate-800 text-slate-100 shadow">
+                        Все (<span id="cntAll">0</span>)
+                    </button>
+                    <button onclick="setFilter('broken')" id="tabBroken" class="filter-tab px-3 py-1.5 rounded-md text-xs font-medium text-slate-400 hover:text-slate-200 transition">
+                        <i class="fa-solid fa-triangle-exclamation text-rose-400 mr-1"></i> Не работают (<span id="cntBroken">0</span>)
+                    </button>
+                    <button onclick="setFilter('working')" id="tabWorking" class="filter-tab px-3 py-1.5 rounded-md text-xs font-medium text-slate-400 hover:text-slate-200 transition">
+                        <i class="fa-solid fa-check text-emerald-400 mr-1"></i> Работают (<span id="cntWorking">0</span>)
+                    </button>
+                </div>
+
+                <!-- Search & Category Filters -->
+                <div class="flex items-center gap-2 flex-1 md:max-w-md">
+                    <!-- Search Input -->
+                    <div class="relative flex-1">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
+                        <input type="text" id="searchInput" oninput="applyFilters()" placeholder="Поиск по названию или URL..." class="w-full bg-slate-950 border border-slate-800 rounded-lg pl-9 pr-3 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-blue-500">
+                    </div>
+                    
+                    <!-- Group/Category Filter -->
+                    <select id="groupSelect" onchange="applyFilters()" class="bg-slate-950 border border-slate-800 text-xs text-slate-300 rounded-lg px-3 py-1.5 focus:outline-none max-w-[140px] truncate">
+                        <option value="">Все категории</option>
+                    </select>
+                </div>
+
+                <!-- Export Menu / Action buttons -->
+                <div class="flex items-center gap-2">
+                    <button onclick="exportWorkingM3U()" class="px-3 py-1.5 text-xs font-medium bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 rounded-lg transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-download"></i>
+                        <span>Экспорт рабочих (M3U)</span>
+                    </button>
+                    <button onclick="exportBrokenReport()" class="px-3 py-1.5 text-xs font-medium bg-rose-600/20 hover:bg-rose-600/30 text-rose-300 border border-rose-500/30 rounded-lg transition flex items-center gap-1.5" title="Экспорт отчета битых каналов">
+                        <i class="fa-solid fa-file-export"></i>
+                        <span>Отчет битых</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Channels Grid / Table Area -->
+            <div id="channelsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                <!-- Empty State Initial -->
+                <div class="col-span-full bg-slate-900 border border-slate-800 border-dashed rounded-2xl p-12 text-center text-slate-500">
+                    <i class="fa-solid fa-tv text-4xl mb-3 text-slate-600"></i>
+                    <p class="text-slate-300 font-medium">Каналы еще не загружены</p>
+                    <p class="text-xs text-slate-500 mt-1">Укажите ссылку на плейлист или загрузите файл M3U и нажмите «Проверить»</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Player Modal -->
+    <div id="playerModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-3xl w-full overflow-hidden shadow-2xl flex flex-col">
+            <!-- Modal Header -->
+            <div class="p-4 border-b border-slate-800 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <img id="modalChannelLogo" src="" alt="" class="w-8 h-8 object-contain rounded bg-slate-950 p-1 border border-slate-800 hidden">
+                    <div>
+                        <h3 id="modalChannelTitle" class="font-bold text-slate-100 text-sm sm:text-base">Воспроизведение</h3>
+                        <p id="modalChannelGroup" class="text-xs text-slate-400"></p>
+                    </div>
+                </div>
+                <button onclick="closePlayerModal()" class="text-slate-400 hover:text-white p-2 transition">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Video Player Container -->
+            <div class="relative bg-black aspect-video flex items-center justify-center overflow-hidden">
+                <video id="videoPlayer" controls class="w-full h-full object-contain"></video>
+                <div id="videoErrorOverlay" class="absolute inset-0 bg-slate-950/90 flex flex-col items-center justify-center p-4 text-center hidden">
+                    <i class="fa-solid fa-triangle-exclamation text-rose-500 text-3xl mb-2"></i>
+                    <p class="text-sm font-semibold text-slate-200">Не удалось воспроизвести поток</p>
+                    <p id="videoErrorMessage" class="text-xs text-slate-400 max-w-md mt-1">Возможно поток недоступен или заблокирован политикой CORS браузера.</p>
+                </div>
+            </div>
+
+            <!-- Modal Footer Info -->
+            <div class="p-4 bg-slate-900 border-t border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
+                <div class="truncate max-w-md text-slate-400 font-mono" id="modalChannelUrl"></div>
+                <button onclick="copyModalUrl()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg border border-slate-700 transition flex items-center gap-1.5 shrink-0">
+                    <i class="fa-solid fa-copy"></i>
+                    <span>Копировать URL</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CORS Warning Modal -->
+    <div id="corsModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-xl w-full p-6 shadow-2xl">
+            <div class="flex items-center gap-3 text-amber-400 mb-4">
+                <i class="fa-solid fa-shield-halved text-2xl"></i>
+                <h3 class="font-bold text-lg text-slate-100">Информация о CORS и сетевых ограничениях</h3>
+            </div>
+            
+            <div class="text-xs sm:text-sm text-slate-300 space-y-3 leading-relaxed">
+                <p>
+                    Браузеры применяют политику <strong>CORS (Cross-Origin Resource Sharing)</strong>. Если сервер IPTV трансляции не передает заголовок <code class="bg-slate-950 px-1.5 py-0.5 rounded text-amber-300 border border-slate-800">Access-Control-Allow-Origin: *</code>, прямое сетевое обращение из браузера может блокироваться.
+                </p>
+                <p>
+                    <strong>Как система ТВ 34 Аналитика с этим справляется:</strong>
+                </p>
+                <ul class="list-disc list-inside space-y-1 text-slate-400 pl-1">
+                    <li>Сначала выполняется легкая сетевая проверка (HEAD/GET).</li>
+                    <li>Если сетевой запрос заблокирован CORS, задействуется фоллбэк с тестированием медиа-элемента/HLS.</li>
+                </ul>
+                <p class="text-slate-400">
+                    Если большинство каналов отмечается как «Не работает», установите браузерное расширение CORS Unblock для локальной отладки или проверяйте прямые m3u8 ссылки в VLC плеере.
+                </p>
+            </div>
+
+            <div class="mt-6 flex justify-end">
+                <button onclick="closeCorsModal()" class="px-5 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-medium text-xs transition">
+                    Понятно
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2"></div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- State Management ---
+        let channels = [];
+        let currentFilter = 'all';
+        let checkingInProgress = false;
+        let hlsInstance = null;
+        let chartInstance = null;
+
+        // Init Analytics Chart
+        function initChart() {
+            const ctx = document.getElementById('statusChart').getContext('2d');
+            chartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Работают', 'Не работают', 'В очереди'],
+                    datasets: [{
+                        data: [0, 0, 0],
+                        backgroundColor: ['#10b981', '#f43f5e', '#f59e0b'],
+                        borderWidth: 0,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                color: '#94a3b8',
+                                font: { size: 10 },
+                                boxWidth: 10
+                            }
+                        }
+                    },
+                    cutout: '70%'
+                }
+            });
+        }
+
+        // --- M3U Parser ---
+        function parseM3U(m3uText) {
+            const lines = m3uText.split(/\r?\n/);
+            const parsed = [];
+            let currentChannel = null;
+
+            for (let i = 0; i < lines.length; i++) {
+                const line = lines[i].trim();
+                if (!line) continue;
+
+                if (line.startsWith('#EXTINF:')) {
+                    currentChannel = {
+                        id: 'ch_' + Math.random().toString(36).substr(2, 9),
+                        name: 'Неизвестный канал',
+                        logo: '',
+                        group: 'Без категории',
+                        url: '',
+                        status: 'pending',
+                        statusCode: null,
+                        errorReason: '',
+                        rawExtinf: line
+                    };
+
+                    const logoMatch = line.match(/tvg-logo="([^"]+)"/i);
+                    if (logoMatch) currentChannel.logo = logoMatch[1];
+
+                    const groupMatch = line.match(/group-title="([^"]+)"/i);
+                    if (groupMatch) currentChannel.group = groupMatch[1];
+
+                    const commaIdx = line.lastIndexOf(',');
+                    if (commaIdx !== -1) {
+                        const name = line.substring(commaIdx + 1).trim();
+                        if (name) currentChannel.name = name;
+                    }
+                } else if (!line.startsWith('#') && currentChannel) {
+                    currentChannel.url = line;
+                    parsed.push(currentChannel);
+                    currentChannel = null;
+                } else if (!line.startsWith('#') && !currentChannel) {
+                    parsed.push({
+                        id: 'ch_' + Math.random().toString(36).substr(2, 9),
+                        name: line.split('/').pop().split('?')[0] || 'Канал ' + (parsed.length + 1),
+                        logo: '',
+                        group: 'Без категории',
+                        url: line,
+                        status: 'pending',
+                        statusCode: null,
+                        errorReason: '',
+                        rawExtinf: '#EXTINF:-1,' + line
+                    });
+                }
+            }
+            return parsed;
+        }
+
+        // --- File Upload Handler ---
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            document.getElementById('fileNameLabel').textContent = file.name;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const content = e.target.result;
+                processM3UContent(content);
+            };
+            reader.readAsText(file);
+        }
+
+        // --- Main Load Function ---
+        async function loadAndCheckPlaylist() {
+            if (checkingInProgress) return;
+
+            const urlInput = document.getElementById('playlistUrl').value.trim();
+            const fileInput = document.getElementById('fileInput');
+
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    processM3UContent(e.target.result);
+                };
+                reader.readAsText(file);
+                return;
+            }
+
+            if (!urlInput) {
+                showToast('Пожалуйста, введите URL плейлиста', 'warning');
+                return;
+            }
+
+            showToast('Загрузка плейлиста ТВ 34...', 'info');
+
+            try {
+                const response = await fetch(urlInput);
+                if (!response.ok) throw new Error(`Ошибка HTTP ${response.status}`);
+                const text = await response.text();
+                processM3UContent(text);
+            } catch (err) {
+                console.error(err);
+                showToast(`Ошибка загрузки плейлиста: ${err.message}`, 'error');
+            }
+        }
+
+        function processM3UContent(content) {
+            channels = parseM3U(content);
+            if (channels.length === 0) {
+                showToast('В плейлисте не найдено каналов', 'warning');
+                return;
+            }
+
+            populateGroupSelect();
+            updateStats();
+            renderChannels();
+            showToast(`Загружено каналов: ${channels.length}. Начинаем проверку...`, 'success');
+            
+            startConcurrentCheck();
+        }
+
+        // --- Concurrent Channel Checker ---
+        async function startConcurrentCheck() {
+            checkingInProgress = true;
+            document.getElementById('startBtn').disabled = true;
+            document.getElementById('startBtn').classList.add('opacity-50', 'cursor-not-allowed');
+            document.getElementById('progressSection').classList.remove('hidden');
+
+            const concurrency = parseInt(document.getElementById('concurrencySelect').value) || 5;
+            const timeoutMs = parseInt(document.getElementById('timeoutSelect').value) || 5000;
+
+            let queueIndex = 0;
+            let completedCount = 0;
+            const total = channels.length;
+
+            async function worker() {
+                while (queueIndex < total) {
+                    const currentIndex = queueIndex++;
+                    const channel = channels[currentIndex];
+
+                    await checkChannelStatus(channel, timeoutMs);
+
+                    completedCount++;
+                    updateProgress(completedCount, total);
+                    updateChannelCard(channel);
+                    updateStats();
+                }
+            }
+
+            const workers = [];
+            for (let i = 0; i < Math.min(concurrency, total); i++) {
+                workers.push(worker());
+            }
+
+            await Promise.all(workers);
+
+            checkingInProgress = false;
+            document.getElementById('startBtn').disabled = false;
+            document.getElementById('startBtn').classList.remove('opacity-50', 'cursor-not-allowed');
+            showToast('Анализ плейлиста успешно завершен!', 'success');
+        }
+
+        async function checkChannelStatus(channel, timeoutMs) {
+            const controller = new AbortController();
+            const timer = setTimeout(() => controller.abort(), timeoutMs);
+
+            try {
+                let res = await fetch(channel.url, { method: 'HEAD', signal: controller.signal }).catch(() => null);
+
+                if (!res || !res.ok) {
+                    const getController = new AbortController();
+                    const getTimer = setTimeout(() => getController.abort(), timeoutMs);
+                    res = await fetch(channel.url, { 
+                        method: 'GET', 
+                        headers: { 'Range': 'bytes=0-100' },
+                        signal: getController.signal 
+                    }).catch(() => null);
+                    clearTimeout(getTimer);
+                }
+
+                clearTimeout(timer);
+
+                if (res && (res.ok || res.status === 206)) {
+                    channel.status = 'working';
+                    channel.statusCode = res.status;
+                    channel.errorReason = 'OK';
+                } else if (res) {
+                    channel.status = 'broken';
+                    channel.statusCode = res.status;
+                    channel.errorReason = `HTTP ${res.status}`;
+                } else {
+                    const videoPlayable = await testVideoElement(channel.url, timeoutMs);
+                    if (videoPlayable) {
+                        channel.status = 'working';
+                        channel.statusCode = 200;
+                        channel.errorReason = 'Playable';
+                    } else {
+                        channel.status = 'broken';
+                        channel.statusCode = 'ERR';
+                        channel.errorReason = 'CORS / Таймаут / Недоступен';
+                    }
+                }
+            } catch (err) {
+                clearTimeout(timer);
+                channel.status = 'broken';
+                channel.statusCode = 'ERR';
+                channel.errorReason = err.name === 'AbortError' ? 'Таймаут соединения' : 'Сетевая ошибка';
+            }
+        }
+
+        function testVideoElement(url, timeoutMs) {
+            return new Promise((resolve) => {
+                const video = document.createElement('video');
+                video.volume = 0;
+                let resolved = false;
+
+                const timer = setTimeout(() => {
+                    if (!resolved) {
+                        resolved = true;
+                        video.src = '';
+                        resolve(false);
+                    }
+                }, Math.min(timeoutMs, 4000));
+
+                video.onloadedmetadata = () => {
+                    if (!resolved) {
+                        resolved = true;
+                        clearTimeout(timer);
+                        video.src = '';
+                        resolve(true);
+                    }
+                };
+
+                video.onerror = () => {
+                    if (!resolved) {
+                        resolved = true;
+                        clearTimeout(timer);
+                        video.src = '';
+                        resolve(false);
+                    }
+                };
+
+                video.src = url;
+            });
+        }
+
+        // --- UI Rendering & Stats ---
+        function updateStats() {
+            const total = channels.length;
+            const working = channels.filter(c => c.status === 'working').length;
+            const broken = channels.filter(c => c.status === 'broken').length;
+            const pending = channels.filter(c => c.status === 'pending').length;
+
+            const checkedTotal = working + broken;
+            const workingPct = checkedTotal > 0 ? Math.round((working / checkedTotal) * 100) : 0;
+            const brokenPct = checkedTotal > 0 ? Math.round((broken / checkedTotal) * 100) : 0;
+
+            document.getElementById('statTotal').textContent = total;
+            document.getElementById('statWorking').textContent = working;
+            document.getElementById('statWorkingPct').textContent = `${workingPct}% от проверенных`;
+            document.getElementById('statBroken').textContent = broken;
+            document.getElementById('statBrokenPct').textContent = `${brokenPct}% от проверенных`;
+            document.getElementById('statPending').textContent = pending;
+
+            document.getElementById('cntAll').textContent = total;
+            document.getElementById('cntBroken').textContent = broken;
+            document.getElementById('cntWorking').textContent = working;
+
+            if (chartInstance) {
+                chartInstance.data.datasets[0].data = [working, broken, pending];
+                chartInstance.update();
+            }
+        }
+
+        function updateProgress(completed, total) {
+            const pct = Math.round((completed / total) * 100);
+            document.getElementById('progressBar').style.width = `${pct}%`;
+            document.getElementById('progressPercent').textContent = `${pct}%`;
+            document.getElementById('statProgressText').textContent = `${completed} из ${total} проверено`;
+        }
+
+        function populateGroupSelect() {
+            const groups = [...new Set(channels.map(c => c.group))].sort();
+            const select = document.getElementById('groupSelect');
+            select.innerHTML = '<option value="">Все категории</option>';
+            groups.forEach(g => {
+                const opt = document.createElement('option');
+                opt.value = g;
+                opt.textContent = g;
+                select.appendChild(opt);
+            });
+        }
+
+        function setFilter(filter) {
+            currentFilter = filter;
+            document.querySelectorAll('.filter-tab').forEach(btn => {
+                btn.classList.remove('bg-slate-800', 'text-slate-100', 'shadow');
+                btn.classList.add('text-slate-400');
+            });
+
+            const activeTab = document.getElementById(filter === 'all' ? 'tabAll' : filter === 'broken' ? 'tabBroken' : 'tabWorking');
+            activeTab.classList.add('bg-slate-800', 'text-slate-100', 'shadow');
+            activeTab.classList.remove('text-slate-400');
+
+            applyFilters();
+        }
+
+        function applyFilters() {
+            const search = document.getElementById('searchInput').value.toLowerCase().trim();
+            const selectedGroup = document.getElementById('groupSelect').value;
+
+            const filtered = channels.filter(c => {
+                if (currentFilter === 'working' && c.status !== 'working') return false;
+                if (currentFilter === 'broken' && c.status !== 'broken') return false;
+                if (selectedGroup && c.group !== selectedGroup) return false;
+
+                if (search) {
+                    const matchName = c.name.toLowerCase().includes(search);
+                    const matchUrl = c.url.toLowerCase().includes(search);
+                    const matchGroup = c.group.toLowerCase().includes(search);
+                    return matchName || matchUrl || matchGroup;
+                }
+
+                return true;
+            });
+
+            renderChannels(filtered);
+        }
+
+        function renderChannels(listToRender = channels) {
+            const container = document.getElementById('channelsContainer');
+
+            if (listToRender.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full bg-slate-900 border border-slate-800 rounded-2xl p-8 text-center text-slate-500">
+                        <i class="fa-solid fa-filter text-2xl mb-2 text-slate-600"></i>
+                        <p class="text-slate-300 font-medium">Нет каналов, соответствующих фильтрам</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = listToRender.map(channel => createChannelCardHtml(channel)).join('');
+        }
+
+        function createChannelCardHtml(channel) {
+            let statusBadge = '';
+            if (channel.status === 'working') {
+                statusBadge = `<span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center gap-1">
+                    <i class="fa-solid fa-check"></i> Работает
+                </span>`;
+            } else if (channel.status === 'broken') {
+                statusBadge = `<span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-rose-500/10 text-rose-400 border border-rose-500/20 flex items-center gap-1">
+                    <i class="fa-solid fa-xmark"></i> Не работает
+                </span>`;
+            } else {
+                statusBadge = `<span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20 flex items-center gap-1">
+                    <i class="fa-solid fa-spinner animate-spin"></i> В очереди
+                </span>`;
+            }
+
+            const fallbackLogo = `https://tv34online.github.io/favicon.ico`;
+
+            return `
+                <div id="card-${channel.id}" class="bg-slate-900 border border-slate-800 rounded-xl p-3.5 flex flex-col justify-between hover:border-slate-700 transition shadow-sm">
+                    <div>
+                        <div class="flex items-start justify-between gap-3 mb-2">
+                            <div class="flex items-center gap-2.5 min-w-0">
+                                <img src="${channel.logo || fallbackLogo}" 
+                                     onerror="this.onerror=null; this.src='${fallbackLogo}';" 
+                                     alt="Logo" 
+                                     class="w-10 h-10 object-contain rounded-lg bg-slate-950 border border-slate-800 shrink-0 p-1">
+                                <div class="min-w-0">
+                                    <h4 class="font-semibold text-slate-100 text-sm truncate" title="${escapeHtml(channel.name)}">${escapeHtml(channel.name)}</h4>
+                                    <span class="text-[11px] text-slate-400 bg-slate-950 px-2 py-0.5 rounded border border-slate-800 inline-block truncate max-w-[150px]">
+                                        ${escapeHtml(channel.group)}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="shrink-0">${statusBadge}</div>
+                        </div>
+
+                        <div class="text-[11px] text-slate-500 font-mono truncate mb-3 bg-slate-950/50 p-1.5 rounded border border-slate-800/50" title="${escapeHtml(channel.url)}">
+                            ${escapeHtml(channel.url)}
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between border-t border-slate-800/80 pt-2.5 text-xs">
+                        <span class="text-[11px] text-slate-400">
+                            ${channel.errorReason ? `<span class="${channel.status === 'working' ? 'text-emerald-400' : 'text-rose-400'}">${escapeHtml(channel.errorReason)}</span>` : 'Не проверено'}
+                        </span>
+
+                        <div class="flex items-center gap-1">
+                            <button onclick="playChannel('${channel.id}')" class="px-2.5 py-1 bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 rounded-lg border border-blue-500/30 transition flex items-center gap-1 text-[11px]">
+                                <i class="fa-solid fa-play"></i> Тест
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function updateChannelCard(channel) {
+            const cardEl = document.getElementById(`card-${channel.id}`);
+            if (cardEl) {
+                const temp = document.createElement('div');
+                temp.innerHTML = createChannelCardHtml(channel);
+                cardEl.replaceWith(temp.firstElementChild);
+            }
+        }
+
+        // --- Video Player Modal logic ---
+        function playChannel(id) {
+            const channel = channels.find(c => c.id === id);
+            if (!channel) return;
+
+            document.getElementById('modalChannelTitle').textContent = channel.name;
+            document.getElementById('modalChannelGroup').textContent = channel.group;
+            document.getElementById('modalChannelUrl').textContent = channel.url;
+
+            const logoEl = document.getElementById('modalChannelLogo');
+            logoEl.src = channel.logo || 'https://tv34online.github.io/favicon.ico';
+            logoEl.classList.remove('hidden');
+
+            const video = document.getElementById('videoPlayer');
+            const errorOverlay = document.getElementById('videoErrorOverlay');
+            errorOverlay.classList.add('hidden');
+
+            if (hlsInstance) {
+                hlsInstance.destroy();
+                hlsInstance = null;
+            }
+
+            if (Hls.isSupported() && (channel.url.includes('.m3u8') || channel.url.includes('hls'))) {
+                hlsInstance = new Hls();
+                hlsInstance.loadSource(channel.url);
+                hlsInstance.attachMedia(video);
+                hlsInstance.on(Hls.Events.MANIFEST_PARSED, function() {
+                    video.play().catch(() => {});
+                });
+                hlsInstance.on(Hls.Events.ERROR, function(event, data) {
+                    if (data.fatal) {
+                        showVideoError("Ошибка HLS трансляции: " + data.type);
+                    }
+                });
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                video.src = channel.url;
+                video.play().catch(() => {});
+            } else {
+                video.src = channel.url;
+                video.play().catch(() => {
+                    showVideoError("Прямое воспроизведение не поддерживается или заблокировано CORS.");
+                });
+            }
+
+            document.getElementById('playerModal').classList.remove('hidden');
+            document.getElementById('playerModal').classList.add('flex');
+        }
+
+        function showVideoError(msg) {
+            document.getElementById('videoErrorMessage').textContent = msg;
+            document.getElementById('videoErrorOverlay').classList.remove('hidden');
+        }
+
+        function closePlayerModal() {
+            const video = document.getElementById('videoPlayer');
+            video.pause();
+            video.src = '';
+            if (hlsInstance) {
+                hlsInstance.destroy();
+                hlsInstance = null;
+            }
+            document.getElementById('playerModal').classList.add('hidden');
+            document.getElementById('playerModal').classList.remove('flex');
+        }
+
+        function copyModalUrl() {
+            const url = document.getElementById('modalChannelUrl').textContent;
+            if (!url) return;
+
+            const tempInput = document.createElement('input');
+            tempInput.value = url;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            showToast('URL скопирован в буфер обмена', 'info');
+        }
+
+        // --- Export Functions ---
+        function exportWorkingM3U() {
+            const workingChannels = channels.filter(c => c.status === 'working');
+            if (workingChannels.length === 0) {
+                showToast('Нет рабочих каналов для экспорта', 'warning');
+                return;
+            }
+
+            let m3uContent = '#EXTM3U\n';
+            workingChannels.forEach(c => {
+                m3uContent += `${c.rawExtinf}\n${c.url}\n`;
+            });
+
+            downloadFile(m3uContent, 'tv34_working_playlist.m3u', 'text/plain');
+            showToast(`Экспортировано ${workingChannels.length} рабочих каналов`, 'success');
+        }
+
+        function exportBrokenReport() {
+            const brokenChannels = channels.filter(c => c.status === 'broken');
+            if (brokenChannels.length === 0) {
+                showToast('Битых каналов не обнаружено', 'info');
+                return;
+            }
+
+            let report = 'ОТЧЕТ ТВ 34 АНАЛИТИКА: НЕРАБОТАЮЩИЕ КАНАЛЫ\n';
+            report += `Дата проверки: ${new Date().toLocaleString('ru-RU')}\n`;
+            report += `Всего неработающих: ${brokenChannels.length}\n`;
+            report += '=====================================\n\n';
+
+            brokenChannels.forEach((c, idx) => {
+                report += `${idx + 1}. ${c.name}\n`;
+                report += `   Категория: ${c.group}\n`;
+                report += `   URL: ${c.url}\n`;
+                report += `   Причина: ${c.errorReason}\n\n`;
+            });
+
+            downloadFile(report, 'tv34_broken_channels.txt', 'text/plain');
+            showToast('Отчет битых каналов скачан', 'success');
+        }
+
+        function downloadFile(content, fileName, contentType) {
+            const blob = new Blob([content], { type: contentType });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // --- Utilities & Toast UI ---
+        function clearInput() {
+            document.getElementById('playlistUrl').value = '';
+        }
+
+        function openCorsModal() {
+            document.getElementById('corsModal').classList.remove('hidden');
+            document.getElementById('corsModal').classList.add('flex');
+        }
+
+        function closeCorsModal() {
+            document.getElementById('corsModal').classList.add('hidden');
+            document.getElementById('corsModal').classList.remove('flex');
+        }
+
+        function escapeHtml(str) {
+            return (str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+
+            let bg = 'bg-slate-800 border-slate-700 text-slate-100';
+            let icon = '<i class="fa-solid fa-circle-info text-blue-400"></i>';
+
+            if (type === 'success') {
+                bg = 'bg-emerald-950 border-emerald-800 text-emerald-200';
+                icon = '<i class="fa-solid fa-circle-check text-emerald-400"></i>';
+            } else if (type === 'error') {
+                bg = 'bg-rose-950 border-rose-800 text-rose-200';
+                icon = '<i class="fa-solid fa-triangle-exclamation text-rose-400"></i>';
+            } else if (type === 'warning') {
+                bg = 'bg-amber-950 border-amber-800 text-amber-200';
+                icon = '<i class="fa-solid fa-triangle-exclamation text-amber-400"></i>';
+            }
+
+            toast.className = `px-4 py-3 rounded-xl border ${bg} text-xs shadow-xl flex items-center gap-2.5 transition-all duration-300 transform translate-y-2 opacity-0`;
+            toast.innerHTML = `${icon} <span>${escapeHtml(message)}</span>`;
+
+            container.appendChild(toast);
+
+            requestAnimationFrame(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            });
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3500);
+        }
+
+        // Auto load default playlist on init
+        window.addEventListener('DOMContentLoaded', () => {
+            initChart();
+            loadAndCheckPlaylist();
+        });
+    </script>
+</body>
+</html>
+```
