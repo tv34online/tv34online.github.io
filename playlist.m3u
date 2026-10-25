@@ -61,11 +61,6 @@ https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R01_TNT_VLGOB/variant.m3u8
 #EXTINF:-1 tvg-name="Муз ТВ" group-title="Общественные", МУЗ ТВ
 https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R06_MUZTV_VLGOB/variant.m3u8
 
-#EXTINF:-1 tvg-name="Суббота!" group-title="Общественные", Суббота!
-http://217.114.191.150/Subbota/index.m3u8
-
-#EXTINF:-1 tvg-name="Солнце" group-title="Общественные", Солнце 
-https://zabava-htlive.cdn.ngenix.net/hls/CH_DISNEY/variant.m3u8
 
 #EXTINF:-1 tvg-name="Волгоград 1" group-title="Общественные", Волгоград 1
 http://dmi3y-tv.online/hls/zabava/region/VGRAD/CH_VOLGOGRAD1HD.m3u8
@@ -102,7 +97,7 @@ http://50.7.28.226/8189/index.m3u8
 #EXTVLCOPT:http-user-agent={"platform":"android","app":"limehd.ru.ctvshka","version_name":"5.1.0","version_code":"388","sdk":"34","name":"Xiaomi+13+Ultra","device_id":"a7f8e9d1c2b3a4f5","is_huawei":"0"}
 https://mhd116.iptv2022.com/x/pxCNzzpOwYpRXGHoxHLazA,1792954274/streaming/evropaplus/324/1/index.m3u8
 
-#EXTINF:-1 tvg-name="Шансон ТВ" group-title="Музыкальные", Шансон ТВ
+#EXTINF:-1 group-title="Музыкальные", Шансон ТВ
 https://hls-shansontv.cdnvideo.ru/shansontv/shansontv.sdp/playlist.m3u8
 
 #EXTINF:-1 tvg-name="Дикая охота" group-title="Познавательные", Дикая Охота 
@@ -168,6 +163,9 @@ http://50.7.28.226/8176/index.m3u8
 
 #EXTINF:-1 tvg-name="2x2" group-title="Развлекательные", 2х2 
 https://zabava-htlive.cdn.ngenix.net/hls/CH_2X2/variant.m3u8
+
+#EXTINF:-1 tvg-name="Суббота!" group-title="Развлекательные", Суббота!
+http://217.114.191.150/Subbota/index.m3u8
 
 #EXTINF:-1 tvg-name="СТС Love" group-title="Развлекательные", СТС Love
 https://fs.uplink.kz/sts_love/mono.m3u8?token=onlinetv
@@ -261,6 +259,9 @@ https://hls-02-europaplus.emgsound.ru/11/playlist.m3u8
 
 #EXTINF:-1 group-title="Детские", Карусель
 https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R01_KARUSEL_VLGOB/variant.m3u8
+
+#EXTINF:-1 tvg-name="Солнце" group-title="Детские", Солнце 
+https://zabava-htlive.cdn.ngenix.net/hls/CH_DISNEY/variant.m3u8
 
 #EXTINF:-1 tvg-name="Мульт" group-title="Детские", Мульт
 https://flussonic.mkpnet.ru/tv-c8b065a591077c26/video.m3u8
