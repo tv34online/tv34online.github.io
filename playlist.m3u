@@ -288,7 +288,7 @@ http://stream.mcquack.net/220/tracks-v1a1/mono.ts.m3u8
 #EXTINF:-1 tvg-name="Мультиландия" group-title="Детские", Мультиландия
 https://flussonic.mkpnet.ru/tv-89530153f25733fe/video.m3u8
 
-#EXTINF:-1 group-title="Детские", Канал Disney
+#EXTINF:-1 tvg-id="disney-c"  group-title="Детские", Канал Disney
 https://kinowalk.hopto.org/kanaldisneyonline_live
 
 #EXTINF:-1 tvg-name="Cartoon Classics" group-title="Детские", Cartoon Classics
