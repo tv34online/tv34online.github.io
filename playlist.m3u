@@ -81,29 +81,26 @@ https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R01_VOLGOGRAD24/variant.m3u8
 https://flussonic.mkpnet.ru/tv-ceaa6aa3cc1ea359/video.m3u8
 
 #EXTINF:-1 tvg-name="RU.TV" group-title="Музыкальные", RUTV
-https://hls-03-video.webcaramba.com/rutv/live_480/index.m3u8
+https://bl.rutube.ru/livestream/b1eb8e90d7e636677b3eb73b4fcbb717/index.m3u8?s=j3yDMmyGdzxPcUvClTgLSg&e=2092867968&scheme=https
 
 #EXTINF:-1 tvg-name="Жара" group-title="Музыкальные", Жара
-http://50.7.28.226/8361/index.m3u8
+https://flussonic.mkpnet.ru/tv-3cdc33d3606ba23f/video.m3u8
 
 #EXTINF:-1 group-title="Музыкальные", FON Music
-https://river-1.rutube.ru/stream/genetta-519.ost.rutube.ru/6oyf7_TGyXRBhGXigLTBYA/1765737942/5a294ae1ed12c44c7053301fb5fa9ba0/1080p_stream.m3u8
+https://flussonic.mkpnet.ru/tv-6683d71aa818d0a0/video.m3u8
 
-#EXTINF:-1 tvg-name="Жар Птица" group-title="Музыкальные", Жар птица
-http://streamer.rtcommufa.ru:1935/ptica/ptica1/playlist.m3u8
 
-#EXTINF:-1 tvg-name="AIVA" group-title="Музыкальные", AIVA TV
-https://mhd128.iptv2022.com/p/sg65S8XfqmzfDgNuvp0zEw,1765227625/streaming/aiva_tv/324/1/index.m3u8
 
 #EXTINF:-1 tvg-name="Музыка Первого" group-title="Музыкальные", Музыка первого
-http://176.96.241.40/MuzikaPervogo/index.m3u8
+http://195.64.140.147:10196/196
 
 
 #EXTINF:-1 tvg-name="Music Box Russia" group-title="Музыкальные", Music Box
 http://50.7.28.226/8189/index.m3u8
 
 #EXTINF:-1 tvg-name="Europa Plus TV" group-title="Музыкальные", Europa Plus TV
-https://minsk-cache04i.voka.tv/live/963-req_5k_v5.m3u8
+#EXTVLCOPT:http-user-agent={"platform":"android","app":"limehd.ru.ctvshka","version_name":"5.1.0","version_code":"388","sdk":"34","name":"Xiaomi+13+Ultra","device_id":"a7f8e9d1c2b3a4f5","is_huawei":"0"}
+https://mhd116.iptv2022.com/x/pxCNzzpOwYpRXGHoxHLazA,1792954274/streaming/evropaplus/324/1/index.m3u8
 
 #EXTINF:-1 tvg-name="Шансон ТВ" group-title="Музыкальные", Шансон ТВ
 https://hls-shansontv.cdnvideo.ru/shansontv/shansontv.sdp/playlist.m3u8
