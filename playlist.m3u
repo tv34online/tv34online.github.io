@@ -83,13 +83,13 @@ https://mhd128.iptv2022.com/p/oSGe_R6-gpsIK5-rmD4nfA,1765227610/streaming/touris
 #EXTINF:-1 tvg-name="Доктор" group-title="Познавательные", Доктор
 http://45.11.139.43:8555/doctor/index.m3u8
 #EXTINF:-1 tvg-name="Живая Планета" group-title="Познавательные", Живая планета
-http://185.46.16.239:8000/Zhivaya_Planeta
+http://95.66.188.74/Zhivaya_Planeta/mono.m3u8
 #EXTINF:-1 tvg-name="Живая природа" group-title="Познавательные", Живая природа
 https://mhd128.iptv2022.com/p/6INk6miWGzES9pZ-Ed3dgA,1765227610/streaming/livenature/324/1/index.m3u8
 #EXTINF:-1 tvg-name="Здоровое ТВ" group-title="Познавательные", Здоровое ТВ
-http://195.64.140.147:10171/171
+http://95.66.188.74/ZdorovoeTV/index.m3u8
 #EXTINF:-1 tvg-name="Моя Планета" group-title="Познавательные", Моя Планета
-http://195.64.140.147:10161/161
+http://tv.streams.baikal-telecom.net:8080/MoyaPlanetaHD/index.m3u8
 #EXTINF:-1 tvg-name="Т24" group-title="Познавательные", Т24
 http://50.7.28.226/8196/index.m3u8
 #EXTINF:-1 tvg-name="Домашние животные" group-title="Познавательные", Домашние животные
@@ -107,7 +107,7 @@ https://zabava-htlive.cdn.ngenix.net/hls/CH_2X2/variant.m3u8
 #EXTINF:-1 tvg-name="Суббота!" group-title="Развлекательные", Суббота!
 http://217.114.191.150/Subbota/index.m3u8
 #EXTINF:-1 tvg-name="СТС Love" group-title="Развлекательные", СТС Love
-http://195.64.140.147:10140/140
+https://fs.uplink.kz/sts_love/mono.m3u8?token=onlinetv
 #EXTINF:-1 tvg-name="Ю" group-title="Развлекательные", Ю
 https://bl.rutube.ru/livestream/5c9327074e25ca86f3111d4085cbbb65/index.m3u8?s=VLfn5xIbPS5HN1HdfMxFWA&e=2091960701&scheme=https
 #EXTINF:-1 tvg-name="ТНТ4" group-title="Развлекательные", ТНТ 4
@@ -117,7 +117,7 @@ https://fs.uplink.kz/perec/mono.m3u8?token=onlinetv
 #EXTINF:-1 tvg-name="Твоё ТВ" group-title="Развлекательные", Твоё ТВ
 http://tvoetv.space:8080/tvoetv/index.m3u8
 #EXTINF:-1 tvg-name="РЖД ТВ" group-title="Развлекательные", РЖД ТВ
-http://185.46.16.239:8000/Nat_Geo_Wild_HD
+https://hls-tva.cdnvideo.ru/tva/tvahd.sdp/tracks-v1a1/mono.m3u8
 #EXTINF:-1 tvg-name="Лапки Live" group-title="Развлекательные", Лапки Live
 https://fs.uplink.kz/lapki_live/mono.m3u8?token=onlinetv
 #EXTINF:-1 tvg-name="Драйв" group-title="Развлекательные", Драйв
@@ -137,9 +137,10 @@ http://50.7.28.226/8164/index.m3u8
 #EXTINF:-1 tvg-name="Живи!" group-title="Развлекательные", Живи
 https://mhd128.iptv2022.com/p/lYhBKww0rlGohUrEAmYLYw,1765227610/streaming/jivi/324/1/tracks-v5a1/mono.m3u8
 #EXTINF:-1 tvg-name="RUTUBE" group-title="Развлекательные", RUTUBE TV
-https://rutube.ru/video/9ae8e8a6dc58bdad66190475f9872ecd/?r=a/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
+https://bl.rutube.ru/livestream/9ae8e8a6dc58bdad66190475f9872ecd/index.m3u8?s=CIyJUfURREOAKGXgqmRwIA&e=2093174060&scheme=https
 #EXTINF:-1 tvg-name="Бобер" group-title="Развлекательные", БОБЁР
-http://195.64.140.147:10163/163
+http://95.66.188.74/Bober/mono.m3u8
 #EXTINF:-1 group-title="Радио", Русское Радио
 http://rusradio.hostingradio.ru/rusradio96.aacp?0.4177960461051895
 #EXTINF:-1 group-title="Радио", Радио Радонеж
@@ -205,7 +206,7 @@ http://5.188.159.128:8070/Cartoon_Network/index.m3u8
 #EXTINF:-1 tvg-name="Капитан Фантастика" group-title="Детские", Капитан Фантастика
 http://stream.mcquack.net/144/tracks-v1a1/mono.ts.m3u8
 #EXTINF:-1 tvg-name="Мультимузыка" group-title="Детские", Мультимузыка
-http://195.64.140.147:10134/134
+http://31.210.208.171:8080/mult_i_muzika/index.m3u8?token=+W2MSER
 #EXTINF:-1 tvg-name="Ani" group-title="Детские", Ani
 http://194.152.35.17/ani/index.m3u8
 #EXTINF:-1 group-title="Детские", Фиксай ТВ
@@ -213,15 +214,15 @@ https://tv34online.github.io/FixEye-TV/channel.m3u8
 #EXTINF:-1 tvg-name="Дом кино" group-title="Кино", Дом кино
 https://stream8.cinerama.uz/1054/tracks-v1a1/mono.m3u8
 #EXTINF:-1 group-title="Кино", Мосфильм. Золотая Коллекция
-http://195.64.140.147:10078/78
+https://fs.uplink.kz/mosfilm/mono.m3u8?token=onlinetv
 #EXTINF:-1 group-title="Кино", Красная Линия
 https://s55766.cdn.ngenix.net/s55766-media-origin/rline_high/tracks-v1a1/mono.m3u8
 #EXTINF:-1 group-title="Кино", Кино ТВ
 http://stream.mcquack.net/221/tracks-v1a1/mono.ts.m3u8
 #EXTINF:-1 group-title="Кино", Победа
-http://195.64.140.147:10141/141
+https://fs.uplink.kz/pobeda/mono.m3u8?token=onlinetv
 #EXTINF:-1 group-title="Кино", Кинокомедия
-http://195.64.140.147:10047/47
+http://31.210.208.171:8080/kinokomedia/index.m3u8?token=+W2MSER
 #EXTINF:-1 group-title="Кино", Русский Детектив
 https://flussonic.mkpnet.ru/tv-2997fed720614567/video.m3u8
 #EXTINF:-1 group-title="Кино", Мир Сериала
