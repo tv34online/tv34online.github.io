@@ -146,17 +146,15 @@ http://50.7.28.226/8196/index.m3u8
 #EXTINF:-1 tvg-name="Домашние животные" group-title="Познавательные", Домашние животные 
 https://mhd128.iptv2022.com/p/_S4ZhkldWn9KEnPMLXDdMQ,1765227611/streaming/homejivotnie/324/1/tracks-v5a1/mono.m3u8
 
-#EXTINF:-1 tvg-name="Охота и рыбалка" group-title="Познавательные", Охота и Рыбалка 
-http://50.7.28.226/8065/index.m3u8
 
-#EXTINF:-1 tvg-name="Усадьба" group-title="Познавательные", Познавач
+#EXTINF:-1 group-title="Познавательные", Познавач
 https://bl.rutube.ru/livestream/eddcc86d1dee0b5def546ea388eb38ea/index.m3u8?s=-SuogQvLaqnvsCcrTdWcvg&e=2093174067&scheme=https
 
 #EXTINF:-1 tvg-name="Animal Planet" group-title="Познавательные", Animal Planet
-http://109.75.59.241:8017/Animal_Planet/index.m3u8
+https://bl.rutube.ru/livestream/4004c8f6817b9ae1bd0d418905ae2b02/index.m3u8?s=CZYeR6QR48aRJcSU69tgbg&e=2093174067&scheme=https
 
 #EXTINF:-1 tvg-name="Discovery Channel" group-title="Познавательные", Discovery
-
+https://bl.rutube.ru/livestream/6422d62f7e1f87bc3aec45b462cd89ea/index.m3u8?s=HFyC0yKgmiN4xE0MxIY4cw&e=2093174068&scheme=https
 
 #EXTINF:-1 tvg-name="National Geographic" group-title="Познавательные", National Geographic
 https://bl.rutube.ru/livestream/2619fc295c16585ef018041d88f14db0/index.m3u8?s=TmPsYm5SuPNKDE676QudCg&e=2093174068&scheme=https
