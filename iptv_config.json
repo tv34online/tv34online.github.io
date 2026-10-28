@@ -2,37 +2,24 @@
   "source": "playlist_source.m3u",
   "output": "playlist.m3u",
   "fallbacks_file": "fallbacks.json",
+  "allowed_source_groups": [
+    "Ott Club+Реклама",
+    "Rutube (VPN)",
+    "Оргтехсервис (VPN🇷🇺)",
+    "Webhost (VPN🇷🇺)",
+    "Wink (VPN🇷🇺)"
+  ],
   "protect_first_group": true,
   "protected_groups": [],
   "protected_names": [
-    "Первый",
-    "Россия 1",
-    "Россия 24",
-    "Россия К",
-    "Матч",
-    "НТВ",
-    "Пятый",
-    "ОТР",
-    "ТВ Центр",
-    "ТВЦ",
-    "РЕН ТВ",
-    "Звезда",
-    "Мир",
-    "Карусель",
-    "СПАС"
+    "Первый", "Россия 1", "Россия 24", "Россия К", "Матч", "НТВ",
+    "Пятый", "ОТР", "ТВ Центр", "ТВЦ", "РЕН ТВ", "Звезда", "Мир",
+    "Карусель", "СПАС"
   ],
   "extra_playlists": [
     "https://raw.githubusercontent.com/Dimonovich/TV/Dimonovich/FREE/TV"
   ],
-  "extra_skip_groups_contains": [
-    "VPN",
-    "INFO"
-  ],
-  "use_iptv_org": true,
-  "iptv_org_url": "https://iptv-org.github.io/iptv/languages/rus.m3u",
-  "use_rutube_search": true,
   "workers": 20,
   "timeout": 10,
-  "drop_dead": false,
   "max_dead_ratio": 0.6
 }
