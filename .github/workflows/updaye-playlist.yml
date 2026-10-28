@@ -1,0 +1,42 @@
+name: Rebuild IPTV playlist
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"   # каждые 6 часов (UTC)
+  workflow_dispatch:         # ручной запуск кнопкой
+
+permissions:
+  contents: write
+
+concurrency:
+  group: rebuild-playlist
+  cancel-in-progress: false
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install deps
+        run: pip install requests
+
+      - name: Rebuild playlist
+        run: python scripts/rebuild_playlist.py
+
+      - name: Commit changes
+        run: |
+          git config user.name "iptv-bot"
+          git config user.email "iptv-bot@users.noreply.github.com"
+          git add playlist.m3u
+          if git diff --cached --quiet; then
+            echo "No changes"
+          else
+            git commit -m "Rebuild playlist $(date -u +'%Y-%m-%d %H:%M UTC')"
+            git push
+          fi
