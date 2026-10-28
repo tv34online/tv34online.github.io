@@ -18,6 +18,14 @@ UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
 SESSION = requests.Session()
 SESSION.headers.update({"User-Agent": UA})
 OPT_PREFIXES = ("#EXTVLCOPT", "#EXTHTTP")
+# Любой URL с этим фрагментом запрещён, включая указанный iptv2022-адрес.
+FORBIDDEN_URL_SUBSTRINGS = ("iptv2022",)
+
+def forbidden_stream(url):
+    """True, если адрес потока содержит запрещённый фрагмент."""
+    value = (url or "").strip().casefold()
+    return any(fragment.casefold() in value for fragment in FORBIDDEN_URL_SUBSTRINGS)
+
 NOISE = {"hd", "fhd", "uhd", "sd", "hq", "4k"}
 DEFAULTS = {
     "source": "playlist_source.m3u",
@@ -145,6 +153,9 @@ def load_one(url, allowed_groups, timeout):
     allowed = {norm_group(g) for g in allowed_groups}
     for entry in entries:
         name, group = info(entry)
+        # Никогда не используем запрещённые потоки даже как источник замены.
+        if forbidden_stream(entry["url"]):
+            continue
         # Строгое совпадение group-title; прочие группы не могут стать заменами.
         if norm_group(group) not in allowed:
             continue
@@ -190,7 +201,8 @@ def load_fallbacks(path, allowed_groups):
             if not isinstance(item, dict):
                 continue
             group, url = item.get("group", ""), item.get("url", "")
-            if norm_group(group) in allowed and isinstance(url, str) and url.startswith(("http://", "https://")):
+            if (norm_group(group) in allowed and isinstance(url, str)
+                    and url.startswith(("http://", "https://")) and not forbidden_stream(url)):
                 valid.append((group, url, []))
         result[" ".join(tokens(channel))] = valid
     return result
@@ -207,7 +219,7 @@ def find_replacement(name, fallbacks, sources, cfg):
     for group, url, opts in candidates:
         if norm_group(group) not in {norm_group(x) for x in cfg["allowed_source_groups"]}:
             continue
-        if not url or url in tried:
+        if not url or forbidden_stream(url) or url in tried:
             continue
         tried.add(url)
         if alive(url, cfg["timeout"]):
@@ -224,8 +236,12 @@ def main():
 
     with open(cfg["source"], encoding="utf-8-sig") as f:
         headers, entries = parse(f.read())
+    removed_forbidden = sum(1 for e in entries if forbidden_stream(e["url"]))
+    entries = [e for e in entries if not forbidden_stream(e["url"])]
+    if removed_forbidden:
+        print(f"Удалено потоков с запрещённым адресом iptv2022: {removed_forbidden}")
     if not entries:
-        print(f"Ошибка: в {cfg['source']} не найдено каналов.")
+        print(f"Ошибка: после удаления запрещённых потоков в {cfg['source']} не осталось каналов.")
         return 2
 
     fallbacks = load_fallbacks(cfg["fallbacks_file"], cfg["allowed_source_groups"])
@@ -267,6 +283,9 @@ def main():
 
     output = (headers or ["#EXTM3U"])[:1]
     for entry in entries:
+        # Финальная страховка: запрещённый URL не попадёт в итоговый файл.
+        if forbidden_stream(entry["url"]):
+            continue
         output.extend(entry["meta"])
         output.append(entry["url"])
     with open(cfg["output"], "w", encoding="utf-8", newline="\n") as f:
