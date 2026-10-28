@@ -18,13 +18,27 @@ UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
 SESSION = requests.Session()
 SESSION.headers.update({"User-Agent": UA})
 OPT_PREFIXES = ("#EXTVLCOPT", "#EXTHTTP")
-# Любой URL с этим фрагментом запрещён, включая указанный iptv2022-адрес.
+# Потоки iptv2022 нужно заменить, но канал из плейлиста не удалять.
 FORBIDDEN_URL_SUBSTRINGS = ("iptv2022",)
 
 def forbidden_stream(url):
-    """True, если адрес потока содержит запрещённый фрагмент."""
+    """True, если URL требует обязательной замены."""
     value = (url or "").strip().casefold()
     return any(fragment.casefold() in value for fragment in FORBIDDEN_URL_SUBSTRINGS)
+
+PAID_MARKERS = (
+    "payment required", "subscription required", "subscribe to watch",
+    "paywall", "paid content", "платная подписка", "оплатите подписку",
+    "требуется подписка", "доступ только по подписке", "купить подписку"
+)
+
+def looks_like_paid_or_blocked(response, sample=b""):
+    """Эвристика: отсекает явные страницы оплаты/подписки; не доказывает бесплатность."""
+    content_type = response.headers.get("content-type", "").lower()
+    if "text/html" not in content_type and not sample.lstrip().lower().startswith((b"<!doctype html", b"<html")):
+        return False
+    text = sample.decode("utf-8", "ignore").casefold()
+    return any(marker in text for marker in PAID_MARKERS)
 
 NOISE = {"hd", "fhd", "uhd", "sd", "hq", "4k"}
 DEFAULTS = {
@@ -112,7 +126,7 @@ def _alive(url, timeout, depth=0):
         if response.status_code != 200:
             return False
         chunk = next(response.iter_content(65536), b"")
-        if not chunk:
+        if not chunk or looks_like_paid_or_blocked(response, chunk):
             return False
         if chunk.lstrip().startswith(b"#EXTM3U"):
             if depth >= 3:
@@ -153,7 +167,7 @@ def load_one(url, allowed_groups, timeout):
     allowed = {norm_group(g) for g in allowed_groups}
     for entry in entries:
         name, group = info(entry)
-        # Никогда не используем запрещённые потоки даже как источник замены.
+        # Потоки iptv2022 никогда не используются как замена.
         if forbidden_stream(entry["url"]):
             continue
         # Строгое совпадение group-title; прочие группы не могут стать заменами.
@@ -236,12 +250,11 @@ def main():
 
     with open(cfg["source"], encoding="utf-8-sig") as f:
         headers, entries = parse(f.read())
-    removed_forbidden = sum(1 for e in entries if forbidden_stream(e["url"]))
-    entries = [e for e in entries if not forbidden_stream(e["url"])]
-    if removed_forbidden:
-        print(f"Удалено потоков с запрещённым адресом iptv2022: {removed_forbidden}")
+    forced_replace = [e for e in entries if forbidden_stream(e["url"]) ]
+    if forced_replace:
+        print(f"Найдено каналов с iptv2022: {len(forced_replace)}. Каналы сохраняются; ищу замену потока.")
     if not entries:
-        print(f"Ошибка: после удаления запрещённых потоков в {cfg['source']} не осталось каналов.")
+        print(f"Ошибка: в {cfg['source']} не найдено каналов.")
         return 2
 
     fallbacks = load_fallbacks(cfg["fallbacks_file"], cfg["allowed_source_groups"])
@@ -250,10 +263,11 @@ def main():
         entry["name"], entry["group"] = info(entry)
         entry["protected"] = is_protected(entry["name"], entry["group"], cfg, first_group)
 
-    todo = [e for e in entries if not e["protected"]]
-    print(f"Каналов: {len(entries)}; защищено: {len(entries)-len(todo)}; проверяю: {len(todo)}")
+    # Каналы с iptv2022 всегда проходят замену, даже если обычно защищены.
+    todo = [e for e in entries if (not e["protected"]) or forbidden_stream(e["url"])]
+    print(f"Каналов: {len(entries)}; защищено без принудительной замены: {len(entries)-len(todo)}; проверяю: {len(todo)}")
     with ThreadPoolExecutor(max_workers=int(cfg["workers"])) as pool:
-        for entry, is_ok in zip(todo, pool.map(lambda e: alive(e["url"], int(cfg["timeout"])), todo)):
+        for entry, is_ok in zip(todo, pool.map(lambda e: False if forbidden_stream(e["url"]) else alive(e["url"], int(cfg["timeout"])), todo)):
             entry["alive"] = is_ok
 
     dead = [e for e in todo if not e["alive"]]
@@ -279,20 +293,21 @@ def main():
             report.append(f"✅ {entry['name']} → {group}")
         else:
             failed += 1
-            report.append(f"❌ {entry['name']}: разрешённой замены нет, оставлен исходный URL")
+            if forbidden_stream(entry["url"]):
+                report.append(f"⚠️ {entry['name']}: безопасная рабочая замена не найдена; канал сохранён с прежним URL iptv2022")
+            else:
+                report.append(f"❌ {entry['name']}: разрешённой рабочей замены нет, исходный URL сохранён")
 
     output = (headers or ["#EXTM3U"])[:1]
     for entry in entries:
-        # Финальная страховка: запрещённый URL не попадёт в итоговый файл.
-        if forbidden_stream(entry["url"]):
-            continue
+        # Канал никогда не удаляем. Если замена не найдена, оставляем исходный URL и явно пишем об этом в отчёте.
         output.extend(entry["meta"])
         output.append(entry["url"])
     with open(cfg["output"], "w", encoding="utf-8", newline="\n") as f:
         f.write("\n".join(output) + "\n")
 
-    summary = (f"## Пересборка плейлиста\n\nВсего: {len(entries)} · защищено: {len(entries)-len(todo)} · "
-               f"нерабочих: {len(dead)} · заменено: {replaced} · без замены: {failed}\n\n" +
+    summary = (f"## Пересборка плейлиста\n\nВсего: {len(entries)} · защищено без принудительной замены: {len(entries)-len(todo)} · "
+               f"требовали проверки/замены: {len(dead)} · заменено: {replaced} · без замены: {failed}\n\n" +
                "\n".join(f"- {line}" for line in report))
     print(summary)
     if os.environ.get("GITHUB_STEP_SUMMARY"):
