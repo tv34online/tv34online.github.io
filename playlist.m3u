@@ -1,4 +1,4 @@
-#EXTM3U url-tvg="https://iptvx.one/EPG"
+й#EXTM3U url-tvg="https://iptvx.one/EPG"
 #PROVIDER:TELEVIZOR34_VOLGOGRAD
 #EXTINF:-1 group-title="Общественные", Первый канал
 https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R03_1TV_VLGOB/variant.m3u8
@@ -57,45 +57,40 @@ https://flussonic.mkpnet.ru/tv-6683d71aa818d0a0/video.m3u8
 #EXTINF:-1 tvg-name="Музыка Первого" group-title="Музыкальные", Музыка первого
 http://195.64.140.147:10196/196
 #EXTINF:-1 group-title="Музыкальные", Baby Time
-#EXTVLCOPT:http-user-agent={"platform":"android","app":"limehd.ru.ctvshka","version_name":"5.1.0","version_code":"388","sdk":"34","name":"Xiaomi+13+Ultra","device_id":"a7f8e9d1c2b3a4f5","is_huawei":"0"}
-https://mhd116.iptv2022.com/x/CRT-GMetLKLl3GjhLuXlWw,1792954274/streaming/baby_time/324/1/index.m3u8
+#https://dont-working-channel.su/europaplustv
 #EXTINF:-1 tvg-name="Europa Plus TV" group-title="Музыкальные", Europa Plus TV
-#EXTVLCOPT:http-user-agent={"platform":"android","app":"limehd.ru.ctvshka","version_name":"5.1.0","version_code":"388","sdk":"34","name":"Xiaomi+13+Ultra","device_id":"a7f8e9d1c2b3a4f5","is_huawei":"0"}
-https://mhd116.iptv2022.com/x/pxCNzzpOwYpRXGHoxHLazA,1792954274/streaming/evropaplus/324/1/index.m3u8
+https://dont-working-channel.su/europaplustv
 #EXTINF:-1 group-title="Музыкальные", Шансон ТВ
 https://hls-shansontv.cdnvideo.ru/shansontv/shansontv.sdp/playlist.m3u8
-#EXTINF:-1 tvg-name="Дикая охота" group-title="Познавательные", Дикая Охота
-http://217.21.34.160:38007/dikayaohotahd/index.m3u8
-#EXTINF:-1 tvg-name="Дикая рыбалка" group-title="Познавательные", Дикая рыбалка
-https://mhd128.iptv2022.com/p/OmQqh-ai_2m0jBtx1Ny5zw,1765227609/streaming/ohotahd/324/1/tracks-v5a1/mono.m3u8
-#EXTINF:-1 tvg-name="Охотник и рыболов" group-title="Познавательные", Охотник и Рыболов
-https://mhd128.iptv2022.com/p/DYjFwizv-zIg35BW2RhCHw,1765227609/streaming/ohotnikhd/324/1/tracks-v5a1/mono.m3u8
-#EXTINF:-1 tvg-name="Загородный" group-title="Познавательные", Загородный
-http://95.66.188.74/Zagorodniy/mono.m3u8
+
+#EXTINF:-1 tvg-name="Охотник и рыболов Int" group-title="Познавательные", Охотник и Рыболов Int
+https://dont-working-channel.su/ohotnikiribolov
+#EXTINF:-1 tvg-name="Загородный" group-title="Познавательные", Загородный Int
+https://dont-working-channel.su/zagorodniy
 #EXTINF:-1 tvg-name="365 дней ТВ" group-title="Познавательные", 365 Дней ТВ
-https://mhd128.iptv2022.com/p/satiGW9TPVog3yQtqAGYfg,1765227611/streaming/365day/324/1/tracks-v5a1/mono.m3u8
+https://dont-working-channel.su/365daystv
 #EXTINF:-1 tvg-name="Zooпарк" group-title="Познавательные", ZooПарк
-https://mhd128.iptv2022.com/p/u1QOt2cCX6hDqQ2eMCUZlg,1765227611/streaming/zoopark/324/1/tracks-v5a1/mono.m3u8
+https://dont-working-channel.su/europaplustv
 #EXTINF:-1 tvg-name="В мире животных" group-title="Познавательные", В мире животных
 http://stream.mcquack.net/241/tracks-v1a1/mono.ts.m3u8
 #EXTINF:-1 tvg-name="Глазами туриста" group-title="Познавательные", Глазами туриста
-https://mhd128.iptv2022.com/p/oSGe_R6-gpsIK5-rmD4nfA,1765227610/streaming/tourist_eyes/324/1/tracks-v5a1/mono.m3u8
+https://dont-working-channel.su/europaplustv
 #EXTINF:-1 tvg-name="Доктор" group-title="Познавательные", Доктор
 http://45.11.139.43:8555/doctor/index.m3u8
 #EXTINF:-1 tvg-name="Живая Планета" group-title="Познавательные", Живая планета
-http://95.66.188.74/Zhivaya_Planeta/mono.m3u8
+https://dont-working-channel.su/europaplustv
 #EXTINF:-1 tvg-name="Живая природа" group-title="Познавательные", Живая природа
-https://mhd128.iptv2022.com/p/6INk6miWGzES9pZ-Ed3dgA,1765227610/streaming/livenature/324/1/index.m3u8
+https://dont-working-channel.su/europaplustv
 #EXTINF:-1 tvg-name="Здоровое ТВ" group-title="Познавательные", Здоровое ТВ
-http://95.66.188.74/ZdorovoeTV/index.m3u8
+https://dont-working-channel.su/europaplustv
 #EXTINF:-1 tvg-name="Моя Планета" group-title="Познавательные", Моя Планета
-http://tv.streams.baikal-telecom.net:8080/MoyaPlanetaHD/index.m3u8
+https://dont-working-channel.su/europaplustv
 #EXTINF:-1 tvg-name="Т24" group-title="Познавательные", Т24
-http://50.7.28.226/8196/index.m3u8
+https://dont-working-channel.su/europaplustv
 #EXTINF:-1 tvg-name="Домашние животные" group-title="Познавательные", Домашние животные
-https://mhd128.iptv2022.com/p/_S4ZhkldWn9KEnPMLXDdMQ,1765227611/streaming/homejivotnie/324/1/tracks-v5a1/mono.m3u8
+https://dont-working-channel.su/europaplustv
 #EXTINF:-1 group-title="Познавательные", Познавач
-https://bl.rutube.ru/livestream/eddcc86d1dee0b5def546ea388eb38ea/index.m3u8?s=-SuogQvLaqnvsCcrTdWcvg&e=2093174067&scheme=https
+https://dont-working-channel.su/europaplustv
 #EXTINF:-1 tvg-name="Animal Planet" group-title="Познавательные", Animal Planet
 https://bl.rutube.ru/livestream/4004c8f6817b9ae1bd0d418905ae2b02/index.m3u8?s=CZYeR6QR48aRJcSU69tgbg&e=2093174067&scheme=https
 #EXTINF:-1 tvg-name="Discovery Channel" group-title="Познавательные", Discovery
