@@ -306,6 +306,8 @@ http://31.210.208.171:8080/mult_i_muzika/index.m3u8?token=+W2MSER
 #EXTINF:-1 tvg-name="Ani" group-title="Детские", Ani
 http://194.152.35.17/ani/index.m3u8
 
+#EXTINF:-1 group-title="Детские", Фиксай ТВ
+https://tv34online.github.io/FixEye-TV/channel.m3u8
 
 #EXTINF:-1 tvg-name="Дом кино" group-title="Кино", Дом кино
 https://stream8.cinerama.uz/1054/tracks-v1a1/mono.m3u8
