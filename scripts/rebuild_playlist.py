@@ -27,6 +27,8 @@ DEFAULTS = {
     "protect_first_group": True,
     "protected_groups": [],
     "protected_names": [],
+    "extra_playlists": [],
+    "extra_skip_groups_contains": ["VPN", "INFO"],
     "use_iptv_org": True,
     "iptv_org_url": "https://iptv-org.github.io/iptv/languages/rus.m3u",
     "use_rutube_search": True,
@@ -150,18 +152,40 @@ def rutube_search(name):
                 return
 
 
-def load_iptv_org(cfg):
-    if not cfg["use_iptv_org"]:
-        return {}
-    try:
-        txt = S.get(cfg["iptv_org_url"], timeout=30).text
-    except Exception as e:
-        print(f"! iptv-org недоступен: {e}")
-        return {}
-    _, items = parse(txt)
-    idx = {}
+OPT_PREFIXES = ("#EXTVLCOPT", "#EXTHTTP")
+
+
+def load_one(url, label, skip_groups):
+    _, items = parse(S.get(url, timeout=30).text)
     for it in items:
-        idx.setdefault(" ".join(tokens(info(it)[0])), []).append(it["url"])
+        name, group = info(it)
+        if any(x.lower() in group.lower() for x in skip_groups):
+            continue
+        key = " ".join(tokens(name))
+        if key:
+            opts = [l for l in it["meta"] if l.startswith(OPT_PREFIXES)]
+            yield key, label, it["url"], opts
+
+
+def load_sources(cfg):
+    """Все запасные плейлисты -> {нормализованное имя: [(источник, url, opts)]}."""
+    sources = []
+    for u in cfg["extra_playlists"]:
+        parts = u.split("/")
+        label = "плейлист " + "/".join(parts[3:5]) if len(parts) > 4 else "доп. плейлист"
+        sources.append((u, label, cfg["extra_skip_groups_contains"]))
+    if cfg["use_iptv_org"]:
+        sources.append((cfg["iptv_org_url"], "iptv-org", []))
+    idx = {}
+    for url, label, skip in sources:
+        try:
+            n = 0
+            for key, lab, u, opts in load_one(url, label, skip):
+                idx.setdefault(key, []).append((lab, u, opts))
+                n += 1
+            print(f"Загружен {label}: {n} потоков")
+        except Exception as e:
+            print(f"! не удалось загрузить {url}: {e}")
     return idx
 
 
@@ -173,23 +197,23 @@ def resolve(cand):
     return cand
 
 
-def find_replacement(name, fallbacks, iptv_org, cfg):
+def find_replacement(name, fallbacks, sources, cfg):
     key = " ".join(tokens(name))
     tried = set()
 
     def cands():
         for c in fallbacks.get(key, []):
-            yield "fallbacks.json", c
-        for u in iptv_org.get(key, []):
-            yield "iptv-org", u
+            yield "fallbacks.json", c, []
+        for lab, u, opts in sources.get(key, []):
+            yield lab, u, opts
         if cfg["use_rutube_search"]:
             try:
                 for vid in rutube_search(name):
-                    yield "Rutube (поиск)", f"rutube:{vid}"
+                    yield "Rutube (поиск)", f"rutube:{vid}", []
             except Exception as e:
                 print(f"  ! поиск Rutube для «{name}»: {e}")
 
-    for label, c in cands():
+    for label, c, opts in cands():
         try:
             url = resolve(c)
         except Exception:
@@ -198,7 +222,7 @@ def find_replacement(name, fallbacks, iptv_org, cfg):
             continue
         tried.add(url)
         if alive(url, cfg["timeout"]):
-            return label, url
+            return label, url, opts
     return None
 
 
@@ -237,13 +261,14 @@ def main():
         report.append(msg)
         dead = []
 
-    iptv_org = load_iptv_org(cfg) if dead else {}
+    sources = load_sources(cfg) if dead else {}
     replaced = failed = 0
     for e in dead:
-        res = find_replacement(e["name"], fallbacks, iptv_org, cfg)
+        res = find_replacement(e["name"], fallbacks, sources, cfg)
         if res:
-            label, url = res
+            label, url, opts = res
             e["url"] = url
+            e["meta"] = [l for l in e["meta"] if not l.startswith(OPT_PREFIXES)] + opts
             replaced += 1
             report.append(f"✅ {e['name']} → {label}")
         else:
