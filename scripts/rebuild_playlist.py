@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
-"""Пересборка IPTV-плейлиста: проверяет потоки, нерабочие заменяет запасными.
-
-Исходник (playlist_source.m3u) никогда не меняется — каждый раз он
-проверяется заново, поэтому родной поток возвращается, как только оживёт.
-Результат пишется в playlist.m3u.
+"""Проверяет исходный IPTV-плейлист и заменяет нерабочие каналы
+только потоками из разрешённых групп group-title.
+Исходный playlist_source.m3u никогда не изменяется.
 """
 import json
 import os
@@ -15,108 +13,117 @@ from urllib.parse import urljoin
 
 import requests
 
-UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
-      "(KHTML, like Gecko) Chrome/124.0 Safari/537.36")
-S = requests.Session()
-S.headers["User-Agent"] = UA
-
+UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+      "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36")
+SESSION = requests.Session()
+SESSION.headers.update({"User-Agent": UA})
+OPT_PREFIXES = ("#EXTVLCOPT", "#EXTHTTP")
+NOISE = {"hd", "fhd", "uhd", "sd", "hq", "4k"}
 DEFAULTS = {
     "source": "playlist_source.m3u",
     "output": "playlist.m3u",
     "fallbacks_file": "fallbacks.json",
+    "allowed_source_groups": [
+        "Ott Club+Реклама",
+        "Rutube (VPN)",
+        "Оргтехсервис (VPN🇷🇺)",
+        "Webhost (VPN🇷🇺)",
+        "Wink (VPN🇷🇺)"
+    ],
     "protect_first_group": True,
     "protected_groups": [],
-    "protected_names": [],
-    "extra_playlists": [],
-    "extra_skip_groups_contains": ["VPN", "INFO"],
-    "use_iptv_org": True,
-    "iptv_org_url": "https://iptv-org.github.io/iptv/languages/rus.m3u",
-    "use_rutube_search": True,
+    "protected_names": [
+        "Первый", "Россия 1", "Россия 24", "Россия К", "Матч", "НТВ",
+        "Пятый", "ОТР", "ТВ Центр", "ТВЦ", "РЕН ТВ", "Звезда", "Мир",
+        "Карусель", "СПАС"
+    ],
+    "extra_playlists": [
+        "https://raw.githubusercontent.com/Dimonovich/TV/Dimonovich/FREE/TV"
+    ],
     "workers": 20,
     "timeout": 10,
-    "drop_dead": False,
-    "max_dead_ratio": 0.6,
+    "max_dead_ratio": 0.6
 }
-NOISE = {"hd", "fhd", "uhd", "sd", "hq", "4k"}
 
 
-# ---------- разбор m3u ----------
 def tokens(name):
-    return [t for t in re.findall(r"\w+", name.lower()) if t not in NOISE]
+    return [t for t in re.findall(r"\w+", name.casefold()) if t not in NOISE]
+
+
+def norm_group(group):
+    return re.sub(r"\s+", " ", (group or "").strip()).casefold()
 
 
 def parse(text):
-    head, entries, pre = [], [], []
-    for line in text.splitlines():
-        line = line.strip()
+    headers, entries, meta = [], [], []
+    for raw in text.splitlines():
+        line = raw.strip()
         if not line:
             continue
         if line.startswith("#EXTM3U"):
-            head.append(line)
+            headers.append(line)
         elif line.startswith("#"):
-            pre.append(line)
+            meta.append(line)
         else:
-            entries.append({"meta": pre, "url": line})
-            pre = []
-    return head, entries
+            entries.append({"meta": meta, "url": line})
+            meta = []
+    return headers, entries
 
 
 def info(entry):
     name, group = "", ""
-    for line in entry["meta"]:
+    for line in entry.get("meta", []):
         if line.startswith("#EXTINF"):
             if "," in line:
                 name = line.rsplit(",", 1)[-1].strip()
-            m = re.search(r'group-title="([^"]*)"', line)
+            m = re.search(r'group-title="([^"]*)"', line, re.I)
             if m:
-                group = m.group(1)
+                group = m.group(1).strip()
         elif line.startswith("#EXTGRP:") and not group:
             group = line.split(":", 1)[1].strip()
     return name, group
 
 
 def is_protected(name, group, cfg, first_group):
-    g = group.strip().lower()
-    if cfg["protect_first_group"] and first_group and g == first_group:
+    g = norm_group(group)
+    if cfg.get("protect_first_group", True) and first_group and g == first_group:
         return True
-    if g and g in [x.lower() for x in cfg["protected_groups"]]:
+    if g and g in {norm_group(x) for x in cfg.get("protected_groups", [])}:
         return True
     nt = tokens(name)
-    for p in cfg["protected_names"]:
-        pt = tokens(p)
+    for protected in cfg.get("protected_names", []):
+        pt = tokens(protected)
         if pt and nt[:len(pt)] == pt:
             return True
     return False
 
 
-# ---------- проверка потока ----------
 def _alive(url, timeout, depth=0):
-    r = S.get(url, timeout=timeout, stream=True, allow_redirects=True)
+    response = SESSION.get(url, timeout=timeout, stream=True, allow_redirects=True)
     try:
-        if r.status_code != 200:
+        if response.status_code != 200:
             return False
-        chunk = next(r.iter_content(65536), b"")
+        chunk = next(response.iter_content(65536), b"")
         if not chunk:
             return False
-        if chunk.lstrip()[:7] == b"#EXTM3U":
-            if depth > 3:
+        if chunk.lstrip().startswith(b"#EXTM3U"):
+            if depth >= 3:
                 return False
-            lines = [l.strip() for l in chunk.decode("utf-8", "ignore").splitlines()]
-            uris = [l for l in lines if l and not l.startswith("#")]
+            lines = [x.strip() for x in chunk.decode("utf-8", "ignore").splitlines()]
+            uris = [x for x in lines if x and not x.startswith("#")]
             if not uris:
                 return False
-            if any(l.startswith("#EXT-X-STREAM-INF") for l in lines):
-                return _alive(urljoin(r.url, uris[0]), timeout, depth + 1)
-            seg = S.get(urljoin(r.url, uris[-1]), timeout=timeout, stream=True,
-                        headers={"Range": "bytes=0-4095"})
+            if any(x.startswith("#EXT-X-STREAM-INF") for x in lines):
+                return _alive(urljoin(response.url, uris[0]), timeout, depth + 1)
+            segment = SESSION.get(urljoin(response.url, uris[-1]), timeout=timeout,
+                                  stream=True, headers={"Range": "bytes=0-4095"})
             try:
-                return seg.status_code in (200, 206) and bool(next(seg.iter_content(1024), b""))
+                return segment.status_code in (200, 206) and bool(next(segment.iter_content(1024), b""))
             finally:
-                seg.close()
-        ctype = r.headers.get("content-type", "").lower()
-        return not ctype.startswith("text/html")
+                segment.close()
+        return not response.headers.get("content-type", "").lower().startswith("text/html")
     finally:
-        r.close()
+        response.close()
 
 
 def alive(url, timeout):
@@ -127,168 +134,152 @@ def alive(url, timeout):
         except Exception:
             pass
         if attempt == 0:
-            time.sleep(2)
+            time.sleep(1)
     return False
 
 
-# ---------- источники замен ----------
-def rutube_stream(video_id):
-    r = S.get(f"https://rutube.ru/api/play/options/{video_id}/",
-              params={"no_404": "true", "referer": "https://rutube.ru"}, timeout=15)
-    vb = r.json().get("video_balancer") or {}
-    return vb.get("m3u8") or vb.get("default")
-
-
-def rutube_search(name):
-    r = S.get("https://rutube.ru/api/search/video/",
-              params={"query": f"{name} прямой эфир"}, timeout=15)
-    want = set(tokens(name))
-    n = 0
-    for v in r.json().get("results", []):
-        if v.get("is_livestream") and want <= set(tokens(v.get("title", ""))):
-            yield v["id"]
-            n += 1
-            if n >= 5:
-                return
-
-
-OPT_PREFIXES = ("#EXTVLCOPT", "#EXTHTTP")
-
-
-def load_one(url, label, skip_groups):
-    _, items = parse(S.get(url, timeout=30).text)
-    for it in items:
-        name, group = info(it)
-        if any(x.lower() in group.lower() for x in skip_groups):
+def load_one(url, allowed_groups, timeout):
+    response = SESSION.get(url, timeout=max(30, timeout))
+    response.raise_for_status()
+    _, entries = parse(response.text)
+    allowed = {norm_group(g) for g in allowed_groups}
+    for entry in entries:
+        name, group = info(entry)
+        # Строгое совпадение group-title; прочие группы не могут стать заменами.
+        if norm_group(group) not in allowed:
             continue
         key = " ".join(tokens(name))
         if key:
-            opts = [l for l in it["meta"] if l.startswith(OPT_PREFIXES)]
-            yield key, label, it["url"], opts
+            opts = [line for line in entry["meta"] if line.startswith(OPT_PREFIXES)]
+            yield key, name, group, entry["url"], opts
 
 
 def load_sources(cfg):
-    """Все запасные плейлисты -> {нормализованное имя: [(источник, url, opts)]}."""
-    sources = []
-    for u in cfg["extra_playlists"]:
-        parts = u.split("/")
-        label = "плейлист " + "/".join(parts[3:5]) if len(parts) > 4 else "доп. плейлист"
-        sources.append((u, label, cfg["extra_skip_groups_contains"]))
-    if cfg["use_iptv_org"]:
-        sources.append((cfg["iptv_org_url"], "iptv-org", []))
-    idx = {}
-    for url, label, skip in sources:
+    index = {}
+    allowed = cfg["allowed_source_groups"]
+    for url in cfg.get("extra_playlists", []):
         try:
-            n = 0
-            for key, lab, u, opts in load_one(url, label, skip):
-                idx.setdefault(key, []).append((lab, u, opts))
-                n += 1
-            print(f"Загружен {label}: {n} потоков")
-        except Exception as e:
-            print(f"! не удалось загрузить {url}: {e}")
-    return idx
+            count = 0
+            for key, name, group, stream_url, opts in load_one(url, allowed, cfg["timeout"]):
+                index.setdefault(key, []).append((group, stream_url, opts, name))
+                count += 1
+            print(f"Загружено разрешённых потоков из {url}: {count}")
+        except Exception as exc:
+            print(f"! Не удалось загрузить {url}: {exc}")
+    return index
 
 
-def resolve(cand):
-    """'rutube:<url|id>' -> m3u8, остальное — как есть."""
-    if cand.startswith("rutube:"):
-        m = re.search(r"[0-9a-f]{32}", cand)
-        return rutube_stream(m.group(0)) if m else None
-    return cand
+def load_fallbacks(path, allowed_groups):
+    """Формат: {"Имя канала": [{"group":"точная группа", "url":"https://..."}]}.
+    Старый формат со списком URL намеренно игнорируется: у него нет группы-источника.
+    """
+    if not os.path.exists(path):
+        return {}
+    try:
+        raw = json.load(open(path, encoding="utf-8"))
+    except Exception as exc:
+        print(f"! Не удалось прочитать {path}: {exc}")
+        return {}
+    allowed = {norm_group(g) for g in allowed_groups}
+    result = {}
+    for channel, items in raw.items():
+        if not isinstance(items, list):
+            continue
+        valid = []
+        for item in items:
+            if not isinstance(item, dict):
+                continue
+            group, url = item.get("group", ""), item.get("url", "")
+            if norm_group(group) in allowed and isinstance(url, str) and url.startswith(("http://", "https://")):
+                valid.append((group, url, []))
+        result[" ".join(tokens(channel))] = valid
+    return result
 
 
 def find_replacement(name, fallbacks, sources, cfg):
     key = " ".join(tokens(name))
     tried = set()
-
-    def cands():
-        for c in fallbacks.get(key, []):
-            yield "fallbacks.json", c, []
-        for lab, u, opts in sources.get(key, []):
-            yield lab, u, opts
-        if cfg["use_rutube_search"]:
-            try:
-                for vid in rutube_search(name):
-                    yield "Rutube (поиск)", f"rutube:{vid}", []
-            except Exception as e:
-                print(f"  ! поиск Rutube для «{name}»: {e}")
-
-    for label, c, opts in cands():
-        try:
-            url = resolve(c)
-        except Exception:
+    candidates = []
+    for group, url, opts in fallbacks.get(key, []):
+        candidates.append((group, url, opts))
+    for group, url, opts, _source_name in sources.get(key, []):
+        candidates.append((group, url, opts))
+    for group, url, opts in candidates:
+        if norm_group(group) not in {norm_group(x) for x in cfg["allowed_source_groups"]}:
             continue
         if not url or url in tried:
             continue
         tried.add(url)
         if alive(url, cfg["timeout"]):
-            return label, url, opts
+            return group, url, opts
     return None
 
 
-# ---------- main ----------
 def main():
     cfg = dict(DEFAULTS)
-    cfg_path = os.environ.get("IPTV_CONFIG", "iptv_config.json")
-    if os.path.exists(cfg_path):
-        cfg.update(json.load(open(cfg_path, encoding="utf-8")))
+    config_path = os.environ.get("IPTV_CONFIG", "iptv_config.json")
+    if os.path.exists(config_path):
+        with open(config_path, encoding="utf-8") as f:
+            cfg.update(json.load(f))
 
-    head, entries = parse(open(cfg["source"], encoding="utf-8").read())
+    with open(cfg["source"], encoding="utf-8-sig") as f:
+        headers, entries = parse(f.read())
+    if not entries:
+        print(f"Ошибка: в {cfg['source']} не найдено каналов.")
+        return 2
 
-    fallbacks = {}
-    if os.path.exists(cfg["fallbacks_file"]):
-        raw = json.load(open(cfg["fallbacks_file"], encoding="utf-8"))
-        fallbacks = {" ".join(tokens(k)): v for k, v in raw.items()}
-
-    first_group = next((info(e)[1].strip().lower() for e in entries if info(e)[1].strip()), "")
-    for e in entries:
-        e["name"], e["group"] = info(e)
-        e["protected"] = is_protected(e["name"], e["group"], cfg, first_group)
+    fallbacks = load_fallbacks(cfg["fallbacks_file"], cfg["allowed_source_groups"])
+    first_group = next((norm_group(info(e)[1]) for e in entries if info(e)[1].strip()), "")
+    for entry in entries:
+        entry["name"], entry["group"] = info(entry)
+        entry["protected"] = is_protected(entry["name"], entry["group"], cfg, first_group)
 
     todo = [e for e in entries if not e["protected"]]
-    print(f"Каналов: {len(entries)}, защищённых: {len(entries) - len(todo)}, проверяю: {len(todo)}")
+    print(f"Каналов: {len(entries)}; защищено: {len(entries)-len(todo)}; проверяю: {len(todo)}")
+    with ThreadPoolExecutor(max_workers=int(cfg["workers"])) as pool:
+        for entry, is_ok in zip(todo, pool.map(lambda e: alive(e["url"], int(cfg["timeout"])), todo)):
+            entry["alive"] = is_ok
 
-    with ThreadPoolExecutor(cfg["workers"]) as ex:
-        for e, ok in zip(todo, ex.map(lambda e: alive(e["url"], cfg["timeout"]), todo)):
-            e["alive"] = ok
     dead = [e for e in todo if not e["alive"]]
-
     report = []
-    if todo and len(dead) / len(todo) > cfg["max_dead_ratio"]:
-        msg = (f"⚠️ «Мёртвыми» оказалось {len(dead)} из {len(todo)} — похоже на блокировку "
-               f"раннера GitHub или сбой сети. Замену не делаю, плейлист остаётся как есть.")
-        print(msg)
-        report.append(msg)
-        dead = []
+    if todo and len(dead) / len(todo) > float(cfg["max_dead_ratio"]):
+        message = (f"⚠️ Нерабочих каналов {len(dead)} из {len(todo)}; вероятен сбой сети. "
+                   "Исходный результат не перезаписываю.")
+        print(message)
+        if os.environ.get("GITHUB_STEP_SUMMARY"):
+            with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as f:
+                f.write("## Пересборка плейлиста\n\n" + message + "\n")
+        return 0
 
     sources = load_sources(cfg) if dead else {}
     replaced = failed = 0
-    for e in dead:
-        res = find_replacement(e["name"], fallbacks, sources, cfg)
-        if res:
-            label, url, opts = res
-            e["url"] = url
-            e["meta"] = [l for l in e["meta"] if not l.startswith(OPT_PREFIXES)] + opts
+    for entry in dead:
+        replacement = find_replacement(entry["name"], fallbacks, sources, cfg)
+        if replacement:
+            group, url, opts = replacement
+            entry["url"] = url
+            entry["meta"] = [x for x in entry["meta"] if not x.startswith(OPT_PREFIXES)] + opts
             replaced += 1
-            report.append(f"✅ {e['name']} → {label}")
+            report.append(f"✅ {entry['name']} → {group}")
         else:
             failed += 1
-            e["drop"] = cfg["drop_dead"]
-            report.append(f"❌ {e['name']}: замены нет" + (" (удалён)" if cfg["drop_dead"] else " (оставлен как был)"))
+            report.append(f"❌ {entry['name']}: разрешённой замены нет, оставлен исходный URL")
 
-    out = (head or ["#EXTM3U"])[:1]
-    for e in entries:
-        if e.get("drop"):
-            continue
-        out += e["meta"] + [e["url"]]
-    open(cfg["output"], "w", encoding="utf-8", newline="\n").write("\n".join(out) + "\n")
+    output = (headers or ["#EXTM3U"])[:1]
+    for entry in entries:
+        output.extend(entry["meta"])
+        output.append(entry["url"])
+    with open(cfg["output"], "w", encoding="utf-8", newline="\n") as f:
+        f.write("\n".join(output) + "\n")
 
-    summary = (f"## Пересборка плейлиста\n\nВсего: {len(entries)} · защищено: {len(entries) - len(todo)} · "
-               f"нерабочих: {len(dead)} · заменено: {replaced} · без замены: {failed}\n\n" + "\n".join(f"- {r}" for r in report))
+    summary = (f"## Пересборка плейлиста\n\nВсего: {len(entries)} · защищено: {len(entries)-len(todo)} · "
+               f"нерабочих: {len(dead)} · заменено: {replaced} · без замены: {failed}\n\n" +
+               "\n".join(f"- {line}" for line in report))
     print(summary)
     if os.environ.get("GITHUB_STEP_SUMMARY"):
         with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as f:
             f.write(summary + "\n")
+    return 0
 
 
 if __name__ == "__main__":
