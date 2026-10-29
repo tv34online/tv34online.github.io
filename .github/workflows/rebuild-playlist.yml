@@ -101,6 +101,18 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
+          # Сохраняем созданные файлы во временное место.
+          cp playlist.m3u /tmp/playlist.m3u
+          cp playlist-report.json /tmp/playlist-report.json
+
+          # Получаем актуальную ветку без попытки объединить отчёты.
+          git fetch origin main
+          git checkout -B main origin/main
+
+          # Возвращаем результаты текущего запуска.
+          cp /tmp/playlist.m3u playlist.m3u
+          cp /tmp/playlist-report.json playlist-report.json
+
           git add playlist.m3u playlist-report.json
 
           if git diff --cached --quiet; then
@@ -109,8 +121,7 @@ jobs:
           fi
 
           git commit -m "Check and repair IPTV streams"
-
-          git fetch origin main
+          git push origin main
           git rebase origin/main
 
           git push origin HEAD:main
