@@ -57,11 +57,11 @@ https://flussonic.mkpnet.ru/tv-6683d71aa818d0a0/video.m3u8
 #EXTINF:-1 tvg-name="Музыка Первого" group-title="Музыкальные", Музыка первого
 http://195.64.140.147:10196/196
 #EXTINF:-1 group-title="Музыкальные", Baby Time
+https://fs.uplink.kz/baby_time/mono.m3u8?token=onlinetv
 #EXTVLCOPT:http-user-agent={"platform":"android","app":"limehd.ru.ctvshka","version_name":"5.1.0","version_code":"388","sdk":"34","name":"Xiaomi+13+Ultra","device_id":"a7f8e9d1c2b3a4f5","is_huawei":"0"}
-https://mhd116.iptv2022.com/x/CRT-GMetLKLl3GjhLuXlWw,1792954274/streaming/baby_time/324/1/index.m3u8
 #EXTINF:-1 tvg-name="Europa Plus TV" group-title="Музыкальные", Europa Plus TV
-#EXTVLCOPT:http-user-agent={"platform":"android","app":"limehd.ru.ctvshka","version_name":"5.1.0","version_code":"388","sdk":"34","name":"Xiaomi+13+Ultra","device_id":"a7f8e9d1c2b3a4f5","is_huawei":"0"}
 https://mhd116.iptv2022.com/x/pxCNzzpOwYpRXGHoxHLazA,1792954274/streaming/evropaplus/324/1/index.m3u8
+#EXTVLCOPT:http-user-agent={"platform":"android","app":"limehd.ru.ctvshka","version_name":"5.1.0","version_code":"388","sdk":"34","name":"Xiaomi+13+Ultra","device_id":"a7f8e9d1c2b3a4f5","is_huawei":"0"}
 #EXTINF:-1 group-title="Музыкальные", Шансон ТВ
 https://hls-shansontv.cdnvideo.ru/shansontv/shansontv.sdp/playlist.m3u8
 #EXTINF:-1 tvg-name="Дикая охота" group-title="Познавательные", Дикая Охота
@@ -69,8 +69,7 @@ http://217.21.34.160:38007/dikayaohotahd/index.m3u8
 #EXTINF:-1 tvg-name="Дикая рыбалка" group-title="Познавательные", Дикая рыбалка
 https://mhd128.iptv2022.com/p/OmQqh-ai_2m0jBtx1Ny5zw,1765227609/streaming/ohotahd/324/1/tracks-v5a1/mono.m3u8
 #EXTINF:-1 tvg-name="Охотник и рыболов" group-title="Познавательные", Охотник и Рыболов
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
-https://bl.rutube.ru/livestream/1da5d92af8c55b16241f1eb12a27f00c/index.m3u8?s=aCt0L5dB3vTwhirayPpnfQ&e=2093217845&scheme=https
+https://mhd128.iptv2022.com/p/DYjFwizv-zIg35BW2RhCHw,1765227609/streaming/ohotnikhd/324/1/tracks-v5a1/mono.m3u8
 #EXTINF:-1 tvg-name="Загородный" group-title="Познавательные", Загородный
 http://95.66.188.74/Zagorodniy/mono.m3u8
 #EXTINF:-1 tvg-name="365 дней ТВ" group-title="Познавательные", 365 Дней ТВ
@@ -138,8 +137,8 @@ http://50.7.28.226/8164/index.m3u8
 #EXTINF:-1 tvg-name="Живи!" group-title="Развлекательные", Живи
 https://mhd128.iptv2022.com/p/lYhBKww0rlGohUrEAmYLYw,1765227610/streaming/jivi/324/1/tracks-v5a1/mono.m3u8
 #EXTINF:-1 tvg-name="RUTUBE" group-title="Развлекательные", RUTUBE TV
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 https://bl.rutube.ru/livestream/9ae8e8a6dc58bdad66190475f9872ecd/index.m3u8?s=CIyJUfURREOAKGXgqmRwIA&e=2093174060&scheme=https
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36
 #EXTINF:-1 tvg-name="Бобер" group-title="Развлекательные", БОБЁР
 http://95.66.188.74/Bober/mono.m3u8
 #EXTINF:-1 group-title="Радио", Русское Радио

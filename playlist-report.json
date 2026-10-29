@@ -1,15 +1,30 @@
 {
-  "generated_at": "2026-10-29T13:16:44.667902+00:00",
-  "status": "pending",
-  "summary": {
-    "channels_checked": 0,
-    "streams_repaired": 0,
-    "unresolved_channels": 0
-  },
-  "repairs": [],
-  "unresolved": [],
-  "notes": [
-    "Этот файл — шаблон отчёта. Он будет содержать реальные результаты после запуска скрипта rebuild_playlist.py.",
-    "Если скрипт не перезаписывает этот файл, добавьте в него создание playlist-report.json после обработки плейлиста."
-  ]
+  "status": "success",
+  "generated_at": "2026-10-29T13:25:03.798346+00:00",
+  "input": "playlist_source.m3u",
+  "source_url": "https://raw.githubusercontent.com/Dimonovich/TV/Dimonovich/FREE/TV",
+  "total_channels": 114,
+  "marked_channels": 0,
+  "repaired_channels": 1,
+  "unrepaired_channels": 1,
+  "blocked_streams_replaced": 1,
+  "errors": [],
+  "channels": [
+    {
+      "channel": "Baby Time",
+      "old_url": "https://mhd116.iptv2022.com/x/CRT-GMetLKLl3GjhLuXlWw,1792954274/streaming/baby_time/324/1/index.m3u8",
+      "status": "repaired",
+      "reason": "blocked_source",
+      "new_url": "https://fs.uplink.kz/baby_time/mono.m3u8?token=onlinetv"
+    },
+    {
+      "channel": "Europa Plus TV",
+      "old_url": "https://mhd116.iptv2022.com/x/pxCNzzpOwYpRXGHoxHLazA,1792954274/streaming/evropaplus/324/1/index.m3u8",
+      "status": "unrepaired",
+      "reason": "blocked_source",
+      "new_url": null,
+      "error": "<urlopen error [Errno 111] Connection refused>"
+    }
+  ],
+  "finished_at": "2026-10-29T13:25:06.766860+00:00"
 }
