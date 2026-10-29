@@ -1,0 +1,38 @@
+{
+  "blocked_url_substrings": [
+    "mhd116.iptv2022.com",
+    "arbiter.bolshoe.tv",
+    "bolshoe.tv",
+    "limehd.ru",
+    "limehd",
+    "lime"
+  ],
+  "repair_marker": "kanal-ne-rabotaet.live",
+  "allowed_provider_names": [
+    "WINK",
+    "Ott Club + Реклама",
+    "RUTUBE (VPN)",
+    "Оргтехсервис"
+  ],
+  "provider_match_mode": "group_or_metadata",
+  "check": {
+    "timeout_seconds": 8,
+    "workers": 12,
+    "max_candidates_per_channel": 8
+  },
+  "matching": {
+    "minimum_name_similarity": 0.78,
+    "strip_quality_suffixes": [
+      "4k",
+      "uhd",
+      "fhd",
+      "hd",
+      "sd",
+      "тв",
+      "tv",
+      "online",
+      "international",
+      "int"
+    ]
+  }
+}
