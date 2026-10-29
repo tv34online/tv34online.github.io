@@ -1,0 +1,133 @@
+name: Rebuild IPTV playlist
+
+on:
+workflow_dispatch:
+schedule:
+- cron: "17 */6 * * *"
+
+permissions:
+contents: write
+
+concurrency:
+group: rebuild-iptv-playlist
+cancel-in-progress: false
+
+jobs:
+rebuild:
+name: Check and repair IPTV streams
+runs-on: ubuntu-latest
+timeout-minutes: 30
+
+steps:
+  - name: Checkout repository
+    uses: actions/checkout@v4
+    with:
+      ref: main
+      fetch-depth: 0
+
+  - name: Set up Python
+    uses: actions/setup-python@v5
+    with:
+      python-version: "3.12"
+
+  - name: Check required files
+    shell: bash
+    run: |
+      set -eu
+
+      test -s playlist_source.m3u || {
+        echo "::error::playlist_source.m3u is missing or empty"
+        exit 1
+      }
+
+      test -s scripts/rebuild_playlist.py || {
+        echo "::error::scripts/rebuild_playlist.py is missing or empty"
+        exit 1
+      }
+
+      test -s config/providers.json || {
+        echo "::error::config/providers.json is missing or empty"
+        exit 1
+      }
+
+      python -m json.tool config/providers.json >/dev/null
+      python -m py_compile scripts/rebuild_playlist.py
+
+  - name: Rebuild playlist
+    shell: bash
+    run: |
+      set -eu
+
+      python -u scripts/rebuild_playlist.py \
+        --input playlist_source.m3u \
+        --source-url "https://raw.githubusercontent.com/Dimonovich/TV/Dimonovich/FREE/TV" \
+        --output playlist.m3u \
+        --report playlist-report.json \
+        --config config/providers.json \
+        --check
+
+  - name: Validate results
+    shell: bash
+    run: |
+      set -eu
+
+      test -s playlist.m3u || {
+        echo "::error::playlist.m3u was not generated"
+        exit 1
+      }
+
+      test -s playlist-report.json || {
+        echo "::error::playlist-report.json was not generated"
+        exit 1
+      }
+
+      grep -q '^#EXTM3U' playlist.m3u || {
+        echo "::error::Invalid M3U playlist"
+        exit 1
+      }
+
+      python -m json.tool playlist-report.json >/dev/null
+
+      echo "Playlist and report are valid."
+
+  - name: Save report artifact
+    if: always()
+    uses: actions/upload-artifact@v4
+    with:
+      name: playlist-report
+      path: playlist-report.json
+      if-no-files-found: warn
+      retention-days: 14
+
+  - name: Publish results
+    if: success()
+    shell: bash
+    run: |
+      set -eu
+
+      git config user.name "github-actions[bot]"
+      git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      # Сохраняем результаты проверки.
+      cp playlist.m3u /tmp/playlist.m3u
+      cp playlist-report.json /tmp/playlist-report.json
+
+      # Получаем актуальную main.
+      git fetch origin main
+      git reset --hard origin/main
+
+      # Кладём результаты проверки поверх актуальной ветки.
+      cp /tmp/playlist.m3u playlist.m3u
+      cp /tmp/playlist-report.json playlist-report.json
+
+      git add playlist.m3u playlist-report.json
+
+      if git diff --cached --quiet; then
+        echo "No changes to publish."
+        exit 0
+      fi
+
+      git commit -m "Update IPTV playlist and report"
+
+      # Пытаемся отправить результаты.
+      git push origin HEAD:main
