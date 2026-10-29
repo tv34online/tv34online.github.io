@@ -1,6 +1,6 @@
 {
   "status": "success",
-  "generated_at": "2026-10-29T13:25:03.798346+00:00",
+  "generated_at": "2026-10-29T13:25:17.102783+00:00",
   "input": "playlist_source.m3u",
   "source_url": "https://raw.githubusercontent.com/Dimonovich/TV/Dimonovich/FREE/TV",
   "total_channels": 114,
@@ -26,5 +26,5 @@
       "error": "<urlopen error [Errno 111] Connection refused>"
     }
   ],
-  "finished_at": "2026-10-29T13:25:06.766860+00:00"
+  "finished_at": "2026-10-29T13:25:19.816008+00:00"
 }
