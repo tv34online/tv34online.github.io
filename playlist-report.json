@@ -1,15 +1,15 @@
 {
   "status": "success",
-  "generated_at": "2026-10-29T13:48:33.451910+00:00",
+  "generated_at": "2026-10-29T13:57:16.201974+00:00",
   "input": "playlist_source.m3u",
   "source_url": "https://raw.githubusercontent.com/Dimonovich/TV/Dimonovich/FREE/TV",
   "total_channels": 114,
   "checked_channels": 114,
-  "working_channels": 93,
+  "working_channels": 94,
   "marked_channels": 0,
   "blocked_channels": 2,
-  "unavailable_channels": 21,
-  "repaired_channels": 8,
+  "unavailable_channels": 20,
+  "repaired_channels": 7,
   "unrepaired_channels": 13,
   "errors": [],
   "channels": [
@@ -228,10 +228,9 @@
     {
       "channel": "Шансон ТВ",
       "old_url": "https://hls-shansontv.cdnvideo.ru/shansontv/shansontv.sdp/playlist.m3u8",
-      "status": "repaired",
-      "reason": "stream_unavailable",
-      "new_url": "https://flussonic.mkpnet.ru/tv-181e3f7698288892/video.m3u8",
-      "matched_candidate": "Шансон ТВ"
+      "status": "unchanged",
+      "reason": "http_200",
+      "new_url": null
     },
     {
       "channel": "Дикая Охота",
@@ -833,5 +832,5 @@
       "new_url": null
     }
   ],
-  "finished_at": "2026-10-29T13:49:37.748427+00:00"
+  "finished_at": "2026-10-29T13:58:33.426593+00:00"
 }
