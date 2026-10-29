@@ -1,42 +1,11 @@
 {
-  "allowed_providers": {
-    "WINK": [
-      "cdn.ngenix.net",
-      "zabava",
-      "provider=\"wink\"",
-      "provider='wink'"
-    ],
-    "Ott Club + Реклама": [
-      "Ott Club",
-      "OTTCLUB",
-      "ottclub",
-      "provider=\"ottclub\"",
-      "provider='ottclub'"
-    ],
-    "RUTUBE (VPN)": [
-      "RUTUBE (VPN)",
-      "RUTUBE_VPN",
-      "rutube.ru",
-      "bl.rutube.ru",
-      "provider=\"rutube\""
-    ],
-    "Оргтехсервис": [
-      "Оргтехсервис",
-      "orgtehservis",
-      "orgtechservice",
-  
-[ "provider=\"оргтехсервис\""
-    ]
-  },
-  "blocked_markers": [
-    "LIME",
-    "LIMEHD",
+  "blocked_url_substrings": [
+    "https://mhd116.iptv2022.com/",
+    "http://arbiter.bolshoe.tv/?path=streaming/",
+    "iptv2022.com",
+    "bolshoe.tv",
     "limehd.ru",
     "limehd",
-    "Большое ТВ",
-    "БольшоеТВ",
-    "bolshoe tv",
-    "bolshoe.tv",
-    "iptv2022"
+    "lime"
   ]
 }
