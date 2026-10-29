@@ -1,7 +1,7 @@
 {
   "allowed_providers": {
     "WINK": [
-      "WINK",
+      "cdn.ngenix.net",
       "zabava",
       "provider=\"wink\"",
       "provider='wink'"
@@ -24,7 +24,8 @@
       "Оргтехсервис",
       "orgtehservis",
       "orgtechservice",
-      "provider=\"оргтехсервис\""
+  
+[ "provider=\"оргтехсервис\""
     ]
   },
   "blocked_markers": [
