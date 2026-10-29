@@ -1,61 +1,38 @@
-name: Rebuild approved IPTV playlist
-
+name: Rebuild IPTV playlist
 on:
   workflow_dispatch:
   push:
-    paths:
-      - "playlist_source.m3u"
-      - "config/providers.json"
-      - "scripts/rebuild_playlist.py"
-      - ".github/workflows/rebuild-playlist.yml"
+    paths: ["playlist_source.m3u", "scripts/rebuild_playlist.py", "config/providers.json", ".github/workflows/rebuild-playlist.yml"]
   schedule:
     - cron: "17 */6 * * *"
-
 permissions:
   contents: write
-
-concurrency:
-  group: playlist-rebuild
-  cancel-in-progress: false
-
 jobs:
   rebuild:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-
-      - name: Rebuild playlist (strict provider allowlist)
+      - name: Repair marked and blocked streams
         run: |
-          python scripts/rebuild_playlist.py \
-            --input playlist_source.m3u \
-            --output playlist.m3u \
-            --report playlist-report.json \
-            --check
-
-      - name: Upload report even on failure
+          python scripts/rebuild_playlist.py --input playlist_source.m3u --source-url "https://raw.githubusercontent.com/Dimonovich/TV/Dimonovich/FREE/TV" --output playlist.m3u --report playlist-report.json --check
+      - name: Upload report
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: playlist-report
           path: playlist-report.json
           if-no-files-found: ignore
-
-      - name: Commit changed playlist
+      - name: Commit playlist
         if: success()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add playlist.m3u playlist-report.json
           if ! git diff --cached --quiet; then
-            git commit -m "Rebuild playlist from approved providers"
+            git commit -m "Repair IPTV playlist streams"
             git push
-          else
-            echo "No playlist changes."
           fi
