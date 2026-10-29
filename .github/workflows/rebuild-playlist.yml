@@ -85,43 +85,57 @@ jobs:
             exit 1
           fi
 
-      - name: Upload report
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: playlist-report
-          path: playlist-report.json
-          if-no-files-found: warn
-
-      - name: Commit generated playlist and report
+            - name: Commit generated playlist and report
         if: success()
+        shell: bash
         run: |
           set -e
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          # Сохраняем созданные файлы во временное место.
+          # Сохраняем результаты проверки.
           cp playlist.m3u /tmp/playlist.m3u
           cp playlist-report.json /tmp/playlist-report.json
 
-          # Получаем актуальную ветку без попытки объединить отчёты.
+          # Получаем актуальную версию main.
           git fetch origin main
-          git checkout -B main origin/main
 
-          # Возвращаем результаты текущего запуска.
+          # Переключаемся на актуальную ветку.
+          git reset --hard origin/main
+
+          # Возвращаем результаты текущей проверки.
           cp /tmp/playlist.m3u playlist.m3u
           cp /tmp/playlist-report.json playlist-report.json
 
           git add playlist.m3u playlist-report.json
 
           if git diff --cached --quiet; then
-            echo "No changes to commit."
+            echo "Изменений нет."
             exit 0
           fi
 
           git commit -m "Check and repair IPTV streams"
-          git push origin main
-          git rebase origin/main
 
-          git push origin HEAD:main
+          # Повторяем отправку при одновременном обновлении main.
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then
+              echo "Плейлист и отчёт успешно опубликованы."
+              exit 0
+            fi
+
+            if [ "$attempt" -lt 3 ]; then
+              echo "Ветка обновилась. Повторная попытка $attempt..."
+              git fetch origin main
+              git reset --hard origin/main
+
+              cp /tmp/playlist.m3u playlist.m3u
+              cp /tmp/playlist-report.json playlist-report.json
+
+              git add playlist.m3u playlist-report.json
+              git diff --cached --quiet || git commit -m "Check and repair IPTV streams"
+            fi
+          done
+
+          echo "::error::Не удалось отправить изменения в main после 3 попыток."
+          exit 1
