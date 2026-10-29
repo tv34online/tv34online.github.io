@@ -63,7 +63,7 @@ https://mhd116.iptv2022.com/x/CRT-GMetLKLl3GjhLuXlWw,1792954274/streaming/baby_t
 https://mhd116.iptv2022.com/x/pxCNzzpOwYpRXGHoxHLazA,1792954274/streaming/evropaplus/324/1/index.m3u8
 #EXTVLCOPT:http-user-agent={"platform":"android","app":"limehd.ru.ctvshka","version_name":"5.1.0","version_code":"388","sdk":"34","name":"Xiaomi+13+Ultra","device_id":"a7f8e9d1c2b3a4f5","is_huawei":"0"}
 #EXTINF:-1 group-title="Музыкальные", Шансон ТВ
-https://hls-shansontv.cdnvideo.ru/shansontv/shansontv.sdp/playlist.m3u8
+https://flussonic.mkpnet.ru/tv-181e3f7698288892/video.m3u8
 #EXTINF:-1 tvg-name="Дикая охота" group-title="Познавательные", Дикая Охота
 http://217.21.34.160:38007/dikayaohotahd/index.m3u8
 #EXTINF:-1 tvg-name="Дикая рыбалка" group-title="Познавательные", Дикая рыбалка
