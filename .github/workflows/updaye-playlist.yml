@@ -1,38 +1,88 @@
 name: Rebuild IPTV playlist
+
 on:
   workflow_dispatch:
+
   push:
-    paths: ["playlist_source.m3u", "scripts/rebuild_playlist.py", "config/providers.json", ".github/workflows/rebuild-playlist.yml"]
+    paths:
+      - "playlist_source.m3u"
+      - "scripts/rebuild_playlist.py"
+      - "config/providers.json"
+      - ".github/workflows/rebuild-playlist.yml"
+
   schedule:
     - cron: "17 */6 * * *"
+
 permissions:
   contents: write
+
 jobs:
   rebuild:
     runs-on: ubuntu-latest
     timeout-minutes: 30
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+
+      - name: Check input playlist
+        run: |
+          if [ ! -s playlist_source.m3u ]; then
+            echo "::error::playlist_source.m3u is missing or empty"
+            exit 1
+          fi
+
       - name: Repair marked and blocked streams
         run: |
-          python scripts/rebuild_playlist.py --input playlist_source.m3u --source-url "https://raw.githubusercontent.com/Dimonovich/TV/Dimonovich/FREE/TV" --output playlist.m3u --report playlist-report.json --check
+          python -u scripts/rebuild_playlist.py \
+            --input playlist_source.m3u \
+            --source-url "https://raw.githubusercontent.com/Dimonovich/TV/Dimonovich/FREE/TV" \
+            --output playlist.m3u \
+            --report playlist-report.json \
+            --check
+
+      - name: Validate generated files
+        run: |
+          if [ ! -s playlist.m3u ]; then
+            echo "::error::playlist.m3u was not created or is empty"
+            exit 1
+          fi
+
+          if [ ! -s playlist-report.json ]; then
+            echo "::error::playlist-report.json was not created or is empty"
+            exit 1
+          fi
+
+          echo "Playlist size:"
+          wc -c playlist.m3u
+
+          echo "Report:"
+          cat playlist-report.json
+
       - name: Upload report
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: playlist-report
           path: playlist-report.json
-          if-no-files-found: ignore
+          if-no-files-found: warn
+
       - name: Commit playlist
         if: success()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
           git add playlist.m3u playlist-report.json
+
           if ! git diff --cached --quiet; then
             git commit -m "Repair IPTV playlist streams"
             git push
+          else
+            echo "No changes to commit."
           fi
