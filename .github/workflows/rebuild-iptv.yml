@@ -1,4 +1,4 @@
-name: Rebuild IPTV playlist
+name: Rebuild IPTV
 
 on:
 workflow_dispatch:
