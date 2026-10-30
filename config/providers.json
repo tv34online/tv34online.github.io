@@ -1,5 +1,14 @@
 {
-  "blocked_url_substrings": [
+  "version": 2,
+  "alternative_playlist_url": "https://raw.githubusercontent.com/Dimonovich/TV/Dimonovich/FREE/TV",
+  "allowed_providers": [
+    {"name": "WINK", "aliases": ["wink"]},
+    {"name": "Ott Club + Реклама", "aliases": ["ott club + реклама", "ott club"]},
+    {"name": "RUTUBE (VPN)", "aliases": ["rutube (vpn)", "rutube"]},
+    {"name": "Оргтехсервис", "aliases": ["оргтехсервис", "orgtehservis"]}
+  ],
+  "provider_fields": ["group-title", "extgrp", "attr_values", "directives", "comments"],
+  "forbidden_url_fragments": [
     "mhd116.iptv2022.com",
     "arbiter.bolshoe.tv",
     "bolshoe.tv",
@@ -7,32 +16,25 @@
     "limehd",
     "lime"
   ],
-  "repair_marker": "kanal-ne-rabotaet.live",
-  "allowed_provider_names": [
-    "WINK",
-    "Ott Club + Реклама",
-    "RUTUBE (VPN)",
-    "Оргтехсервис"
-  ],
-  "provider_match_mode": "group_or_metadata",
-  "check": {
-    "timeout_seconds": 8,
-    "workers": 12,
-    "max_candidates_per_channel": 8
+  "force_replace_url_fragments": ["kanal-ne-rabotaet.live"],
+  "no_replace_dead_channels": ["Первый канал", "Первый", "Россия 1", "Матч ТВ", "НТВ"],
+  "paid_markers": ["платн", "подписк", "premium", "pay-tv", "pay tv"],
+  "http": {
+    "headers": {"User-Agent": "Mozilla/5.0 (compatible; tv34-playlist-checker/2.0)", "Accept": "*/*"},
+    "host_headers": {}
   },
   "matching": {
-    "minimum_name_similarity": 0.78,
-    "strip_quality_suffixes": [
-      "4k",
-      "uhd",
-      "fhd",
-      "hd",
-      "sd",
-      "тв",
-      "tv",
-      "online",
-      "international",
-      "int"
-    ]
+    "fuzzy_enabled": true,
+    "fuzzy_cutoff": 0.93
+  },
+  "limits": {
+    "workers": 16,
+    "per_host": 4,
+    "timeout": 10,
+    "request_deadline": 20,
+    "max_candidates": 8,
+    "max_runtime": 2700,
+    "mass_failure_ratio": 0.95,
+    "mass_failure_min_channels": 10
   }
 }
