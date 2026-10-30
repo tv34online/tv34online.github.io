@@ -1,6 +1,29 @@
-name: Rebuild IPTV playlists
+name: Rebuild IPTV playlist
 
+on:
+workflow_dispatch:
 
+schedule:
+- cron: "17 */6 * * *"
+
+push:
+branches:
+- main
+paths:
+- "playlist_source.m3u"
+- "scripts/rebuild_playlist.py"
+- "config/providers.json"
+- ".github/workflows/rebuild-playlist.yml"
+
+permissions:
+contents: write
+
+concurrency:
+group: rebuild-iptv-playlist
+cancel-in-progress: false
+
+jobs:
+rebuild:
 name: Check and repair IPTV streams
 runs-on: ubuntu-latest
 timeout-minutes: 30
@@ -17,33 +40,36 @@ steps:
     with:
       python-version: "3.12"
 
-  - name: Check required files
+  - name: Validate project
     shell: bash
     run: |
-      set -eu
+      set -euo pipefail
 
-      test -s playlist_source.m3u || {
-        echo "::error::playlist_source.m3u is missing or empty"
-        exit 1
-      }
-
-      test -s scripts/rebuild_playlist.py || {
-        echo "::error::scripts/rebuild_playlist.py is missing or empty"
-        exit 1
-      }
-
-      test -s config/providers.json || {
-        echo "::error::config/providers.json is missing or empty"
-        exit 1
-      }
+      for file in \
+        playlist_source.m3u \
+        scripts/rebuild_playlist.py \
+        config/providers.json
+      do
+        if [ ! -s "$file" ]; then
+          echo "::error::Missing or empty file: $file"
+          exit 1
+        fi
+      done
 
       python -m json.tool config/providers.json >/dev/null
       python -m py_compile scripts/rebuild_playlist.py
 
-  - name: Rebuild playlist
+      grep -q '^#EXTM3U' playlist_source.m3u || {
+        echo "::error::Invalid source M3U playlist"
+        exit 1
+      }
+
+      echo "Project validation successful."
+
+  - name: Check and repair streams
     shell: bash
     run: |
-      set -eu
+      set -euo pipefail
 
       python -u scripts/rebuild_playlist.py \
         --input playlist_source.m3u \
@@ -53,31 +79,38 @@ steps:
         --config config/providers.json \
         --check
 
-  - name: Validate results
+  - name: Validate generated files
+    if: always()
     shell: bash
     run: |
-      set -eu
+      set -euo pipefail
 
-      test -s playlist.m3u || {
-        echo "::error::playlist.m3u was not generated"
-        exit 1
-      }
+      if [ -s playlist-report.json ]; then
+        python -m json.tool playlist-report.json >/dev/null
+        echo "===== REPAIR REPORT ====="
+        cat playlist-report.json
+      else
+        echo "::warning::Report was not generated."
+      fi
 
-      test -s playlist-report.json || {
-        echo "::error::playlist-report.json was not generated"
-        exit 1
-      }
+      if [ "${{ job.status }}" = "success" ]; then
+        test -s playlist.m3u || {
+          echo "::error::playlist.m3u is missing or empty"
+          exit 1
+        }
 
-      grep -q '^#EXTM3U' playlist.m3u || {
-        echo "::error::Invalid M3U playlist"
-        exit 1
-      }
+        test -s playlist-report.json || {
+          echo "::error::playlist-report.json is missing or empty"
+          exit 1
+        }
 
-      python -m json.tool playlist-report.json >/dev/null
+        grep -q '^#EXTM3U' playlist.m3u || {
+          echo "::error::Invalid generated playlist"
+          exit 1
+        }
+      fi
 
-      echo "Playlist and report are valid."
-
-  - name: Save report artifact
+  - name: Upload report
     if: always()
     uses: actions/upload-artifact@v4
     with:
@@ -86,35 +119,44 @@ steps:
       if-no-files-found: warn
       retention-days: 14
 
-  - name: Publish results
+  - name: Publish playlist and report
     if: success()
     shell: bash
     run: |
-      set -eu
+      set -euo pipefail
 
       git config user.name "github-actions[bot]"
       git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      # Сохраняем результаты проверки.
-      cp playlist.m3u /tmp/playlist.m3u
-      cp playlist-report.json /tmp/playlist-report.json
+      cp playlist.m3u /tmp/generated-playlist.m3u
+      cp playlist-report.json /tmp/generated-playlist-report.json
 
-      # Получаем актуальную main.
-      git fetch origin main
-      git reset --hard origin/main
+      for attempt in 1 2 3; do
+        echo "Publishing attempt ${attempt}/3"
 
-      # Кладём результаты проверки поверх актуальной ветки.
-      cp /tmp/playlist.m3u playlist.m3u
-      cp /tmp/playlist-report.json playlist-report.json
+        git fetch origin main
+        git reset --hard origin/main
 
-      git add playlist.m3u playlist-report.json
+        cp /tmp/generated-playlist.m3u playlist.m3u
+        cp /tmp/generated-playlist-report.json playlist-report.json
 
-      if git diff --cached --quiet; then
-        echo "No changes to publish."
-        exit 0
-      fi
+        git add playlist.m3u playlist-report.json
 
-      git commit -m "Update IPTV playlist and report"
+        if git diff --cached --quiet; then
+          echo "No changes to publish."
+          exit 0
+        fi
 
-      # Пытаемся отправить результаты.
-      git push origin HEAD:main
+        git commit -m "Update IPTV playlist and report"
+
+        if git push origin HEAD:main; then
+          echo "Playlist and report published successfully."
+          exit 0
+        fi
+
+        echo "Push failed; retrying against latest main."
+        git reset --hard
+      done
+
+      echo "::error::Could not publish after 3 attempts."
+      exit 1
