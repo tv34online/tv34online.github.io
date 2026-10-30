@@ -1,4 +1,4 @@
-name: Rebuild IPTV
+name: Rebuild IPTV playlist
 
 on:
 workflow_dispatch:
@@ -40,7 +40,7 @@ steps:
     with:
       python-version: "3.12"
 
-  - name: Validate project
+  - name: Validate project files
     shell: bash
     run: |
       set -euo pipefail
@@ -50,8 +50,8 @@ steps:
         scripts/rebuild_playlist.py \
         config/providers.json
       do
-        if [ ! -s "$file" ]; then
-          echo "::error::Missing or empty file: $file"
+        if [[ ! -s "$file" ]]; then
+          echo "::error::Required file is missing or empty: $file"
           exit 1
         fi
       done
@@ -59,14 +59,14 @@ steps:
       python -m json.tool config/providers.json >/dev/null
       python -m py_compile scripts/rebuild_playlist.py
 
-      grep -q '^#EXTM3U' playlist_source.m3u || {
+      if ! grep -q '^#EXTM3U' playlist_source.m3u; then
         echo "::error::Invalid source M3U playlist"
         exit 1
-      }
+      fi
 
       echo "Project validation successful."
 
-  - name: Check and repair streams
+  - name: Check and repair IPTV streams
     shell: bash
     run: |
       set -euo pipefail
@@ -85,32 +85,32 @@ steps:
     run: |
       set -euo pipefail
 
-      if [ -s playlist-report.json ]; then
+      if [[ -s playlist-report.json ]]; then
         python -m json.tool playlist-report.json >/dev/null
-        echo "===== REPAIR REPORT ====="
+        echo "===== IPTV REPAIR REPORT ====="
         cat playlist-report.json
       else
         echo "::warning::Report was not generated."
       fi
 
-      if [ "${{ job.status }}" = "success" ]; then
-        test -s playlist.m3u || {
+      if [[ "${{ job.status }}" == "success" ]]; then
+        [[ -s playlist.m3u ]] || {
           echo "::error::playlist.m3u is missing or empty"
           exit 1
         }
 
-        test -s playlist-report.json || {
-          echo "::error::playlist-report.json is missing or empty"
+        grep -q '^#EXTM3U' playlist.m3u || {
+          echo "::error::Generated playlist is invalid"
           exit 1
         }
 
-        grep -q '^#EXTM3U' playlist.m3u || {
-          echo "::error::Invalid generated playlist"
+        [[ -s playlist-report.json ]] || {
+          echo "::error::playlist-report.json is missing"
           exit 1
         }
       fi
 
-  - name: Upload report
+  - name: Upload report artifact
     if: always()
     uses: actions/upload-artifact@v4
     with:
@@ -154,9 +154,9 @@ steps:
           exit 0
         fi
 
-        echo "Push failed; retrying against latest main."
+        echo "::warning::Push failed. Retrying with latest main."
         git reset --hard
       done
 
-      echo "::error::Could not publish after 3 attempts."
+      echo "::error::Failed to publish after 3 attempts."
       exit 1
