@@ -1,837 +1,775 @@
 {
-  "status": "success",
-  "generated_at": "2026-10-29T14:13:22.035279+00:00",
-  "input": "playlist_source.m3u",
-  "source_url": "https://raw.githubusercontent.com/Dimonovich/TV/Dimonovich/FREE/TV",
-  "total_channels": 114,
-  "checked_channels": 114,
-  "working_channels": 93,
-  "marked_channels": 0,
-  "blocked_channels": 2,
-  "unavailable_channels": 21,
-  "repaired_channels": 8,
-  "unrepaired_channels": 13,
+  "generated_at": "2026-10-30T14:04:32+00:00",
+  "status": "completed_with_warnings",
   "errors": [],
+  "warnings": [],
+  "alternative_playlist": {
+    "url": "https://raw.githubusercontent.com/Dimonovich/TV/Dimonovich/FREE/TV",
+    "loaded": true,
+    "error": null,
+    "candidates": {
+      "total": 3411,
+      "eligible": 647,
+      "rejected_forbidden": 452,
+      "rejected_provider": 2307,
+      "rejected_paid": 2,
+      "rejected_scheme": 3
+    }
+  },
   "channels": [
     {
-      "channel": "Первый канал",
-      "old_url": "https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R03_1TV_VLGOB/variant.m3u8",
-      "status": "unchanged",
-      "reason": "http_206",
-      "new_url": null
+      "index": 28,
+      "name": "Baby Time",
+      "group": "Музыкальные",
+      "status": "kept_unreplaced",
+      "need_reason": "forbidden_source",
+      "original_url": "https://mhd116.iptv2022.com/x/CRT-GMetLKLl3GjhLuXlWw,1792954274/streaming/baby_time/324/1/index.m3u8",
+      "source_check": {
+        "state": "forbidden",
+        "reason": "forbidden_url_fragment"
+      },
+      "reason": "forbidden_source",
+      "candidates": [],
+      "failure": "no_matching_candidates"
     },
     {
-      "channel": "Россия 1",
-      "old_url": "https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R04_ROSSIA1_VLGOB/variant.m3u8",
-      "status": "unchanged",
-      "reason": "http_206",
-      "new_url": null
+      "index": 29,
+      "name": "Europa Plus TV",
+      "group": "Музыкальные",
+      "status": "kept_unreplaced",
+      "need_reason": "forbidden_source",
+      "original_url": "https://mhd116.iptv2022.com/x/pxCNzzpOwYpRXGHoxHLazA,1792954274/streaming/evropaplus/324/1/index.m3u8",
+      "source_check": {
+        "state": "forbidden",
+        "reason": "forbidden_url_fragment"
+      },
+      "reason": "forbidden_source",
+      "candidates": [],
+      "failure": "no_matching_candidates"
     },
     {
-      "channel": "Матч!",
-      "old_url": "https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R04_ROSSIA2_VLGOB/variant.m3u8",
-      "status": "unchanged",
-      "reason": "http_206",
-      "new_url": null
-    },
-    {
-      "channel": "НТВ",
-      "old_url": "https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R03_NTV_VLGOB/variant.m3u8",
-      "status": "unchanged",
-      "reason": "http_206",
-      "new_url": null
-    },
-    {
-      "channel": "Пятый канал",
-      "old_url": "https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R02_5TV_VLGOB/variant.m3u8",
-      "status": "unchanged",
-      "reason": "http_206",
-      "new_url": null
-    },
-    {
-      "channel": "Россия К",
-      "old_url": "https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R02_ROSSIAK_VLGOB/variant.m3u8",
-      "status": "unchanged",
-      "reason": "http_206",
-      "new_url": null
-    },
-    {
-      "channel": "Россия 24",
-      "old_url": "https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R01_ROSSIA24_VLGOB/variant.m3u8",
-      "status": "unchanged",
-      "reason": "http_206",
-      "new_url": null
-    },
-    {
-      "channel": "Детский канал Карусель",
-      "old_url": "https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R01_KARUSEL_VLGOB/variant.m3u8",
-      "status": "unchanged",
-      "reason": "http_206",
-      "new_url": null
-    },
-    {
-      "channel": "ОТР",
-      "old_url": "https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R01_OTR_VLGOB/variant.m3u8",
-      "status": "unchanged",
-      "reason": "http_206",
-      "new_url": null
-    },
-    {
-      "channel": "ТВЦ",
-      "old_url": "https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R04_TVC_VLGOB/variant.m3u8",
-      "status": "unchanged",
-      "reason": "http_206",
-      "new_url": null
-    },
-    {
-      "channel": "РЕН ТВ",
-      "old_url": "https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R02_RENTV_VLGOB/variant.m3u8",
-      "status": "unchanged",
-      "reason": "http_206",
-      "new_url": null
-    },
-    {
-      "channel": "СПАС",
-      "old_url": "https://tvspas.mediacdn.ru/cdn/spas/tracks-v1a1/mono.ts.m3u8",
-      "status": "unchanged",
-      "reason": "http_206",
-      "new_url": null
-    },
-    {
-      "channel": "СТС",
-      "old_url": "https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R02_STS_VLGOB/variant.m3u8",
-      "status": "unchanged",
-      "reason": "http_206",
-      "new_url": null
-    },
-    {
-      "channel": "Домашний",
-      "old_url": "https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R04_DOMASHNY_VLGOB/variant.m3u8",
-      "status": "unchanged",
-      "reason": "http_206",
-      "new_url": null
-    },
-    {
-      "channel": "ТВ3",
-      "old_url": "https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R01_TV3_VLGOB/variant.m3u8",
-      "status": "unchanged",
-      "reason": "http_206",
-      "new_url": null
-    },
-    {
-      "channel": "Пятница!",
-      "old_url": "https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R01_FRIDAY_VLGOB/variant.m3u8",
-      "status": "unchanged",
-      "reason": "http_206",
-      "new_url": null
-    },
-    {
-      "channel": "Звезда",
-      "old_url": "https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R03_ZVEZDA_VLGOB/variant.m3u8",
-      "status": "unchanged",
-      "reason": "http_206",
-      "new_url": null
-    },
-    {
-      "channel": "МИР",
-      "old_url": "https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R02_MIR_VLGOB/variant.m3u8",
-      "status": "unchanged",
-      "reason": "http_206",
-      "new_url": null
-    },
-    {
-      "channel": "ТНТ",
-      "old_url": "https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R01_TNT_VLGOB/variant.m3u8",
-      "status": "unchanged",
-      "reason": "http_206",
-      "new_url": null
-    },
-    {
-      "channel": "МУЗ ТВ",
-      "old_url": "https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R06_MUZTV_VLGOB/variant.m3u8",
-      "status": "unchanged",
-      "reason": "http_206",
-      "new_url": null
-    },
-    {
-      "channel": "Волгоград 1",
-      "old_url": "http://dmi3y-tv.online/hls/zabava/region/VGRAD/CH_VOLGOGRAD1HD.m3u8",
-      "status": "unchanged",
-      "reason": "http_206",
-      "new_url": null
-    },
-    {
-      "channel": "МТВ Волгоград",
-      "old_url": "https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R01_MTV/variant.m3u8",
-      "status": "unchanged",
-      "reason": "http_206",
-      "new_url": null
-    },
-    {
-      "channel": "Волгоград 24",
-      "old_url": "https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R01_VOLGOGRAD24/variant.m3u8",
-      "status": "unchanged",
-      "reason": "http_206",
-      "new_url": null
-    },
-    {
-      "channel": "BRIDGE TV",
-      "old_url": "https://flussonic.mkpnet.ru/tv-ceaa6aa3cc1ea359/video.m3u8",
-      "status": "unchanged",
-      "reason": "http_206",
-      "new_url": null
-    },
-    {
-      "channel": "RUTV",
-      "old_url": "https://bl.rutube.ru/livestream/b1eb8e90d7e636677b3eb73b4fcbb717/index.m3u8?s=j3yDMmyGdzxPcUvClTgLSg&e=2092867968&scheme=https",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
-    },
-    {
-      "channel": "Жара",
-      "old_url": "https://flussonic.mkpnet.ru/tv-3cdc33d3606ba23f/video.m3u8",
-      "status": "unchanged",
-      "reason": "http_206",
-      "new_url": null
-    },
-    {
-      "channel": "FON Music",
-      "old_url": "https://flussonic.mkpnet.ru/tv-6683d71aa818d0a0/video.m3u8",
-      "status": "unchanged",
-      "reason": "http_206",
-      "new_url": null
-    },
-    {
-      "channel": "Музыка первого",
-      "old_url": "http://195.64.140.147:10196/196",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
-    },
-    {
-      "channel": "Baby Time",
-      "old_url": "https://mhd116.iptv2022.com/x/CRT-GMetLKLl3GjhLuXlWw,1792954274/streaming/baby_time/324/1/index.m3u8",
-      "status": "unrepaired",
-      "reason": "blocked_source",
-      "new_url": null,
-      "error": "no_matching_allowed_provider_candidate"
-    },
-    {
-      "channel": "Europa Plus TV",
-      "old_url": "https://mhd116.iptv2022.com/x/pxCNzzpOwYpRXGHoxHLazA,1792954274/streaming/evropaplus/324/1/index.m3u8",
-      "status": "unrepaired",
-      "reason": "blocked_source",
-      "new_url": null,
-      "error": "no_matching_allowed_provider_candidate"
-    },
-    {
-      "channel": "Шансон ТВ",
-      "old_url": "https://hls-shansontv.cdnvideo.ru/shansontv/shansontv.sdp/playlist.m3u8",
-      "status": "repaired",
-      "reason": "stream_unavailable",
+      "index": 30,
+      "name": "Шансон ТВ",
+      "group": "Музыкальные",
+      "status": "replaced",
+      "need_reason": "dead",
+      "original_url": "https://hls-shansontv.cdnvideo.ru/shansontv/shansontv.sdp/playlist.m3u8",
+      "source_check": {
+        "state": "fail",
+        "reason": "auth_required_or_denied_http_403"
+      },
+      "reason": "dead",
+      "candidates": [
+        {
+          "url": "https://flussonic.mkpnet.ru/tv-181e3f7698288892/video.m3u8",
+          "name": "Шансон ТВ",
+          "provider": "Оргтехсервис",
+          "match": "exact",
+          "check": {
+            "state": "ok",
+            "reason": "hls",
+            "detail": {
+              "segments": 4
+            }
+          },
+          "free_status": "assumed_free_by_allowed_provider_not_independently_verified"
+        }
+      ],
+      "failure": null,
       "new_url": "https://flussonic.mkpnet.ru/tv-181e3f7698288892/video.m3u8",
-      "matched_candidate": "Шансон ТВ"
+      "new_provider": "Оргтехсервис"
     },
     {
-      "channel": "Дикая Охота",
-      "old_url": "http://217.21.34.160:38007/dikayaohotahd/index.m3u8",
-      "status": "unrepaired",
-      "reason": "stream_unavailable",
-      "new_url": null,
-      "error": "no_matching_allowed_provider_candidate"
+      "index": 31,
+      "name": "Дикая Охота",
+      "group": "Познавательные",
+      "status": "kept_unreplaced",
+      "need_reason": "dead",
+      "original_url": "http://217.21.34.160:38007/dikayaohotahd/index.m3u8",
+      "source_check": {
+        "state": "fail",
+        "reason": "timeout"
+      },
+      "reason": "dead",
+      "candidates": [],
+      "failure": "no_matching_candidates"
     },
     {
-      "channel": "Дикая рыбалка",
-      "old_url": "https://mhd128.iptv2022.com/p/OmQqh-ai_2m0jBtx1Ny5zw,1765227609/streaming/ohotahd/324/1/tracks-v5a1/mono.m3u8",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
+      "index": 32,
+      "name": "Дикая рыбалка",
+      "group": "Познавательные",
+      "status": "kept_unreplaced",
+      "need_reason": "forbidden_source",
+      "original_url": "https://mhd128.iptv2022.com/p/OmQqh-ai_2m0jBtx1Ny5zw,1765227609/streaming/ohotahd/324/1/tracks-v5a1/mono.m3u8",
+      "source_check": {
+        "state": "forbidden",
+        "reason": "redirects_to_forbidden_host"
+      },
+      "reason": "forbidden_source",
+      "candidates": [],
+      "failure": "no_matching_candidates"
     },
     {
-      "channel": "Охотник и Рыболов",
-      "old_url": "https://mhd128.iptv2022.com/p/DYjFwizv-zIg35BW2RhCHw,1765227609/streaming/ohotnikhd/324/1/tracks-v5a1/mono.m3u8",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
+      "index": 33,
+      "name": "Охотник и Рыболов",
+      "group": "Познавательные",
+      "status": "replaced",
+      "need_reason": "forbidden_source",
+      "original_url": "https://mhd128.iptv2022.com/p/DYjFwizv-zIg35BW2RhCHw,1765227609/streaming/ohotnikhd/324/1/tracks-v5a1/mono.m3u8",
+      "source_check": {
+        "state": "forbidden",
+        "reason": "redirects_to_forbidden_host"
+      },
+      "reason": "forbidden_source",
+      "candidates": [
+        {
+          "url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=o2thHa84jV2Oyp8-SLcBjg&e=2093347097&scheme=https",
+          "name": "Охотник и рыболов",
+          "provider": "RUTUBE (VPN)",
+          "match": "exact",
+          "check": {
+            "state": "ok",
+            "reason": "hls",
+            "detail": {
+              "segments": 12
+            }
+          },
+          "free_status": "assumed_free_by_allowed_provider_not_independently_verified"
+        }
+      ],
+      "failure": null,
+      "new_url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=o2thHa84jV2Oyp8-SLcBjg&e=2093347097&scheme=https",
+      "new_provider": "RUTUBE (VPN)"
     },
     {
-      "channel": "Загородный",
-      "old_url": "http://95.66.188.74/Zagorodniy/mono.m3u8",
-      "status": "repaired",
-      "reason": "stream_unavailable",
-      "new_url": "https://bl.rutube.ru/livestream/406973c72e9d0449feef05ef7811ad01/index.m3u8?s=A4GPUOi59Tpiumy2Y4qQBw&e=2093260456&scheme=https",
-      "matched_candidate": "Загородный International"
+      "index": 34,
+      "name": "Загородный",
+      "group": "Познавательные",
+      "status": "replaced",
+      "need_reason": "dead",
+      "original_url": "http://95.66.188.74/Zagorodniy/mono.m3u8",
+      "source_check": {
+        "state": "fail",
+        "reason": "timeout"
+      },
+      "reason": "dead",
+      "candidates": [
+        {
+          "url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=VhPSdZChhqANfzoCABwTgw&e=2093347099&scheme=https",
+          "name": "Загородный International",
+          "provider": "RUTUBE (VPN)",
+          "match": "exact",
+          "check": {
+            "state": "ok",
+            "reason": "hls",
+            "detail": {
+              "segments": 12
+            }
+          },
+          "free_status": "assumed_free_by_allowed_provider_not_independently_verified"
+        }
+      ],
+      "failure": null,
+      "new_url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=VhPSdZChhqANfzoCABwTgw&e=2093347099&scheme=https",
+      "new_provider": "RUTUBE (VPN)"
     },
     {
-      "channel": "365 Дней ТВ",
-      "old_url": "https://mhd128.iptv2022.com/p/satiGW9TPVog3yQtqAGYfg,1765227611/streaming/365day/324/1/tracks-v5a1/mono.m3u8",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
+      "index": 35,
+      "name": "365 Дней ТВ",
+      "group": "Познавательные",
+      "status": "kept_unreplaced",
+      "need_reason": "forbidden_source",
+      "original_url": "https://mhd128.iptv2022.com/p/satiGW9TPVog3yQtqAGYfg,1765227611/streaming/365day/324/1/tracks-v5a1/mono.m3u8",
+      "source_check": {
+        "state": "forbidden",
+        "reason": "redirects_to_forbidden_host"
+      },
+      "reason": "forbidden_source",
+      "candidates": [],
+      "failure": "no_matching_candidates"
     },
     {
-      "channel": "ZooПарк",
-      "old_url": "https://mhd128.iptv2022.com/p/u1QOt2cCX6hDqQ2eMCUZlg,1765227611/streaming/zoopark/324/1/tracks-v5a1/mono.m3u8",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
+      "index": 36,
+      "name": "ZooПарк",
+      "group": "Познавательные",
+      "status": "kept_unreplaced",
+      "need_reason": "forbidden_source",
+      "original_url": "https://mhd128.iptv2022.com/p/u1QOt2cCX6hDqQ2eMCUZlg,1765227611/streaming/zoopark/324/1/tracks-v5a1/mono.m3u8",
+      "source_check": {
+        "state": "forbidden",
+        "reason": "redirects_to_forbidden_host"
+      },
+      "reason": "forbidden_source",
+      "candidates": [],
+      "failure": "no_matching_candidates"
     },
     {
-      "channel": "В мире животных",
-      "old_url": "http://stream.mcquack.net/241/tracks-v1a1/mono.ts.m3u8",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
+      "index": 38,
+      "name": "Глазами туриста",
+      "group": "Познавательные",
+      "status": "kept_unreplaced",
+      "need_reason": "forbidden_source",
+      "original_url": "https://mhd128.iptv2022.com/p/oSGe_R6-gpsIK5-rmD4nfA,1765227610/streaming/tourist_eyes/324/1/tracks-v5a1/mono.m3u8",
+      "source_check": {
+        "state": "forbidden",
+        "reason": "redirects_to_forbidden_host"
+      },
+      "reason": "forbidden_source",
+      "candidates": [],
+      "failure": "no_matching_candidates"
     },
     {
-      "channel": "Глазами туриста",
-      "old_url": "https://mhd128.iptv2022.com/p/oSGe_R6-gpsIK5-rmD4nfA,1765227610/streaming/tourist_eyes/324/1/tracks-v5a1/mono.m3u8",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
+      "index": 40,
+      "name": "Живая планета",
+      "group": "Познавательные",
+      "status": "kept_unreplaced",
+      "need_reason": "dead",
+      "original_url": "http://95.66.188.74/Zhivaya_Planeta/mono.m3u8",
+      "source_check": {
+        "state": "fail",
+        "reason": "timeout"
+      },
+      "reason": "dead",
+      "candidates": [],
+      "failure": "no_matching_candidates"
     },
     {
-      "channel": "Доктор",
-      "old_url": "http://45.11.139.43:8555/doctor/index.m3u8",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
+      "index": 41,
+      "name": "Живая природа",
+      "group": "Познавательные",
+      "status": "kept_unreplaced",
+      "need_reason": "forbidden_source",
+      "original_url": "https://mhd128.iptv2022.com/p/6INk6miWGzES9pZ-Ed3dgA,1765227610/streaming/livenature/324/1/index.m3u8",
+      "source_check": {
+        "state": "forbidden",
+        "reason": "redirects_to_forbidden_host"
+      },
+      "reason": "forbidden_source",
+      "candidates": [],
+      "failure": "no_matching_candidates"
     },
     {
-      "channel": "Живая планета",
-      "old_url": "http://95.66.188.74/Zhivaya_Planeta/mono.m3u8",
-      "status": "unrepaired",
-      "reason": "stream_unavailable",
-      "new_url": null,
-      "error": "no_matching_allowed_provider_candidate"
-    },
-    {
-      "channel": "Живая природа",
-      "old_url": "https://mhd128.iptv2022.com/p/6INk6miWGzES9pZ-Ed3dgA,1765227610/streaming/livenature/324/1/index.m3u8",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
-    },
-    {
-      "channel": "Здоровое ТВ",
-      "old_url": "http://95.66.188.74/ZdorovoeTV/index.m3u8",
-      "status": "repaired",
-      "reason": "stream_unavailable",
+      "index": 42,
+      "name": "Здоровое ТВ",
+      "group": "Познавательные",
+      "status": "replaced",
+      "need_reason": "dead",
+      "original_url": "http://95.66.188.74/ZdorovoeTV/index.m3u8",
+      "source_check": {
+        "state": "fail",
+        "reason": "timeout"
+      },
+      "reason": "dead",
+      "candidates": [
+        {
+          "url": "https://flussonic.mkpnet.ru/tv-92fa9d648cab0f3f/video.m3u8",
+          "name": "Здоровое ТВ",
+          "provider": "Оргтехсервис",
+          "match": "exact",
+          "check": {
+            "state": "ok",
+            "reason": "hls",
+            "detail": {
+              "segments": 4
+            }
+          },
+          "free_status": "assumed_free_by_allowed_provider_not_independently_verified"
+        }
+      ],
+      "failure": null,
       "new_url": "https://flussonic.mkpnet.ru/tv-92fa9d648cab0f3f/video.m3u8",
-      "matched_candidate": "Здоровое ТВ"
+      "new_provider": "Оргтехсервис"
     },
     {
-      "channel": "Моя Планета",
-      "old_url": "http://tv.streams.baikal-telecom.net:8080/MoyaPlanetaHD/index.m3u8",
-      "status": "repaired",
-      "reason": "stream_unavailable",
+      "index": 43,
+      "name": "Моя Планета",
+      "group": "Познавательные",
+      "status": "replaced",
+      "need_reason": "dead",
+      "original_url": "http://tv.streams.baikal-telecom.net:8080/MoyaPlanetaHD/index.m3u8",
+      "source_check": {
+        "state": "fail",
+        "reason": "auth_required_or_denied_http_403"
+      },
+      "reason": "dead",
+      "candidates": [
+        {
+          "url": "https://flussonic.mkpnet.ru/tv-6febc5aecf84848d/video.m3u8",
+          "name": "Моя Планета",
+          "provider": "Оргтехсервис",
+          "match": "exact",
+          "check": {
+            "state": "ok",
+            "reason": "hls",
+            "detail": {
+              "segments": 4
+            }
+          },
+          "free_status": "assumed_free_by_allowed_provider_not_independently_verified"
+        }
+      ],
+      "failure": null,
       "new_url": "https://flussonic.mkpnet.ru/tv-6febc5aecf84848d/video.m3u8",
-      "matched_candidate": "Моя Планета"
+      "new_provider": "Оргтехсервис"
     },
     {
-      "channel": "Т24",
-      "old_url": "http://50.7.28.226/8196/index.m3u8",
-      "status": "unrepaired",
-      "reason": "stream_unavailable",
-      "new_url": null,
-      "error": "no_matching_allowed_provider_candidate"
+      "index": 44,
+      "name": "Т24",
+      "group": "Познавательные",
+      "status": "kept_unreplaced",
+      "need_reason": "dead",
+      "original_url": "http://50.7.28.226/8196/index.m3u8",
+      "source_check": {
+        "state": "fail",
+        "reason": "connection_error"
+      },
+      "reason": "dead",
+      "candidates": [],
+      "failure": "no_matching_candidates"
     },
     {
-      "channel": "Домашние животные",
-      "old_url": "https://mhd128.iptv2022.com/p/_S4ZhkldWn9KEnPMLXDdMQ,1765227611/streaming/homejivotnie/324/1/tracks-v5a1/mono.m3u8",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
+      "index": 45,
+      "name": "Домашние животные",
+      "group": "Познавательные",
+      "status": "kept_unreplaced",
+      "need_reason": "forbidden_source",
+      "original_url": "https://mhd128.iptv2022.com/p/_S4ZhkldWn9KEnPMLXDdMQ,1765227611/streaming/homejivotnie/324/1/tracks-v5a1/mono.m3u8",
+      "source_check": {
+        "state": "forbidden",
+        "reason": "redirects_to_forbidden_host"
+      },
+      "reason": "forbidden_source",
+      "candidates": [],
+      "failure": "no_matching_candidates"
     },
     {
-      "channel": "Познавач",
-      "old_url": "https://bl.rutube.ru/livestream/eddcc86d1dee0b5def546ea388eb38ea/index.m3u8?s=-SuogQvLaqnvsCcrTdWcvg&e=2093174067&scheme=https",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
+      "index": 52,
+      "name": "СТС Love",
+      "group": "Развлекательные",
+      "status": "replaced",
+      "need_reason": "dead",
+      "original_url": "https://fs.uplink.kz/sts_love/mono.m3u8?token=***",
+      "source_check": {
+        "state": "fail",
+        "reason": "auth_required_or_denied_http_403"
+      },
+      "reason": "dead",
+      "candidates": [
+        {
+          "url": "http://zabava-htlive.cdn.ngenix.net/hls/CH_STSLOVE/variant.m3u8",
+          "name": "СТС Love",
+          "provider": "WINK",
+          "match": "exact",
+          "check": {
+            "state": "ok",
+            "reason": "hls",
+            "detail": {
+              "segments": 4
+            }
+          },
+          "free_status": "assumed_free_by_allowed_provider_not_independently_verified"
+        }
+      ],
+      "failure": null,
+      "new_url": "http://zabava-htlive.cdn.ngenix.net/hls/CH_STSLOVE/variant.m3u8",
+      "new_provider": "WINK"
     },
     {
-      "channel": "Animal Planet",
-      "old_url": "https://bl.rutube.ru/livestream/4004c8f6817b9ae1bd0d418905ae2b02/index.m3u8?s=CZYeR6QR48aRJcSU69tgbg&e=2093174067&scheme=https",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
+      "index": 54,
+      "name": "ТНТ 4",
+      "group": "Развлекательные",
+      "status": "kept_unreplaced",
+      "need_reason": "dead",
+      "original_url": "https://fs.uplink.kz/tnt4/mono.m3u8?token=***",
+      "source_check": {
+        "state": "fail",
+        "reason": "auth_required_or_denied_http_403"
+      },
+      "reason": "dead",
+      "candidates": [],
+      "failure": "no_matching_candidates"
     },
     {
-      "channel": "Discovery",
-      "old_url": "https://bl.rutube.ru/livestream/6422d62f7e1f87bc3aec45b462cd89ea/index.m3u8?s=HFyC0yKgmiN4xE0MxIY4cw&e=2093174068&scheme=https",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
+      "index": 55,
+      "name": "Перец",
+      "group": "Развлекательные",
+      "status": "kept_unreplaced",
+      "need_reason": "dead",
+      "original_url": "https://fs.uplink.kz/perec/mono.m3u8?token=***",
+      "source_check": {
+        "state": "fail",
+        "reason": "auth_required_or_denied_http_403"
+      },
+      "reason": "dead",
+      "candidates": [],
+      "failure": "no_matching_candidates"
     },
     {
-      "channel": "National Geographic",
-      "old_url": "https://bl.rutube.ru/livestream/2619fc295c16585ef018041d88f14db0/index.m3u8?s=TmPsYm5SuPNKDE676QudCg&e=2093174068&scheme=https",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
+      "index": 57,
+      "name": "РЖД ТВ",
+      "group": "Развлекательные",
+      "status": "kept_unreplaced",
+      "need_reason": "dead",
+      "original_url": "https://hls-tva.cdnvideo.ru/tva/tvahd.sdp/tracks-v1a1/mono.m3u8",
+      "source_check": {
+        "state": "fail",
+        "reason": "auth_required_or_denied_http_403"
+      },
+      "reason": "dead",
+      "candidates": [],
+      "failure": "no_matching_candidates"
     },
     {
-      "channel": "2х2",
-      "old_url": "https://zabava-htlive.cdn.ngenix.net/hls/CH_2X2/variant.m3u8",
-      "status": "unchanged",
-      "reason": "http_206",
-      "new_url": null
+      "index": 58,
+      "name": "Лапки Live",
+      "group": "Развлекательные",
+      "status": "kept_unreplaced",
+      "need_reason": "dead",
+      "original_url": "https://fs.uplink.kz/lapki_live/mono.m3u8?token=***",
+      "source_check": {
+        "state": "fail",
+        "reason": "auth_required_or_denied_http_403"
+      },
+      "reason": "dead",
+      "candidates": [],
+      "failure": "no_matching_candidates"
     },
     {
-      "channel": "Суббота!",
-      "old_url": "http://217.114.191.150/Subbota/index.m3u8",
-      "status": "unchanged",
-      "reason": "http_206",
-      "new_url": null
+      "index": 60,
+      "name": "Авто плюс",
+      "group": "Развлекательные",
+      "status": "kept_unreplaced",
+      "need_reason": "forbidden_source",
+      "original_url": "https://mhd128.iptv2022.com/p/NYQCU6FB-HcMxYiMjQRSWA,1765227609/streaming/avtoplus/324/1/tracks-v5a1/mono.m3u8",
+      "source_check": {
+        "state": "forbidden",
+        "reason": "redirects_to_forbidden_host"
+      },
+      "reason": "forbidden_source",
+      "candidates": [],
+      "failure": "no_matching_candidates"
     },
     {
-      "channel": "СТС Love",
-      "old_url": "https://fs.uplink.kz/sts_love/mono.m3u8?token=onlinetv",
-      "status": "repaired",
-      "reason": "stream_unavailable",
-      "new_url": "https://flussonic.mkpnet.ru/tv-b9f0884f9a81b8c6/video.m3u8",
-      "matched_candidate": "СТС Love"
+      "index": 61,
+      "name": "Авто 24",
+      "group": "Развлекательные",
+      "status": "replaced",
+      "need_reason": "forbidden_source",
+      "original_url": "https://mhd128.iptv2022.com/p/sJLRoEkaE-csau_hEoW7gw,1765227609/streaming/avto24/324/1/tracks-v5a1/mono.m3u8",
+      "source_check": {
+        "state": "forbidden",
+        "reason": "redirects_to_forbidden_host"
+      },
+      "reason": "forbidden_source",
+      "candidates": [
+        {
+          "url": "https://flussonic.mkpnet.ru/tv-a5fa84789fc4add5/video.m3u8",
+          "name": "Авто 24",
+          "provider": "Оргтехсервис",
+          "match": "exact",
+          "check": {
+            "state": "ok",
+            "reason": "hls",
+            "detail": {
+              "segments": 4
+            }
+          },
+          "free_status": "assumed_free_by_allowed_provider_not_independently_verified"
+        }
+      ],
+      "failure": null,
+      "new_url": "https://flussonic.mkpnet.ru/tv-a5fa84789fc4add5/video.m3u8",
+      "new_provider": "Оргтехсервис"
     },
     {
-      "channel": "Ю",
-      "old_url": "https://bl.rutube.ru/livestream/5c9327074e25ca86f3111d4085cbbb65/index.m3u8?s=VLfn5xIbPS5HN1HdfMxFWA&e=2091960701&scheme=https",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
+      "index": 63,
+      "name": "КЛЮЧ",
+      "group": "Развлекательные",
+      "status": "kept_unreplaced",
+      "need_reason": "forbidden_source",
+      "original_url": "https://mhd128.iptv2022.com/p/p4XXoEv-zIwO5xYgDDJ0SQ,1765227607/streaming/kluchhd/324/1/index.m3u8",
+      "source_check": {
+        "state": "forbidden",
+        "reason": "redirects_to_forbidden_host"
+      },
+      "reason": "forbidden_source",
+      "candidates": [],
+      "failure": "no_matching_candidates"
     },
     {
-      "channel": "ТНТ 4",
-      "old_url": "https://fs.uplink.kz/tnt4/mono.m3u8?token=onlinetv",
-      "status": "repaired",
-      "reason": "stream_unavailable",
-      "new_url": "https://bl.rutube.ru/livestream/c801a7087e29a097192d74c270fbc6c1/index.m3u8?s=bqW6DFtB1gtiO49RnuhgyA&e=2093260450&scheme=https",
-      "matched_candidate": "ТНТ4 HD"
+      "index": 64,
+      "name": "Кухня",
+      "group": "Развлекательные",
+      "status": "kept_unreplaced",
+      "need_reason": "forbidden_source",
+      "original_url": "https://mhd128.iptv2022.com/p/FXedfXKBch5NDZLPVxO2Ng,1765227609/streaming/kuhnya/324/1/tracks-v5a1/mono.m3u8",
+      "source_check": {
+        "state": "forbidden",
+        "reason": "redirects_to_forbidden_host"
+      },
+      "reason": "forbidden_source",
+      "candidates": [],
+      "failure": "no_matching_candidates"
     },
     {
-      "channel": "Перец",
-      "old_url": "https://fs.uplink.kz/perec/mono.m3u8?token=onlinetv",
-      "status": "unrepaired",
-      "reason": "stream_unavailable",
-      "new_url": null,
-      "error": "no_matching_allowed_provider_candidate"
-    },
-    {
-      "channel": "Твоё ТВ",
-      "old_url": "http://tvoetv.space:8080/tvoetv/index.m3u8",
-      "status": "unchanged",
-      "reason": "http_206",
-      "new_url": null
-    },
-    {
-      "channel": "РЖД ТВ",
-      "old_url": "https://hls-tva.cdnvideo.ru/tva/tvahd.sdp/tracks-v1a1/mono.m3u8",
-      "status": "unrepaired",
-      "reason": "stream_unavailable",
-      "new_url": null,
-      "error": "no_matching_allowed_provider_candidate"
-    },
-    {
-      "channel": "Лапки Live",
-      "old_url": "https://fs.uplink.kz/lapki_live/mono.m3u8?token=onlinetv",
-      "status": "unrepaired",
-      "reason": "stream_unavailable",
-      "new_url": null,
-      "error": "no_matching_allowed_provider_candidate"
-    },
-    {
-      "channel": "Драйв",
-      "old_url": "http://185.46.16.239:8000/Drayv",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
-    },
-    {
-      "channel": "Авто плюс",
-      "old_url": "https://mhd128.iptv2022.com/p/NYQCU6FB-HcMxYiMjQRSWA,1765227609/streaming/avtoplus/324/1/tracks-v5a1/mono.m3u8",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
-    },
-    {
-      "channel": "Авто 24",
-      "old_url": "https://mhd128.iptv2022.com/p/sJLRoEkaE-csau_hEoW7gw,1765227609/streaming/avto24/324/1/tracks-v5a1/mono.m3u8",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
-    },
-    {
-      "channel": "КВН ТВ",
-      "old_url": "https://fs.uplink.kz/kvn_tv/mono.m3u8?token=onlinetv",
-      "status": "unchanged",
-      "reason": "http_206",
-      "new_url": null
-    },
-    {
-      "channel": "КЛЮЧ",
-      "old_url": "https://mhd128.iptv2022.com/p/p4XXoEv-zIwO5xYgDDJ0SQ,1765227607/streaming/kluchhd/324/1/index.m3u8",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
-    },
-    {
-      "channel": "Кухня",
-      "old_url": "https://mhd128.iptv2022.com/p/FXedfXKBch5NDZLPVxO2Ng,1765227609/streaming/kuhnya/324/1/tracks-v5a1/mono.m3u8",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
-    },
-    {
-      "channel": "Успех",
-      "old_url": "http://50.7.28.226/8164/index.m3u8",
-      "status": "repaired",
-      "reason": "stream_unavailable",
+      "index": 65,
+      "name": "Успех",
+      "group": "Развлекательные",
+      "status": "replaced",
+      "need_reason": "dead",
+      "original_url": "http://50.7.28.226/8164/index.m3u8",
+      "source_check": {
+        "state": "fail",
+        "reason": "connection_error"
+      },
+      "reason": "dead",
+      "candidates": [
+        {
+          "url": "https://flussonic.mkpnet.ru/tv-324fe9acc597fbc1/video.m3u8",
+          "name": "Успех",
+          "provider": "Оргтехсервис",
+          "match": "exact",
+          "check": {
+            "state": "ok",
+            "reason": "hls",
+            "detail": {
+              "segments": 4
+            }
+          },
+          "free_status": "assumed_free_by_allowed_provider_not_independently_verified"
+        }
+      ],
+      "failure": null,
       "new_url": "https://flussonic.mkpnet.ru/tv-324fe9acc597fbc1/video.m3u8",
-      "matched_candidate": "Успех"
+      "new_provider": "Оргтехсервис"
     },
     {
-      "channel": "Живи",
-      "old_url": "https://mhd128.iptv2022.com/p/lYhBKww0rlGohUrEAmYLYw,1765227610/streaming/jivi/324/1/tracks-v5a1/mono.m3u8",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
+      "index": 66,
+      "name": "Живи",
+      "group": "Развлекательные",
+      "status": "kept_unreplaced",
+      "need_reason": "forbidden_source",
+      "original_url": "https://mhd128.iptv2022.com/p/lYhBKww0rlGohUrEAmYLYw,1765227610/streaming/jivi/324/1/tracks-v5a1/mono.m3u8",
+      "source_check": {
+        "state": "forbidden",
+        "reason": "redirects_to_forbidden_host"
+      },
+      "reason": "forbidden_source",
+      "candidates": [],
+      "failure": "no_matching_candidates"
     },
     {
-      "channel": "RUTUBE TV",
-      "old_url": "https://bl.rutube.ru/livestream/9ae8e8a6dc58bdad66190475f9872ecd/index.m3u8?s=CIyJUfURREOAKGXgqmRwIA&e=2093174060&scheme=https",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
-    },
-    {
-      "channel": "БОБЁР",
-      "old_url": "http://95.66.188.74/Bober/mono.m3u8",
-      "status": "repaired",
-      "reason": "stream_unavailable",
+      "index": 68,
+      "name": "БОБЁР",
+      "group": "Развлекательные",
+      "status": "replaced",
+      "need_reason": "dead",
+      "original_url": "http://95.66.188.74/Bober/mono.m3u8",
+      "source_check": {
+        "state": "fail",
+        "reason": "timeout"
+      },
+      "reason": "dead",
+      "candidates": [
+        {
+          "url": "https://flussonic.mkpnet.ru/tv-319cadb3fff5fb3e/video.m3u8",
+          "name": "Бобёр",
+          "provider": "Оргтехсервис",
+          "match": "exact",
+          "check": {
+            "state": "ok",
+            "reason": "hls",
+            "detail": {
+              "segments": 4
+            }
+          },
+          "free_status": "assumed_free_by_allowed_provider_not_independently_verified"
+        }
+      ],
+      "failure": null,
       "new_url": "https://flussonic.mkpnet.ru/tv-319cadb3fff5fb3e/video.m3u8",
-      "matched_candidate": "Бобёр"
+      "new_provider": "Оргтехсервис"
     },
     {
-      "channel": "Русское Радио",
-      "old_url": "http://rusradio.hostingradio.ru/rusradio96.aacp?0.4177960461051895",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
+      "index": 72,
+      "name": "Детское радио",
+      "group": "Радио",
+      "status": "kept_unreplaced",
+      "need_reason": "dead",
+      "original_url": "http://ic6.101.ru:8000/stream/air/aac/64/199",
+      "source_check": {
+        "state": "fail",
+        "reason": "connection_error"
+      },
+      "reason": "dead",
+      "candidates": [],
+      "failure": "no_matching_candidates"
     },
     {
-      "channel": "Радио Радонеж",
-      "old_url": "https://icecast-radonezh.cdnvideo.ru/rad128",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
+      "index": 91,
+      "name": "TiJi",
+      "group": "Детские",
+      "status": "replaced",
+      "need_reason": "dead",
+      "original_url": "http://stream.mcquack.net/111/tracks-v1a1/mono.ts.m3u8",
+      "source_check": {
+        "state": "fail",
+        "reason": "hls_segment_unavailable"
+      },
+      "reason": "dead",
+      "candidates": [
+        {
+          "url": "https://flussonic.mkpnet.ru/tv-3848dd8604a262e0/video.m3u8",
+          "name": "TiJi",
+          "provider": "Оргтехсервис",
+          "match": "exact",
+          "check": {
+            "state": "ok",
+            "reason": "hls",
+            "detail": {
+              "segments": 4
+            }
+          },
+          "free_status": "assumed_free_by_allowed_provider_not_independently_verified"
+        }
+      ],
+      "failure": null,
+      "new_url": "https://flussonic.mkpnet.ru/tv-3848dd8604a262e0/video.m3u8",
+      "new_provider": "Оргтехсервис"
     },
     {
-      "channel": "Новое Радио",
-      "old_url": "http://icecast.newradio.cdnvideo.ru/newradio3",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
+      "index": 94,
+      "name": "Nickelodeon",
+      "group": "Детские",
+      "status": "replaced",
+      "need_reason": "dead",
+      "original_url": "http://stream.mcquack.net/443/tracks-v1a1/mono.ts.m3u8",
+      "source_check": {
+        "state": "fail",
+        "reason": "hls_segment_unavailable"
+      },
+      "reason": "dead",
+      "candidates": [
+        {
+          "url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=49a59Z_RGKxtu-ohnoEVGw&e=2093347128&scheme=https",
+          "name": "Nickelodeon",
+          "provider": "RUTUBE (VPN)",
+          "match": "exact",
+          "check": {
+            "state": "ok",
+            "reason": "hls",
+            "detail": {
+              "segments": 12
+            }
+          },
+          "free_status": "assumed_free_by_allowed_provider_not_independently_verified"
+        }
+      ],
+      "failure": null,
+      "new_url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=49a59Z_RGKxtu-ohnoEVGw&e=2093347128&scheme=https",
+      "new_provider": "RUTUBE (VPN)"
     },
     {
-      "channel": "Детское радио",
-      "old_url": "http://ic6.101.ru:8000/stream/air/aac/64/199",
-      "status": "unrepaired",
-      "reason": "stream_unavailable",
-      "new_url": null,
-      "error": "no_matching_allowed_provider_candidate"
+      "index": 100,
+      "name": "Капитан Фантастика",
+      "group": "Детские",
+      "status": "kept_unreplaced",
+      "need_reason": "dead",
+      "original_url": "http://stream.mcquack.net/144/tracks-v1a1/mono.ts.m3u8",
+      "source_check": {
+        "state": "fail",
+        "reason": "hls_segment_unavailable"
+      },
+      "reason": "dead",
+      "candidates": [],
+      "failure": "no_matching_candidates"
     },
     {
-      "channel": "Радио Вера",
-      "old_url": "http://radiovera.hostingradio.ru:8007/radiovera_128",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
+      "index": 101,
+      "name": "Мультимузыка",
+      "group": "Детские",
+      "status": "kept_unreplaced",
+      "need_reason": "dead",
+      "original_url": "http://31.210.208.171:8080/mult_i_muzika/index.m3u8?token=***",
+      "source_check": {
+        "state": "fail",
+        "reason": "timeout"
+      },
+      "reason": "dead",
+      "candidates": [],
+      "failure": "no_matching_candidates"
     },
     {
-      "channel": "Наше радио",
-      "old_url": "http://nashe3.hostingradio.ru/nashe-128.mp3",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
+      "index": 105,
+      "name": "Мосфильм. Золотая Коллекция",
+      "group": "Кино",
+      "status": "kept_unreplaced",
+      "need_reason": "dead",
+      "original_url": "https://fs.uplink.kz/mosfilm/mono.m3u8?token=***",
+      "source_check": {
+        "state": "fail",
+        "reason": "auth_required_or_denied_http_403"
+      },
+      "reason": "dead",
+      "candidates": [],
+      "failure": "no_matching_candidates"
     },
     {
-      "channel": "Комсомольская Правда",
-      "old_url": "http://kpradio.hostingradio.ru:8000/russia.radiokp128.mp3",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
+      "index": 107,
+      "name": "Кино ТВ",
+      "group": "Кино",
+      "status": "kept_unreplaced",
+      "need_reason": "dead",
+      "original_url": "http://stream.mcquack.net/221/tracks-v1a1/mono.ts.m3u8",
+      "source_check": {
+        "state": "fail",
+        "reason": "hls_segment_unavailable"
+      },
+      "reason": "dead",
+      "candidates": [],
+      "failure": "no_matching_candidates"
     },
     {
-      "channel": "Радио Ваня",
-      "old_url": "http://icecast-radiovanya.cdnvideo.ru/radiovanya",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
+      "index": 108,
+      "name": "Победа",
+      "group": "Кино",
+      "status": "kept_unreplaced",
+      "need_reason": "dead",
+      "original_url": "https://fs.uplink.kz/pobeda/mono.m3u8?token=***",
+      "source_check": {
+        "state": "fail",
+        "reason": "auth_required_or_denied_http_403"
+      },
+      "reason": "dead",
+      "candidates": [],
+      "failure": "no_matching_candidates"
     },
     {
-      "channel": "Монте Карло",
-      "old_url": "http://montecarlo.hostingradio.ru/montecarlo96.aacp",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
-    },
-    {
-      "channel": "Дорожное радио",
-      "old_url": "http://dorognoe.hostingradio.ru:8000/dorognoe_acc",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
-    },
-    {
-      "channel": "Радио Дача",
-      "old_url": "https://ic1.radiosignal.one/vanya",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
-    },
-    {
-      "channel": "Радио Шансон",
-      "old_url": "http://chanson.hostingradio.ru:8041/chanson128.mp3",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
-    },
-    {
-      "channel": "Радио Культура",
-      "old_url": "http://icecast.vgtrk.cdnvideo.ru/kulturafm_mp3_64kbps",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
-    },
-    {
-      "channel": "Радио Страна",
-      "old_url": "http://icecast.stranafm.cdnvideo.ru/stranafm",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
-    },
-    {
-      "channel": "Спутник FM",
-      "old_url": "http://radio.mediacdn.ru/sputnik_fm.mp3",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
-    },
-    {
-      "channel": "Ретро FM",
-      "old_url": "http://retroserver.streamr.ru:8043/retro128",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
-    },
-    {
-      "channel": "Пионер FM",
-      "old_url": "https://listen10.myradio24.com/pionerfm",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
-    },
-    {
-      "channel": "Радио Maximum",
-      "old_url": "http://maximum.hostingradio.ru/maximum128.mp3",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
-    },
-    {
-      "channel": "Europa Plus",
-      "old_url": "https://hls-02-europaplus.emgsound.ru/11/playlist.m3u8",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
-    },
-    {
-      "channel": "Карусель",
-      "old_url": "https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R01_KARUSEL_VLGOB/variant.m3u8",
-      "status": "unchanged",
-      "reason": "http_206",
-      "new_url": null
-    },
-    {
-      "channel": "Солнце",
-      "old_url": "https://zabava-htlive.cdn.ngenix.net/hls/CH_DISNEY/variant.m3u8",
-      "status": "unchanged",
-      "reason": "http_206",
-      "new_url": null
-    },
-    {
-      "channel": "Мульт",
-      "old_url": "https://flussonic.mkpnet.ru/tv-c8b065a591077c26/video.m3u8",
-      "status": "unchanged",
-      "reason": "http_206",
-      "new_url": null
-    },
-    {
-      "channel": "TiJi",
-      "old_url": "http://stream.mcquack.net/111/tracks-v1a1/mono.ts.m3u8",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
-    },
-    {
-      "channel": "О!",
-      "old_url": "http://195.64.140.147:10124/124",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
-    },
-    {
-      "channel": "Gulli Girl",
-      "old_url": "http://195.64.140.147:10122/122",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
-    },
-    {
-      "channel": "Nickelodeon",
-      "old_url": "http://stream.mcquack.net/443/tracks-v1a1/mono.ts.m3u8",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
-    },
-    {
-      "channel": "Cartoon Network",
-      "old_url": "https://bl.rutube.ru/livestream/d2119cfb95146b3983cf05c1fe35e66f/index.m3u8?s=BHK7OEOTbxOq-0BnENcIlQ&e=2091787924&scheme=https",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
-    },
-    {
-      "channel": "Nick Jr",
-      "old_url": "http://stream.mcquack.net/220/tracks-v1a1/mono.ts.m3u8",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
-    },
-    {
-      "channel": "Мультиландия",
-      "old_url": "https://flussonic.mkpnet.ru/tv-89530153f25733fe/video.m3u8",
-      "status": "unchanged",
-      "reason": "http_206",
-      "new_url": null
-    },
-    {
-      "channel": "Канал Disney",
-      "old_url": "https://kinowalk.hopto.org/kanaldisneyonline_live",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
-    },
-    {
-      "channel": "Cartoon Classics",
-      "old_url": "http://5.188.159.128:8070/Cartoon_Network/index.m3u8",
-      "status": "unchanged",
-      "reason": "http_206",
-      "new_url": null
-    },
-    {
-      "channel": "Капитан Фантастика",
-      "old_url": "http://stream.mcquack.net/144/tracks-v1a1/mono.ts.m3u8",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
-    },
-    {
-      "channel": "Мультимузыка",
-      "old_url": "http://31.210.208.171:8080/mult_i_muzika/index.m3u8?token=+W2MSER",
-      "status": "unrepaired",
-      "reason": "stream_unavailable",
-      "new_url": null,
-      "error": "no_matching_allowed_provider_candidate"
-    },
-    {
-      "channel": "Ani",
-      "old_url": "http://194.152.35.17/ani/index.m3u8",
-      "status": "unchanged",
-      "reason": "http_206",
-      "new_url": null
-    },
-    {
-      "channel": "Фиксай ТВ",
-      "old_url": "https://tv34online.github.io/FixEye-TV/channel.m3u8",
-      "status": "unchanged",
-      "reason": "http_206",
-      "new_url": null
-    },
-    {
-      "channel": "Дом кино",
-      "old_url": "https://stream8.cinerama.uz/1054/tracks-v1a1/mono.m3u8",
-      "status": "unchanged",
-      "reason": "http_206",
-      "new_url": null
-    },
-    {
-      "channel": "Мосфильм. Золотая Коллекция",
-      "old_url": "https://fs.uplink.kz/mosfilm/mono.m3u8?token=onlinetv",
-      "status": "unrepaired",
-      "reason": "stream_unavailable",
-      "new_url": null,
-      "error": "no_matching_allowed_provider_candidate"
-    },
-    {
-      "channel": "Красная Линия",
-      "old_url": "https://s55766.cdn.ngenix.net/s55766-media-origin/rline_high/tracks-v1a1/mono.m3u8",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
-    },
-    {
-      "channel": "Кино ТВ",
-      "old_url": "http://stream.mcquack.net/221/tracks-v1a1/mono.ts.m3u8",
-      "status": "unchanged",
-      "reason": "http_200",
-      "new_url": null
-    },
-    {
-      "channel": "Победа",
-      "old_url": "https://fs.uplink.kz/pobeda/mono.m3u8?token=onlinetv",
-      "status": "unrepaired",
-      "reason": "stream_unavailable",
-      "new_url": null,
-      "error": "no_matching_allowed_provider_candidate"
-    },
-    {
-      "channel": "Кинокомедия",
-      "old_url": "http://31.210.208.171:8080/kinokomedia/index.m3u8?token=+W2MSER",
-      "status": "unrepaired",
-      "reason": "stream_unavailable",
-      "new_url": null,
-      "error": "no_matching_allowed_provider_candidate"
-    },
-    {
-      "channel": "Русский Детектив",
-      "old_url": "https://flussonic.mkpnet.ru/tv-2997fed720614567/video.m3u8",
-      "status": "unchanged",
-      "reason": "http_206",
-      "new_url": null
-    },
-    {
-      "channel": "Мир Сериала",
-      "old_url": "http://176.118.197.101/MirSeriala/index.m3u8",
-      "status": "unchanged",
-      "reason": "http_206",
-      "new_url": null
-    },
-    {
-      "channel": "Смотрим 100% Мужское",
-      "old_url": "https://stream.smotrim.ru/hls3/fasttv02/playlist_3.m3u8",
-      "status": "unchanged",
-      "reason": "http_206",
-      "new_url": null
-    },
-    {
-      "channel": "Смотрим 100% Любовь",
-      "old_url": "https://stream.smotrim.ru/hls3/fasttv01/playlist_3.m3u8",
-      "status": "unchanged",
-      "reason": "http_206",
-      "new_url": null
+      "index": 109,
+      "name": "Кинокомедия",
+      "group": "Кино",
+      "status": "kept_unreplaced",
+      "need_reason": "dead",
+      "original_url": "http://31.210.208.171:8080/kinokomedia/index.m3u8?token=***",
+      "source_check": {
+        "state": "fail",
+        "reason": "timeout"
+      },
+      "reason": "dead",
+      "candidates": [],
+      "failure": "no_matching_candidates"
     }
   ],
-  "finished_at": "2026-10-29T14:14:31.779303+00:00"
+  "summary": {
+    "total_channels": 115,
+    "checked_channels": 115,
+    "working_streams": 78,
+    "broken_streams": 23,
+    "needing_replacement": 37,
+    "replacements_succeeded": 11,
+    "replacements_failed": 26,
+    "replacements_skipped_protected": 0,
+    "unchecked_or_undetermined": 0,
+    "duration_seconds": 46.1
+  }
 }
