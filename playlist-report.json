@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-30T14:04:32+00:00",
+  "generated_at": "2026-10-30T14:05:32+00:00",
   "status": "completed_with_warnings",
   "errors": [],
   "warnings": [],
@@ -200,6 +200,21 @@
         "reason": "redirects_to_forbidden_host"
       },
       "reason": "forbidden_source",
+      "candidates": [],
+      "failure": "no_matching_candidates"
+    },
+    {
+      "index": 37,
+      "name": "В мире животных",
+      "group": "Познавательные",
+      "status": "kept_unreplaced",
+      "need_reason": "dead",
+      "original_url": "http://stream.mcquack.net/241/tracks-v1a1/mono.ts.m3u8",
+      "source_check": {
+        "state": "fail",
+        "reason": "hls_segment_unavailable"
+      },
+      "reason": "dead",
       "candidates": [],
       "failure": "no_matching_candidates"
     },
@@ -763,11 +778,11 @@
   "summary": {
     "total_channels": 115,
     "checked_channels": 115,
-    "working_streams": 78,
-    "broken_streams": 23,
-    "needing_replacement": 37,
+    "working_streams": 77,
+    "broken_streams": 24,
+    "needing_replacement": 38,
     "replacements_succeeded": 11,
-    "replacements_failed": 26,
+    "replacements_failed": 27,
     "replacements_skipped_protected": 0,
     "unchecked_or_undetermined": 0,
     "duration_seconds": 46.1
