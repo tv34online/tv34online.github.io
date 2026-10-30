@@ -1,0 +1,162 @@
+name: Rebuild IPTV playlist
+
+on:
+workflow_dispatch:
+
+schedule:
+- cron: "17 */6 * * *"
+
+push:
+branches:
+- main
+paths:
+- "playlist_source.m3u"
+- "scripts/rebuild_playlist.py"
+- "config/providers.json"
+- ".github/workflows/rebuild-playlist.yml"
+
+permissions:
+contents: write
+
+concurrency:
+group: rebuild-iptv-playlist
+cancel-in-progress: false
+
+jobs:
+rebuild:
+name: Check and repair IPTV streams
+runs-on: ubuntu-latest
+timeout-minutes: 30
+
+steps:
+  - name: Checkout repository
+    uses: actions/checkout@v4
+    with:
+      ref: main
+      fetch-depth: 0
+
+  - name: Set up Python
+    uses: actions/setup-python@v5
+    with:
+      python-version: "3.12"
+
+  - name: Validate project
+    shell: bash
+    run: |
+      set -euo pipefail
+
+      for file in \
+        playlist_source.m3u \
+        scripts/rebuild_playlist.py \
+        config/providers.json
+      do
+        if [ ! -s "$file" ]; then
+          echo "::error::Missing or empty file: $file"
+          exit 1
+        fi
+      done
+
+      python -m json.tool config/providers.json >/dev/null
+      python -m py_compile scripts/rebuild_playlist.py
+
+      grep -q '^#EXTM3U' playlist_source.m3u || {
+        echo "::error::Invalid source M3U playlist"
+        exit 1
+      }
+
+      echo "Project validation successful."
+
+  - name: Check and repair streams
+    shell: bash
+    run: |
+      set -euo pipefail
+
+      python -u scripts/rebuild_playlist.py \
+        --input playlist_source.m3u \
+        --source-url "https://raw.githubusercontent.com/Dimonovich/TV/Dimonovich/FREE/TV" \
+        --output playlist.m3u \
+        --report playlist-report.json \
+        --config config/providers.json \
+        --check
+
+  - name: Validate generated files
+    if: always()
+    shell: bash
+    run: |
+      set -euo pipefail
+
+      if [ -s playlist-report.json ]; then
+        python -m json.tool playlist-report.json >/dev/null
+        echo "===== REPAIR REPORT ====="
+        cat playlist-report.json
+      else
+        echo "::warning::Report was not generated."
+      fi
+
+      if [ "${{ job.status }}" = "success" ]; then
+        test -s playlist.m3u || {
+          echo "::error::playlist.m3u is missing or empty"
+          exit 1
+        }
+
+        test -s playlist-report.json || {
+          echo "::error::playlist-report.json is missing or empty"
+          exit 1
+        }
+
+        grep -q '^#EXTM3U' playlist.m3u || {
+          echo "::error::Invalid generated playlist"
+          exit 1
+        }
+      fi
+
+  - name: Upload report
+    if: always()
+    uses: actions/upload-artifact@v4
+    with:
+      name: playlist-report
+      path: playlist-report.json
+      if-no-files-found: warn
+      retention-days: 14
+
+  - name: Publish playlist and report
+    if: success()
+    shell: bash
+    run: |
+      set -euo pipefail
+
+      git config user.name "github-actions[bot]"
+      git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      cp playlist.m3u /tmp/generated-playlist.m3u
+      cp playlist-report.json /tmp/generated-playlist-report.json
+
+      for attempt in 1 2 3; do
+        echo "Publishing attempt ${attempt}/3"
+
+        git fetch origin main
+        git reset --hard origin/main
+
+        cp /tmp/generated-playlist.m3u playlist.m3u
+        cp /tmp/generated-playlist-report.json playlist-report.json
+
+        git add playlist.m3u playlist-report.json
+
+        if git diff --cached --quiet; then
+          echo "No changes to publish."
+          exit 0
+        fi
+
+        git commit -m "Update IPTV playlist and report"
+
+        if git push origin HEAD:main; then
+          echo "Playlist and report published successfully."
+          exit 0
+        fi
+
+        echo "Push failed; retrying against latest main."
+        git reset --hard
+      done
+
+      echo "::error::Could not publish after 3 attempts."
+      exit 1
