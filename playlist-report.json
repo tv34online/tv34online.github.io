@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-30T14:05:32+00:00",
+  "generated_at": "2026-10-30T18:56:25+00:00",
   "status": "completed_with_warnings",
   "errors": [],
   "warnings": [],
@@ -621,38 +621,6 @@
       "failure": "no_matching_candidates"
     },
     {
-      "index": 91,
-      "name": "TiJi",
-      "group": "Детские",
-      "status": "replaced",
-      "need_reason": "dead",
-      "original_url": "http://stream.mcquack.net/111/tracks-v1a1/mono.ts.m3u8",
-      "source_check": {
-        "state": "fail",
-        "reason": "hls_segment_unavailable"
-      },
-      "reason": "dead",
-      "candidates": [
-        {
-          "url": "https://flussonic.mkpnet.ru/tv-3848dd8604a262e0/video.m3u8",
-          "name": "TiJi",
-          "provider": "Оргтехсервис",
-          "match": "exact",
-          "check": {
-            "state": "ok",
-            "reason": "hls",
-            "detail": {
-              "segments": 4
-            }
-          },
-          "free_status": "assumed_free_by_allowed_provider_not_independently_verified"
-        }
-      ],
-      "failure": null,
-      "new_url": "https://flussonic.mkpnet.ru/tv-3848dd8604a262e0/video.m3u8",
-      "new_provider": "Оргтехсервис"
-    },
-    {
       "index": 94,
       "name": "Nickelodeon",
       "group": "Детские",
@@ -683,21 +651,6 @@
       "failure": null,
       "new_url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=49a59Z_RGKxtu-ohnoEVGw&e=2093347128&scheme=https",
       "new_provider": "RUTUBE (VPN)"
-    },
-    {
-      "index": 100,
-      "name": "Капитан Фантастика",
-      "group": "Детские",
-      "status": "kept_unreplaced",
-      "need_reason": "dead",
-      "original_url": "http://stream.mcquack.net/144/tracks-v1a1/mono.ts.m3u8",
-      "source_check": {
-        "state": "fail",
-        "reason": "hls_segment_unavailable"
-      },
-      "reason": "dead",
-      "candidates": [],
-      "failure": "no_matching_candidates"
     },
     {
       "index": 101,
@@ -778,13 +731,13 @@
   "summary": {
     "total_channels": 115,
     "checked_channels": 115,
-    "working_streams": 77,
-    "broken_streams": 24,
-    "needing_replacement": 38,
-    "replacements_succeeded": 11,
-    "replacements_failed": 27,
+    "working_streams": 79,
+    "broken_streams": 22,
+    "needing_replacement": 36,
+    "replacements_succeeded": 10,
+    "replacements_failed": 26,
     "replacements_skipped_protected": 0,
     "unchecked_or_undetermined": 0,
-    "duration_seconds": 46.1
+    "duration_seconds": 39.5
   }
 }
