@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-30T18:56:25+00:00",
+  "generated_at": "2026-10-31T01:09:46+00:00",
   "status": "completed_with_warnings",
   "errors": [],
   "warnings": [],
@@ -8,10 +8,10 @@
     "loaded": true,
     "error": null,
     "candidates": {
-      "total": 3411,
+      "total": 3386,
       "eligible": 647,
       "rejected_forbidden": 452,
-      "rejected_provider": 2307,
+      "rejected_provider": 2282,
       "rejected_paid": 2,
       "rejected_scheme": 3
     }
@@ -123,7 +123,7 @@
       "reason": "forbidden_source",
       "candidates": [
         {
-          "url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=o2thHa84jV2Oyp8-SLcBjg&e=2093347097&scheme=https",
+          "url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=id9XHsaAld8_3NY_R_HNqg&e=2093390359&scheme=https",
           "name": "Охотник и рыболов",
           "provider": "RUTUBE (VPN)",
           "match": "exact",
@@ -138,7 +138,7 @@
         }
       ],
       "failure": null,
-      "new_url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=o2thHa84jV2Oyp8-SLcBjg&e=2093347097&scheme=https",
+      "new_url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=id9XHsaAld8_3NY_R_HNqg&e=2093390359&scheme=https",
       "new_provider": "RUTUBE (VPN)"
     },
     {
@@ -155,7 +155,7 @@
       "reason": "dead",
       "candidates": [
         {
-          "url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=VhPSdZChhqANfzoCABwTgw&e=2093347099&scheme=https",
+          "url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=WzhfVCBXh2mNqxLAHORu4w&e=2093390361&scheme=https",
           "name": "Загородный International",
           "provider": "RUTUBE (VPN)",
           "match": "exact",
@@ -170,7 +170,7 @@
         }
       ],
       "failure": null,
-      "new_url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=VhPSdZChhqANfzoCABwTgw&e=2093347099&scheme=https",
+      "new_url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=WzhfVCBXh2mNqxLAHORu4w&e=2093390361&scheme=https",
       "new_provider": "RUTUBE (VPN)"
     },
     {
@@ -200,21 +200,6 @@
         "reason": "redirects_to_forbidden_host"
       },
       "reason": "forbidden_source",
-      "candidates": [],
-      "failure": "no_matching_candidates"
-    },
-    {
-      "index": 37,
-      "name": "В мире животных",
-      "group": "Познавательные",
-      "status": "kept_unreplaced",
-      "need_reason": "dead",
-      "original_url": "http://stream.mcquack.net/241/tracks-v1a1/mono.ts.m3u8",
-      "source_check": {
-        "state": "fail",
-        "reason": "hls_segment_unavailable"
-      },
-      "reason": "dead",
       "candidates": [],
       "failure": "no_matching_candidates"
     },
@@ -634,7 +619,7 @@
       "reason": "dead",
       "candidates": [
         {
-          "url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=49a59Z_RGKxtu-ohnoEVGw&e=2093347128&scheme=https",
+          "url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=wljYQC0rm56TfRl168Y3KQ&e=2093390389&scheme=https",
           "name": "Nickelodeon",
           "provider": "RUTUBE (VPN)",
           "match": "exact",
@@ -649,7 +634,7 @@
         }
       ],
       "failure": null,
-      "new_url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=49a59Z_RGKxtu-ohnoEVGw&e=2093347128&scheme=https",
+      "new_url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=wljYQC0rm56TfRl168Y3KQ&e=2093390389&scheme=https",
       "new_provider": "RUTUBE (VPN)"
     },
     {
@@ -731,13 +716,13 @@
   "summary": {
     "total_channels": 115,
     "checked_channels": 115,
-    "working_streams": 79,
-    "broken_streams": 22,
-    "needing_replacement": 36,
+    "working_streams": 80,
+    "broken_streams": 21,
+    "needing_replacement": 35,
     "replacements_succeeded": 10,
-    "replacements_failed": 26,
+    "replacements_failed": 25,
     "replacements_skipped_protected": 0,
     "unchecked_or_undetermined": 0,
-    "duration_seconds": 39.5
+    "duration_seconds": 47.0
   }
 }
