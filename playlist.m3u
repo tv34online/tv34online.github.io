@@ -63,15 +63,15 @@ https://mhd116.iptv2022.com/x/CRT-GMetLKLl3GjhLuXlWw,1792954274/streaming/baby_t
 #EXTVLCOPT:http-user-agent={"platform":"android","app":"limehd.ru.ctvshka","version_name":"5.1.0","version_code":"388","sdk":"34","name":"Xiaomi+13+Ultra","device_id":"a7f8e9d1c2b3a4f5","is_huawei":"0"}
 https://mhd116.iptv2022.com/x/pxCNzzpOwYpRXGHoxHLazA,1792954274/streaming/evropaplus/324/1/index.m3u8
 #EXTINF:-1 group-title="Музыкальные", Шансон ТВ
-https://flussonic.mkpnet.ru/tv-181e3f7698288892/video.m3u8
+https://hls-shansontv.cdnvideo.ru/shansontv/shansontv.sdp/playlist.m3u8
 #EXTINF:-1 tvg-name="Дикая охота" group-title="Познавательные", Дикая Охота
 http://217.21.34.160:38007/dikayaohotahd/index.m3u8
 #EXTINF:-1 tvg-name="Дикая рыбалка" group-title="Познавательные", Дикая рыбалка
 https://mhd128.iptv2022.com/p/OmQqh-ai_2m0jBtx1Ny5zw,1765227609/streaming/ohotahd/324/1/tracks-v5a1/mono.m3u8
 #EXTINF:-1 tvg-name="Охотник и рыболов" group-title="Познавательные", Охотник и Рыболов
-https://bl.rutube.ru/livestream/1da5d92af8c55b16241f1eb12a27f00c/index.m3u8?s=id9XHsaAld8_3NY_R_HNqg&e=2093390359&scheme=https
+https://bl.rutube.ru/livestream/1da5d92af8c55b16241f1eb12a27f00c/index.m3u8?s=HUt0oufbMNhBEO_Ray7cZw&e=2093433401&scheme=https
 #EXTINF:-1 tvg-name="Загородный" group-title="Познавательные", Загородный
-https://bl.rutube.ru/livestream/406973c72e9d0449feef05ef7811ad01/index.m3u8?s=WzhfVCBXh2mNqxLAHORu4w&e=2093390361&scheme=https
+https://bl.rutube.ru/livestream/406973c72e9d0449feef05ef7811ad01/index.m3u8?s=OTeX0A4H-CX7Hz5DCqhmGg&e=2093433404&scheme=https
 #EXTINF:-1 tvg-name="365 дней ТВ" group-title="Познавательные", 365 Дней ТВ
 https://mhd128.iptv2022.com/p/satiGW9TPVog3yQtqAGYfg,1765227611/streaming/365day/324/1/tracks-v5a1/mono.m3u8
 #EXTINF:-1 tvg-name="Zooпарк" group-title="Познавательные", ZooПарк
@@ -186,13 +186,13 @@ https://zabava-htlive.cdn.ngenix.net/hls/CH_DISNEY/variant.m3u8
 #EXTINF:-1 tvg-name="Мульт" group-title="Детские", Мульт
 https://flussonic.mkpnet.ru/tv-c8b065a591077c26/video.m3u8
 #EXTINF:-1 tvg-name="TiJi" group-title="Детские", TiJi
-http://stream.mcquack.net/111/tracks-v1a1/mono.ts.m3u8
+https://flussonic.mkpnet.ru/tv-3848dd8604a262e0/video.m3u8
 #EXTINF:-1 tvg-name="О!" group-title="Детские", О!
 http://195.64.140.147:10124/124
 #EXTINF:-1 tvg-name="Gulli Girl" group-title="Детские", Gulli Girl
 http://195.64.140.147:10122/122
 #EXTINF:-1 tvg-name="Nickelodeon" group-title="Детские", Nickelodeon
-https://bl.rutube.ru/livestream/e902c1a059034a1537430b2aa5aedece/index.m3u8?s=wljYQC0rm56TfRl168Y3KQ&e=2093390389&scheme=https
+http://stream.mcquack.net/443/tracks-v1a1/mono.ts.m3u8
 #EXTINF:-1 tvg-name="Cartoon Network" group-title="Детские", Cartoon Network
 https://bl.rutube.ru/livestream/d2119cfb95146b3983cf05c1fe35e66f/index.m3u8?s=BHK7OEOTbxOq-0BnENcIlQ&e=2091787924&scheme=https
 #EXTINF:-1 tvg-name="Nick Jr." group-title="Детские", Nick Jr

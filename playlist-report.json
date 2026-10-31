@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-31T07:02:21+00:00",
+  "generated_at": "2026-10-31T12:58:04+00:00",
   "status": "completed_with_warnings",
   "errors": [],
   "warnings": [],
@@ -48,38 +48,6 @@
       "failure": "no_matching_candidates"
     },
     {
-      "index": 30,
-      "name": "Шансон ТВ",
-      "group": "Музыкальные",
-      "status": "replaced",
-      "need_reason": "dead",
-      "original_url": "https://hls-shansontv.cdnvideo.ru/shansontv/shansontv.sdp/playlist.m3u8",
-      "source_check": {
-        "state": "fail",
-        "reason": "auth_required_or_denied_http_403"
-      },
-      "reason": "dead",
-      "candidates": [
-        {
-          "url": "https://flussonic.mkpnet.ru/tv-181e3f7698288892/video.m3u8",
-          "name": "Шансон ТВ",
-          "provider": "Оргтехсервис",
-          "match": "exact",
-          "check": {
-            "state": "ok",
-            "reason": "hls",
-            "detail": {
-              "segments": 4
-            }
-          },
-          "free_status": "assumed_free_by_allowed_provider_not_independently_verified"
-        }
-      ],
-      "failure": null,
-      "new_url": "https://flussonic.mkpnet.ru/tv-181e3f7698288892/video.m3u8",
-      "new_provider": "Оргтехсервис"
-    },
-    {
       "index": 31,
       "name": "Дикая Охота",
       "group": "Познавательные",
@@ -123,7 +91,7 @@
       "reason": "forbidden_source",
       "candidates": [
         {
-          "url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=id9XHsaAld8_3NY_R_HNqg&e=2093390359&scheme=https",
+          "url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=HUt0oufbMNhBEO_Ray7cZw&e=2093433401&scheme=https",
           "name": "Охотник и рыболов",
           "provider": "RUTUBE (VPN)",
           "match": "exact",
@@ -138,7 +106,7 @@
         }
       ],
       "failure": null,
-      "new_url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=id9XHsaAld8_3NY_R_HNqg&e=2093390359&scheme=https",
+      "new_url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=HUt0oufbMNhBEO_Ray7cZw&e=2093433401&scheme=https",
       "new_provider": "RUTUBE (VPN)"
     },
     {
@@ -155,7 +123,7 @@
       "reason": "dead",
       "candidates": [
         {
-          "url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=WzhfVCBXh2mNqxLAHORu4w&e=2093390361&scheme=https",
+          "url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=OTeX0A4H-CX7Hz5DCqhmGg&e=2093433404&scheme=https",
           "name": "Загородный International",
           "provider": "RUTUBE (VPN)",
           "match": "exact",
@@ -170,7 +138,7 @@
         }
       ],
       "failure": null,
-      "new_url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=WzhfVCBXh2mNqxLAHORu4w&e=2093390361&scheme=https",
+      "new_url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=OTeX0A4H-CX7Hz5DCqhmGg&e=2093433404&scheme=https",
       "new_provider": "RUTUBE (VPN)"
     },
     {
@@ -621,12 +589,12 @@
       "failure": "no_matching_candidates"
     },
     {
-      "index": 94,
-      "name": "Nickelodeon",
+      "index": 91,
+      "name": "TiJi",
       "group": "Детские",
       "status": "replaced",
       "need_reason": "dead",
-      "original_url": "http://stream.mcquack.net/443/tracks-v1a1/mono.ts.m3u8",
+      "original_url": "http://stream.mcquack.net/111/tracks-v1a1/mono.ts.m3u8",
       "source_check": {
         "state": "fail",
         "reason": "hls_segment_unavailable"
@@ -634,38 +602,23 @@
       "reason": "dead",
       "candidates": [
         {
-          "url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=wljYQC0rm56TfRl168Y3KQ&e=2093390389&scheme=https",
-          "name": "Nickelodeon",
-          "provider": "RUTUBE (VPN)",
+          "url": "https://flussonic.mkpnet.ru/tv-3848dd8604a262e0/video.m3u8",
+          "name": "TiJi",
+          "provider": "Оргтехсервис",
           "match": "exact",
           "check": {
             "state": "ok",
             "reason": "hls",
             "detail": {
-              "segments": 12
+              "segments": 4
             }
           },
           "free_status": "assumed_free_by_allowed_provider_not_independently_verified"
         }
       ],
       "failure": null,
-      "new_url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=wljYQC0rm56TfRl168Y3KQ&e=2093390389&scheme=https",
-      "new_provider": "RUTUBE (VPN)"
-    },
-    {
-      "index": 96,
-      "name": "Nick Jr",
-      "group": "Детские",
-      "status": "kept_unreplaced",
-      "need_reason": "dead",
-      "original_url": "http://stream.mcquack.net/220/tracks-v1a1/mono.ts.m3u8",
-      "source_check": {
-        "state": "fail",
-        "reason": "hls_segment_unavailable"
-      },
-      "reason": "dead",
-      "candidates": [],
-      "failure": "no_matching_candidates"
+      "new_url": "https://flussonic.mkpnet.ru/tv-3848dd8604a262e0/video.m3u8",
+      "new_provider": "Оргтехсервис"
     },
     {
       "index": 100,
@@ -713,21 +666,6 @@
       "failure": "no_matching_candidates"
     },
     {
-      "index": 107,
-      "name": "Кино ТВ",
-      "group": "Кино",
-      "status": "kept_unreplaced",
-      "need_reason": "dead",
-      "original_url": "http://stream.mcquack.net/221/tracks-v1a1/mono.ts.m3u8",
-      "source_check": {
-        "state": "fail",
-        "reason": "hls_segment_unavailable"
-      },
-      "reason": "dead",
-      "candidates": [],
-      "failure": "no_matching_candidates"
-    },
-    {
       "index": 108,
       "name": "Победа",
       "group": "Кино",
@@ -761,13 +699,13 @@
   "summary": {
     "total_channels": 115,
     "checked_channels": 115,
-    "working_streams": 77,
-    "broken_streams": 24,
-    "needing_replacement": 38,
-    "replacements_succeeded": 10,
-    "replacements_failed": 28,
+    "working_streams": 80,
+    "broken_streams": 21,
+    "needing_replacement": 35,
+    "replacements_succeeded": 9,
+    "replacements_failed": 26,
     "replacements_skipped_protected": 0,
     "unchecked_or_undetermined": 0,
-    "duration_seconds": 42.9
+    "duration_seconds": 38.0
   }
 }
