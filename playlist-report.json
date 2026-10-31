@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-31T12:58:04+00:00",
+  "generated_at": "2026-10-31T18:54:03+00:00",
   "status": "completed_with_warnings",
   "errors": [],
   "warnings": [],
@@ -46,6 +46,38 @@
       "reason": "forbidden_source",
       "candidates": [],
       "failure": "no_matching_candidates"
+    },
+    {
+      "index": 30,
+      "name": "Шансон ТВ",
+      "group": "Музыкальные",
+      "status": "replaced",
+      "need_reason": "dead",
+      "original_url": "https://hls-shansontv.cdnvideo.ru/shansontv/shansontv.sdp/playlist.m3u8",
+      "source_check": {
+        "state": "fail",
+        "reason": "auth_required_or_denied_http_403"
+      },
+      "reason": "dead",
+      "candidates": [
+        {
+          "url": "https://flussonic.mkpnet.ru/tv-181e3f7698288892/video.m3u8",
+          "name": "Шансон ТВ",
+          "provider": "Оргтехсервис",
+          "match": "exact",
+          "check": {
+            "state": "ok",
+            "reason": "hls",
+            "detail": {
+              "segments": 4
+            }
+          },
+          "free_status": "assumed_free_by_allowed_provider_not_independently_verified"
+        }
+      ],
+      "failure": null,
+      "new_url": "https://flussonic.mkpnet.ru/tv-181e3f7698288892/video.m3u8",
+      "new_provider": "Оргтехсервис"
     },
     {
       "index": 31,
@@ -168,21 +200,6 @@
         "reason": "redirects_to_forbidden_host"
       },
       "reason": "forbidden_source",
-      "candidates": [],
-      "failure": "no_matching_candidates"
-    },
-    {
-      "index": 37,
-      "name": "В мире животных",
-      "group": "Познавательные",
-      "status": "kept_unreplaced",
-      "need_reason": "dead",
-      "original_url": "http://stream.mcquack.net/241/tracks-v1a1/mono.ts.m3u8",
-      "source_check": {
-        "state": "fail",
-        "reason": "hls_segment_unavailable"
-      },
-      "reason": "dead",
       "candidates": [],
       "failure": "no_matching_candidates"
     },
@@ -702,10 +719,10 @@
     "working_streams": 80,
     "broken_streams": 21,
     "needing_replacement": 35,
-    "replacements_succeeded": 9,
-    "replacements_failed": 26,
+    "replacements_succeeded": 10,
+    "replacements_failed": 25,
     "replacements_skipped_protected": 0,
     "unchecked_or_undetermined": 0,
-    "duration_seconds": 38.0
+    "duration_seconds": 41.7
   }
 }
