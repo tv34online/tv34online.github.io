@@ -186,13 +186,13 @@ https://zabava-htlive.cdn.ngenix.net/hls/CH_DISNEY/variant.m3u8
 #EXTINF:-1 tvg-name="Мульт" group-title="Детские", Мульт
 https://flussonic.mkpnet.ru/tv-c8b065a591077c26/video.m3u8
 #EXTINF:-1 tvg-name="TiJi" group-title="Детские", TiJi
-https://flussonic.mkpnet.ru/tv-3848dd8604a262e0/video.m3u8
+http://stream.mcquack.net/111/tracks-v1a1/mono.ts.m3u8
 #EXTINF:-1 tvg-name="О!" group-title="Детские", О!
 http://195.64.140.147:10124/124
 #EXTINF:-1 tvg-name="Gulli Girl" group-title="Детские", Gulli Girl
 http://195.64.140.147:10122/122
 #EXTINF:-1 tvg-name="Nickelodeon" group-title="Детские", Nickelodeon
-http://stream.mcquack.net/443/tracks-v1a1/mono.ts.m3u8
+https://bl.rutube.ru/livestream/e902c1a059034a1537430b2aa5aedece/index.m3u8?s=EeaHPo6My2hrcsLVTmXjsg&e=2093526173&scheme=https
 #EXTINF:-1 tvg-name="Cartoon Network" group-title="Детские", Cartoon Network
 https://bl.rutube.ru/livestream/d2119cfb95146b3983cf05c1fe35e66f/index.m3u8?s=BHK7OEOTbxOq-0BnENcIlQ&e=2091787924&scheme=https
 #EXTINF:-1 tvg-name="Nick Jr." group-title="Детские", Nick Jr

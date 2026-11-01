@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-01T12:59:02+00:00",
+  "generated_at": "2026-11-01T18:54:05+00:00",
   "status": "completed_with_warnings",
   "errors": [],
   "warnings": [],
@@ -200,21 +200,6 @@
         "reason": "redirects_to_forbidden_host"
       },
       "reason": "forbidden_source",
-      "candidates": [],
-      "failure": "no_matching_candidates"
-    },
-    {
-      "index": 37,
-      "name": "В мире животных",
-      "group": "Познавательные",
-      "status": "kept_unreplaced",
-      "need_reason": "dead",
-      "original_url": "http://stream.mcquack.net/241/tracks-v1a1/mono.ts.m3u8",
-      "source_check": {
-        "state": "fail",
-        "reason": "hls_segment_unavailable"
-      },
-      "reason": "dead",
       "candidates": [],
       "failure": "no_matching_candidates"
     },
@@ -621,12 +606,12 @@
       "failure": "no_matching_candidates"
     },
     {
-      "index": 91,
-      "name": "TiJi",
+      "index": 94,
+      "name": "Nickelodeon",
       "group": "Детские",
       "status": "replaced",
       "need_reason": "dead",
-      "original_url": "http://stream.mcquack.net/111/tracks-v1a1/mono.ts.m3u8",
+      "original_url": "http://stream.mcquack.net/443/tracks-v1a1/mono.ts.m3u8",
       "source_check": {
         "state": "fail",
         "reason": "hls_segment_unavailable"
@@ -634,53 +619,23 @@
       "reason": "dead",
       "candidates": [
         {
-          "url": "https://flussonic.mkpnet.ru/tv-3848dd8604a262e0/video.m3u8",
-          "name": "TiJi",
-          "provider": "Оргтехсервис",
+          "url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=EeaHPo6My2hrcsLVTmXjsg&e=2093526173&scheme=https",
+          "name": "Nickelodeon",
+          "provider": "RUTUBE (VPN)",
           "match": "exact",
           "check": {
             "state": "ok",
             "reason": "hls",
             "detail": {
-              "segments": 4
+              "segments": 12
             }
           },
           "free_status": "assumed_free_by_allowed_provider_not_independently_verified"
         }
       ],
       "failure": null,
-      "new_url": "https://flussonic.mkpnet.ru/tv-3848dd8604a262e0/video.m3u8",
-      "new_provider": "Оргтехсервис"
-    },
-    {
-      "index": 96,
-      "name": "Nick Jr",
-      "group": "Детские",
-      "status": "kept_unreplaced",
-      "need_reason": "dead",
-      "original_url": "http://stream.mcquack.net/220/tracks-v1a1/mono.ts.m3u8",
-      "source_check": {
-        "state": "fail",
-        "reason": "hls_segment_unavailable"
-      },
-      "reason": "dead",
-      "candidates": [],
-      "failure": "no_matching_candidates"
-    },
-    {
-      "index": 100,
-      "name": "Капитан Фантастика",
-      "group": "Детские",
-      "status": "kept_unreplaced",
-      "need_reason": "dead",
-      "original_url": "http://stream.mcquack.net/144/tracks-v1a1/mono.ts.m3u8",
-      "source_check": {
-        "state": "fail",
-        "reason": "hls_segment_unavailable"
-      },
-      "reason": "dead",
-      "candidates": [],
-      "failure": "no_matching_candidates"
+      "new_url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=EeaHPo6My2hrcsLVTmXjsg&e=2093526173&scheme=https",
+      "new_provider": "RUTUBE (VPN)"
     },
     {
       "index": 101,
@@ -761,13 +716,13 @@
   "summary": {
     "total_channels": 115,
     "checked_channels": 115,
-    "working_streams": 77,
-    "broken_streams": 24,
-    "needing_replacement": 38,
+    "working_streams": 80,
+    "broken_streams": 21,
+    "needing_replacement": 35,
     "replacements_succeeded": 10,
-    "replacements_failed": 28,
+    "replacements_failed": 25,
     "replacements_skipped_protected": 0,
     "unchecked_or_undetermined": 0,
-    "duration_seconds": 40.5
+    "duration_seconds": 39.0
   }
 }
