@@ -63,7 +63,7 @@ https://mhd116.iptv2022.com/x/CRT-GMetLKLl3GjhLuXlWw,1792954274/streaming/baby_t
 #EXTVLCOPT:http-user-agent={"platform":"android","app":"limehd.ru.ctvshka","version_name":"5.1.0","version_code":"388","sdk":"34","name":"Xiaomi+13+Ultra","device_id":"a7f8e9d1c2b3a4f5","is_huawei":"0"}
 https://mhd116.iptv2022.com/x/pxCNzzpOwYpRXGHoxHLazA,1792954274/streaming/evropaplus/324/1/index.m3u8
 #EXTINF:-1 group-title="Музыкальные", Шансон ТВ
-https://flussonic.mkpnet.ru/tv-181e3f7698288892/video.m3u8
+https://hls-shansontv.cdnvideo.ru/shansontv/shansontv.sdp/playlist.m3u8
 #EXTINF:-1 tvg-name="Дикая охота" group-title="Познавательные", Дикая Охота
 http://217.21.34.160:38007/dikayaohotahd/index.m3u8
 #EXTINF:-1 tvg-name="Дикая рыбалка" group-title="Познавательные", Дикая рыбалка
@@ -192,7 +192,7 @@ http://195.64.140.147:10124/124
 #EXTINF:-1 tvg-name="Gulli Girl" group-title="Детские", Gulli Girl
 http://195.64.140.147:10122/122
 #EXTINF:-1 tvg-name="Nickelodeon" group-title="Детские", Nickelodeon
-http://stream.mcquack.net/443/tracks-v1a1/mono.ts.m3u8
+https://bl.rutube.ru/livestream/e902c1a059034a1537430b2aa5aedece/index.m3u8?s=mnd2k8O7eTW-EhnpAO42RQ&e=2093479431&scheme=https
 #EXTINF:-1 tvg-name="Cartoon Network" group-title="Детские", Cartoon Network
 https://bl.rutube.ru/livestream/d2119cfb95146b3983cf05c1fe35e66f/index.m3u8?s=BHK7OEOTbxOq-0BnENcIlQ&e=2091787924&scheme=https
 #EXTINF:-1 tvg-name="Nick Jr." group-title="Детские", Nick Jr
