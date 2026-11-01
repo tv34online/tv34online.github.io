@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-31T18:54:03+00:00",
+  "generated_at": "2026-11-01T01:19:36+00:00",
   "status": "completed_with_warnings",
   "errors": [],
   "warnings": [],
@@ -123,7 +123,7 @@
       "reason": "forbidden_source",
       "candidates": [
         {
-          "url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=HUt0oufbMNhBEO_Ray7cZw&e=2093433401&scheme=https",
+          "url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=indmV8Zr-xbNj6jbXqv-uA&e=2093479397&scheme=https",
           "name": "Охотник и рыболов",
           "provider": "RUTUBE (VPN)",
           "match": "exact",
@@ -138,7 +138,7 @@
         }
       ],
       "failure": null,
-      "new_url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=HUt0oufbMNhBEO_Ray7cZw&e=2093433401&scheme=https",
+      "new_url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=indmV8Zr-xbNj6jbXqv-uA&e=2093479397&scheme=https",
       "new_provider": "RUTUBE (VPN)"
     },
     {
@@ -155,7 +155,7 @@
       "reason": "dead",
       "candidates": [
         {
-          "url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=OTeX0A4H-CX7Hz5DCqhmGg&e=2093433404&scheme=https",
+          "url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=xkpFaQtEdwpDlkqKGKazGw&e=2093479400&scheme=https",
           "name": "Загородный International",
           "provider": "RUTUBE (VPN)",
           "match": "exact",
@@ -170,7 +170,7 @@
         }
       ],
       "failure": null,
-      "new_url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=OTeX0A4H-CX7Hz5DCqhmGg&e=2093433404&scheme=https",
+      "new_url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=xkpFaQtEdwpDlkqKGKazGw&e=2093479400&scheme=https",
       "new_provider": "RUTUBE (VPN)"
     },
     {
@@ -200,6 +200,21 @@
         "reason": "redirects_to_forbidden_host"
       },
       "reason": "forbidden_source",
+      "candidates": [],
+      "failure": "no_matching_candidates"
+    },
+    {
+      "index": 37,
+      "name": "В мире животных",
+      "group": "Познавательные",
+      "status": "kept_unreplaced",
+      "need_reason": "dead",
+      "original_url": "http://stream.mcquack.net/241/tracks-v1a1/mono.ts.m3u8",
+      "source_check": {
+        "state": "fail",
+        "reason": "hls_segment_unavailable"
+      },
+      "reason": "dead",
       "candidates": [],
       "failure": "no_matching_candidates"
     },
@@ -683,6 +698,21 @@
       "failure": "no_matching_candidates"
     },
     {
+      "index": 107,
+      "name": "Кино ТВ",
+      "group": "Кино",
+      "status": "kept_unreplaced",
+      "need_reason": "dead",
+      "original_url": "http://stream.mcquack.net/221/tracks-v1a1/mono.ts.m3u8",
+      "source_check": {
+        "state": "fail",
+        "reason": "hls_segment_unavailable"
+      },
+      "reason": "dead",
+      "candidates": [],
+      "failure": "no_matching_candidates"
+    },
+    {
       "index": 108,
       "name": "Победа",
       "group": "Кино",
@@ -716,13 +746,13 @@
   "summary": {
     "total_channels": 115,
     "checked_channels": 115,
-    "working_streams": 80,
-    "broken_streams": 21,
-    "needing_replacement": 35,
+    "working_streams": 78,
+    "broken_streams": 23,
+    "needing_replacement": 37,
     "replacements_succeeded": 10,
-    "replacements_failed": 25,
+    "replacements_failed": 27,
     "replacements_skipped_protected": 0,
     "unchecked_or_undetermined": 0,
-    "duration_seconds": 41.7
+    "duration_seconds": 43.0
   }
 }
