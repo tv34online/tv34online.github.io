@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-02T07:37:56+00:00",
+  "generated_at": "2026-11-02T13:20:25+00:00",
   "status": "completed_with_warnings",
   "errors": [],
   "warnings": [],
@@ -200,6 +200,21 @@
         "reason": "redirects_to_forbidden_host"
       },
       "reason": "forbidden_source",
+      "candidates": [],
+      "failure": "no_matching_candidates"
+    },
+    {
+      "index": 37,
+      "name": "В мире животных",
+      "group": "Познавательные",
+      "status": "kept_unreplaced",
+      "need_reason": "dead",
+      "original_url": "http://stream.mcquack.net/241/tracks-v1a1/mono.ts.m3u8",
+      "source_check": {
+        "state": "fail",
+        "reason": "hls_segment_unavailable"
+      },
+      "reason": "dead",
       "candidates": [],
       "failure": "no_matching_candidates"
     },
@@ -670,12 +685,12 @@
       "new_provider": "RUTUBE (VPN)"
     },
     {
-      "index": 96,
-      "name": "Nick Jr",
+      "index": 100,
+      "name": "Капитан Фантастика",
       "group": "Детские",
       "status": "kept_unreplaced",
       "need_reason": "dead",
-      "original_url": "http://stream.mcquack.net/220/tracks-v1a1/mono.ts.m3u8",
+      "original_url": "http://stream.mcquack.net/144/tracks-v1a1/mono.ts.m3u8",
       "source_check": {
         "state": "fail",
         "reason": "hls_segment_unavailable"
@@ -715,6 +730,21 @@
       "failure": "no_matching_candidates"
     },
     {
+      "index": 107,
+      "name": "Кино ТВ",
+      "group": "Кино",
+      "status": "kept_unreplaced",
+      "need_reason": "dead",
+      "original_url": "http://stream.mcquack.net/221/tracks-v1a1/mono.ts.m3u8",
+      "source_check": {
+        "state": "fail",
+        "reason": "hls_segment_unavailable"
+      },
+      "reason": "dead",
+      "candidates": [],
+      "failure": "no_matching_candidates"
+    },
+    {
       "index": 108,
       "name": "Победа",
       "group": "Кино",
@@ -748,13 +778,13 @@
   "summary": {
     "total_channels": 115,
     "checked_channels": 115,
-    "working_streams": 79,
-    "broken_streams": 22,
-    "needing_replacement": 36,
+    "working_streams": 77,
+    "broken_streams": 24,
+    "needing_replacement": 38,
     "replacements_succeeded": 11,
-    "replacements_failed": 25,
+    "replacements_failed": 27,
     "replacements_skipped_protected": 0,
     "unchecked_or_undetermined": 0,
-    "duration_seconds": 45.4
+    "duration_seconds": 45.8
   }
 }
