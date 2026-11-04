@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-04T07:28:21+00:00",
+  "generated_at": "2026-11-04T13:17:33+00:00",
   "status": "completed_with_warnings",
   "errors": [],
   "warnings": [],
@@ -700,21 +700,6 @@
       "failure": "no_matching_candidates"
     },
     {
-      "index": 100,
-      "name": "Капитан Фантастика",
-      "group": "Детские",
-      "status": "kept_unreplaced",
-      "need_reason": "dead",
-      "original_url": "http://stream.mcquack.net/144/tracks-v1a1/mono.ts.m3u8",
-      "source_check": {
-        "state": "fail",
-        "reason": "hls_segment_unavailable"
-      },
-      "reason": "dead",
-      "candidates": [],
-      "failure": "no_matching_candidates"
-    },
-    {
       "index": 101,
       "name": "Мультимузыка",
       "group": "Детские",
@@ -788,33 +773,18 @@
       "reason": "dead",
       "candidates": [],
       "failure": "no_matching_candidates"
-    },
-    {
-      "index": 111,
-      "name": "Мир Сериала",
-      "group": "Кино",
-      "status": "kept_unreplaced",
-      "need_reason": "dead",
-      "original_url": "http://176.118.197.101/MirSeriala/index.m3u8",
-      "source_check": {
-        "state": "fail",
-        "reason": "http_404"
-      },
-      "reason": "dead",
-      "candidates": [],
-      "failure": "no_matching_candidates"
     }
   ],
   "summary": {
     "total_channels": 115,
     "checked_channels": 115,
-    "working_streams": 75,
-    "broken_streams": 26,
-    "needing_replacement": 40,
+    "working_streams": 77,
+    "broken_streams": 24,
+    "needing_replacement": 38,
     "replacements_succeeded": 11,
-    "replacements_failed": 29,
+    "replacements_failed": 27,
     "replacements_skipped_protected": 0,
     "unchecked_or_undetermined": 0,
-    "duration_seconds": 44.8
+    "duration_seconds": 38.7
   }
 }
