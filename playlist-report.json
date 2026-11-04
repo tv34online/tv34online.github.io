@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-03T19:04:19+00:00",
+  "generated_at": "2026-11-04T01:16:55+00:00",
   "status": "completed_with_warnings",
   "errors": [],
   "warnings": [],
@@ -114,13 +114,13 @@
       "name": "Охотник и Рыболов",
       "group": "Познавательные",
       "status": "replaced",
-      "need_reason": "forbidden_source",
+      "need_reason": "dead",
       "original_url": "https://mhd128.iptv2022.com/p/DYjFwizv-zIg35BW2RhCHw,1765227609/streaming/ohotnikhd/324/1/tracks-v5a1/mono.m3u8",
       "source_check": {
-        "state": "forbidden",
-        "reason": "redirects_to_forbidden_host"
+        "state": "fail",
+        "reason": "network_error:URLError"
       },
-      "reason": "forbidden_source",
+      "reason": "dead",
       "candidates": [
         {
           "url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=tsXMkFWWlakPWARc9SxGuQ&e=2093649442&scheme=https",
@@ -606,12 +606,12 @@
       "failure": "no_matching_candidates"
     },
     {
-      "index": 94,
-      "name": "Nickelodeon",
+      "index": 91,
+      "name": "TiJi",
       "group": "Детские",
       "status": "replaced",
       "need_reason": "dead",
-      "original_url": "http://stream.mcquack.net/443/tracks-v1a1/mono.ts.m3u8",
+      "original_url": "http://stream.mcquack.net/111/tracks-v1a1/mono.ts.m3u8",
       "source_check": {
         "state": "fail",
         "reason": "hls_segment_unavailable"
@@ -619,23 +619,23 @@
       "reason": "dead",
       "candidates": [
         {
-          "url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=LWZMd45CPHWVrleSyCk-kQ&e=2093649477&scheme=https",
-          "name": "Nickelodeon",
-          "provider": "RUTUBE (VPN)",
+          "url": "https://flussonic.mkpnet.ru/tv-3848dd8604a262e0/video.m3u8",
+          "name": "TiJi",
+          "provider": "Оргтехсервис",
           "match": "exact",
           "check": {
             "state": "ok",
             "reason": "hls",
             "detail": {
-              "segments": 12
+              "segments": 4
             }
           },
           "free_status": "assumed_free_by_allowed_provider_not_independently_verified"
         }
       ],
       "failure": null,
-      "new_url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=LWZMd45CPHWVrleSyCk-kQ&e=2093649477&scheme=https",
-      "new_provider": "RUTUBE (VPN)"
+      "new_url": "https://flussonic.mkpnet.ru/tv-3848dd8604a262e0/video.m3u8",
+      "new_provider": "Оргтехсервис"
     },
     {
       "index": 96,
@@ -644,21 +644,6 @@
       "status": "kept_unreplaced",
       "need_reason": "dead",
       "original_url": "http://stream.mcquack.net/220/tracks-v1a1/mono.ts.m3u8",
-      "source_check": {
-        "state": "fail",
-        "reason": "hls_segment_unavailable"
-      },
-      "reason": "dead",
-      "candidates": [],
-      "failure": "no_matching_candidates"
-    },
-    {
-      "index": 100,
-      "name": "Капитан Фантастика",
-      "group": "Детские",
-      "status": "kept_unreplaced",
-      "need_reason": "dead",
-      "original_url": "http://stream.mcquack.net/144/tracks-v1a1/mono.ts.m3u8",
       "source_check": {
         "state": "fail",
         "reason": "hls_segment_unavailable"
@@ -746,13 +731,13 @@
   "summary": {
     "total_channels": 115,
     "checked_channels": 115,
-    "working_streams": 78,
+    "working_streams": 79,
     "broken_streams": 23,
-    "needing_replacement": 37,
+    "needing_replacement": 36,
     "replacements_succeeded": 10,
-    "replacements_failed": 27,
+    "replacements_failed": 26,
     "replacements_skipped_protected": 0,
     "unchecked_or_undetermined": 0,
-    "duration_seconds": 47.7
+    "duration_seconds": 41.3
   }
 }
