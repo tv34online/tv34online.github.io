@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-04T01:16:55+00:00",
+  "generated_at": "2026-11-04T07:28:21+00:00",
   "status": "completed_with_warnings",
   "errors": [],
   "warnings": [],
@@ -8,9 +8,9 @@
     "loaded": true,
     "error": null,
     "candidates": {
-      "total": 3386,
+      "total": 3387,
       "eligible": 647,
-      "rejected_forbidden": 452,
+      "rejected_forbidden": 453,
       "rejected_provider": 2282,
       "rejected_paid": 2,
       "rejected_scheme": 3
@@ -114,16 +114,16 @@
       "name": "Охотник и Рыболов",
       "group": "Познавательные",
       "status": "replaced",
-      "need_reason": "dead",
+      "need_reason": "forbidden_source",
       "original_url": "https://mhd128.iptv2022.com/p/DYjFwizv-zIg35BW2RhCHw,1765227609/streaming/ohotnikhd/324/1/tracks-v5a1/mono.m3u8",
       "source_check": {
-        "state": "fail",
-        "reason": "network_error:URLError"
+        "state": "forbidden",
+        "reason": "redirects_to_forbidden_host"
       },
-      "reason": "dead",
+      "reason": "forbidden_source",
       "candidates": [
         {
-          "url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=tsXMkFWWlakPWARc9SxGuQ&e=2093649442&scheme=https",
+          "url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=ijM0qXp6bfXau9OgtYex-A&e=2093765735&scheme=https",
           "name": "Охотник и рыболов",
           "provider": "RUTUBE (VPN)",
           "match": "exact",
@@ -138,7 +138,7 @@
         }
       ],
       "failure": null,
-      "new_url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=tsXMkFWWlakPWARc9SxGuQ&e=2093649442&scheme=https",
+      "new_url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=ijM0qXp6bfXau9OgtYex-A&e=2093765735&scheme=https",
       "new_provider": "RUTUBE (VPN)"
     },
     {
@@ -155,7 +155,7 @@
       "reason": "dead",
       "candidates": [
         {
-          "url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=hchP5yRCMujMyhlhWzo-KA&e=2093649446&scheme=https",
+          "url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=-y7UR8N6hZD--t4Rbm99vg&e=2093765738&scheme=https",
           "name": "Загородный International",
           "provider": "RUTUBE (VPN)",
           "match": "exact",
@@ -170,7 +170,7 @@
         }
       ],
       "failure": null,
-      "new_url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=hchP5yRCMujMyhlhWzo-KA&e=2093649446&scheme=https",
+      "new_url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=-y7UR8N6hZD--t4Rbm99vg&e=2093765738&scheme=https",
       "new_provider": "RUTUBE (VPN)"
     },
     {
@@ -200,6 +200,21 @@
         "reason": "redirects_to_forbidden_host"
       },
       "reason": "forbidden_source",
+      "candidates": [],
+      "failure": "no_matching_candidates"
+    },
+    {
+      "index": 37,
+      "name": "В мире животных",
+      "group": "Познавательные",
+      "status": "kept_unreplaced",
+      "need_reason": "dead",
+      "original_url": "http://stream.mcquack.net/241/tracks-v1a1/mono.ts.m3u8",
+      "source_check": {
+        "state": "fail",
+        "reason": "hls_segment_unavailable"
+      },
+      "reason": "dead",
       "candidates": [],
       "failure": "no_matching_candidates"
     },
@@ -638,12 +653,59 @@
       "new_provider": "Оргтехсервис"
     },
     {
+      "index": 94,
+      "name": "Nickelodeon",
+      "group": "Детские",
+      "status": "replaced",
+      "need_reason": "dead",
+      "original_url": "http://stream.mcquack.net/443/tracks-v1a1/mono.ts.m3u8",
+      "source_check": {
+        "state": "fail",
+        "reason": "hls_segment_unavailable"
+      },
+      "reason": "dead",
+      "candidates": [
+        {
+          "url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=0ZTfTyCNrq3Q6ehO4Rmgcw&e=2093765768&scheme=https",
+          "name": "Nickelodeon",
+          "provider": "RUTUBE (VPN)",
+          "match": "exact",
+          "check": {
+            "state": "ok",
+            "reason": "hls",
+            "detail": {
+              "segments": 12
+            }
+          },
+          "free_status": "assumed_free_by_allowed_provider_not_independently_verified"
+        }
+      ],
+      "failure": null,
+      "new_url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=0ZTfTyCNrq3Q6ehO4Rmgcw&e=2093765768&scheme=https",
+      "new_provider": "RUTUBE (VPN)"
+    },
+    {
       "index": 96,
       "name": "Nick Jr",
       "group": "Детские",
       "status": "kept_unreplaced",
       "need_reason": "dead",
       "original_url": "http://stream.mcquack.net/220/tracks-v1a1/mono.ts.m3u8",
+      "source_check": {
+        "state": "fail",
+        "reason": "hls_segment_unavailable"
+      },
+      "reason": "dead",
+      "candidates": [],
+      "failure": "no_matching_candidates"
+    },
+    {
+      "index": 100,
+      "name": "Капитан Фантастика",
+      "group": "Детские",
+      "status": "kept_unreplaced",
+      "need_reason": "dead",
+      "original_url": "http://stream.mcquack.net/144/tracks-v1a1/mono.ts.m3u8",
       "source_check": {
         "state": "fail",
         "reason": "hls_segment_unavailable"
@@ -726,18 +788,33 @@
       "reason": "dead",
       "candidates": [],
       "failure": "no_matching_candidates"
+    },
+    {
+      "index": 111,
+      "name": "Мир Сериала",
+      "group": "Кино",
+      "status": "kept_unreplaced",
+      "need_reason": "dead",
+      "original_url": "http://176.118.197.101/MirSeriala/index.m3u8",
+      "source_check": {
+        "state": "fail",
+        "reason": "http_404"
+      },
+      "reason": "dead",
+      "candidates": [],
+      "failure": "no_matching_candidates"
     }
   ],
   "summary": {
     "total_channels": 115,
     "checked_channels": 115,
-    "working_streams": 79,
-    "broken_streams": 23,
-    "needing_replacement": 36,
-    "replacements_succeeded": 10,
-    "replacements_failed": 26,
+    "working_streams": 75,
+    "broken_streams": 26,
+    "needing_replacement": 40,
+    "replacements_succeeded": 11,
+    "replacements_failed": 29,
     "replacements_skipped_protected": 0,
     "unchecked_or_undetermined": 0,
-    "duration_seconds": 41.3
+    "duration_seconds": 44.8
   }
 }
