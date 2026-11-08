@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-08T13:25:42+00:00",
+  "generated_at": "2026-11-08T22:06:09+00:00",
   "status": "completed_with_warnings",
   "errors": [],
   "warnings": [],
@@ -123,7 +123,7 @@
       "reason": "forbidden_source",
       "candidates": [
         {
-          "url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=0DmkAqzrKdql3GWSStHsFA&e=2094126699&scheme=https",
+          "url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=MCk8NtrFP0I3ImmLk7xVhg&e=2094168014&scheme=https",
           "name": "Охотник и рыболов",
           "provider": "RUTUBE (VPN)",
           "match": "exact",
@@ -138,7 +138,7 @@
         }
       ],
       "failure": null,
-      "new_url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=0DmkAqzrKdql3GWSStHsFA&e=2094126699&scheme=https",
+      "new_url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=MCk8NtrFP0I3ImmLk7xVhg&e=2094168014&scheme=https",
       "new_provider": "RUTUBE (VPN)"
     },
     {
@@ -155,7 +155,7 @@
       "reason": "dead",
       "candidates": [
         {
-          "url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=0KKAGOzQz4mF7xsq4c_zEg&e=2094126700&scheme=https",
+          "url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=gYZ4t7xPdeTR66lpxMGT-A&e=2094168015&scheme=https",
           "name": "Загородный International",
           "provider": "RUTUBE (VPN)",
           "match": "exact",
@@ -170,7 +170,7 @@
         }
       ],
       "failure": null,
-      "new_url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=0KKAGOzQz4mF7xsq4c_zEg&e=2094126700&scheme=https",
+      "new_url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=gYZ4t7xPdeTR66lpxMGT-A&e=2094168015&scheme=https",
       "new_provider": "RUTUBE (VPN)"
     },
     {
@@ -361,7 +361,7 @@
       "index": 47,
       "name": "Animal Planet",
       "group": "Познавательные",
-      "status": "kept_unreplaced",
+      "status": "replaced",
       "need_reason": "dead",
       "original_url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=CZYeR6QR48aRJcSU69tgbg&e=2093174067&scheme=https",
       "source_check": {
@@ -376,13 +376,18 @@
           "provider": "Ott Club + Реклама",
           "match": "exact",
           "check": {
-            "state": "fail",
-            "reason": "hls_segment_unavailable"
+            "state": "ok",
+            "reason": "hls",
+            "detail": {
+              "segments": 4
+            }
           },
           "free_status": "assumed_free_by_allowed_provider_not_independently_verified"
         }
       ],
-      "failure": "all_candidates_failed"
+      "failure": null,
+      "new_url": "http://stream.mcquack.net/114/tracks-v1a1/mono.ts.m3u8",
+      "new_provider": "Ott Club + Реклама"
     },
     {
       "index": 52,
@@ -648,53 +653,6 @@
       "failure": "no_matching_candidates"
     },
     {
-      "index": 91,
-      "name": "TiJi",
-      "group": "Детские",
-      "status": "replaced",
-      "need_reason": "dead",
-      "original_url": "http://stream.mcquack.net/111/tracks-v1a1/mono.ts.m3u8",
-      "source_check": {
-        "state": "fail",
-        "reason": "hls_segment_unavailable"
-      },
-      "reason": "dead",
-      "candidates": [
-        {
-          "url": "https://flussonic.mkpnet.ru/tv-3848dd8604a262e0/video.m3u8",
-          "name": "TiJi",
-          "provider": "Оргтехсервис",
-          "match": "exact",
-          "check": {
-            "state": "ok",
-            "reason": "hls",
-            "detail": {
-              "segments": 4
-            }
-          },
-          "free_status": "assumed_free_by_allowed_provider_not_independently_verified"
-        }
-      ],
-      "failure": null,
-      "new_url": "https://flussonic.mkpnet.ru/tv-3848dd8604a262e0/video.m3u8",
-      "new_provider": "Оргтехсервис"
-    },
-    {
-      "index": 94,
-      "name": "Nickelodeon",
-      "group": "Детские",
-      "status": "kept_unreplaced",
-      "need_reason": "dead",
-      "original_url": "http://stream.mcquack.net/443/tracks-v1a1/mono.ts.m3u8",
-      "source_check": {
-        "state": "fail",
-        "reason": "hls_segment_unavailable"
-      },
-      "reason": "dead",
-      "candidates": [],
-      "failure": "no_matching_candidates"
-    },
-    {
       "index": 95,
       "name": "Cartoon Network",
       "group": "Детские",
@@ -704,21 +662,6 @@
       "source_check": {
         "state": "fail",
         "reason": "http_404"
-      },
-      "reason": "dead",
-      "candidates": [],
-      "failure": "no_matching_candidates"
-    },
-    {
-      "index": 96,
-      "name": "Nick Jr",
-      "group": "Детские",
-      "status": "kept_unreplaced",
-      "need_reason": "dead",
-      "original_url": "http://stream.mcquack.net/220/tracks-v1a1/mono.ts.m3u8",
-      "source_check": {
-        "state": "fail",
-        "reason": "hls_segment_unavailable"
       },
       "reason": "dead",
       "candidates": [],
@@ -785,6 +728,21 @@
       "failure": "no_matching_candidates"
     },
     {
+      "index": 107,
+      "name": "Кино ТВ",
+      "group": "Кино",
+      "status": "kept_unreplaced",
+      "need_reason": "dead",
+      "original_url": "http://stream.mcquack.net/221/tracks-v1a1/mono.ts.m3u8",
+      "source_check": {
+        "state": "fail",
+        "reason": "hls_segment_unavailable"
+      },
+      "reason": "dead",
+      "candidates": [],
+      "failure": "no_matching_candidates"
+    },
+    {
       "index": 108,
       "name": "Победа",
       "group": "Кино",
@@ -818,13 +776,13 @@
   "summary": {
     "total_channels": 115,
     "checked_channels": 115,
-    "working_streams": 74,
-    "broken_streams": 27,
-    "needing_replacement": 41,
+    "working_streams": 76,
+    "broken_streams": 25,
+    "needing_replacement": 39,
     "replacements_succeeded": 10,
-    "replacements_failed": 31,
+    "replacements_failed": 29,
     "replacements_skipped_protected": 0,
     "unchecked_or_undetermined": 0,
-    "duration_seconds": 39.4
+    "duration_seconds": 42.7
   }
 }
