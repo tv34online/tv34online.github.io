@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-15T18:51:37+00:00",
+  "generated_at": "2026-11-16T06:30:43+00:00",
   "status": "completed_with_warnings",
   "errors": [],
   "warnings": [],
@@ -204,6 +204,21 @@
       "failure": "no_matching_candidates"
     },
     {
+      "index": 37,
+      "name": "В мире животных",
+      "group": "Познавательные",
+      "status": "kept_unreplaced",
+      "need_reason": "dead",
+      "original_url": "http://stream.mcquack.net/241/tracks-v1a1/mono.ts.m3u8",
+      "source_check": {
+        "state": "fail",
+        "reason": "hls_segment_unavailable"
+      },
+      "reason": "dead",
+      "candidates": [],
+      "failure": "no_matching_candidates"
+    },
+    {
       "index": 38,
       "name": "Глазами туриста",
       "group": "Познавательные",
@@ -346,7 +361,7 @@
       "index": 47,
       "name": "Animal Planet",
       "group": "Познавательные",
-      "status": "replaced",
+      "status": "kept_unreplaced",
       "need_reason": "dead",
       "original_url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=CZYeR6QR48aRJcSU69tgbg&e=2093174067&scheme=https",
       "source_check": {
@@ -361,18 +376,13 @@
           "provider": "Ott Club + Реклама",
           "match": "exact",
           "check": {
-            "state": "ok",
-            "reason": "hls",
-            "detail": {
-              "segments": 4
-            }
+            "state": "fail",
+            "reason": "hls_segment_unavailable"
           },
           "free_status": "assumed_free_by_allowed_provider_not_independently_verified"
         }
       ],
-      "failure": null,
-      "new_url": "http://stream.mcquack.net/114/tracks-v1a1/mono.ts.m3u8",
-      "new_provider": "Ott Club + Реклама"
+      "failure": "all_candidates_failed"
     },
     {
       "index": 52,
@@ -638,6 +648,53 @@
       "failure": "no_matching_candidates"
     },
     {
+      "index": 91,
+      "name": "TiJi",
+      "group": "Детские",
+      "status": "replaced",
+      "need_reason": "dead",
+      "original_url": "http://stream.mcquack.net/111/tracks-v1a1/mono.ts.m3u8",
+      "source_check": {
+        "state": "fail",
+        "reason": "hls_segment_unavailable"
+      },
+      "reason": "dead",
+      "candidates": [
+        {
+          "url": "https://flussonic.mkpnet.ru/tv-3848dd8604a262e0/video.m3u8",
+          "name": "TiJi",
+          "provider": "Оргтехсервис",
+          "match": "exact",
+          "check": {
+            "state": "ok",
+            "reason": "hls",
+            "detail": {
+              "segments": 4
+            }
+          },
+          "free_status": "assumed_free_by_allowed_provider_not_independently_verified"
+        }
+      ],
+      "failure": null,
+      "new_url": "https://flussonic.mkpnet.ru/tv-3848dd8604a262e0/video.m3u8",
+      "new_provider": "Оргтехсервис"
+    },
+    {
+      "index": 94,
+      "name": "Nickelodeon",
+      "group": "Детские",
+      "status": "kept_unreplaced",
+      "need_reason": "dead",
+      "original_url": "http://stream.mcquack.net/443/tracks-v1a1/mono.ts.m3u8",
+      "source_check": {
+        "state": "fail",
+        "reason": "hls_segment_unavailable"
+      },
+      "reason": "dead",
+      "candidates": [],
+      "failure": "no_matching_candidates"
+    },
+    {
       "index": 95,
       "name": "Cartoon Network",
       "group": "Детские",
@@ -761,13 +818,13 @@
   "summary": {
     "total_channels": 115,
     "checked_channels": 115,
-    "working_streams": 77,
-    "broken_streams": 24,
-    "needing_replacement": 38,
+    "working_streams": 74,
+    "broken_streams": 27,
+    "needing_replacement": 41,
     "replacements_succeeded": 10,
-    "replacements_failed": 28,
+    "replacements_failed": 31,
     "replacements_skipped_protected": 0,
     "unchecked_or_undetermined": 0,
-    "duration_seconds": 38.6
+    "duration_seconds": 39.0
   }
 }
