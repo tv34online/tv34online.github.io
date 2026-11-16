@@ -41,7 +41,7 @@ https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R01_TNT_VLGOB/variant.m3u8
 #EXTINF:-1 tvg-name="Муз ТВ" group-title="Общественные", МУЗ ТВ
 https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R06_MUZTV_VLGOB/variant.m3u8
 #EXTINF:-1 tvg-name="Волгоград 1" group-title="Общественные", Волгоград 1
-http://dmi3y-tv.online/hls/zabava/region/VGRAD/CH_VOLGOGRAD1HD.m3u8
+https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R06_OTT_STH_VGRAD_VOLGOGRAD1/variant.m3u8
 #EXTINF:-1 tvg-name="МТВ Волгоград" group-title="Общественные", МТВ Волгоград
 https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/CH_R01_MTV/variant.m3u8
 #EXTINF:-1 tvg-name="Волгоград 24" group-title="Общественные", Волгоград 24
@@ -69,9 +69,9 @@ http://217.21.34.160:38007/dikayaohotahd/index.m3u8
 #EXTINF:-1 tvg-name="Дикая рыбалка" group-title="Познавательные", Дикая рыбалка
 https://mhd128.iptv2022.com/p/OmQqh-ai_2m0jBtx1Ny5zw,1765227609/streaming/ohotahd/324/1/tracks-v5a1/mono.m3u8
 #EXTINF:-1 tvg-name="Охотник и рыболов" group-title="Познавательные", Охотник и Рыболов
-https://bl.rutube.ru/livestream/1da5d92af8c55b16241f1eb12a27f00c/index.m3u8?s=sWGDslt6CihCHSPqW_fycg&e=2094731297&scheme=https
+https://bl.rutube.ru/livestream/1da5d92af8c55b16241f1eb12a27f00c/index.m3u8?s=1_utinqv5h6Jizy0DOBlOA&e=2094860692&scheme=https
 #EXTINF:-1 tvg-name="Загородный" group-title="Познавательные", Загородный
-https://bl.rutube.ru/livestream/406973c72e9d0449feef05ef7811ad01/index.m3u8?s=eGM4jr8gGW9SNiBt16jF5A&e=2094731300&scheme=https
+https://bl.rutube.ru/livestream/406973c72e9d0449feef05ef7811ad01/index.m3u8?s=xvv9eY5Rj6RIwaW1e53YEw&e=2094860693&scheme=https
 #EXTINF:-1 tvg-name="365 дней ТВ" group-title="Познавательные", 365 Дней ТВ
 https://mhd128.iptv2022.com/p/satiGW9TPVog3yQtqAGYfg,1765227611/streaming/365day/324/1/tracks-v5a1/mono.m3u8
 #EXTINF:-1 tvg-name="Zooпарк" group-title="Познавательные", ZooПарк
@@ -107,7 +107,7 @@ https://zabava-htlive.cdn.ngenix.net/hls/CH_2X2/variant.m3u8
 #EXTINF:-1 tvg-name="Суббота!" group-title="Развлекательные", Суббота!
 http://217.114.191.150/Subbota/index.m3u8
 #EXTINF:-1 tvg-name="СТС Love" group-title="Развлекательные", СТС Love
-http://zabava-htlive.cdn.ngenix.net/hls/CH_STSLOVE/variant.m3u8
+https://fs.uplink.kz/sts_love/mono.m3u8?token=onlinetv
 #EXTINF:-1 tvg-name="Ю" group-title="Развлекательные", Ю
 https://bl.rutube.ru/livestream/5c9327074e25ca86f3111d4085cbbb65/index.m3u8?s=VLfn5xIbPS5HN1HdfMxFWA&e=2091960701&scheme=https
 #EXTINF:-1 tvg-name="ТНТ4" group-title="Развлекательные", ТНТ 4
@@ -186,7 +186,7 @@ https://zabava-htlive.cdn.ngenix.net/hls/CH_DISNEY/variant.m3u8
 #EXTINF:-1 tvg-name="Мульт" group-title="Детские", Мульт
 https://flussonic.mkpnet.ru/tv-c8b065a591077c26/video.m3u8
 #EXTINF:-1 tvg-name="TiJi" group-title="Детские", TiJi
-https://flussonic.mkpnet.ru/tv-3848dd8604a262e0/video.m3u8
+http://stream.mcquack.net/111/tracks-v1a1/mono.ts.m3u8
 #EXTINF:-1 tvg-name="О!" group-title="Детские", О!
 http://195.64.140.147:10124/124
 #EXTINF:-1 tvg-name="Gulli Girl" group-title="Детские", Gulli Girl
