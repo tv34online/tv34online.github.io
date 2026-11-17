@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-16T22:02:47+00:00",
+  "generated_at": "2026-11-17T07:55:24+00:00",
   "status": "completed_with_warnings",
   "errors": [],
   "warnings": [],
@@ -17,38 +17,6 @@
     }
   },
   "channels": [
-    {
-      "index": 20,
-      "name": "Волгоград 1",
-      "group": "Общественные",
-      "status": "replaced",
-      "need_reason": "dead",
-      "original_url": "http://dmi3y-tv.online/hls/zabava/region/VGRAD/CH_VOLGOGRAD1HD.m3u8",
-      "source_check": {
-        "state": "fail",
-        "reason": "timeout"
-      },
-      "reason": "dead",
-      "candidates": [
-        {
-          "url": "https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/***/variant.m3u8",
-          "name": "Волгоград 1 HD",
-          "provider": "WINK",
-          "match": "exact",
-          "check": {
-            "state": "ok",
-            "reason": "hls",
-            "detail": {
-              "segments": 4
-            }
-          },
-          "free_status": "assumed_free_by_allowed_provider_not_independently_verified"
-        }
-      ],
-      "failure": null,
-      "new_url": "https://rt-sth-vgrad-htlive.cdn.ngenix.net/hls/***/variant.m3u8",
-      "new_provider": "WINK"
-    },
     {
       "index": 28,
       "name": "Baby Time",
@@ -78,38 +46,6 @@
       "reason": "forbidden_source",
       "candidates": [],
       "failure": "no_matching_candidates"
-    },
-    {
-      "index": 30,
-      "name": "Шансон ТВ",
-      "group": "Музыкальные",
-      "status": "replaced",
-      "need_reason": "dead",
-      "original_url": "https://hls-shansontv.cdnvideo.ru/shansontv/shansontv.sdp/playlist.m3u8",
-      "source_check": {
-        "state": "fail",
-        "reason": "auth_required_or_denied_http_403"
-      },
-      "reason": "dead",
-      "candidates": [
-        {
-          "url": "https://flussonic.mkpnet.ru/tv-181e3f7698288892/video.m3u8",
-          "name": "Шансон ТВ",
-          "provider": "Оргтехсервис",
-          "match": "exact",
-          "check": {
-            "state": "ok",
-            "reason": "hls",
-            "detail": {
-              "segments": 4
-            }
-          },
-          "free_status": "assumed_free_by_allowed_provider_not_independently_verified"
-        }
-      ],
-      "failure": null,
-      "new_url": "https://flussonic.mkpnet.ru/tv-181e3f7698288892/video.m3u8",
-      "new_provider": "Оргтехсервис"
     },
     {
       "index": 31,
@@ -232,6 +168,21 @@
         "reason": "redirects_to_forbidden_host"
       },
       "reason": "forbidden_source",
+      "candidates": [],
+      "failure": "no_matching_candidates"
+    },
+    {
+      "index": 37,
+      "name": "В мире животных",
+      "group": "Познавательные",
+      "status": "kept_unreplaced",
+      "need_reason": "dead",
+      "original_url": "http://stream.mcquack.net/241/tracks-v1a1/mono.ts.m3u8",
+      "source_check": {
+        "state": "fail",
+        "reason": "hls_segment_unavailable"
+      },
+      "reason": "dead",
       "candidates": [],
       "failure": "no_matching_candidates"
     },
@@ -378,7 +329,7 @@
       "index": 47,
       "name": "Animal Planet",
       "group": "Познавательные",
-      "status": "kept_unreplaced",
+      "status": "replaced",
       "need_reason": "dead",
       "original_url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=CZYeR6QR48aRJcSU69tgbg&e=2093174067&scheme=https",
       "source_check": {
@@ -393,13 +344,18 @@
           "provider": "Ott Club + Реклама",
           "match": "exact",
           "check": {
-            "state": "fail",
-            "reason": "hls_segment_unavailable"
+            "state": "ok",
+            "reason": "hls",
+            "detail": {
+              "segments": 4
+            }
           },
           "free_status": "assumed_free_by_allowed_provider_not_independently_verified"
         }
       ],
-      "failure": "all_candidates_failed"
+      "failure": null,
+      "new_url": "http://stream.mcquack.net/114/tracks-v1a1/mono.ts.m3u8",
+      "new_provider": "Ott Club + Реклама"
     },
     {
       "index": 57,
@@ -588,21 +544,6 @@
       "failure": "no_matching_candidates"
     },
     {
-      "index": 94,
-      "name": "Nickelodeon",
-      "group": "Детские",
-      "status": "kept_unreplaced",
-      "need_reason": "dead",
-      "original_url": "http://stream.mcquack.net/443/tracks-v1a1/mono.ts.m3u8",
-      "source_check": {
-        "state": "fail",
-        "reason": "hls_segment_unavailable"
-      },
-      "reason": "dead",
-      "candidates": [],
-      "failure": "no_matching_candidates"
-    },
-    {
       "index": 95,
       "name": "Cartoon Network",
       "group": "Детские",
@@ -612,6 +553,21 @@
       "source_check": {
         "state": "fail",
         "reason": "http_404"
+      },
+      "reason": "dead",
+      "candidates": [],
+      "failure": "no_matching_candidates"
+    },
+    {
+      "index": 96,
+      "name": "Nick Jr",
+      "group": "Детские",
+      "status": "kept_unreplaced",
+      "need_reason": "dead",
+      "original_url": "http://stream.mcquack.net/220/tracks-v1a1/mono.ts.m3u8",
+      "source_check": {
+        "state": "fail",
+        "reason": "hls_segment_unavailable"
       },
       "reason": "dead",
       "candidates": [],
@@ -696,13 +652,13 @@
   "summary": {
     "total_channels": 115,
     "checked_channels": 115,
-    "working_streams": 81,
-    "broken_streams": 20,
-    "needing_replacement": 34,
-    "replacements_succeeded": 9,
+    "working_streams": 82,
+    "broken_streams": 19,
+    "needing_replacement": 33,
+    "replacements_succeeded": 8,
     "replacements_failed": 25,
     "replacements_skipped_protected": 0,
     "unchecked_or_undetermined": 0,
-    "duration_seconds": 43.7
+    "duration_seconds": 36.8
   }
 }
