@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-17T20:56:00+00:00",
+  "generated_at": "2026-11-18T07:29:57+00:00",
   "status": "completed_with_warnings",
   "errors": [],
   "warnings": [],
@@ -204,21 +204,6 @@
       "failure": "no_matching_candidates"
     },
     {
-      "index": 37,
-      "name": "В мире животных",
-      "group": "Познавательные",
-      "status": "kept_unreplaced",
-      "need_reason": "dead",
-      "original_url": "http://stream.mcquack.net/241/tracks-v1a1/mono.ts.m3u8",
-      "source_check": {
-        "state": "fail",
-        "reason": "hls_segment_unavailable"
-      },
-      "reason": "dead",
-      "candidates": [],
-      "failure": "no_matching_candidates"
-    },
-    {
       "index": 38,
       "name": "Глазами туриста",
       "group": "Познавательные",
@@ -361,7 +346,7 @@
       "index": 47,
       "name": "Animal Planet",
       "group": "Познавательные",
-      "status": "replaced",
+      "status": "kept_unreplaced",
       "need_reason": "dead",
       "original_url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=CZYeR6QR48aRJcSU69tgbg&e=2093174067&scheme=https",
       "source_check": {
@@ -376,18 +361,13 @@
           "provider": "Ott Club + Реклама",
           "match": "exact",
           "check": {
-            "state": "ok",
-            "reason": "hls",
-            "detail": {
-              "segments": 4
-            }
+            "state": "fail",
+            "reason": "hls_segment_unavailable"
           },
           "free_status": "assumed_free_by_allowed_provider_not_independently_verified"
         }
       ],
-      "failure": null,
-      "new_url": "http://stream.mcquack.net/114/tracks-v1a1/mono.ts.m3u8",
-      "new_provider": "Ott Club + Реклама"
+      "failure": "all_candidates_failed"
     },
     {
       "index": 57,
@@ -684,13 +664,13 @@
   "summary": {
     "total_channels": 115,
     "checked_channels": 115,
-    "working_streams": 81,
-    "broken_streams": 20,
-    "needing_replacement": 34,
-    "replacements_succeeded": 9,
+    "working_streams": 82,
+    "broken_streams": 19,
+    "needing_replacement": 33,
+    "replacements_succeeded": 8,
     "replacements_failed": 25,
     "replacements_skipped_protected": 0,
     "unchecked_or_undetermined": 0,
-    "duration_seconds": 43.1
+    "duration_seconds": 41.2
   }
 }
