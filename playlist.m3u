@@ -69,9 +69,9 @@ http://217.21.34.160:38007/dikayaohotahd/index.m3u8
 #EXTINF:-1 tvg-name="Дикая рыбалка" group-title="Познавательные", Дикая рыбалка
 https://mhd128.iptv2022.com/p/OmQqh-ai_2m0jBtx1Ny5zw,1765227609/streaming/ohotahd/324/1/tracks-v5a1/mono.m3u8
 #EXTINF:-1 tvg-name="Охотник и рыболов" group-title="Познавательные", Охотник и Рыболов
-https://bl.rutube.ru/livestream/1da5d92af8c55b16241f1eb12a27f00c/index.m3u8?s=jH0byZGZMfYWsV2nY6MzjQ&e=2094945898&scheme=https
+https://bl.rutube.ru/livestream/1da5d92af8c55b16241f1eb12a27f00c/index.m3u8?s=I6-q0UY0wXa4K7ixHkKHTg&e=2095021376&scheme=https
 #EXTINF:-1 tvg-name="Загородный" group-title="Познавательные", Загородный
-https://bl.rutube.ru/livestream/406973c72e9d0449feef05ef7811ad01/index.m3u8?s=TYD2V4HM5qpstfh-eeRhZg&e=2094945900&scheme=https
+https://bl.rutube.ru/livestream/406973c72e9d0449feef05ef7811ad01/index.m3u8?s=ycN4wzEXRJA1bhI6pijy-Q&e=2095021378&scheme=https
 #EXTINF:-1 tvg-name="365 дней ТВ" group-title="Познавательные", 365 Дней ТВ
 https://mhd128.iptv2022.com/p/satiGW9TPVog3yQtqAGYfg,1765227611/streaming/365day/324/1/tracks-v5a1/mono.m3u8
 #EXTINF:-1 tvg-name="Zooпарк" group-title="Познавательные", ZooПарк
@@ -101,7 +101,7 @@ https://bl.rutube.ru/livestream/4004c8f6817b9ae1bd0d418905ae2b02/index.m3u8?s=CZ
 #EXTINF:-1 tvg-name="Discovery Channel" group-title="Познавательные", Discovery
 https://bl.rutube.ru/livestream/6422d62f7e1f87bc3aec45b462cd89ea/index.m3u8?s=HFyC0yKgmiN4xE0MxIY4cw&e=2093174068&scheme=https
 #EXTINF:-1 tvg-name="National Geographic" group-title="Познавательные", National Geographic
-https://bl.rutube.ru/livestream/2619fc295c16585ef018041d88f14db0/index.m3u8?s=TmPsYm5SuPNKDE676QudCg&e=2093174068&scheme=https
+http://stream.mcquack.net/116/tracks-v1a1/mono.ts.m3u8
 #EXTINF:-1 tvg-name="2x2" group-title="Развлекательные", 2х2
 https://zabava-htlive.cdn.ngenix.net/hls/CH_2X2/variant.m3u8
 #EXTINF:-1 tvg-name="Суббота!" group-title="Развлекательные", Суббота!
