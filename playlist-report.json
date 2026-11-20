@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-19T20:38:34+00:00",
+  "generated_at": "2026-11-20T07:16:35+00:00",
   "status": "completed_with_warnings",
   "errors": [],
   "warnings": [],
@@ -8,15 +8,30 @@
     "loaded": true,
     "error": null,
     "candidates": {
-      "total": 2872,
+      "total": 2889,
       "eligible": 508,
       "rejected_forbidden": 110,
-      "rejected_provider": 2251,
+      "rejected_provider": 2268,
       "rejected_paid": 0,
       "rejected_scheme": 3
     }
   },
   "channels": [
+    {
+      "index": 27,
+      "name": "Музыка первого",
+      "group": "Музыкальные",
+      "status": "kept_unreplaced",
+      "need_reason": "dead",
+      "original_url": "http://195.64.140.147:10196/196",
+      "source_check": {
+        "state": "fail",
+        "reason": "timeout"
+      },
+      "reason": "dead",
+      "candidates": [],
+      "failure": "no_matching_candidates"
+    },
     {
       "index": 28,
       "name": "Baby Time",
@@ -633,6 +648,53 @@
       "new_provider": "Оргтехсервис"
     },
     {
+      "index": 92,
+      "name": "О!",
+      "group": "Детские",
+      "status": "kept_unreplaced",
+      "need_reason": "dead",
+      "original_url": "http://195.64.140.147:10124/124",
+      "source_check": {
+        "state": "fail",
+        "reason": "timeout"
+      },
+      "reason": "dead",
+      "candidates": [],
+      "failure": "no_matching_candidates"
+    },
+    {
+      "index": 93,
+      "name": "Gulli Girl",
+      "group": "Детские",
+      "status": "replaced",
+      "need_reason": "dead",
+      "original_url": "http://195.64.140.147:10122/122",
+      "source_check": {
+        "state": "fail",
+        "reason": "timeout"
+      },
+      "reason": "dead",
+      "candidates": [
+        {
+          "url": "https://flussonic.mkpnet.ru/tv-d66fcf59f2f4c966/video.m3u8",
+          "name": "Gulli Girl",
+          "provider": "Оргтехсервис",
+          "match": "exact",
+          "check": {
+            "state": "ok",
+            "reason": "hls",
+            "detail": {
+              "segments": 4
+            }
+          },
+          "free_status": "assumed_free_by_allowed_provider_not_independently_verified"
+        }
+      ],
+      "failure": null,
+      "new_url": "https://flussonic.mkpnet.ru/tv-d66fcf59f2f4c966/video.m3u8",
+      "new_provider": "Оргтехсервис"
+    },
+    {
       "index": 94,
       "name": "Nickelodeon",
       "group": "Детские",
@@ -771,13 +833,13 @@
   "summary": {
     "total_channels": 115,
     "checked_channels": 115,
-    "working_streams": 76,
-    "broken_streams": 25,
-    "needing_replacement": 39,
-    "replacements_succeeded": 9,
-    "replacements_failed": 30,
+    "working_streams": 73,
+    "broken_streams": 28,
+    "needing_replacement": 42,
+    "replacements_succeeded": 10,
+    "replacements_failed": 32,
     "replacements_skipped_protected": 0,
     "unchecked_or_undetermined": 0,
-    "duration_seconds": 37.5
+    "duration_seconds": 40.6
   }
 }
