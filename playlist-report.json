@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-21T07:09:29+00:00",
+  "generated_at": "2026-11-21T19:16:17+00:00",
   "status": "completed_with_warnings",
   "errors": [],
   "warnings": [],
@@ -123,7 +123,7 @@
       "reason": "forbidden_source",
       "candidates": [
         {
-          "url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=yXWAWomD0HwsjMhHIzzj_w&e=2095204582&scheme=https",
+          "url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=FXHDe4oaIVfB5ChOOaa4QQ&e=2095248766&scheme=https",
           "name": "Охотник и рыболов",
           "provider": "RUTUBE (VPN)",
           "match": "exact",
@@ -138,7 +138,7 @@
         }
       ],
       "failure": null,
-      "new_url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=yXWAWomD0HwsjMhHIzzj_w&e=2095204582&scheme=https",
+      "new_url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=FXHDe4oaIVfB5ChOOaa4QQ&e=2095248766&scheme=https",
       "new_provider": "RUTUBE (VPN)"
     },
     {
@@ -155,7 +155,7 @@
       "reason": "dead",
       "candidates": [
         {
-          "url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=RSH7nBa9qiVtnYgK-XMRaw&e=2095204583&scheme=https",
+          "url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=HMDPQM6kCxVDAF2Za6pE3w&e=2095248767&scheme=https",
           "name": "Загородный International",
           "provider": "RUTUBE (VPN)",
           "match": "exact",
@@ -170,7 +170,7 @@
         }
       ],
       "failure": null,
-      "new_url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=RSH7nBa9qiVtnYgK-XMRaw&e=2095204583&scheme=https",
+      "new_url": "https://bl.rutube.ru/livestream/***/index.m3u8?s=HMDPQM6kCxVDAF2Za6pE3w&e=2095248767&scheme=https",
       "new_provider": "RUTUBE (VPN)"
     },
     {
@@ -706,6 +706,6 @@
     "replacements_failed": 26,
     "replacements_skipped_protected": 0,
     "unchecked_or_undetermined": 0,
-    "duration_seconds": 43.3
+    "duration_seconds": 41.1
   }
 }
