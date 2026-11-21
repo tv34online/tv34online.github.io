@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-20T20:21:29+00:00",
+  "generated_at": "2026-11-21T07:09:29+00:00",
   "status": "completed_with_warnings",
   "errors": [],
   "warnings": [],
@@ -706,6 +706,6 @@
     "replacements_failed": 26,
     "replacements_skipped_protected": 0,
     "unchecked_or_undetermined": 0,
-    "duration_seconds": 37.6
+    "duration_seconds": 43.3
   }
 }
